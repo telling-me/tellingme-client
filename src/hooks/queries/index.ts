@@ -1,0 +1,1 @@
+export { useTestQuery } from './test'
