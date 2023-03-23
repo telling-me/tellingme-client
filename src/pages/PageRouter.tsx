@@ -19,6 +19,7 @@ const PageRouter = () => {
         <Route path={PAGE_URL.Login} element={<Layout.LoginLayout />}>
           <Route index element={<Swtich.LoginPage />} />
         </Route>
+        <Route path={PAGE_URL.Kakao} element={<Layout.KakaoLayout />} />
       </Routes>
     </>
   )
