@@ -1,4 +1,4 @@
-import { API, KAKAO_API } from 'configs/axios'
+import { API, KAKAO_TOKEN_API, KAKAO_USER_INFO_API } from 'configs/axios'
 
 export interface IUserData {
   name: string
@@ -26,14 +26,19 @@ export const userApi = {
     const data = await API.get('/')
     return data
   },
-  kakaoToken: async (kakaoData: IKakaoTokenData) => {
-    const data = await KAKAO_API.post('/token', {
+  kakaoToken: async (data: IKakaoTokenData) => {
+    const response = await KAKAO_TOKEN_API.post('/oauth/token', {
       grant_type: 'authorization_code',
-      client_id: kakaoData.client_id,
-      redirect_uri: kakaoData.redirect_uri,
-      code: kakaoData.code
+      client_id: data.client_id,
+      redirect_uri: data.redirect_uri,
+      code: data.code
     })
 
-    return data
+    return response
+  },
+  kakaoUserInfo: async () => {
+    const response = await KAKAO_USER_INFO_API.post('/v2/user/me', {})
+
+    return response
   }
 }
