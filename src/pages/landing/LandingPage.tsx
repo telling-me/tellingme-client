@@ -3,7 +3,7 @@ import { CommonTest, LandingBubble } from 'components/common'
 import { CoreButton, CoreDangerButton } from 'components/core/button'
 import style from 'styles/styled-components/styled'
 
-import { getKakaoAuthorizationCode } from 'configs/kakao'
+import { KAKAO_AUTH_URL } from 'configs/kakao'
 
 const LoginPage = () => {
   return (
@@ -19,7 +19,7 @@ const LoginPage = () => {
 
         <button
           onClick={() => {
-            getKakaoAuthorizationCode()
+            window.location.href = KAKAO_AUTH_URL
           }}
         >
           카카오 로그인 테스트
