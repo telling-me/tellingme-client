@@ -26,19 +26,24 @@ export const userApi = {
     const data = await API.get('/')
     return data
   },
-  kakaoToken: async (data: IKakaoTokenData) => {
-    const response = await KAKAO_TOKEN_API.post('/oauth/token', {
+  getKakaoToken: async (data: IKakaoTokenData) => {
+    return await KAKAO_TOKEN_API.post('/oauth/token', {
       grant_type: 'authorization_code',
       client_id: data.client_id,
       redirect_uri: data.redirect_uri,
       code: data.code
     })
-
-    return response
   },
-  kakaoUserInfo: async () => {
-    const response = await KAKAO_USER_INFO_API.post('/v2/user/me', {})
-
-    return response
+  getKakaoUserInfo: async (accessToken: string) => {
+    return await KAKAO_USER_INFO_API.post(
+      '/v2/user/me',
+      {},
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    )
   }
 }
