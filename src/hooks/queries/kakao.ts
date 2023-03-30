@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { useQueries } from 'react-query'
 import { apis } from 'apis/apis'
 import { type IKakaoTokenData } from 'apis/userApi'
+import { useCheckIdQuery } from './checkId'
 import { useState } from 'react'
 
 export const useKakaoQueries = ({ client_id, redirect_uri, code }: IKakaoTokenData) => {
@@ -31,6 +31,7 @@ export const useKakaoQueries = ({ client_id, redirect_uri, code }: IKakaoTokenDa
         setSocialId(res.data.id.toString())
       },
       retry: 0
-    }
+    },
+    useCheckIdQuery('kakao', socialId)
   ])
 }

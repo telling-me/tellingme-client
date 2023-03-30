@@ -45,5 +45,14 @@ export const userApi = {
         }
       }
     )
+  },
+  checkUserInfo: async (loginType: string, socialId: string) => {
+    return await API.post(
+      `/api/oauth/${loginType}`,
+      { socialId },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
   }
 }
