@@ -1,4 +1,11 @@
 export enum PAGE_URL {
-  Login = '/login',
-  Home = '/'
+  // Landing
+  Home = '/',
+  Login = 'login',
+
+  // App
+  App = 'app',
+  Main = 'main',
+  MyAnswer = 'myAnswer',
+  AllAnswer = 'Allanswer'
 }

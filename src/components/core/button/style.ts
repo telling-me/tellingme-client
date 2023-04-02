@@ -46,7 +46,7 @@ export const PrimaryButton = styled(BaseButton)<{ styleType: StyleType }>`
       --color: ${(props) => props.theme.colors.gray.gray0};
       color: var(--color);
       background-color: ${(props) =>
-        props.theme.colors.primary.primary800_main};
+        props.theme.colors.primary.primary400_main};
 
       &:hover {
         background-color: ${(props) => props.theme.colors.primary.primary900};
@@ -108,7 +108,7 @@ export const PrimaryButton = styled(BaseButton)<{ styleType: StyleType }>`
         ${(props) =>
     props.styleType === 'text' &&
     css`
-      --color: ${(props) => props.theme.colors.primary.primary800_main};
+      --color: ${(props) => props.theme.colors.primary.primary400_main};
       color: var(--color);
       background-color: transparent;
 

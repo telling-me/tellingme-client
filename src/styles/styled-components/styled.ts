@@ -1,20 +1,4 @@
-import { motion } from 'framer-motion'
 import styled from 'styled-components'
-
-export interface IGrid {
-  flex?: 'start' | 'end' | 'between' | 'center'
-  flexOption?: string
-  direction?: 'column' | 'row'
-  alignItems?: 'start' | 'end' | 'center' | 'stretch'
-  wrap?: 'wrap' | 'nowrap'
-  _width?: string
-  _margin?: string
-  _padding?: string
-  _height?: string
-  align?: 'left' | 'center' | 'right'
-  _gap?: string
-  _overflow?: 'hidden' | 'visible' | 'auto' | 'overlay'
-}
 
 export interface IText {
   typo?:
@@ -36,46 +20,13 @@ export interface IText {
     | 'c'
   _margin?: string
   _width?: string
+  _color?: string
 }
 
-const Grid = styled(motion.div)<IGrid>`
-  ${({ _width }) => (_width != null ? `width: ${_width}` : 'width: 100%')};
-  ${({ _height }) => _height != null && `height: ${_height}`};
-  ${({ _margin }) => _margin != null && `margin: ${_margin}`};
-  ${({ _padding }) => _padding != null && `padding: ${_padding}`};
-  ${({ theme, flex }) =>
-    flex === 'start'
-      ? theme.common.flexStart
-      : flex === 'end'
-      ? theme.common.flexEnd
-      : flex === 'between'
-      ? theme.common.flexBetween
-      : flex === 'center' && theme.common.flexCenter};
-  ${({ alignItems }) =>
-    alignItems === 'start'
-      ? 'align-items: flex-start'
-      : alignItems === 'end'
-      ? 'align-items: flex-end'
-      : alignItems === 'stretch'
-      ? 'align-items: stretch'
-      : alignItems === 'center' && 'align-items: center'};
-  ${({ direction }) => direction === 'column' && 'flex-direction: column'};
-  ${({ wrap }) => wrap === 'wrap' && 'flex-wrap: wrap'};
-  ${({ flexOption }) => flexOption != null && `flex: ${flexOption}`};
-  ${({ align }) =>
-    align === 'left'
-      ? 'text-align: left'
-      : align === 'right'
-      ? 'text-align: right'
-      : align === 'center' && 'text-align: center'};
-
-  ${({ _gap }) => _gap != null && `gap: ${_gap}`};
-  ${({ _overflow }) => _overflow != null && `overflow: ${_overflow}`};
-`
 const TextH1 = styled.h1<IText>`
-  white-space: nowrap;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
+  ${({ _color }) => _color != null && `color: ${_color}`};
 
   ${({ theme, typo }) =>
     typo === 'display_b' ||
@@ -91,9 +42,9 @@ const TextH1 = styled.h1<IText>`
 `
 
 const TextH2 = styled.h2<IText>`
-  white-space: nowrap;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
+  ${({ _color }) => _color != null && `color: ${_color}`};
 
   ${({ theme, typo }) =>
     typo === 'display_b' ||
@@ -109,9 +60,9 @@ const TextH2 = styled.h2<IText>`
 `
 
 const TextH3 = styled.h3<IText>`
-  white-space: nowrap;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
+  ${({ _color }) => _color != null && `color: ${_color}`};
 
   ${({ theme, typo }) =>
     typo === 'display_b' ||
@@ -127,9 +78,9 @@ const TextH3 = styled.h3<IText>`
 `
 
 const TextH4 = styled.h4<IText>`
-  white-space: nowrap;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
+  ${({ _color }) => _color != null && `color: ${_color}`};
 
   ${({ theme, typo }) =>
     typo === 'display_b' ||
@@ -145,9 +96,9 @@ const TextH4 = styled.h4<IText>`
 `
 
 const TextH5 = styled.h5<IText>`
-  white-space: nowrap;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
+  ${({ _color }) => _color != null && `color: ${_color}`};
 
   ${({ theme, typo }) =>
     typo === 'display_b' ||
@@ -163,9 +114,9 @@ const TextH5 = styled.h5<IText>`
 `
 
 const TextP = styled.p<IText>`
-  white-space: nowrap;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
+  ${({ _color }) => _color != null && `color: ${_color}`};
 
   ${({ theme, typo }) =>
     typo === 'display_b' ||
@@ -181,9 +132,9 @@ const TextP = styled.p<IText>`
 `
 
 const TextSpan = styled.span<IText>`
-  white-space: nowrap;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
+  ${({ _color }) => _color != null && `color: ${_color}`};
 
   ${({ theme, typo }) =>
     typo === 'display_b' ||
@@ -199,7 +150,6 @@ const TextSpan = styled.span<IText>`
 `
 
 const settingStyle = {
-  Grid,
   TextH1,
   TextH2,
   TextH3,

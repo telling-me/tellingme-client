@@ -1,0 +1,11 @@
+<svg id="eXvkQfh43iR1" width="320px" height="320px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 351 282" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+<defs>
+  <linearGradient id="eXvkQfh43iR3-fill" x1="90.2788" y1="203.113" x2="367.515" y2="-29.1851" spreadMethod="pad" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 0)">
+    <stop id="eXvkQfh43iR3-fill-0" offset="0%" stop-color="#b0f5ca"/>
+    <stop id="eXvkQfh43iR3-fill-1" offset="100%" stop-color="#8fd3f4"/>
+  </linearGradient>
+</defs>
+<g>
+  <path id="eXvkQfh43iR3" d="M184.217,16.0415c58.82.7312,124.235,14.7391,142.493,66.1821c18.312,51.5954-25.049,98.9634-72.378,131.3694-49.68,34.016-112.79,62.06-164.6523,30.923C30.9642,209.266,4.41424,138.807,29.3565,78.527C51.5259,24.9488,121.905,15.2668,184.217,16.0415Z" transform="translate(.48954 0)" clip-rule="evenodd" fill="url(#eXvkQfh43iR3-fill)" fill-rule="evenodd" />
+</g>
+</svg>

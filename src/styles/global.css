@@ -142,6 +142,7 @@ section {
 body {
   line-height: 1;
 }
+li,
 ol,
 ul {
   list-style: none;
@@ -171,20 +172,4 @@ table {
 button,
 input {
   font-family: 'NanumSquareRound', sans-serif;
-}
-
-/* 스크롤바 설정 */
-::-webkit-scrollbar {
-  width: 14px;
-  height: 14px;
-  margin-right: 3px;
-}
-/* 스크롤바 뒷 배경 설정 */
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-/* 스크롤바 막대 설정 */
-::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  background-color: rgba(0, 0, 0, 0.25);
 }

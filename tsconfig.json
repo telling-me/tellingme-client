@@ -14,6 +14,7 @@
       "styles/*": ["styles/*"],
       "assets/*": ["assets/*"]
     },
+
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -29,6 +30,6 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "src/components/common/LandingBubble.tsx"],
   "files": ["./custom.d.ts"]
 }

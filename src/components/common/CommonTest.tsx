@@ -1,25 +1,24 @@
 import React from 'react'
-import styled from 'styled-components'
-import * as Queries from 'hooks/index'
 import Icon from 'assets/icons'
+
+// components
+import style from 'styles/styled-components/styled'
+
+// hooks
+import * as Queries from 'hooks/index'
 
 const CommonTest = () => {
   const { data: dataTest = null } = Queries.useTestQuery()
   return (
-    <Title
+    <style.TextP
       onClick={() => {
         console.log(dataTest)
       }}
     >
       <Icon.Menu width="32px" height="32px" />
       API TEST COMPONENT
-    </Title>
+    </style.TextP>
   )
 }
-
-const Title = styled.h1`
-  ${({ theme }) => theme.typo.title.h2};
-  color: ${({ theme }) => theme.colors.gray.gray_black};
-`
 
 export default CommonTest

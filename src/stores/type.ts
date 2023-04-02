@@ -4,8 +4,6 @@ export interface ICommonFilter {
 }
 
 export interface ICommonStore {
-  page: number
-  setPage: (value: number) => void
-  keyword: string
-  setKeyword: (value: string) => void
+  prevPage: number
+  setPrevPage: (value: number) => void
 }

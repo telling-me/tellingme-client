@@ -13,19 +13,36 @@ declare module 'styled-components' {
       gray: IGray
       system: ISystem
       primary: {
+        primary25: string
+        primary50: string
         primary100: string
         primary200: string
         primary300: string
-        primary400: string
+        primary400_main: string
         primary500: string
         primary600: string
         primary700: string
-        primary800_main: string
+        primary800: string
         primary900: string
       }
-      text: {
-        black: string
+      secondary: {
+        secondary25: string
+        secondary50: string
+        secondary100: string
+        secondary200: string
+        secondary300: string
+        secondary400_main: string
+        secondary500: string
+        secondary600: string
+        secondary700: string
+        secondary800: string
       }
+      side: {
+        side100: string
+        side200: string
+        side300: string
+      }
+      logo: string
     }
     typo: ITypo
     font: IFont
