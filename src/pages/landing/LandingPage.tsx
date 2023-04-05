@@ -8,86 +8,31 @@ import { LandingBubble } from 'components'
 
 // animation
 import { motion } from 'framer-motion'
-import {
-  landingCircleAni,
-  landingLogoAni,
-  landingBubbleAni,
-  landingSubAni
-} from 'styles/ani'
+import { landingCircleAni, landingLogoAni, landingBubbleAni, landingSubAni } from 'styles/ani'
 
 const LandingPage = () => {
   return (
     <LandingWrapper>
-      <AbsoluteLogoBubble
-        variants={landingBubbleAni}
-        initial="init"
-        animate="ani"
-      >
+      <AbsoluteLogoBubble variants={landingBubbleAni} initial="init" animate="ani">
         <LandingBubble />
       </AbsoluteLogoBubble>
-      <LandingLogo
-        variants={landingLogoAni}
-        initial="init"
-        animate="ani"
-        custom={2}
-        src={Logo}
-      />
-      <AbsoluteLogoS1
-        variants={landingSubAni}
-        initial="init"
-        animate="ani"
-        custom={2}
-      >
+      <LandingLogo variants={landingLogoAni} initial="init" animate="ani" custom={2} src={Logo} />
+      <AbsoluteLogoS1 variants={landingSubAni} initial="init" animate="ani" custom={2}>
         <Icon.LogoS1 />
       </AbsoluteLogoS1>
-      <AbsoluteLogoS2
-        variants={landingSubAni}
-        initial="init"
-        animate="ani"
-        custom={3}
-      >
+      <AbsoluteLogoS2 variants={landingSubAni} initial="init" animate="ani" custom={3}>
         <Icon.LogoS2 />
       </AbsoluteLogoS2>
-      <AbsoluteLogoS3
-        variants={landingSubAni}
-        initial="init"
-        animate="ani"
-        custom={4}
-      >
+      <AbsoluteLogoS3 variants={landingSubAni} initial="init" animate="ani" custom={4}>
         <Icon.LogoS3 />
       </AbsoluteLogoS3>
-      <AbsoluteLogoS4
-        variants={landingSubAni}
-        initial="init"
-        animate="ani"
-        custom={5}
-      >
+      <AbsoluteLogoS4 variants={landingSubAni} initial="init" animate="ani" custom={5}>
         <Icon.LogoS4 />
       </AbsoluteLogoS4>
-      <AbsoluteCircle1
-        initial="init"
-        animate="ani"
-        custom={2}
-        variants={landingCircleAni}
-      />
-      <AbsoluteCircle2
-        initial="init"
-        animate="ani"
-        custom={3}
-        variants={landingCircleAni}
-      />
-      <AbsoluteCircle3
-        initial="init"
-        animate="ani"
-        custom={4}
-        variants={landingCircleAni}
-      />
-      <AbsoluteCircle4
-        initial="init"
-        animate="ani"
-        custom={5}
-        variants={landingCircleAni}
-      />
+      <AbsoluteCircle1 initial="init" animate="ani" custom={2} variants={landingCircleAni} />
+      <AbsoluteCircle2 initial="init" animate="ani" custom={3} variants={landingCircleAni} />
+      <AbsoluteCircle3 initial="init" animate="ani" custom={4} variants={landingCircleAni} />
+      <AbsoluteCircle4 initial="init" animate="ani" custom={5} variants={landingCircleAni} />
     </LandingWrapper>
   )
 }
