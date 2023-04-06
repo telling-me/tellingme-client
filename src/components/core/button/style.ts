@@ -45,8 +45,7 @@ export const PrimaryButton = styled(BaseButton)<{ styleType: StyleType }>`
     css`
       --color: ${(props) => props.theme.colors.gray.gray0};
       color: var(--color);
-      background-color: ${(props) =>
-        props.theme.colors.primary.primary400_main};
+      background-color: ${(props) => props.theme.colors.primary.primary400_main};
 
       &:hover {
         background-color: ${(props) => props.theme.colors.primary.primary900};
@@ -151,18 +150,18 @@ ${({ isLoading }) =>
 
 // Danger
 export const DangerButton = styled(BaseButton)`
-  --color: ${(props) => props.theme.colors.system.red_darken}
+  --color: ${(props) => props.theme.colors.error.error200}
   color: var(--color);
-  background-color: ${(props) => props.theme.colors.system.red_lighten};
+  background-color: ${(props) => props.theme.colors.error.error200};
 
   &:hover {
     color: ${(props) => props.theme.colors.gray.gray0};
-    background-color: ${(props) => props.theme.colors.system.red};
+    background-color: ${(props) => props.theme.colors.error.error200};
   }
 
   &:active {
     color: ${(props) => props.theme.colors.gray.gray0};
-    background-color: ${(props) => props.theme.colors.system.red_darken};
+    background-color: ${(props) => props.theme.colors.error.error200};
   }
 
   &:disabled {

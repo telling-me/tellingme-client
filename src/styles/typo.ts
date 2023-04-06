@@ -2,8 +2,6 @@ import font from 'styles/font'
 
 export interface ITypo {
   title: {
-    display_b: string
-    display: string
     h1_b: string
     h1: string
     h2_b: string
@@ -12,6 +10,10 @@ export interface ITypo {
     h3: string
     h4_b: string
     h4: string
+    h5_b: string
+    h5: string
+    h6_b: string
+    h6: string
   }
   body: {
     b1_b: string
@@ -27,16 +29,6 @@ export interface ITypo {
 
 const typo: ITypo = {
   title: {
-    display_b: `
-      font-weight: ${font.weight.bold};
-      font-size: ${font.size.display};
-      line-height: ${font.lineHeight.display};
-      `,
-    display: `
-      font-weight: ${font.weight.regular};
-      font-size: ${font.size.display};
-      line-height: ${font.lineHeight.display};
-      `,
     h1_b: `
       font-weight: ${font.weight.bold};
       font-size: ${font.size.h1};
@@ -76,6 +68,26 @@ const typo: ITypo = {
       font-weight: ${font.weight.regular};
       font-size: ${font.size.h4};
       line-height: ${font.lineHeight.h4};
+      `,
+    h5_b: `
+      font-weight: ${font.weight.bold};
+      font-size: ${font.size.h5};
+      line-height: ${font.lineHeight.h5};
+      `,
+    h5: `
+      font-weight: ${font.weight.regular};
+      font-size: ${font.size.h5};
+      line-height: ${font.lineHeight.h5}
+      `,
+    h6_b: `
+      font-weight: ${font.weight.bold};
+      font-size${font.size.h6};
+      line-height: ${font.lineHeight.h6};
+      `,
+    h6: `
+      font-weight: ${font.weight.regular};
+      font-size: ${font.size.h6};
+      line-height: ${font.lineHeight.h6};
       `
   },
   body: {

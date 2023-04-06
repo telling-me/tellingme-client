@@ -8,20 +8,20 @@ export interface IGray {
   gray6: string
   gray7: string
   gray8: string
-  gray_black_text: string
+  black: string
 }
 
 const gray: IGray = {
   gray0: '#FFFFFF',
   gray1: '#EEF1F1',
-  gray2: '#CDD5D6',
-  gray3: '#ABB8BA',
-  gray4: '#899C9F',
-  gray5: '#5C6E70',
-  gray6: '#4E5D5F',
-  gray7: '#323C3E',
-  gray8: '#262D2E',
-  gray_black_text: '#1F2626'
+  gray2: '#CCD1CE',
+  gray3: '#B3B9B5',
+  gray4: '#99A29D',
+  gray5: '#808983',
+  gray6: '#666F6A',
+  gray7: '#4D534F',
+  gray8: '#404642',
+  black: '#333835'
 }
 
 export default gray
