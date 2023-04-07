@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 // components
-import { CoreButton, LandingBubble } from 'components'
+import { Button, LandingBubble } from 'components'
 
 const MainPage = () => {
   return (
     <MainWrapper>
       <LandingBubble />
-      <CoreButton size="default" styleType="filled" text="메인 페이지야!" />
+      <Button buttonType="secondary" contentType="text" text="메인 페이지야!" textColor="gray6" textSize="h3" />
     </MainWrapper>
   )
 }

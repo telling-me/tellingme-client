@@ -1,2 +1,1 @@
-export { default as CoreButton } from './CoreButton'
-export { default as CoreDangerButton } from './CoreDangerButton'
+export { default as Button } from './Button'

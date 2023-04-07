@@ -4,20 +4,22 @@ import React from 'react'
 import { KAKAO_AUTH_URL } from 'configs/kakao'
 
 // component
+import { Button } from 'components'
 import styled from 'styled-components'
-import { CoreButton } from 'components/core'
 
 const LoginButtonPage = () => {
   return (
     <LoginButtonWrapper>
-      <CoreButton
-        size="default"
-        styleType="filled"
+      <Button
+        buttonType="tertiaryModified"
+        contentType="text"
         text="카카오 로그인 테스트"
+        textColor="primary800"
+        textSize="h2"
         _onClick={() => {
           window.location.href = KAKAO_AUTH_URL
         }}
-      ></CoreButton>
+      />
     </LoginButtonWrapper>
   )
 }

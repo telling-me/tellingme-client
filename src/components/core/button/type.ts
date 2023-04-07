@@ -1,20 +1,23 @@
 import type { MouseEventHandler, RefObject } from 'react'
+import { type IconType, type ColorType, type TextSizeType } from 'type/common'
+import { type IconSizeType } from '../icon/type'
 
-export type ButtonSize = 'large' | 'default' | 'small'
-export type StyleType = 'filled' | 'tonal' | 'outlined' | 'text'
+export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'tertiaryModified' | 'fourth'
+export type ContentType = 'icon' | 'text' | 'row' | 'col'
 
-export interface IDangerButton {
+export interface IButton {
+  buttonType: ButtonType
+  contentType: ContentType
   text?: string
+  textSize?: TextSizeType
+  textColor?: ColorType
+  icon?: IconType
+  iconSize?: IconSizeType
+  iconColor?: ColorType
   _margin?: string
+  _padding?: string
+  _gap?: string
   _disabled?: boolean
   _onClick?: MouseEventHandler<HTMLButtonElement>
   _ref?: RefObject<HTMLButtonElement>
-  isLoading?: boolean
-}
-
-export interface IButton extends IDangerButton {
-  size: ButtonSize
-  styleType: StyleType
-  _width?: string
-  isLoading?: boolean
 }

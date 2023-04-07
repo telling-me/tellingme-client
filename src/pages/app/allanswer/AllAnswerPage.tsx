@@ -2,16 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 
 // components
-import { CoreButton, LandingBubble } from 'components'
+import { LandingBubble, Button } from 'components'
 
 const AllAnswerPage = () => {
   return (
     <AllAnswerWrapper>
       <LandingBubble />
-      <CoreButton
-        size="default"
-        styleType="filled"
+      <Button
+        buttonType="primary"
+        contentType="text"
         text="모든 사람 답변보기!"
+        textSize="h6"
+        textColor="error400"
+        _padding="50px"
       />
     </AllAnswerWrapper>
   )

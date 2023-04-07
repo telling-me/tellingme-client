@@ -1,193 +1,148 @@
-import styled, { css, keyframes } from 'styled-components'
-import { type StyleType } from './type'
+import styled, { css } from 'styled-components'
 
-const buttonLoadingSpinner = keyframes`
-  from {
-    transform: rotate(0turn);
-  }
-  to {
-    transform: rotate(1turn);
-  }
-`
+import useChangeTextSize from 'hooks/useChangeTextSize'
+import useChangeColor from 'hooks/useChangeColor'
 
-export const BaseButton = styled.button<{
-  _width?: string
-  margin?: string
-  isLoading?: boolean
-}>`
-  height: 40px;
-  width: ${({ _width }) => _width ?? 'max-content'};
-  white-space: nowrap;
-  padding: 0 24px;
-  border-radius: 8px;
+// type
+import { type ContentType, type ButtonType } from './type'
+import { type TextSizeType } from 'type/common'
 
-  ${({ margin }) => margin != null && `margin: ${margin}`};
-
-  ${({ theme }) => theme.typo.body.b1_b};
-
-  position: relative;
+export const BothFrame = styled.div<{ contentType: ContentType; _gap: string }>`
   display: flex;
-  justify-content: center;
   align-items: center;
-  cursor: pointer;
-  transition: background-color 0.2s, border 0.2s;
 
-  &:disabled {
-    cursor: unset;
-  }
+  ${({ contentType }) =>
+    contentType === 'row'
+      ? css`
+          flex-direction: row;
+        `
+      : contentType === 'col' &&
+        css`
+          flex-direction: column;
+        `}
+
+  ${({ _gap }) =>
+    css`
+      gap: ${_gap};
+    `}
 `
 
-// Primary
-export const PrimaryButton = styled(BaseButton)<{ styleType: StyleType }>`
-  // type - filled
-  ${(props) =>
-    props.styleType === 'filled' &&
+export const ButtonContent = styled.div<{ textSize?: TextSizeType; textColor?: string; _padding: string }>`
+  display: flex;
+
+  ${({ textSize }) =>
     css`
-      --color: ${(props) => props.theme.colors.gray.gray0};
-      color: var(--color);
-      background-color: ${(props) => props.theme.colors.primary.primary400_main};
+      font-size: ${useChangeTextSize(textSize as TextSizeType)};
+    `}
+
+  ${({ textColor }) =>
+    css`
+      color: ${useChangeColor(textColor as string)};
+    `}
+
+  ${({ _padding }) =>
+    css`
+      padding: ${_padding};
+    `}
+`
+
+export const ButtonComponent = styled.button<{ buttonType: ButtonType; _margin: string }>`
+  display: flex;
+  align-htems: center;
+  border-radius: 20px;
+
+  ${({ _margin }) =>
+    css`
+      margin: ${_margin};
+    `}
+
+  ${(props) =>
+    props.buttonType === 'primary' &&
+    css`
+      background-color: ${(props) => props.theme.colors.primary.primary100};
 
       &:hover {
-        background-color: ${(props) => props.theme.colors.primary.primary900};
+        background-color: ${(props) => props.theme.colors.primary.primary100};
       }
 
       &:active {
-        background-color: ${(props) => props.theme.colors.primary.primary900};
+        background-color: ${(props) => props.theme.colors.primary.primary300};
       }
 
       &:disabled {
-        color: ${(props) => props.theme.colors.primary.primary100};
-        background-color: ${(props) => props.theme.colors.primary.primary100};
+        background-color: ${(props) => props.theme.colors.gray.gray2};
       }
     `}
 
-  // type - tonal
-    ${(props) =>
-    props.styleType === 'tonal' &&
+  ${(props) =>
+    props.buttonType === 'secondary' &&
     css`
-      --color: ${(props) => props.theme.colors.primary.primary900};
-      color: var(--color);
-      background-color: ${(props) => props.theme.colors.primary.primary900};
+      background-color: ${(props) => props.theme.colors.primary.primary25};
+
+      &:hover {
+        background-color: ${(props) => props.theme.colors.primary.primary25};
+      }
 
       &:active {
-        background-color: ${(props) => props.theme.colors.primary.primary900};
+        background-color: ${(props) => props.theme.colors.primary.primary300};
       }
 
       &:disabled {
-        color: ${(props) => props.theme.colors.gray.gray3};
         background-color: ${(props) => props.theme.colors.gray.gray1};
       }
     `}
 
-    // type - outlined
-    ${(props) =>
-    props.styleType === 'outlined' &&
+  ${(props) =>
+    props.buttonType === 'tertiary' &&
     css`
-      --color: ${(props) => props.theme.colors.primary.primary900};
-      color: var(--color);
-      background-color: ${({ theme }) => theme.colors.gray.gray0};
-      border: 1px solid ${(props) => props.theme.colors.primary.primary900};
+      background-color: ${(props) => props.theme.colors.side.side200};
 
       &:hover {
-        background-color: ${(props) => props.theme.colors.primary.primary100};
+        background-color: ${(props) => props.theme.colors.side.side200};
       }
 
       &:active {
-        background-color: ${(props) => props.theme.colors.primary.primary900};
+        background-color: ${(props) => props.theme.colors.secondary.secondary300};
       }
 
       &:disabled {
-        color: ${(props) => props.theme.colors.gray.gray3};
-        border-color: ${(props) => props.theme.colors.gray.gray1};
-        background-color: ${({ theme }) => theme.colors.gray.gray0};
+        background-color: ${(props) => props.theme.colors.gray.gray1};
       }
     `}
 
-        // type - text
-        ${(props) =>
-    props.styleType === 'text' &&
+  ${(props) =>
+    props.buttonType === 'tertiaryModified' &&
     css`
-      --color: ${(props) => props.theme.colors.primary.primary400_main};
-      color: var(--color);
-      background-color: transparent;
+      background-color: ${(props) => props.theme.colors.side.side200};
 
       &:hover {
-        background-color: ${(props) => props.theme.colors.primary.primary100};
+        background-color: ${(props) => props.theme.colors.side.side200};
       }
 
       &:active {
-        background-color: ${(props) => props.theme.colors.primary.primary200};
+        background-color: ${(props) => props.theme.colors.side.side300};
       }
 
       &:disabled {
-        color: ${(props) => props.theme.colors.gray.gray3};
-        background-color: transparent;
+        background-color: ${(props) => props.theme.colors.side.side200};
       }
     `}
 
-${({ isLoading }) =>
-    isLoading === true &&
+  ${(props) =>
+    props.buttonType === 'fourth' &&
     css`
-      & > span {
-        visibility: hidden;
+      background-color: ${(props) => props.theme.colors.secondary.secondary200};
+
+      &:hover {
+        background-color: ${(props) => props.theme.colors.secondary.secondary200};
       }
 
-      &::after {
-        content: '';
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        top: calc(50% - (8px + 2px));
-        left: calc(50% - (8px + 2px));
-        margin: auto;
-        border: 2px solid transparent;
-        border-top-color: var(--color);
-        border-radius: 50%;
-        animation: ${buttonLoadingSpinner} 1s ease infinite;
-      }
-    `}
-`
-
-// Danger
-export const DangerButton = styled(BaseButton)`
-  --color: ${(props) => props.theme.colors.error.error200}
-  color: var(--color);
-  background-color: ${(props) => props.theme.colors.error.error200};
-
-  &:hover {
-    color: ${(props) => props.theme.colors.gray.gray0};
-    background-color: ${(props) => props.theme.colors.error.error200};
-  }
-
-  &:active {
-    color: ${(props) => props.theme.colors.gray.gray0};
-    background-color: ${(props) => props.theme.colors.error.error200};
-  }
-
-  &:disabled {
-    color: ${(props) => props.theme.colors.gray.gray3};
-    background-color: ${(props) => props.theme.colors.gray.gray1};
-  }
-
-  ${({ isLoading, theme }) =>
-    isLoading === true &&
-    css`
-      & > span {
-        visibility: hidden;
+      &:active {
+        background-color: ${(props) => props.theme.colors.secondary.secondary700};
       }
 
-      &::after {
-        content: '';
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        top: calc(50% - (8px + 2px));
-        left: calc(50% - (8px + 2px));
-        margin: auto;
-        border: 2px solid transparent;
-        border-top-color: var(--color);
-        border-radius: 50%;
-        animation: ${buttonLoadingSpinner} 1s ease infinite;
+      &:disabled {
+        background-color: ${(props) => props.theme.colors.secondary.secondary25};
       }
     `}
 `

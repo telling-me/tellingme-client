@@ -3,13 +3,13 @@ import styled from 'styled-components'
 
 // components
 import style from 'styles/styled-components/styled'
-import { CoreButton } from 'components'
+import { Button } from 'components'
 
 const LandingHeader = () => {
   return (
     <HeaderWrapper>
       <style.TextH1>Telling Me</style.TextH1>
-      <CoreButton size="default" styleType="filled" text="세팅" />
+      <Button buttonType="primary" contentType="text" textSize="h6" textColor="error400" text="세팅" _padding="15px" />
     </HeaderWrapper>
   )
 }
