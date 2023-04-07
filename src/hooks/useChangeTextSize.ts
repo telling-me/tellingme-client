@@ -1,8 +1,9 @@
-import { type TextSize } from 'components/core/button/type'
 import { Theme } from 'styles/DefaultTheme'
 
+import { type TextSizeType } from 'type/common'
+
 // h1 -> 48px 형식으로 변경
-const useChangeTextSize = (beforeTextSize: TextSize) => {
+const useChangeTextSize = (beforeTextSize: TextSizeType) => {
   const afterTextSize = Object.keys(Theme.typo.title).includes(beforeTextSize)
     ? Theme.typo.title[beforeTextSize as keyof typeof Theme.typo.title]
     : Object.keys(Theme.typo.body).includes(beforeTextSize)
