@@ -17,8 +17,8 @@ export type TextSizeType =
   | 'b1_b'
   | 'b2'
   | 'b2_b'
-  | 'c1'
-  | 'c1_b'
+  | 'c'
+  | 'c_b'
 
 export type ColorType =
   | 'primary100'
