@@ -2,19 +2,17 @@ import { Theme } from 'styles/DefaultTheme'
 
 // primary200 -> ##B0F5CA 형식으로 변경
 const useChangeColor = (beforeColor: string) => {
-  const afterColor = beforeColor.includes('primary')
+  const afterColor = Object.keys(Theme.colors.primary).includes(beforeColor)
     ? Theme.colors.primary[beforeColor]
-    : beforeColor.includes('secondary')
+    : Object.keys(Theme.colors.secondary).includes(beforeColor)
     ? Theme.colors.secondary[beforeColor]
-    : beforeColor.includes('gray')
+    : Object.keys(Theme.colors.gray).includes(beforeColor)
     ? Theme.colors.gray[beforeColor]
-    : beforeColor.includes('error')
+    : Object.keys(Theme.colors.error).includes(beforeColor)
     ? Theme.colors.error[beforeColor]
-    : beforeColor.includes('side')
+    : Object.keys(Theme.colors.side).includes(beforeColor)
     ? Theme.colors.side[beforeColor as keyof typeof Theme.colors.side]
-    : beforeColor.includes('logo')
-    ? Theme.colors.logo
-    : beforeColor.includes('black') && Theme.colors.gray.black
+    : beforeColor === 'logo' && Theme.colors.logo
 
   return afterColor
 }
