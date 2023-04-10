@@ -225,9 +225,16 @@ const TextP = styled.p<IText>`
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
 `
 
-const TextSpan = styled.span<{ textSize?: TextSizeType; textColor?: ColorType; _margin?: string }>`
+const TextSpan = styled.span<{
+  textSize?: TextSizeType
+  textColor?: ColorType
+  _margin?: string
+  _width?: string
+  _textAlign?: string
+}>`
   white-space: nowrap;
 
+  ${({ _width }) => _width != null && `width: ${_width}`}
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textSize }) => `font-size: ${useChangeTextSize(textSize as TextSizeType)}`}
   ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
