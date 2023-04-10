@@ -10,12 +10,13 @@ import useChangeColor from 'hooks/useChangeColor'
 // component
 import styled from 'styled-components'
 
-const Icon = ({ icon, iconSize, iconColor, _onClick }: IIcon) => {
+const Icon = ({ icon, iconSize, iconColor, _margin, _onClick }: IIcon) => {
   const color = useChangeColor(iconColor)
   const size = iconSize === 'small' ? '20px' : iconSize === 'medium' ? '24px' : '32px'
 
   return (
     <IconComponent
+      _margin={_margin}
       onClick={(e) => {
         if (_onClick !== undefined) _onClick(e)
       }}
@@ -69,6 +70,8 @@ const Icon = ({ icon, iconSize, iconColor, _onClick }: IIcon) => {
   )
 }
 
-const IconComponent = styled.div``
+const IconComponent = styled.div<{ _margin?: string }>`
+  ${({ _margin }) => _margin !== undefined && `margin: ${_margin}`}
+`
 
 export default Icon

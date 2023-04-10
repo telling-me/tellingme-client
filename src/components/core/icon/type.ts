@@ -9,4 +9,5 @@ export interface IIcon {
   iconSize: IconSizeType
   iconColor: ColorType
   _onClick?: MouseEventHandler<HTMLDivElement>
+  _margin?: string
 }
