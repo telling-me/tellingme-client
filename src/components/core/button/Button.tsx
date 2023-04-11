@@ -19,9 +19,13 @@ const Button = ({
   icon,
   iconSize,
   iconColor,
+  _active,
+  _width,
+  _height,
   _margin,
   _padding,
   _gap,
+  _justifyContent = 'center',
   _disabled = false,
   _onClick,
   _ref
@@ -29,7 +33,11 @@ const Button = ({
   return (
     <ButtonComponent
       buttonType={buttonType}
+      _active={_active}
+      _width={_width}
+      _height={_height}
       _margin={_margin as string}
+      _justifyContent={_justifyContent}
       disabled={_disabled}
       onClick={(e) => {
         if (_onClick === undefined) return

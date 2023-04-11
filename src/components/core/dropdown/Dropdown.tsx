@@ -6,20 +6,28 @@ import type { IDropdown } from './type'
 import style from 'styles/styled-components/styled'
 import { Icon } from 'components'
 
-import { DropdownData } from './data'
-
-const Dropdown = ({ label, dropdownType, _selected, _setSelected, _padding, _margin, _flexGrow }: IDropdown) => {
+const Dropdown = ({
+  label,
+  defaultText,
+  data,
+  _selected,
+  _setSelected,
+  _width,
+  _padding,
+  _margin,
+  _flexGrow
+}: IDropdown) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <DropdownComponent _margin={_margin} _flexGrow={_flexGrow}>
+    <DropdownComponent _width={_width} _margin={_margin} _flexGrow={_flexGrow}>
       <style.TextSpan textSize="h6" textColor="black" _margin="0px 10px">
         {label}
       </style.TextSpan>
 
       <DropdownButton _padding={_padding}>
         <style.TextSpan textSize="b1" textColor={isOpen || _selected !== undefined ? 'black' : 'gray4'} _width="100%">
-          {_selected !== undefined ? _selected : DropdownData[dropdownType].defaultText}
+          {_selected !== undefined ? _selected : defaultText}
         </style.TextSpan>
 
         <Icon
@@ -35,7 +43,7 @@ const Dropdown = ({ label, dropdownType, _selected, _setSelected, _padding, _mar
 
       {isOpen && (
         <DropdownList label={label}>
-          {DropdownData[dropdownType as keyof typeof DropdownData].data.map((v) => {
+          {data.map((v) => {
             return (
               <DropdownItem
                 key={v}

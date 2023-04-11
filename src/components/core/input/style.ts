@@ -12,7 +12,7 @@ export const InputComponent = styled.div<{ _margin: string }>`
   gap: 8px;
 
   width: 100%;
-  max-width: 475px;
+  max-width: 425px;
 
   ${({ _margin }) => `margin: ${_margin}`}
 `

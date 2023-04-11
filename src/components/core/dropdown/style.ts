@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const DropdownComponent = styled.div<{ _margin?: string; _flexGrow?: string }>`
+export const DropdownComponent = styled.div<{ _width?: string; _margin?: string; _flexGrow?: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,13 +9,14 @@ export const DropdownComponent = styled.div<{ _margin?: string; _flexGrow?: stri
 
   position: relative;
 
-  width: 100%;
   max-width: 425px;
 
+  ${({ _width }) => _width !== undefined && `width: ${_width}`}
   ${({ _margin }) => _margin !== undefined && `margin: ${_margin}`}
+  ${({ _flexGrow }) => _flexGrow !== undefined && `flex-grow: ${_flexGrow}`}
 `
 
-export const DropdownButton = styled.button<{ _padding: string }>`
+export const DropdownButton = styled.button<{ _padding?: string }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -29,7 +30,7 @@ export const DropdownButton = styled.button<{ _padding: string }>`
     background-color: ${props.theme.colors.side.side200};
   `}
 
-  ${({ _padding }) => `padding: ${_padding}`}
+  ${({ _padding }) => _padding !== undefined && `padding: ${_padding}`}
 `
 
 export const DropdownList = styled.div<{ label?: string }>`
@@ -54,7 +55,7 @@ export const DropdownList = styled.div<{ label?: string }>`
   `}
 `
 
-export const DropdownItem = styled.button<{ _padding: string }>`
+export const DropdownItem = styled.button<{ _padding?: string }>`
   display: block;
   flex-direction: column;
   justify-content: center;
@@ -72,5 +73,5 @@ export const DropdownItem = styled.button<{ _padding: string }>`
     }
   `}
 
-  ${({ _padding }) => `padding: ${_padding}`}
+  ${({ _padding }) => _padding !== undefined && `padding: ${_padding}`}
 `

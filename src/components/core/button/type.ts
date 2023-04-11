@@ -14,9 +14,13 @@ export interface IButton {
   icon?: IconType
   iconSize?: IconSizeType
   iconColor?: ColorType
+  _active?: boolean
+  _width?: string
+  _height?: string
   _margin?: string
   _padding?: string
   _gap?: string
+  _justifyContent?: string
   _disabled?: boolean
   _onClick?: MouseEventHandler<HTMLButtonElement>
   _ref?: RefObject<HTMLButtonElement>
