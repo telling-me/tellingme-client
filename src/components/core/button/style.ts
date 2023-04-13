@@ -27,6 +27,28 @@ export const BothFrame = styled.div<{ contentType: ContentType; _gap: string }>`
     `}
 `
 
+export const WithInputFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`
+
+export const WithInput = styled.input<{ _active?: boolean }>`
+  border: none;
+  outline: none;
+
+  text-align: center;
+
+  ${(props) =>
+    props._active !== undefined && props._active
+      ? css`
+          background-color: ${(props) => props.theme.colors.side.side300};
+        `
+      : css`
+          background-color: ${(props) => props.theme.colors.side.side200};
+        `}
+`
+
 export const ButtonContent = styled.div<{ textSize?: TextSizeType; textColor?: string; _padding: string }>`
   display: flex;
 

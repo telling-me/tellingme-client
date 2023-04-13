@@ -1,244 +1,239 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { type Dispatch, type SetStateAction, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import { ContentWrapper, MoveButtonWrapper, SignUpWrapper } from './style'
 
-import style from 'styles/styled-components/styled'
-import { Button, CheckBox, Dropdown, Input } from 'components'
+// type
 import type { ColorType, IconType } from 'type/common'
 
+// hooks
+import { useSignUpQuery } from 'hooks/queries'
+
+// component
+import { birthDateData, genderData, jobData, mbtiData, purposeData, stepTextData } from './data'
+import { Button, CheckBox, Dropdown, Input } from 'components'
+import style from 'styles/styled-components/styled'
+
 const SignUpPage = () => {
+  const location = useLocation()
+  const socialId = location.state.socialId
+  const socialLoginType = location.state.socialLoginType
+
   const [step, setStep] = useState(0)
 
+  // JoinResponseDto
   const [isAgree, setIsAgree] = useState(false)
-  const [name, setName] = useState('')
+  const [nickname, setNickname] = useState('')
   const [purpose, setPurpose] = useState<string[]>([])
-  const [job, setJob] = useState('')
+  const [job, setJob] = useState<number>(-1)
+  const [jobInfo, setJobInfo] = useState('')
   const [gender, setGender] = useState('')
   const [year, setYear] = useState<string | undefined>(undefined)
   const [month, setMonth] = useState<string | undefined>(undefined)
   const [day, setDay] = useState<string | undefined>(undefined)
   const [mbti, setMbti] = useState<string | undefined>(undefined)
 
-  const stepTexts = [
-    '서비스 이용 약관',
-    '닉네임을 정해주세요',
-    '고민을 알려주세요',
-    '직업을 알려주세요',
-    '성별을 알려주세요',
-    '생일을 알려주세요',
-    'mbti는 무엇인가요'
-  ]
-  const purposeData: Array<{ text: string; icon: IconType }> = [
-    { text: '학업/진로', icon: 'pen' },
-    { text: '대인 관계', icon: 'handshake' },
-    { text: '성격/가치관', icon: 'values' },
-    { text: '행동/습관', icon: 'magnet' },
-    { text: '건강', icon: 'health' },
-    { text: '기타', icon: 'heart' }
-  ]
-  const jobData: Array<{ text: string; icon: IconType }> = [
-    { text: '고등학생', icon: 'bagpack' },
-    { text: '대학(원)생', icon: 'graduationcap' },
-    { text: '취업준비생', icon: 'smiley' },
-    { text: '직장인', icon: 'briefcase' },
-    { text: '주부', icon: 'cookpot' },
-    { text: '기타', icon: 'heart' }
-  ]
-  const genderData: Array<{ text: string; icon: IconType; iconColor: ColorType }> = [
-    { text: '남성', icon: 'male', iconColor: 'secondary700' },
-    { text: '여성', icon: 'female', iconColor: 'error300' }
-  ]
-  const mbtiData = [
-    'ENFJ',
-    'ENFP',
-    'ENTJ',
-    'ENTP',
-    'ESTP',
-    'ESFP',
-    'ESTJ',
-    'ESFJ',
-    'INFJ',
-    'INFP',
-    'INTJ',
-    'INTP',
-    'ISTP',
-    'ISFP',
-    'ISFJ',
-    'ISTJ'
-  ]
-  const birthDateData: Array<{
-    defaultText: string
-    data: string[] | number[]
-    _selected: string | undefined
-    _setSelected: Dispatch<SetStateAction<string | undefined>>
-    _padding: string
-    _flexGrow: string
-  }> = [
-    {
-      defaultText: '년\u00a0\u00a0\u00a0',
-      data: new Array(70).fill(0).map((_, i) => 2023 - i),
-      _selected: year,
-      _setSelected: setYear,
-      _padding: '16.5px 20px',
-      _flexGrow: '2'
-    },
-    {
-      defaultText: '월\u00a0',
-      data: new Array(12).fill(0).map((_, i) => i + 1),
-      _selected: month,
-      _setSelected: setMonth,
-      _padding: '16.5px 20px',
-      _flexGrow: '1'
-    },
-    {
-      defaultText: '일\u00a0',
-      data: new Array(31).fill(0).map((_, i) => i + 1),
-      _selected: day,
-      _setSelected: setDay,
-      _padding: '16.5px 20px',
-      _flexGrow: '1'
-    }
-  ]
+  const { data, refetch } = useSignUpQuery({
+    allowNotification: true,
+    birthDate:
+      year !== undefined && month !== undefined && day !== undefined
+        ? `${year}-${month.length === 1 ? `0${month}` : month}-${day.length === 1 ? `0${day}` : day}`
+        : ``,
+    gender,
+    job,
+    jobInfo: job === 5 ? jobInfo : '',
+    mbti: mbti !== undefined ? mbti : '',
+    nickname,
+    purpose: `[${purpose.join(',')}]`,
+    socialId,
+    socialLoginType
+  })
+
+  const handleClick = () => {
+    refetch()
+  }
 
   return (
     <SignUpWrapper>
-      <style.TextSpan textSize="h4" textColor="black" _margin="60px 0px 110px 0px">
-        {stepTexts[step]}
+      <style.TextSpan
+        textSize="h4"
+        textColor="black"
+        _margin={
+          [0, 1, 5, 6].includes(step) ? '60px 0px 110px 0px' : step === 2 ? '60px 0px 8px 0px' : '60px 0px 80px 0px'
+        }
+      >
+        {stepTextData[step]}
       </style.TextSpan>
 
-      {step === 0 ? (
-        <CheckBox label="전체 동의합니다" buttonText="전문 보기" _checked={isAgree} _setChecked={setIsAgree} />
-      ) : step === 1 ? (
-        <Input
-          _placeholder="2-8글자 이내"
-          infoText="영문, 숫자, 띄어쓰기, 특수문자 불가"
-          errorText="사용불가 닉네임입니다"
-          _value={name}
-          _setValue={setName}
-        />
-      ) : step === 2 ? (
-        <ContentWrapper type="purpose">
-          {purposeData.map((v: { text: string; icon: IconType }, i: number) => {
-            return (
-              <Button
-                key={i}
-                buttonType="tertiaryModified"
-                contentType="col"
-                text={v.text}
-                textSize="h6"
-                textColor="gray7"
-                icon={v.icon}
-                iconSize="large"
-                iconColor="logo"
-                _active={purpose.includes(i.toString())}
-                _gap="15px"
-                _width="105px"
-                _height="114px"
-                _onClick={() => {
-                  const idx = purpose.indexOf(i.toString())
+      {step === 2 && (
+        <style.TextSpan textSize="b2" textColor="gray6" _margin="0px 0px 60px 0px">
+          최대 2가지 선택 가능
+        </style.TextSpan>
+      )}
 
-                  if (idx === -1 && purpose.length < 2) {
-                    setPurpose([...purpose, i.toString()])
-                  } else if (idx !== -1) {
-                    setPurpose([...purpose.slice(0, idx), ...purpose.slice(idx + 1)])
-                  }
-                }}
-              />
-            )
-          })}
-        </ContentWrapper>
-      ) : step === 3 ? (
-        <ContentWrapper type="job">
-          {jobData.map((v: { text: string; icon: IconType }, i: number) => {
-            return (
-              <Button
-                key={i}
-                buttonType="tertiaryModified"
-                contentType="row"
-                text={v.text}
-                textSize="h6"
-                textColor="gray7"
-                icon={v.icon}
-                iconSize="large"
-                iconColor="logo"
-                _active={job.includes(i.toString())}
-                _gap="23px"
-                _width="205px"
-                _height="55px"
-                _padding="0px 0px 0px 24px"
-                _justifyContent="flex-start"
-                _onClick={() => {
-                  setJob(`${i}`)
-                }}
-              />
-            )
-          })}
-        </ContentWrapper>
-      ) : step === 4 ? (
-        <ContentWrapper type="gender">
-          {genderData.map((v: { text: string; icon: IconType; iconColor: ColorType }, i: number) => {
-            return (
-              <Button
-                key={i}
-                buttonType="tertiaryModified"
-                contentType="col"
-                text={v.text}
-                textSize="h6"
-                textColor="gray7"
-                icon={v.icon}
-                iconSize="large"
-                iconColor={v.iconColor}
-                _active={gender.includes(`${i}`)}
-                _gap="15px"
-                _width="103px"
-                _height="114px"
-                _onClick={() => {
-                  setGender(`${i}`)
-                }}
-              />
-            )
-          })}
-        </ContentWrapper>
-      ) : step === 5 ? (
-        <ContentWrapper type="birthDate">
-          {birthDateData.map(
-            (
-              v: {
-                defaultText: string
-                data: string[] | number[]
-                _selected: string | undefined
-                _setSelected: Dispatch<SetStateAction<string | undefined>>
-                _padding: string
-                _flexGrow: string
-              },
-              i: number
-            ) => {
+      {
+        // 서비스 이용 약관 (추후에 디자인 나오면 약관 모달 달아야 함)
+        step === 0 ? (
+          <CheckBox label="전체 동의합니다" buttonText="전문 보기" _checked={isAgree} _setChecked={setIsAgree} />
+        ) : // 닉네임
+        step === 1 ? (
+          <Input
+            _placeholder="2-8글자 이내"
+            infoText="영문, 숫자, 띄어쓰기, 특수문자 불가"
+            errorText="사용불가 닉네임입니다"
+            _value={nickname}
+            _setValue={setNickname}
+          />
+        ) : // 고민
+        step === 2 ? (
+          <ContentWrapper type="purpose">
+            {purposeData.map((v: { text: string; icon: IconType }, i: number) => {
               return (
-                <Dropdown
+                <Button
                   key={i}
-                  defaultText={v.defaultText}
-                  data={v.data}
-                  _selected={v._selected}
-                  _setSelected={v._setSelected}
-                  _padding={v._padding}
-                  _flexGrow={v._flexGrow}
+                  buttonType="tertiaryModified"
+                  contentType="col"
+                  text={v.text}
+                  textSize="h6"
+                  textColor="gray7"
+                  icon={v.icon}
+                  iconSize="large"
+                  iconColor="logo"
+                  _active={purpose.includes(i.toString())}
+                  _gap="15px"
+                  _width="105px"
+                  _height="114px"
+                  _onClick={() => {
+                    const idx = purpose.indexOf(i.toString())
+
+                    if (idx === -1 && purpose.length < 2) {
+                      setPurpose([...purpose, i.toString()])
+                    } else if (idx !== -1) {
+                      setPurpose([...purpose.slice(0, idx), ...purpose.slice(idx + 1)])
+                    }
+                  }}
                 />
               )
-            }
-          )}
-        </ContentWrapper>
-      ) : (
-        step === 6 && (
-          <Dropdown
-            defaultText="mbti 선택"
-            data={mbtiData}
-            _selected={mbti}
-            _setSelected={setMbti}
-            _width="100%"
-            _padding="16.5px 30px"
-          />
+            })}
+          </ContentWrapper>
+        ) : // 직업
+        step === 3 ? (
+          <ContentWrapper type="job">
+            {jobData.map((v: { text: string; icon: IconType }, i: number) => {
+              return (
+                <Button
+                  key={i}
+                  buttonType="tertiaryModified"
+                  contentType="row"
+                  text={v.text}
+                  textSize="h6"
+                  textColor="gray7"
+                  icon={v.icon}
+                  iconSize="large"
+                  iconColor="logo"
+                  _active={job === i}
+                  _gap="23px"
+                  _width="205px"
+                  _height="55px"
+                  _padding="0px 0px 0px 24px"
+                  _justifyContent="flex-start"
+                  _onClick={() => {
+                    setJob(i)
+                  }}
+                />
+              )
+            })}
+            <Button
+              buttonType="tertiaryModified"
+              contentType={job === 5 ? 'withInput' : 'row'}
+              text="기타"
+              textSize="h6"
+              textColor="gray7"
+              icon="heart"
+              iconSize="large"
+              iconColor="logo"
+              jobInfo={jobInfo}
+              setJobInfo={setJobInfo}
+              _active={job === 5}
+              _gap="23px"
+              _width="205px"
+              _height={job === 5 ? '102px' : '55px'}
+              _padding="0px 0px 0px 24px"
+              _justifyContent="flex-start"
+              _onClick={() => {
+                setJob(5)
+              }}
+            />
+          </ContentWrapper>
+        ) : // 성별
+        step === 4 ? (
+          <ContentWrapper type="gender">
+            {genderData.map((v: { text: string; icon: IconType; iconColor: ColorType }, i: number) => {
+              return (
+                <Button
+                  key={i}
+                  buttonType="tertiaryModified"
+                  contentType="col"
+                  text={v.text}
+                  textSize="h6"
+                  textColor="gray7"
+                  icon={v.icon}
+                  iconSize="large"
+                  iconColor={v.iconColor}
+                  _active={(gender === 'male' && v.text === '남성') || (gender === 'female' && v.text === '여성')}
+                  _gap="15px"
+                  _width="103px"
+                  _height="114px"
+                  _onClick={() => {
+                    setGender(i === 0 ? 'male' : 'female')
+                  }}
+                />
+              )
+            })}
+          </ContentWrapper>
+        ) : // 생년월일
+        step === 5 ? (
+          <ContentWrapper type="birthDate">
+            {birthDateData.map(
+              (
+                v: {
+                  defaultText: string
+                  data: string[] | number[]
+                  _padding: string
+                  _flexGrow: string
+                },
+                i: number
+              ) => {
+                return (
+                  <Dropdown
+                    key={i}
+                    defaultText={v.defaultText}
+                    data={v.data}
+                    _selected={i === 0 ? year : i === 1 ? month : day}
+                    _setSelected={i === 0 ? setYear : i === 1 ? setMonth : setDay}
+                    _padding={v._padding}
+                    _flexGrow={v._flexGrow}
+                  />
+                )
+              }
+            )}
+          </ContentWrapper>
+        ) : (
+          // mbti
+          step === 6 && (
+            <Dropdown
+              defaultText="mbti 선택"
+              data={mbtiData}
+              _selected={mbti}
+              _setSelected={setMbti}
+              _width="100%"
+              _padding="16.5px 30px"
+            />
+          )
         )
-      )}
+      }
 
       <MoveButtonWrapper>
         <Button
@@ -253,27 +248,39 @@ const SignUpPage = () => {
             setStep(step - 1)
           }}
         />
-        <Button
-          buttonType="secondary"
-          contentType="icon"
-          icon="arrowright"
-          iconSize="medium"
-          iconColor="logo"
-          _margin="0 0 0 auto"
-          _padding="16px"
-          _disabled={
-            (step === 0 && !isAgree) ||
-            (step === 1 && name === '') ||
-            (step === 2 && purpose.length === 0) ||
-            (step === 3 && job === '') ||
-            (step === 4 && gender === '') ||
-            (step === 5 && (year === undefined || month === undefined || day === undefined)) ||
-            (step === 6 && mbti === undefined)
-          }
-          _onClick={() => {
-            setStep(step + 1)
-          }}
-        />
+        {step !== 6 ? (
+          <Button
+            buttonType="secondary"
+            contentType="icon"
+            icon="arrowright"
+            iconSize="medium"
+            iconColor="logo"
+            _margin="0 0 0 auto"
+            _padding="16px"
+            _disabled={
+              (step === 0 && !isAgree) ||
+              (step === 1 && nickname === '') ||
+              (step === 2 && purpose.length === 0) ||
+              (step === 3 && (job === undefined || (job === 5 && jobInfo === '')))
+            }
+            _onClick={() => {
+              setStep(step + 1)
+            }}
+          />
+        ) : (
+          <Button
+            buttonType="secondary"
+            contentType="text"
+            text="완료"
+            textSize="h6"
+            textColor="logo"
+            _margin="0 0 0 auto"
+            _padding="18px 32px"
+            _onClick={() => {
+              handleClick()
+            }}
+          />
+        )}
       </MoveButtonWrapper>
     </SignUpWrapper>
   )

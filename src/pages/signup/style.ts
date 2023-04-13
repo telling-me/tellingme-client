@@ -5,12 +5,15 @@ export const SignUpWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  height: 100%;
+  height: 100vh;
   overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 
   ${(props) => `background-color: ${props.theme.colors.side.side200}`}
 
-  height: 100%;
+  height: max-content;
 
   @media all and (min-width: 1024px) {
     max-width: 1200px;
@@ -29,10 +32,21 @@ export const SignUpWrapper = styled.div`
 export const MoveButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 110px;
 
   width: 100%;
   max-width: 430px;
+
+  @media all and (min-width: 1024px) {
+    margin-top: 110px;
+  }
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    margin: auto 0px 70px 0px;
+  }
+
+  @media all and (max-width: 767px) {
+    margin: auto 0px 70px 0px;
+  }
 `
 
 export const ContentWrapper = styled.div<{ type: string }>`
@@ -43,6 +57,8 @@ export const ContentWrapper = styled.div<{ type: string }>`
 
   width: 100%;
   max-width: 430px;
+
+  margin-bottom: 40px;
 
   @media all and (min-width: 1024px) {
     gap: ${({ type }) =>
