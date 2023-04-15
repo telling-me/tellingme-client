@@ -26,6 +26,7 @@ import { ReactComponent as Bagpack } from './Bagpack.svg'
 import { ReactComponent as Briefcase } from './Briefcase.svg'
 import { ReactComponent as Cookpot } from './Cookpot.svg'
 import { ReactComponent as Smiley } from './Smiley.svg'
+import { ReactComponent as Logo } from './Logo.svg'
 
 interface IIconIndex extends IStringKey {
   Menu: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -50,6 +51,7 @@ interface IIconIndex extends IStringKey {
   Briefcase: string | FunctionComponent<any> | ComponentClass<any, any>
   Cookpot: string | FunctionComponent<any> | ComponentClass<any, any>
   Smiley: string | FunctionComponent<any> | ComponentClass<any, any>
+  Logo: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
@@ -78,7 +80,8 @@ const Icon: IIconIndex = {
   Bagpack,
   Briefcase,
   Cookpot,
-  Smiley
+  Smiley,
+  Logo
 }
 
 export default Icon

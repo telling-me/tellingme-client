@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-
 import axios from 'axios'
 
 export const API = axios.create({

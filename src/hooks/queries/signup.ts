@@ -1,6 +1,5 @@
 import { useQuery } from 'react-query'
 import { apis } from 'apis/apis'
-import type { IError } from 'type/db'
 import type { IJoinResponseDto } from 'apis/userApi'
 
 export const useSignUpQuery = ({
@@ -32,10 +31,7 @@ export const useSignUpQuery = ({
       }),
     {
       enabled: false,
-      retry: 0,
-      onError: (err: IError) => {
-        console.log(err)
-      }
+      retry: 0
     }
   )
 }

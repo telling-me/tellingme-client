@@ -1,5 +1,22 @@
 import styled from 'styled-components'
 
+export const SignUpHeader = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 12px;
+`
+
+export const SkipButton = styled.button`
+  margin: 0px 0px 0px auto;
+
+  &:hover span {
+    color: ${(props) => props.theme.colors.primary.primary200};
+  }
+`
+
 export const SignUpWrapper = styled.div`
   display: flex;
   flex-direction: column;

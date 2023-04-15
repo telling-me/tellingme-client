@@ -69,5 +69,14 @@ export const userApi = {
         headers: { 'Content-Type': 'application/json' }
       }
     )
+  },
+  checkNickname: async (nickname: string) => {
+    return await API.post(
+      '/api/oauth/nickname',
+      { nickname },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
   }
 }

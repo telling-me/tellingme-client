@@ -28,9 +28,7 @@ const KakaoLayout = () => {
         refreshToken: res.data.data.refreshToken
       })
     }
-  } catch (err: unknown) {
-    console.log('에러당! ', err)
-  }
+  } catch (err: unknown) {}
 
   return <></>
 }
