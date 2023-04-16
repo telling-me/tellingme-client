@@ -3,6 +3,7 @@ export enum PAGE_URL {
   Home = '/',
   Login = 'login',
   Login_Apple = 'login/apple',
+  SignUp = 'signup',
   Kakao = '/oauth/kakao',
   Apple = '/oauth/apple',
 

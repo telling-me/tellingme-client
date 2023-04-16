@@ -1,5 +1,7 @@
 import { API, KAKAO_TOKEN_API, KAKAO_USER_INFO_API } from 'configs/axios'
 
+type SocialLoginType = 'kakao' | 'apple'
+
 export interface IUserData {
   name: string
   email: string
@@ -16,12 +18,25 @@ export interface IKakaoTokenData {
   redirect_uri: string
   code: string
 }
+export interface IJoinResponseDto {
+  allowNotification: boolean
+  birthDate?: string
+  gender?: string
+  job: number
+  jobInfo: string
+  mbti?: string
+  nickname: string
+  purpose: string
+  socialId: string
+  socialLoginType: SocialLoginType
+}
 export const userApi = {
   login: async (loginData: ILoginData) => await API.post('/member/auth/login', loginData),
-  signup: async (data: { userData: IUserData }) =>
-    await API.post('/member/auth/registration', data.userData, {
-      params: { userData: data.userData }
-    }),
+  signup: async (joinResponseDto: IJoinResponseDto) => {
+    return await API.post(`/api/oauth/join`, joinResponseDto, {
+      headers: { 'Content-Type': 'application/json' }
+    })
+  },
   test: async () => {
     const data = await API.get('/')
     return data
@@ -52,6 +67,15 @@ export const userApi = {
       { socialId },
       {
         headers: { 'Content-Type': 'application/json', idToken: idToken ?? '' }
+      }
+    )
+  },
+  checkNickname: async (nickname: string) => {
+    return await API.post(
+      '/api/oauth/nickname',
+      { nickname },
+      {
+        headers: { 'Content-Type': 'application/json' }
       }
     )
   }

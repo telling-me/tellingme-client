@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 
 // element
-import * as Swtich from 'pages'
+import * as Switch from 'pages'
 
 // layout
 import CommonLayout from 'components/layout/CommonLayout'
@@ -25,9 +25,10 @@ const PageRouter = () => {
             // 랜딩페이지
           }
           <Route path={PAGE_URL.Home} element={<LandingLayout />}>
-            <Route index element={<Swtich.LandingPage />} />
-            <Route path={PAGE_URL.Login} element={<Swtich.LoginButtonPage />} />
-            <Route path={PAGE_URL.Login_Apple} element={<Swtich.AppleLoginButtonPage />} />
+            <Route index element={<Switch.LandingPage />} />
+            <Route path={PAGE_URL.Login_Apple} element={<Switch.AppleLoginButtonPage />} />
+            <Route path={PAGE_URL.Login} element={<Switch.LoginButtonPage />} />
+            <Route path={PAGE_URL.SignUp} element={<Switch.SignUpPage />} />
           </Route>
           {
             // 임시 로그인 라우터
@@ -38,10 +39,10 @@ const PageRouter = () => {
             // 앱
           }
           <Route path={PAGE_URL.App} element={<CommonLayout />}>
-            <Route index element={<Swtich.MainPage />} />
-            <Route index path={PAGE_URL.Main} element={<Swtich.MainPage />} />
-            <Route path={PAGE_URL.AllAnswer} element={<Swtich.AllAnswerPage />} />
-            <Route path={PAGE_URL.MyAnswer} element={<Swtich.MyAnswerPage />} />
+            <Route index element={<Switch.MainPage />} />
+            <Route index path={PAGE_URL.Main} element={<Switch.MainPage />} />
+            <Route path={PAGE_URL.AllAnswer} element={<Switch.AllAnswerPage />} />
+            <Route path={PAGE_URL.MyAnswer} element={<Switch.MyAnswerPage />} />
           </Route>
         </Routes>
       </AnimatePresence>

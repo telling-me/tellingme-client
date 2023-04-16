@@ -27,6 +27,28 @@ export const BothFrame = styled.div<{ contentType: ContentType; _gap: string }>`
     `}
 `
 
+export const WithInputFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`
+
+export const WithInput = styled.input<{ _active?: boolean }>`
+  border: none;
+  outline: none;
+
+  text-align: center;
+
+  ${(props) =>
+    props._active !== undefined && props._active
+      ? css`
+          background-color: ${(props) => props.theme.colors.side.side300};
+        `
+      : css`
+          background-color: ${(props) => props.theme.colors.side.side200};
+        `}
+`
+
 export const ButtonContent = styled.div<{ textSize?: TextSizeType; textColor?: string; _padding: string }>`
   display: flex;
 
@@ -46,15 +68,22 @@ export const ButtonContent = styled.div<{ textSize?: TextSizeType; textColor?: s
     `}
 `
 
-export const ButtonComponent = styled.button<{ buttonType: ButtonType; _margin: string }>`
+export const ButtonComponent = styled.button<{
+  buttonType: ButtonType
+  _active?: boolean
+  _width?: string
+  _height?: string
+  _margin: string
+  _justifyContent: string
+}>`
   display: flex;
-  align-htems: center;
+  align-items: center;
   border-radius: 20px;
 
-  ${({ _margin }) =>
-    css`
-      margin: ${_margin};
-    `}
+  ${({ _width }) => _width !== undefined && `width: ${_width};`}
+  ${({ _height }) => _height !== undefined && `height: ${_height};`}
+  ${({ _margin }) => `margin: ${_margin};`}
+  ${({ _justifyContent }) => `justify-content: ${_justifyContent};`}
 
   ${(props) =>
     props.buttonType === 'primary' &&
@@ -111,22 +140,27 @@ export const ButtonComponent = styled.button<{ buttonType: ButtonType; _margin: 
     `}
 
   ${(props) =>
-    props.buttonType === 'tertiaryModified' &&
-    css`
-      background-color: ${(props) => props.theme.colors.side.side200};
+    props.buttonType === 'tertiaryModified' && (props._active === undefined || !props._active)
+      ? css`
+          background-color: ${(props) => props.theme.colors.side.side200};
 
-      &:hover {
-        background-color: ${(props) => props.theme.colors.side.side200};
-      }
+          &:hover {
+            background-color: ${(props) => props.theme.colors.side.side200};
+          }
 
-      &:active {
-        background-color: ${(props) => props.theme.colors.side.side300};
-      }
+          &:active {
+            background-color: ${(props) => props.theme.colors.side.side300};
+          }
 
-      &:disabled {
-        background-color: ${(props) => props.theme.colors.side.side200};
-      }
-    `}
+          &:disabled {
+            background-color: ${(props) => props.theme.colors.side.side200};
+          }
+        `
+      : props._active !== undefined &&
+        props._active &&
+        css`
+          background-color: ${(props) => props.theme.colors.side.side300};
+        `}
 
   ${(props) =>
     props.buttonType === 'fourth' &&

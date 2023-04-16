@@ -5,7 +5,7 @@ import type { ICheckBox } from './type'
 
 import style from 'styles/styled-components/styled'
 
-const CheckBox = ({ label, buttonText, _checked, _setChecked, _disabled = false, _onClick }: ICheckBox) => {
+const CheckBox = ({ label, buttonText, _checked, _setChecked, _disabled = false, _onClick, _margin }: ICheckBox) => {
   const handleChange = (e: { target: { checked: boolean | ((prevState: boolean) => boolean) } }) => {
     _setChecked(e.target.checked)
 
@@ -13,7 +13,7 @@ const CheckBox = ({ label, buttonText, _checked, _setChecked, _disabled = false,
   }
 
   return (
-    <CheckBoxComponent _disabled={_disabled}>
+    <CheckBoxComponent _disabled={_disabled} _margin={_margin}>
       <CheckBoxFrame>
         <CheckBoxMain type="checkbox" checked={_checked} onChange={handleChange} disabled={_disabled} />
         <style.TextSpan textSize="b1" textColor={_disabled ? 'gray3' : 'black'}>

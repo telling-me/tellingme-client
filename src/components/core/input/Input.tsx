@@ -11,6 +11,7 @@ const Input = ({
   infoText,
   errorText,
   isError = false,
+  setIsError,
   _disabled = false,
   _placeholder = '',
   _value,
@@ -19,6 +20,10 @@ const Input = ({
 }: IInput) => {
   const handleChange = (e: { target: { value: React.SetStateAction<string> } }) => {
     _setValue(e.target.value)
+
+    if (setIsError !== undefined) {
+      setIsError(false)
+    }
   }
 
   const resetInput = () => {

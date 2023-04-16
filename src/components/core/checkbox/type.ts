@@ -7,4 +7,5 @@ export interface ICheckBox {
   _disabled?: boolean
   _setChecked: Dispatch<SetStateAction<boolean>>
   _onClick?: MouseEventHandler<HTMLButtonElement>
+  _margin?: string
 }

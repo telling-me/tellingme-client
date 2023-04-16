@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const CheckBoxComponent = styled.div<{ _disabled?: boolean }>`
+export const CheckBoxComponent = styled.div<{ _disabled?: boolean; _margin?: string }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -22,7 +22,9 @@ export const CheckBoxComponent = styled.div<{ _disabled?: boolean }>`
         `
       : css`
           background-color: ${props.theme.colors.gray.gray2};
-        `}
+        `};
+
+  ${({ _margin }) => _margin !== undefined && `margin: ${_margin}`}
 `
 
 export const CheckBoxFrame = styled.div`
