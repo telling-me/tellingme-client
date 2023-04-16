@@ -8,6 +8,7 @@ import * as Swtich from 'pages'
 import CommonLayout from 'components/layout/CommonLayout'
 import LandingLayout from 'components/layout/LandingLayout'
 import KakaoLayout from 'components/layout/KakaoLayout'
+import AppleLayout from 'components/layout/AppleLayout'
 
 // path
 import { PAGE_URL } from 'configs/path'
@@ -26,11 +27,13 @@ const PageRouter = () => {
           <Route path={PAGE_URL.Home} element={<LandingLayout />}>
             <Route index element={<Swtich.LandingPage />} />
             <Route path={PAGE_URL.Login} element={<Swtich.LoginButtonPage />} />
+            <Route path={PAGE_URL.Login_Apple} element={<Swtich.AppleLoginButtonPage />} />
           </Route>
           {
             // 임시 로그인 라우터
           }
           <Route path={PAGE_URL.Kakao} element={<KakaoLayout />} />
+          <Route path={PAGE_URL.Apple} element={<AppleLayout />} />
           {
             // 앱
           }

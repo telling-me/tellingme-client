@@ -46,12 +46,12 @@ export const userApi = {
       }
     )
   },
-  checkUserInfo: async (loginType: string, socialId: string) => {
+  checkUserInfo: async (loginType: string, socialId: string, idToken?: string) => {
     return await API.post(
       `/api/oauth/${loginType}`,
       { socialId },
       {
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json', idToken: idToken ?? '' }
       }
     )
   }
