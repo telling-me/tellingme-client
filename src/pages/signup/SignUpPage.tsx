@@ -110,7 +110,7 @@ const SignUpPage = () => {
 
         {[4, 5, 6].includes(step) && (
           <Button
-            buttonType="none"
+            buttonType="noFilled"
             contentType="text"
             text="건너뛰기"
             textSize={(windowSize as number) > 767 ? 'h6' : 'b1'}
@@ -405,7 +405,7 @@ const SignUpPage = () => {
                 }}
               />
               <Button
-                buttonType="none"
+                buttonType="noFilled"
                 contentType="text"
                 text="괜찮아요"
                 textSize="b1"
