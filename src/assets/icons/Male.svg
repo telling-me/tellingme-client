@@ -1,4 +1,10 @@
 <svg width="current" height="current" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id='gradient' gradientUnits='userSpaceOnUse' x1='-5.19%' y1='93.4%' x2='105.19%' y2='6.6%'>
+<stop offset='.012' stop-color='#7CEFA7'/>
+<stop offset='.893' stop-color='#8FD3F4'/>
+</linearGradient>
+</defs>
 <path d="M12 8.25C15.935 8.25 19.125 11.44 19.125 15.375C19.125 19.31 15.935 22.5 12 22.5C8.06497 22.5 4.875 19.31 4.875 15.375C4.875 11.44 8.06497 8.25 12 8.25Z" stroke="current" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M12 8.25V1.5M12 1.5L9 4.5M12 1.5L15 4.5" stroke="current" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

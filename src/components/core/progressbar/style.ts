@@ -17,6 +17,7 @@ export const Progress = styled.div<{ percent: string }>`
 
   width: ${({ percent }) => `${percent}`}%;
   height: 5px;
+  border-radius: 10px;
 
   background: ${(props) => props.theme.gradient.default_gradient(51.82)};
 `

@@ -65,9 +65,8 @@ export const InputInnerFrame = styled.input<{ isError?: boolean; _disabled?: boo
 `
 
 export const InputSpan = styled.span<{ textSize: string; textColor: string }>`
-  margin: 0px 0px 0px 18px;
+  margin: 0px 18px;
 
-  width: 100%;
   max-width: 475px;
 
   ${({ textSize }) => `font-size: ${useChangeTextSize(textSize as TextSizeType)};`}

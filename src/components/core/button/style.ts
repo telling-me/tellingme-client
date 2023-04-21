@@ -1,11 +1,9 @@
+// component
 import styled, { css } from 'styled-components'
 
-import useChangeTextSize from 'hooks/useChangeTextSize'
-import useChangeColor from 'hooks/useChangeColor'
-
 // type
-import { type ContentType, type ButtonType } from './type'
-import { type TextSizeType } from 'type/common'
+import type { ContentType, ButtonType } from './type'
+import type { ColorType } from 'type/common'
 
 export const BothFrame = styled.div<{ contentType: ContentType; _gap: string }>`
   display: flex;
@@ -21,10 +19,7 @@ export const BothFrame = styled.div<{ contentType: ContentType; _gap: string }>`
           flex-direction: column;
         `}
 
-  ${({ _gap }) =>
-    css`
-      gap: ${_gap};
-    `}
+  ${({ _gap }) => `gap: ${_gap};`}
 `
 
 export const WithInputFrame = styled.div`
@@ -49,40 +44,30 @@ export const WithInput = styled.input<{ _active?: boolean }>`
         `}
 `
 
-export const ButtonContent = styled.div<{ textSize?: TextSizeType; textColor?: string; _padding: string }>`
-  display: flex;
-
-  ${({ textSize }) =>
-    css`
-      font-size: ${useChangeTextSize(textSize as TextSizeType)};
-    `}
-
-  ${({ textColor }) =>
-    css`
-      color: ${useChangeColor(textColor as string)};
-    `}
-
-  ${({ _padding }) =>
-    css`
-      padding: ${_padding};
-    `}
-`
-
 export const ButtonComponent = styled.button<{
   buttonType: ButtonType
+  textHoverColor?: ColorType
   _active?: boolean
   _width?: string
   _height?: string
-  _margin: string
+  _margin?: string
+  _padding?: string
   _justifyContent: string
 }>`
   display: flex;
   align-items: center;
   border-radius: 20px;
-
+  ${({ textHoverColor }) =>
+    textHoverColor !== undefined &&
+    css`
+      &:hover span {
+        color: ${(props) => props.theme.colors.primary.primary200};
+      }
+    `}
   ${({ _width }) => _width !== undefined && `width: ${_width};`}
   ${({ _height }) => _height !== undefined && `height: ${_height};`}
-  ${({ _margin }) => `margin: ${_margin};`}
+  ${({ _margin }) => _margin !== undefined && `margin: ${_margin};`}
+  ${({ _padding }) => _padding !== undefined && `padding: ${_padding};`}
   ${({ _justifyContent }) => `justify-content: ${_justifyContent};`}
 
   ${(props) =>
@@ -92,6 +77,7 @@ export const ButtonComponent = styled.button<{
 
       &:hover {
         background-color: ${(props) => props.theme.colors.primary.primary100};
+        box-shadow: ${(props) => props.theme.shadow.shadow1};
       }
 
       &:active {
@@ -110,6 +96,7 @@ export const ButtonComponent = styled.button<{
 
       &:hover {
         background-color: ${(props) => props.theme.colors.primary.primary25};
+        box-shadow: ${(props) => props.theme.shadow.shadow1};
       }
 
       &:active {
@@ -128,6 +115,7 @@ export const ButtonComponent = styled.button<{
 
       &:hover {
         background-color: ${(props) => props.theme.colors.side.side200};
+        box-shadow: ${(props) => props.theme.shadow.shadow1};
       }
 
       &:active {
@@ -146,6 +134,7 @@ export const ButtonComponent = styled.button<{
 
           &:hover {
             background-color: ${(props) => props.theme.colors.side.side200};
+            box-shadow: ${(props) => props.theme.shadow.shadow1};
           }
 
           &:active {
@@ -169,6 +158,7 @@ export const ButtonComponent = styled.button<{
 
       &:hover {
         background-color: ${(props) => props.theme.colors.secondary.secondary200};
+        box-shadow: ${(props) => props.theme.shadow.shadow1};
       }
 
       &:active {

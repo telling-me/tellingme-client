@@ -2,7 +2,7 @@ import type { Dispatch, MouseEventHandler, RefObject, SetStateAction } from 'rea
 import { type IconType, type ColorType, type TextSizeType } from 'type/common'
 import { type IconSizeType } from '../icon/type'
 
-export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'tertiaryModified' | 'fourth'
+export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'tertiaryModified' | 'fourth' | 'none'
 export type ContentType = 'icon' | 'text' | 'row' | 'col' | 'withInput'
 
 export interface IButton {
@@ -11,6 +11,7 @@ export interface IButton {
   text?: string
   textSize?: TextSizeType
   textColor?: ColorType
+  textHoverColor?: ColorType
   icon?: IconType
   iconSize?: IconSizeType
   iconColor?: ColorType

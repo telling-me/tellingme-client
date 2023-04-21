@@ -57,6 +57,7 @@ export type ColorType =
   | 'gray7'
   | 'gray8'
   | 'black'
+  | 'gradient'
 
 export type IconType =
   | 'warning'

@@ -9,14 +9,6 @@ export const SignUpHeader = styled.div`
   margin-bottom: 12px;
 `
 
-export const SkipButton = styled.button`
-  margin: 0px 0px 0px auto;
-
-  &:hover span {
-    color: ${(props) => props.theme.colors.primary.primary200};
-  }
-`
-
 export const SignUpWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,19 +23,29 @@ export const SignUpWrapper = styled.div`
   ${(props) => `background-color: ${props.theme.colors.side.side200}`}
 
   height: max-content;
+  padding: 0px 8px;
 
   @media all and (min-width: 1024px) {
-    max-width: 1200px;
+    max-width: 1216px;
     margin: 0 auto;
   }
 
   @media all and (min-width: 768px) and (max-width: 1023px) {
-    margin: 0px 60px;
+    margin: 0px 44px;
   }
 
   @media all and (max-width: 767px) {
-    margin: 0px 25px;
+    margin: 0px 9px;
   }
+`
+
+export const WebMoveButtonWrapper = styled.div<{ _margin: string }>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  width: 100%;
+  ${({ _margin }) => `margin: ${_margin}`};
 `
 
 export const MoveButtonWrapper = styled.div`
@@ -91,4 +93,20 @@ export const ContentWrapper = styled.div<{ type: string }>`
     gap: ${({ type }) =>
       type === 'purpose' ? `24px 49px;` : type === 'job' ? `12px 15px;` : type === 'gender' ? `0px 50px` : `0px 23px`};
   }
+`
+
+export const AlarmWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+`
+
+export const SpanWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 `

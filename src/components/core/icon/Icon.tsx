@@ -9,13 +9,21 @@ import useChangeColor from 'hooks/useChangeColor'
 
 // component
 import styled from 'styled-components'
+import { Theme } from 'styles/DefaultTheme'
 
-const Icon = ({ icon, iconSize, iconColor, _margin, _onClick }: IIcon) => {
-  const color = useChangeColor(iconColor)
-  const size = iconSize === 'small' ? '20px' : iconSize === 'medium' ? '24px' : '32px'
+const Icon = ({ icon, iconSize, iconColor, iconShadow, _margin, _onClick }: IIcon) => {
+  const color = iconColor === 'gradient' ? 'url(#gradient)' : useChangeColor(iconColor)
+  const size = iconSize === 'small' ? '20px' : iconSize === 'medium' ? '24px' : iconSize === 'large' ? '32px' : '150px'
+  const shadow =
+    iconShadow === 'shadow1'
+      ? Theme.shadow.shadow1
+      : iconShadow === 'shadow2'
+      ? Theme.shadow.shadow2
+      : Theme.shadow.shadow3
 
   return (
     <IconComponent
+      shadow={shadow}
       _margin={_margin}
       onClick={(e) => {
         if (_onClick !== undefined) _onClick(e)
@@ -38,7 +46,7 @@ const Icon = ({ icon, iconSize, iconColor, _margin, _onClick }: IIcon) => {
       ) : icon === 'female' ? (
         <Icons.Female width={size} height={size} stroke={color} />
       ) : icon === 'bellringing' ? (
-        <Icons.BellRinging width={size} height={size} stroke={color} />
+        <Icons.BellRinging width={size} height={size} fill={color} />
       ) : icon === 'caretup' ? (
         <Icons.CaretUp width={size} height={size} stroke={color} />
       ) : icon === 'caretdown' ? (
@@ -70,8 +78,9 @@ const Icon = ({ icon, iconSize, iconColor, _margin, _onClick }: IIcon) => {
   )
 }
 
-const IconComponent = styled.div<{ _margin?: string }>`
-  ${({ _margin }) => _margin !== undefined && `margin: ${_margin}`}
+const IconComponent = styled.div<{ shadow?: string; _margin?: string }>`
+  margin: ${({ _margin }) => _margin != null && _margin};
+  filter: drop-shadow(${({ shadow }) => shadow != null && shadow});
 `
 
 export default Icon
