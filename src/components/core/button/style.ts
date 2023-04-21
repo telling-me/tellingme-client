@@ -5,6 +5,9 @@ import styled, { css } from 'styled-components'
 import type { ContentType, ButtonType } from './type'
 import type { ColorType } from 'type/common'
 
+// hooks
+import useChangeColor from 'hooks/useChangeColor'
+
 export const BothFrame = styled.div<{ contentType: ContentType; _gap: string }>`
   display: flex;
   align-items: center;
@@ -57,11 +60,20 @@ export const ButtonComponent = styled.button<{
   display: flex;
   align-items: center;
   border-radius: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+
   ${({ textHoverColor }) =>
     textHoverColor !== undefined &&
     css`
       &:hover span {
-        color: ${(props) => props.theme.colors.primary.primary200};
+        color: ${useChangeColor(textHoverColor)};
       }
     `}
   ${({ _width }) => _width !== undefined && `width: ${_width};`}
@@ -86,6 +98,7 @@ export const ButtonComponent = styled.button<{
 
       &:disabled {
         background-color: ${(props) => props.theme.colors.gray.gray2};
+        box-shadow: none;
       }
     `}
 
@@ -105,6 +118,7 @@ export const ButtonComponent = styled.button<{
 
       &:disabled {
         background-color: ${(props) => props.theme.colors.gray.gray1};
+        box-shadow: none;
       }
     `}
 
@@ -124,6 +138,7 @@ export const ButtonComponent = styled.button<{
 
       &:disabled {
         background-color: ${(props) => props.theme.colors.gray.gray1};
+        box-shadow: none;
       }
     `}
 
@@ -143,6 +158,7 @@ export const ButtonComponent = styled.button<{
 
           &:disabled {
             background-color: ${(props) => props.theme.colors.side.side200};
+            box-shadow: none;
           }
         `
       : props._active !== undefined &&
@@ -167,6 +183,7 @@ export const ButtonComponent = styled.button<{
 
       &:disabled {
         background-color: ${(props) => props.theme.colors.secondary.secondary25};
+        box-shadow: none;
       }
     `}
 `
