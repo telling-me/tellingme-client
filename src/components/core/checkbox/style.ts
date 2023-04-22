@@ -27,22 +27,31 @@ export const CheckBoxComponent = styled.div<{ _disabled?: boolean; _margin?: str
   ${({ _margin }) => _margin !== undefined && `margin: ${_margin}`}
 `
 
-export const CheckBoxFrame = styled.div`
+export const CheckBoxFrame = styled.div<{ mainLabelGap: string }>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  ${({ mainLabelGap }) => `gap: ${mainLabelGap};`}
 
   width: 100%;
 `
 
-export const CheckBoxMain = styled.input<{ disabled?: boolean }>`
+export const CheckBoxMain = styled.input<{ disabled?: boolean; mainSize: string }>`
   appearance: none;
   background-color: #fffdfa;
   border: 1px solid #57a775;
-  border-radius: 10px;
-  width: 32px;
-  height: 32px;
+  ${({ mainSize }) =>
+    mainSize === 'small'
+      ? `
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+  `
+      : `
+    width: 32px;
+    height:32px;
+    border-radius: 10px;
+  `}
 
   &:disabled {
     background-color: #eef1f1;

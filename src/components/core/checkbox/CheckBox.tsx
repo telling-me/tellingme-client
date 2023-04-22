@@ -1,31 +1,53 @@
 import React from 'react'
 
-import { CheckBoxButton, CheckBoxComponent, CheckBoxFrame, CheckBoxMain } from './style'
+import { CheckBoxComponent, CheckBoxFrame, CheckBoxMain } from './style'
 import type { ICheckBox } from './type'
 
 import style from 'styles/styled-components/styled'
+import { Button } from '../button'
 
-const CheckBox = ({ label, buttonText, _checked, _setChecked, _disabled = false, _onClick, _margin }: ICheckBox) => {
+const CheckBox = ({
+  label,
+  labelSize = 'b1',
+  mainLabelGap = '10px',
+  buttonText,
+  mainSize = 'medium',
+  _checked,
+  _setChecked,
+  _disabled = false,
+  _onClick,
+  _margin
+}: ICheckBox) => {
   const handleChange = (e: { target: { checked: boolean | ((prevState: boolean) => boolean) } }) => {
     _setChecked(e.target.checked)
-
-    console.log(e.target.checked)
   }
 
   return (
     <CheckBoxComponent _disabled={_disabled} _margin={_margin}>
-      <CheckBoxFrame>
-        <CheckBoxMain type="checkbox" checked={_checked} onChange={handleChange} disabled={_disabled} />
-        <style.TextSpan textSize="b1" textColor={_disabled ? 'gray3' : 'black'}>
+      <CheckBoxFrame mainLabelGap={mainLabelGap}>
+        <CheckBoxMain
+          type="checkbox"
+          checked={_checked}
+          mainSize={mainSize}
+          onChange={handleChange}
+          disabled={_disabled}
+        />
+        <style.TextSpan textSize={labelSize} textColor={_disabled ? 'gray3' : 'black'}>
           {label}
         </style.TextSpan>
       </CheckBoxFrame>
 
-      <CheckBoxButton onClick={_onClick} disabled={_disabled}>
-        <style.TextSpan textSize="c" textColor={_disabled ? 'gray3' : 'primary700'}>
-          {buttonText}
-        </style.TextSpan>
-      </CheckBoxButton>
+      {buttonText !== undefined && (
+        <Button
+          buttonType="noFilled"
+          contentType="text"
+          text={buttonText}
+          textSize="c"
+          textColor={_disabled ? 'gray3' : 'primary700'}
+          _disabled={_disabled}
+          _onClick={_onClick}
+        />
+      )}
     </CheckBoxComponent>
   )
 }
