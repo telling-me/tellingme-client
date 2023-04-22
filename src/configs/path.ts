@@ -11,5 +11,8 @@ export enum PAGE_URL {
   App = 'app',
   Main = 'main',
   MyAnswer = 'myAnswer',
-  AllAnswer = 'Allanswer'
+  AllAnswer = 'Allanswer',
+
+  // NewsLetter
+  NewsLetter = 'newsletter'
 }

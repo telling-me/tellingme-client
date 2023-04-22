@@ -44,6 +44,10 @@ const PageRouter = () => {
             <Route path={PAGE_URL.AllAnswer} element={<Switch.AllAnswerPage />} />
             <Route path={PAGE_URL.MyAnswer} element={<Switch.MyAnswerPage />} />
           </Route>
+          {
+            // 뉴스 레터
+          }
+          <Route path={PAGE_URL.NewsLetter} element={<Switch.NewsLetterPage />} />
         </Routes>
       </AnimatePresence>
     </>
