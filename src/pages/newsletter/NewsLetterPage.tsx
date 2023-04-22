@@ -10,6 +10,7 @@ import {
 import style from 'styles/styled-components/styled'
 import BasicIcon from 'assets/icons'
 import { Button, CheckBox, Input, RadioButton } from 'components/core'
+import { useNewsLetterQuery } from 'hooks/queries'
 
 const NewsLetterPage = () => {
   const [email, setEmail] = useState('')
@@ -19,6 +20,26 @@ const NewsLetterPage = () => {
 
   const [personalAgree, setPersonalAgree] = useState(false)
   const [adAgree, setAdAgree] = useState(false)
+
+  const newsLetterQuery = useNewsLetterQuery({
+    email,
+    name,
+    funnel: funnel === 'etc' ? etcFunnel : funnel
+  })
+
+  const handleClick = () => {
+    if (
+      email !== '' &&
+      name !== '' &&
+      ((funnel === 'etc' && etcFunnel !== '') || (funnel !== 'etc' && funnel !== '')) &&
+      personalAgree &&
+      adAgree
+    ) {
+      newsLetterQuery.refetch().catch(() => {})
+    } else {
+      alert('제대로 입력')
+    }
+  }
 
   return (
     <NewsLetterComponent>
@@ -112,6 +133,9 @@ const NewsLetterPage = () => {
           textColor="primary700"
           _width="100%"
           _height="55px"
+          _onClick={() => {
+            handleClick()
+          }}
         />
       </NewsLetterFooter>
     </NewsLetterComponent>
