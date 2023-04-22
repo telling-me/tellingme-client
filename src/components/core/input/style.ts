@@ -17,7 +17,7 @@ export const InputComponent = styled.div<{ _margin: string }>`
   ${({ _margin }) => `margin: ${_margin}`}
 `
 
-export const InputOuterFrame = styled.div<{ isError?: boolean; _disabled?: boolean }>`
+export const InputOuterFrame = styled.div<{ _width?: string; isError?: boolean; _disabled?: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -27,7 +27,7 @@ export const InputOuterFrame = styled.div<{ isError?: boolean; _disabled?: boole
 
   border-radius: 18px;
 
-  width: 100%;
+  width: ${({ _width }) => (_width !== undefined ? _width : '100%')};
   max-width: 475px;
 
   ${({ theme, isError, _disabled }) =>
@@ -65,9 +65,8 @@ export const InputInnerFrame = styled.input<{ isError?: boolean; _disabled?: boo
 `
 
 export const InputSpan = styled.span<{ textSize: string; textColor: string }>`
-  margin: 0px 18px;
-
   max-width: 475px;
+  margin: 0px 10px;
 
   ${({ textSize }) => `font-size: ${useChangeTextSize(textSize as TextSizeType)};`}
   ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType)}`}

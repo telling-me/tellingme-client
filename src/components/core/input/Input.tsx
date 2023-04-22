@@ -12,6 +12,7 @@ const Input = ({
   errorText,
   isError = false,
   setIsError,
+  _width,
   _disabled = false,
   _placeholder = '',
   _value,
@@ -38,7 +39,7 @@ const Input = ({
         </InputSpan>
       )}
 
-      <InputOuterFrame isError={isError} _disabled={_disabled}>
+      <InputOuterFrame _width={_width} isError={isError} _disabled={_disabled}>
         <InputInnerFrame
           value={_value}
           placeholder={_placeholder}
@@ -49,7 +50,7 @@ const Input = ({
         />
 
         {_disabled ? (
-          <Icon icon="xcircle" iconSize="medium" iconColor="side200" />
+          <Icon icon="xcircle" iconSize="medium" iconColor="gray1" />
         ) : isError ? (
           <Icon icon="warning" iconSize="medium" iconColor="error400" />
         ) : _value.length > 0 ? (

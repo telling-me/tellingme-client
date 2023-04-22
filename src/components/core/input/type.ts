@@ -6,6 +6,7 @@ export interface IInput {
   errorText?: string
   isError?: boolean
   setIsError?: Dispatch<SetStateAction<boolean>>
+  _width?: string
   _disabled?: boolean
   _placeholder: string
   _value: string
