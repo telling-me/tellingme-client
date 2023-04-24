@@ -81,5 +81,6 @@ export type IconType =
   | 'briefcase'
   | 'cookpot'
   | 'smiley'
+  | 'close'
 
 export type DropdownType = 'year' | 'month' | 'day' | 'mbti'

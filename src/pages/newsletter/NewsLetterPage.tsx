@@ -1,25 +1,37 @@
 import React, { useState } from 'react'
+
+import { PersonalAgreeData, AdAgreeData } from './agreeData'
 import {
   NewsLetterComponent,
   NewsLetterFooter,
   NewsLetterForm,
   NewsLetterFunnel,
   NewsLetterHeader,
-  NewsLetterHr
+  NewsLetterHr,
+  PersonalAgreeContent
 } from './style'
+
+import { Button, CheckBox, Input, Modal, RadioButton } from 'components'
 import style from 'styles/styled-components/styled'
-import BasicIcon from 'assets/icons'
-import { Button, CheckBox, Input, RadioButton } from 'components/core'
+import Icons from 'assets/icons'
+
 import { useNewsLetterQuery } from 'hooks/queries'
+import useWindowSize from 'hooks/useWindowSize'
+
+import { emailCheck } from 'utils/signRegex'
 
 const NewsLetterPage = () => {
+  const windowSize = useWindowSize().width
+
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [funnel, setFunnel] = useState('')
   const [etcFunnel, setEtcFunnel] = useState('')
 
   const [personalAgree, setPersonalAgree] = useState(false)
+  const [paOpen, setPaOpen] = useState(false)
   const [adAgree, setAdAgree] = useState(false)
+  const [aaOpen, setAaOpen] = useState(false)
 
   const newsLetterQuery = useNewsLetterQuery({
     email,
@@ -27,7 +39,7 @@ const NewsLetterPage = () => {
     funnel: funnel === 'etc' ? etcFunnel : funnel
   })
 
-  const handleClick = () => {
+  const handleApply = () => {
     if (
       email !== '' &&
       name !== '' &&
@@ -35,16 +47,20 @@ const NewsLetterPage = () => {
       personalAgree &&
       adAgree
     ) {
-      newsLetterQuery.refetch().catch(() => {})
+      if (!emailCheck(email)) {
+        alert('이메일 형식 x')
+      } else {
+        newsLetterQuery.refetch().catch(() => {})
+      }
     } else {
-      alert('제대로 입력')
+      alert('빈칸 있음')
     }
   }
 
   return (
     <NewsLetterComponent>
       <NewsLetterHeader>
-        <BasicIcon.Logo width="103px" height="43px" />
+        <Icons.Logo width="103px" height="43px" />
         <style.TextSpan textSize="h3_b" textColor="gray7" _margin="28px 0px 24px 0px">
           서비스 출시 알림 신청하기
         </style.TextSpan>
@@ -108,22 +124,28 @@ const NewsLetterPage = () => {
       <NewsLetterFooter>
         <CheckBox
           label="(필수) 개인 정보 수집 및 이용에 동의합니다."
+          buttonText="보기"
           labelSize="c"
           mainLabelGap="4px"
           mainSize="small"
           _checked={personalAgree}
           _setChecked={setPersonalAgree}
-          buttonText="보기"
+          _onClick={() => {
+            setPaOpen(true)
+          }}
         />
         <CheckBox
           label="(필수) 광고성 정보 수신에 동의합니다."
+          buttonText="보기"
           labelSize="c"
           mainLabelGap="4px"
           mainSize="small"
           _checked={adAgree}
           _setChecked={setAdAgree}
-          buttonText="보기"
           _margin="8px 0px 36px 0px"
+          _onClick={() => {
+            setAaOpen(true)
+          }}
         />
         <Button
           buttonType="primary"
@@ -134,10 +156,71 @@ const NewsLetterPage = () => {
           _width="100%"
           _height="55px"
           _onClick={() => {
-            handleClick()
+            handleApply()
           }}
         />
       </NewsLetterFooter>
+
+      {paOpen && (
+        <Modal
+          _width="100%"
+          _maxWidth="425px"
+          _height={windowSize != null ? (windowSize > 768 ? '379px' : '443px') : '100%'}
+          _borderRadius="20px"
+          _padding="10px"
+          _onClick={() => {
+            setPaOpen(false)
+          }}
+        >
+          <Button
+            buttonType="noFilled"
+            contentType="icon"
+            icon="close"
+            iconSize="medium"
+            iconColor="gray6"
+            _margin="0px 0px 0px auto"
+            _onClick={() => {
+              setPaOpen(false)
+            }}
+          />
+
+          <style.TextSpan textSize="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
+            개인정보 수집 및 이용 동의서
+          </style.TextSpan>
+
+          <PersonalAgreeContent>{PersonalAgreeData}</PersonalAgreeContent>
+        </Modal>
+      )}
+      {aaOpen && (
+        <Modal
+          _width="100%"
+          _maxWidth="425px"
+          _height={windowSize != null ? (windowSize > 768 ? '379px' : '443px') : '100%'}
+          _borderRadius="20px"
+          _padding="10px"
+          _onClick={() => {
+            setAaOpen(false)
+          }}
+        >
+          <Button
+            buttonType="noFilled"
+            contentType="icon"
+            icon="close"
+            iconSize="medium"
+            iconColor="gray6"
+            _margin="0px 0px 0px auto"
+            _onClick={() => {
+              setAaOpen(false)
+            }}
+          />
+
+          <style.TextSpan textSize="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
+            광고성 정보 수신 동의서
+          </style.TextSpan>
+
+          <PersonalAgreeContent>{AdAgreeData}</PersonalAgreeContent>
+        </Modal>
+      )}
     </NewsLetterComponent>
   )
 }
