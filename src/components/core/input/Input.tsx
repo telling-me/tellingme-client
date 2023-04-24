@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-
-import React from 'react'
+import React, { useState } from 'react'
 import { InputComponent, InputInnerFrame, InputOuterFrame, InputSpan } from './style'
 import type { IInput } from './type'
 
@@ -19,6 +17,8 @@ const Input = ({
   _margin = '0px',
   _setValue
 }: IInput) => {
+  const [hasXCircle, setHasXCircle] = useState(false)
+
   const handleChange = (e: { target: { value: React.SetStateAction<string> } }) => {
     _setValue(e.target.value)
 
@@ -45,19 +45,28 @@ const Input = ({
           placeholder={_placeholder}
           disabled={_disabled}
           onChange={handleChange}
+          onFocus={() => {
+            setHasXCircle(true)
+          }}
+          onBlur={() => {
+            setHasXCircle(false)
+          }}
           isError={isError}
           _disabled={_disabled}
         />
 
-        {_disabled ? (
-          <Icon icon="xcircle" iconSize="medium" iconColor="gray1" />
-        ) : isError ? (
-          <Icon icon="warning" iconSize="medium" iconColor="error400" />
-        ) : _value.length > 0 ? (
-          <Icon icon="xcircle" iconSize="medium" iconColor="side500" _onClick={resetInput} />
-        ) : (
-          <Icon icon="xcircle" iconSize="medium" iconColor="side200" />
-        )}
+        <Icon
+          icon="xcircle"
+          iconSize="medium"
+          iconColor={
+            _disabled ? 'gray1' : isError ? 'error400' : hasXCircle && _value.length > 0 ? 'side500' : 'side200'
+          }
+          _onClick={() => {
+            if (!_disabled && !isError) {
+              resetInput()
+            }
+          }}
+        />
       </InputOuterFrame>
 
       {!isError && infoText !== undefined && !_disabled && (
