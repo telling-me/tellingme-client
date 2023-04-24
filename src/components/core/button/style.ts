@@ -1,194 +1,172 @@
-import styled, { css, keyframes } from 'styled-components'
-import { type StyleType } from './type'
+// component
+import styled, { css } from 'styled-components'
 
-const buttonLoadingSpinner = keyframes`
-  from {
-    transform: rotate(0turn);
-  }
-  to {
-    transform: rotate(1turn);
-  }
-`
+// type
+import type { ContentType, ButtonType } from './type'
+import type { ColorType } from 'type/common'
 
-export const BaseButton = styled.button<{
-  _width?: string
-  margin?: string
-  isLoading?: boolean
-}>`
-  height: 40px;
-  width: ${({ _width }) => _width ?? 'max-content'};
-  white-space: nowrap;
-  padding: 0 24px;
-  border-radius: 8px;
-
-  ${({ margin }) => margin != null && `margin: ${margin}`};
-
-  ${({ theme }) => theme.typo.body.b1_b};
-
-  position: relative;
+export const BothFrame = styled.div<{ contentType: ContentType; _gap: string }>`
   display: flex;
-  justify-content: center;
   align-items: center;
-  cursor: pointer;
-  transition: background-color 0.2s, border 0.2s;
 
-  &:disabled {
-    cursor: unset;
-  }
+  ${({ contentType }) =>
+    contentType === 'row'
+      ? css`
+          flex-direction: row;
+        `
+      : contentType === 'col' &&
+        css`
+          flex-direction: column;
+        `}
+
+  ${({ _gap }) => `gap: ${_gap};`}
 `
 
-// Primary
-export const PrimaryButton = styled(BaseButton)<{ styleType: StyleType }>`
-  // type - filled
+export const WithInputFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`
+
+export const WithInput = styled.input<{ _active?: boolean }>`
+  border: none;
+  outline: none;
+
+  text-align: center;
+
   ${(props) =>
-    props.styleType === 'filled' &&
+    props._active !== undefined && props._active
+      ? css`
+          background-color: ${(props) => props.theme.colors.side.side300};
+        `
+      : css`
+          background-color: ${(props) => props.theme.colors.side.side200};
+        `}
+`
+
+export const ButtonComponent = styled.button<{
+  buttonType: ButtonType
+  textHoverColor?: ColorType
+  _active?: boolean
+  _width?: string
+  _height?: string
+  _margin?: string
+  _padding?: string
+  _justifyContent: string
+}>`
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  ${({ textHoverColor }) =>
+    textHoverColor !== undefined &&
     css`
-      --color: ${(props) => props.theme.colors.gray.gray0};
-      color: var(--color);
-      background-color: ${(props) =>
-        props.theme.colors.primary.primary800_main};
+      &:hover span {
+        color: ${(props) => props.theme.colors.primary.primary200};
+      }
+    `}
+  ${({ _width }) => _width !== undefined && `width: ${_width};`}
+  ${({ _height }) => _height !== undefined && `height: ${_height};`}
+  ${({ _margin }) => _margin !== undefined && `margin: ${_margin};`}
+  ${({ _padding }) => _padding !== undefined && `padding: ${_padding};`}
+  ${({ _justifyContent }) => `justify-content: ${_justifyContent};`}
+
+  ${(props) =>
+    props.buttonType === 'primary' &&
+    css`
+      background-color: ${(props) => props.theme.colors.primary.primary100};
 
       &:hover {
-        background-color: ${(props) => props.theme.colors.primary.primary900};
+        background-color: ${(props) => props.theme.colors.primary.primary100};
+        box-shadow: ${(props) => props.theme.shadow.shadow1};
       }
 
       &:active {
-        background-color: ${(props) => props.theme.colors.primary.primary900};
+        background-color: ${(props) => props.theme.colors.primary.primary300};
       }
 
       &:disabled {
-        color: ${(props) => props.theme.colors.primary.primary100};
-        background-color: ${(props) => props.theme.colors.primary.primary100};
+        background-color: ${(props) => props.theme.colors.gray.gray2};
       }
     `}
 
-  // type - tonal
-    ${(props) =>
-    props.styleType === 'tonal' &&
+  ${(props) =>
+    props.buttonType === 'secondary' &&
     css`
-      --color: ${(props) => props.theme.colors.primary.primary900};
-      color: var(--color);
-      background-color: ${(props) => props.theme.colors.primary.primary900};
+      background-color: ${(props) => props.theme.colors.primary.primary25};
+
+      &:hover {
+        background-color: ${(props) => props.theme.colors.primary.primary25};
+        box-shadow: ${(props) => props.theme.shadow.shadow1};
+      }
 
       &:active {
-        background-color: ${(props) => props.theme.colors.primary.primary900};
+        background-color: ${(props) => props.theme.colors.primary.primary300};
       }
 
       &:disabled {
-        color: ${(props) => props.theme.colors.gray.gray3};
         background-color: ${(props) => props.theme.colors.gray.gray1};
       }
     `}
 
-    // type - outlined
-    ${(props) =>
-    props.styleType === 'outlined' &&
+  ${(props) =>
+    props.buttonType === 'tertiary' &&
     css`
-      --color: ${(props) => props.theme.colors.primary.primary900};
-      color: var(--color);
-      background-color: ${({ theme }) => theme.colors.gray.gray0};
-      border: 1px solid ${(props) => props.theme.colors.primary.primary900};
+      background-color: ${(props) => props.theme.colors.side.side200};
 
       &:hover {
-        background-color: ${(props) => props.theme.colors.primary.primary100};
+        background-color: ${(props) => props.theme.colors.side.side200};
+        box-shadow: ${(props) => props.theme.shadow.shadow1};
       }
 
       &:active {
-        background-color: ${(props) => props.theme.colors.primary.primary900};
+        background-color: ${(props) => props.theme.colors.secondary.secondary300};
       }
 
       &:disabled {
-        color: ${(props) => props.theme.colors.gray.gray3};
-        border-color: ${(props) => props.theme.colors.gray.gray1};
-        background-color: ${({ theme }) => theme.colors.gray.gray0};
+        background-color: ${(props) => props.theme.colors.gray.gray1};
       }
     `}
 
-        // type - text
-        ${(props) =>
-    props.styleType === 'text' &&
+  ${(props) =>
+    props.buttonType === 'tertiaryModified' && (props._active === undefined || !props._active)
+      ? css`
+          background-color: ${(props) => props.theme.colors.side.side200};
+
+          &:hover {
+            background-color: ${(props) => props.theme.colors.side.side200};
+            box-shadow: ${(props) => props.theme.shadow.shadow1};
+          }
+
+          &:active {
+            background-color: ${(props) => props.theme.colors.side.side300};
+          }
+
+          &:disabled {
+            background-color: ${(props) => props.theme.colors.side.side200};
+          }
+        `
+      : props._active !== undefined &&
+        props._active &&
+        css`
+          background-color: ${(props) => props.theme.colors.side.side300};
+        `}
+
+  ${(props) =>
+    props.buttonType === 'fourth' &&
     css`
-      --color: ${(props) => props.theme.colors.primary.primary800_main};
-      color: var(--color);
-      background-color: transparent;
+      background-color: ${(props) => props.theme.colors.secondary.secondary200};
 
       &:hover {
-        background-color: ${(props) => props.theme.colors.primary.primary100};
+        background-color: ${(props) => props.theme.colors.secondary.secondary200};
+        box-shadow: ${(props) => props.theme.shadow.shadow1};
       }
 
       &:active {
-        background-color: ${(props) => props.theme.colors.primary.primary200};
+        background-color: ${(props) => props.theme.colors.secondary.secondary700};
       }
 
       &:disabled {
-        color: ${(props) => props.theme.colors.gray.gray3};
-        background-color: transparent;
-      }
-    `}
-
-${({ isLoading }) =>
-    isLoading === true &&
-    css`
-      & > span {
-        visibility: hidden;
-      }
-
-      &::after {
-        content: '';
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        top: calc(50% - (8px + 2px));
-        left: calc(50% - (8px + 2px));
-        margin: auto;
-        border: 2px solid transparent;
-        border-top-color: var(--color);
-        border-radius: 50%;
-        animation: ${buttonLoadingSpinner} 1s ease infinite;
-      }
-    `}
-`
-
-// Danger
-export const DangerButton = styled(BaseButton)`
-  --color: ${(props) => props.theme.colors.system.red_darken}
-  color: var(--color);
-  background-color: ${(props) => props.theme.colors.system.red_lighten};
-
-  &:hover {
-    color: ${(props) => props.theme.colors.gray.gray0};
-    background-color: ${(props) => props.theme.colors.system.red};
-  }
-
-  &:active {
-    color: ${(props) => props.theme.colors.gray.gray0};
-    background-color: ${(props) => props.theme.colors.system.red_darken};
-  }
-
-  &:disabled {
-    color: ${(props) => props.theme.colors.gray.gray3};
-    background-color: ${(props) => props.theme.colors.gray.gray1};
-  }
-
-  ${({ isLoading, theme }) =>
-    isLoading === true &&
-    css`
-      & > span {
-        visibility: hidden;
-      }
-
-      &::after {
-        content: '';
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        top: calc(50% - (8px + 2px));
-        left: calc(50% - (8px + 2px));
-        margin: auto;
-        border: 2px solid transparent;
-        border-top-color: var(--color);
-        border-radius: 50%;
-        animation: ${buttonLoadingSpinner} 1s ease infinite;
+        background-color: ${(props) => props.theme.colors.secondary.secondary25};
       }
     `}
 `

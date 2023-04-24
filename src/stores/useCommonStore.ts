@@ -7,16 +7,10 @@ import { type ICommonStore } from './type'
 const useCommonStore = create<ICommonStore>()(
   devtools(
     immer((set) => ({
-      page: 1,
-      setPage: (value) => {
+      prevPage: 0,
+      setPrevPage: (value) => {
         set((state) => {
-          state.page = value
-        })
-      },
-      keyword: '',
-      setKeyword: (value) => {
-        set((state) => {
-          state.keyword = value
+          state.prevPage = value
         })
       }
     }))

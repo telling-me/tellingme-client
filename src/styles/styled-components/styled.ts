@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
+// type
+import { type ColorType, type TextSizeType } from 'type/common'
+
+// hooks
+import useChangeColor from 'hooks/useChangeColor'
+import useChangeTextSize from 'hooks/useChangeTextSize'
+
 export interface IGrid {
   flex?: 'start' | 'end' | 'between' | 'center'
   flexOption?: string
@@ -18,8 +25,6 @@ export interface IGrid {
 
 export interface IText {
   typo?:
-    | 'display_b'
-    | 'display'
     | 'h1_b'
     | 'h1'
     | 'h2_b'
@@ -28,6 +33,10 @@ export interface IText {
     | 'h3'
     | 'h4_b'
     | 'h4'
+    | 'h5_b'
+    | 'h5'
+    | 'h6_b'
+    | 'h6'
     | 'b1_b'
     | 'b1'
     | 'b2_b'
@@ -78,12 +87,18 @@ const TextH1 = styled.h1<IText>`
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
 
   ${({ theme, typo }) =>
-    typo === 'display_b' ||
-    typo === 'display' ||
     typo === 'h1_b' ||
     typo === 'h1' ||
     typo === 'h2_b' ||
-    typo === 'h2'
+    typo === 'h2' ||
+    typo === 'h3_b' ||
+    typo === 'h3' ||
+    typo === 'h4_b' ||
+    typo === 'h4' ||
+    typo === 'h5_b' ||
+    typo === 'h5' ||
+    typo === 'h6_b' ||
+    typo === 'h6'
       ? theme.typo.title[typo]
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
@@ -96,12 +111,18 @@ const TextH2 = styled.h2<IText>`
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
 
   ${({ theme, typo }) =>
-    typo === 'display_b' ||
-    typo === 'display' ||
     typo === 'h1_b' ||
     typo === 'h1' ||
     typo === 'h2_b' ||
-    typo === 'h2'
+    typo === 'h2' ||
+    typo === 'h3_b' ||
+    typo === 'h3' ||
+    typo === 'h4_b' ||
+    typo === 'h4' ||
+    typo === 'h5_b' ||
+    typo === 'h5' ||
+    typo === 'h6_b' ||
+    typo === 'h6'
       ? theme.typo.title[typo]
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
@@ -114,12 +135,18 @@ const TextH3 = styled.h3<IText>`
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
 
   ${({ theme, typo }) =>
-    typo === 'display_b' ||
-    typo === 'display' ||
     typo === 'h1_b' ||
     typo === 'h1' ||
     typo === 'h2_b' ||
-    typo === 'h2'
+    typo === 'h2' ||
+    typo === 'h3_b' ||
+    typo === 'h3' ||
+    typo === 'h4_b' ||
+    typo === 'h4' ||
+    typo === 'h5_b' ||
+    typo === 'h5' ||
+    typo === 'h6_b' ||
+    typo === 'h6'
       ? theme.typo.title[typo]
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
@@ -132,12 +159,18 @@ const TextH4 = styled.h4<IText>`
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
 
   ${({ theme, typo }) =>
-    typo === 'display_b' ||
-    typo === 'display' ||
     typo === 'h1_b' ||
     typo === 'h1' ||
     typo === 'h2_b' ||
-    typo === 'h2'
+    typo === 'h2' ||
+    typo === 'h3_b' ||
+    typo === 'h3' ||
+    typo === 'h4_b' ||
+    typo === 'h4' ||
+    typo === 'h5_b' ||
+    typo === 'h5' ||
+    typo === 'h6_b' ||
+    typo === 'h6'
       ? theme.typo.title[typo]
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
@@ -150,12 +183,18 @@ const TextH5 = styled.h5<IText>`
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
 
   ${({ theme, typo }) =>
-    typo === 'display_b' ||
-    typo === 'display' ||
     typo === 'h1_b' ||
     typo === 'h1' ||
     typo === 'h2_b' ||
-    typo === 'h2'
+    typo === 'h2' ||
+    typo === 'h3_b' ||
+    typo === 'h3' ||
+    typo === 'h4_b' ||
+    typo === 'h4' ||
+    typo === 'h5_b' ||
+    typo === 'h5' ||
+    typo === 'h6_b' ||
+    typo === 'h6'
       ? theme.typo.title[typo]
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
@@ -168,34 +207,37 @@ const TextP = styled.p<IText>`
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
 
   ${({ theme, typo }) =>
-    typo === 'display_b' ||
-    typo === 'display' ||
     typo === 'h1_b' ||
     typo === 'h1' ||
     typo === 'h2_b' ||
-    typo === 'h2'
+    typo === 'h2' ||
+    typo === 'h3_b' ||
+    typo === 'h3' ||
+    typo === 'h4_b' ||
+    typo === 'h4' ||
+    typo === 'h5_b' ||
+    typo === 'h5' ||
+    typo === 'h6_b' ||
+    typo === 'h6'
       ? theme.typo.title[typo]
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
 `
 
-const TextSpan = styled.span<IText>`
+const TextSpan = styled.span<{
+  textSize?: TextSizeType
+  textColor?: ColorType
+  _margin?: string
+  _width?: string
+  _textAlign?: string
+}>`
   white-space: nowrap;
-  ${({ _width }) => _width != null && `width: ${_width}`};
-  ${({ _margin }) => _margin != null && `margin: ${_margin}`};
 
-  ${({ theme, typo }) =>
-    typo === 'display_b' ||
-    typo === 'display' ||
-    typo === 'h1_b' ||
-    typo === 'h1' ||
-    typo === 'h2_b' ||
-    typo === 'h2'
-      ? theme.typo.title[typo]
-      : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
-      ? theme.typo.body[typo]
-      : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
+  ${({ _width }) => _width != null && `width: ${_width}`}
+  ${({ _margin }) => _margin != null && `margin: ${_margin}`};
+  ${({ textSize }) => `font-size: ${useChangeTextSize(textSize as TextSizeType)}`}
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
 `
 
 const settingStyle = {
