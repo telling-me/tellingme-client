@@ -71,6 +71,8 @@ const Icon = ({ icon, iconSize, iconColor, iconShadow, _margin, _onClick }: IIco
         <Icons.Cookpot width={size} height={size} fill={color} />
       ) : icon === 'smiley' ? (
         <Icons.Smiley width={size} height={size} fill={color} />
+      ) : icon === 'close' ? (
+        <Icons.Close width={size} height={size} stroke={color} />
       ) : (
         <></>
       )}
@@ -79,6 +81,12 @@ const Icon = ({ icon, iconSize, iconColor, iconShadow, _margin, _onClick }: IIco
 }
 
 const IconComponent = styled.div<{ shadow?: string; _margin?: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+
   margin: ${({ _margin }) => _margin != null && _margin};
   filter: drop-shadow(${({ shadow }) => shadow != null && shadow});
 `
