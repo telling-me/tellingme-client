@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 
 import {
   AlarmWrapper,
+  BirthDateWrapper,
   ContentWrapper,
   MoveButtonWrapper,
   SignUpHeader,
@@ -338,7 +339,7 @@ const SignUpPage = () => {
           </ContentWrapper>
         ) : // 생년월일
         step === 5 ? (
-          <ContentWrapper type="birthDate">
+          <BirthDateWrapper>
             {birthDateData.map(
               (
                 v: {
@@ -352,26 +353,25 @@ const SignUpPage = () => {
                 return (
                   <Dropdown
                     key={i}
+                    dropdownSize="large"
                     defaultText={v.defaultText}
                     data={v.data}
                     _selected={i === 0 ? year : i === 1 ? month : day}
                     _setSelected={i === 0 ? setYear : i === 1 ? setMonth : setDay}
-                    _padding={v._padding}
-                    _flexGrow={v._flexGrow}
                   />
                 )
               }
             )}
-          </ContentWrapper>
+          </BirthDateWrapper>
         ) : // mbti
         step === 6 ? (
           <Dropdown
+            dropdownSize="large"
             defaultText="mbti 선택"
             data={mbtiData}
             _selected={mbti}
             _setSelected={setMbti}
-            _width="100%"
-            _padding="16.5px 30px"
+            _maxWidth="425px"
           />
         ) : (
           step === 7 && (
