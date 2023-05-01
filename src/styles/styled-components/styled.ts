@@ -12,7 +12,7 @@ export interface IGrid {
   flex?: 'start' | 'end' | 'between' | 'center'
   flexOption?: string
   direction?: 'column' | 'row'
-  alignItems?: 'start' | 'end' | 'center' | 'stretch'
+  _alignItems?: 'start' | 'end' | 'center' | 'stretch'
   wrap?: 'wrap' | 'nowrap'
   _width?: string
   _margin?: string
@@ -44,14 +44,14 @@ const Grid = styled(motion.div)<IGrid>`
       : flex === 'between'
       ? theme.common.flexBetween
       : flex === 'center' && theme.common.flexCenter};
-  ${({ alignItems }) =>
-    alignItems === 'start'
+  ${({ _alignItems }) =>
+    _alignItems === 'start'
       ? 'align-items: flex-start'
-      : alignItems === 'end'
+      : _alignItems === 'end'
       ? 'align-items: flex-end'
-      : alignItems === 'stretch'
+      : _alignItems === 'stretch'
       ? 'align-items: stretch'
-      : alignItems === 'center' && 'align-items: center'};
+      : _alignItems === 'center' && 'align-items: center'};
   ${({ direction }) => direction === 'column' && 'flex-direction: column'};
   ${({ wrap }) => wrap === 'wrap' && 'flex-wrap: wrap'};
   ${({ flexOption }) => flexOption != null && `flex: ${flexOption}`};
@@ -132,6 +132,8 @@ const TextSpan = styled.span<IText>`
 
   ${({ _width }) => _width != null && `width: ${_width}`}
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
+  ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+
   ${({ typo }) => `font-size: ${useChangeTextSize(typo as TextSizeType)}`}
   ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
 `

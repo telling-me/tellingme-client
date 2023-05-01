@@ -6,19 +6,13 @@ import { Button } from 'components/core'
 
 // assets
 import Icons from 'assets/icons'
-import ContinuousDate from '../main/ContinuousDate'
-import { useLocation } from 'react-router-dom'
 
 const Header = () => {
-  const location = useLocation()
   return (
-    <>
-      <HeaderWrapper>
-        <Icons.Logo />
-        <Button icon="setting" contentType="icon" buttonType="noFilled" iconColor="gray6" iconSize="small" />
-      </HeaderWrapper>
-      {location.pathname.includes('/app/main') && <ContinuousDate />}
-    </>
+    <HeaderWrapper>
+      <Icons.Logo />
+      <Button icon="setting" contentType="icon" buttonType="noFilled" iconColor="gray6" iconSize="small" />
+    </HeaderWrapper>
   )
 }
 
@@ -27,6 +21,7 @@ const HeaderWrapper = styled.header`
   max-width: 1200px;
   ${({ theme }) => theme.common.flexBetween}
   padding: 20px 12px;
+  position: absolute;
 `
 
 export default Header

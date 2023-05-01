@@ -36,9 +36,9 @@ const BackgroundWrapper = styled(style.Grid)`
   z-index: -9000;
 `
 const BackgroundCircle = styled(style.Grid)`
-  background: linear-gradient(#fff, #fff) padding-box,
+  background: linear-gradient(#fffdfa, #fffdfa) padding-box,
     linear-gradient(51.82deg, #7cefa7 1.24%, #8fd3f4 89.34%) border-box;
-  border: 2px dashed #ffffff;
+  border: 2px dashed #fffdfa;
   border-radius: 100%;
 
   // max

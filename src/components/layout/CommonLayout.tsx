@@ -36,11 +36,12 @@ const InnerWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  background-color: ${({ theme }) => theme.colors.side.side100};
 `
 
 const Inner = styled(motion.main)`
   width: 100%;
-  height: calc(100% - 88px);
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

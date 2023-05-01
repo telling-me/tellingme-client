@@ -70,13 +70,13 @@ const TabBar = () => {
 
 const TabBarWrapper = styled.nav`
   position: absolute;
-  z-index: 5000;
+  z-index: 4000;
   right: 30px;
   top: calc(50% - 145px);
   ${({ theme }) => theme.common.flexStart};
   gap: 36px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     top: auto;
     right: auto;
     bottom: 36px;
@@ -98,7 +98,7 @@ const TabWrapperLi = styled.li`
   height: 291px;
   width: 73px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     flex-direction: row;
     width: 325px;
     height: 77px;
@@ -115,7 +115,7 @@ const TabButtonWrapper = styled(style.Grid)`
   flex-direction: column;
   gap: 30px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     display: none;
   }
 `
