@@ -7,7 +7,7 @@ import { AppAni } from 'styles/ani'
 
 // components
 import styled from 'styled-components'
-import { Header, NavBar } from 'components'
+import { Header, TabBar } from 'components'
 
 const CommonLayout = () => {
   return (
@@ -17,7 +17,7 @@ const CommonLayout = () => {
         <Inner initial="init" animate="ani" exit="exit" variants={AppAni}>
           <Outlet />
         </Inner>
-        <NavBar />
+        <TabBar />
       </InnerWrapper>
     </ParentWrapper>
   )

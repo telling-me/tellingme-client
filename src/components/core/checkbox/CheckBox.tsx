@@ -32,7 +32,7 @@ const CheckBox = ({
           onChange={handleChange}
           disabled={_disabled}
         />
-        <style.TextSpan textSize={labelSize} textColor={_disabled ? 'gray3' : 'black'}>
+        <style.TextSpan typo={labelSize} textColor={_disabled ? 'gray3' : 'black'}>
           {label}
         </style.TextSpan>
       </CheckBoxFrame>

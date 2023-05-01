@@ -21,7 +21,7 @@ const Dropdown = ({
 
   return (
     <DropdownComponent _width={_width} _margin={_margin} _flexGrow={_flexGrow}>
-      <style.TextSpan textSize="h6" textColor="black" _margin="0px 10px">
+      <style.TextSpan typo="h6" textColor="black" _margin="0px 10px">
         {label}
       </style.TextSpan>
 
@@ -31,7 +31,7 @@ const Dropdown = ({
           setIsOpen(!isOpen)
         }}
       >
-        <style.TextSpan textSize="b1" textColor={isOpen || _selected !== undefined ? 'black' : 'gray4'} _width="100%">
+        <style.TextSpan typo="b1" textColor={isOpen || _selected !== undefined ? 'black' : 'gray4'} _width="100%">
           {_selected !== undefined ? _selected : defaultText}
         </style.TextSpan>
 
@@ -50,7 +50,7 @@ const Dropdown = ({
                   setIsOpen(false)
                 }}
               >
-                <style.TextSpan textSize="b1" textColor="black">
+                <style.TextSpan typo="b1" textColor="black">
                   {v}
                 </style.TextSpan>
               </DropdownItem>

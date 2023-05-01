@@ -186,4 +186,11 @@ export const ButtonComponent = styled.button<{
         box-shadow: none;
       }
     `}
+
+  ${(props) =>
+    props.buttonType === 'logo' &&
+    css`
+      background: ${(props) => props.theme.gradient.default_gradient()};
+      box-shadow: ${({ theme }) => theme.shadow.shadow2};
+    `}
 `

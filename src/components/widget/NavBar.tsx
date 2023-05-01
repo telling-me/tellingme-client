@@ -5,7 +5,7 @@ import styled from 'styled-components'
 // components
 import style from 'styles/styled-components/styled'
 
-const NavBar = () => {
+const TabBar = () => {
   return (
     <NavBarWrapper>
       <li>
@@ -35,4 +35,4 @@ const NavBarWrapper = styled.nav`
   right: 30px;
   top: 50%;
 `
-export default NavBar
+export default TabBar

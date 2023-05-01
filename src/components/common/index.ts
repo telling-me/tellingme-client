@@ -1,6 +1,0 @@
-export { default as CommonTest } from './CommonTest'
-export { default as LandingHeader } from './LandingHeader'
-export { default as LandingBubble } from './LandingBubble'
-export { default as Header } from './Header'
-export { default as NavBar } from './NavBar'
-export { default as Footer } from './Footer'
