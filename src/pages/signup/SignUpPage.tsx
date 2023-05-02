@@ -228,7 +228,8 @@ const SignUpPage = () => {
             isError={isError}
             setIsError={setIsError}
             _value={nickname}
-            _setValue={setNickname}
+            setValue={setNickname}
+            _maxWidth="425px"
           />
         ) : // 고민
         step === 2 ? (
