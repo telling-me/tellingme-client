@@ -30,6 +30,8 @@ import { ReactComponent as Cookpot } from './Cookpot.svg'
 import { ReactComponent as Smiley } from './Smiley.svg'
 import { ReactComponent as Logo } from './Logo.svg'
 import { ReactComponent as Close } from './Close.svg'
+import { ReactComponent as ToolTipTriangle } from './ToolTipTriangle.svg'
+import { ReactComponent as ToolTipTriangle2 } from './ToolTipTriangle2.svg'
 
 interface IIconIndex extends IStringKey {
   Menu: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -62,6 +64,8 @@ interface IIconIndex extends IStringKey {
   LogoS3: string | FunctionComponent<any> | ComponentClass<any, any>
   LogoS4: string | FunctionComponent<any> | ComponentClass<any, any>
   Close: string | FunctionComponent<any> | ComponentClass<any, any>
+  ToolTipTriangle: string | FunctionComponent<any> | ComponentClass<any, any>
+  ToolTipTriangle2: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
@@ -94,7 +98,9 @@ const Icon: IIconIndex = {
   Cookpot,
   Smiley,
   Logo,
-  Close
+  Close,
+  ToolTipTriangle,
+  ToolTipTriangle2
 }
 
 export default Icon
