@@ -20,7 +20,7 @@ const HeaderWrapper = styled.header`
   width: 100%;
   max-width: 1200px;
   ${({ theme }) => theme.common.flexBetween}
-  padding: 20px 12px;
+  padding: 20px 0 12px 0;
   position: absolute;
 `
 

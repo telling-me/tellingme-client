@@ -1,13 +1,20 @@
-import { Button } from 'components/core'
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
-
+// store
+import useQuestionStore from 'stores/useQuestionStore'
 // components
 import style from 'styles/styled-components/styled'
+import { Button } from 'components/core'
 
 const TabBar = () => {
   const location = useLocation()
+
+  // store
+  const { isWriteModalOn } = useQuestionStore()
+
+  // 질문 작성 시 TabBar 노출 여부
+  if (isWriteModalOn) return null
   return (
     <TabBarWrapper>
       <TabButtonWrapper>

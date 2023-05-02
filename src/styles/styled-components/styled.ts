@@ -29,6 +29,7 @@ export interface IText {
   textAlign?: 'start' | 'end' | 'left' | 'right' | 'center' | 'justify' | 'match-parent'
   _margin?: string
   _width?: string
+  wordBreak?: 'break-all' | 'break-word' | 'keep-all' | 'normal'
 }
 
 const Grid = styled(motion.div)<IGrid>`
@@ -72,6 +73,7 @@ const TextH1 = styled.h1<IText>`
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
 
   ${({ typo }) => `font-size: ${useChangeTextSize(typo as TextSizeType)}`}
   ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
@@ -82,6 +84,7 @@ const TextH2 = styled.h2<IText>`
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
 
   ${({ typo }) => `font-size: ${useChangeTextSize(typo as TextSizeType)}`}
   ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
@@ -92,6 +95,7 @@ const TextH3 = styled.h3<IText>`
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
 
   ${({ typo }) => `font-size: ${useChangeTextSize(typo as TextSizeType)}`}
   ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
@@ -102,6 +106,7 @@ const TextH4 = styled.h4<IText>`
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
 
   ${({ typo }) => `font-size: ${useChangeTextSize(typo as TextSizeType)}`}
   ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
@@ -112,6 +117,7 @@ const TextH5 = styled.h5<IText>`
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
 
   ${({ typo }) => `font-size: ${useChangeTextSize(typo as TextSizeType)}`}
   ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
@@ -122,6 +128,7 @@ const TextP = styled.p<IText>`
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
 
   ${({ typo }) => `font-size: ${useChangeTextSize(typo as TextSizeType)}`}
   ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
@@ -133,6 +140,7 @@ const TextSpan = styled.span<IText>`
   ${({ _width }) => _width != null && `width: ${_width}`}
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
 
   ${({ typo }) => `font-size: ${useChangeTextSize(typo as TextSizeType)}`}
   ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}

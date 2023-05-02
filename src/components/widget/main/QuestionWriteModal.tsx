@@ -1,23 +1,45 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 // store
 import useQuestionStore from 'stores/useQuestionStore'
 
 // components
-import { Button } from 'components/core'
+import { Button, Toggle } from 'components/core'
 
 // assets
 import Icon from 'assets/icons'
 
+// hooks
+import { useGetTodayAnswerQuery, useGetTodayQuestionQuery } from 'hooks/queries'
+import { apis } from 'apis/apis'
+
 const QuestionWriteModal = () => {
   // store
   const { setIsEmotionModal, setIsWriteModal } = useQuestionStore()
+  // query
+  const { data: { data: answer = null } = {} } = useGetTodayAnswerQuery()
+  const { data: { data: question = null } = {} } = useGetTodayQuestionQuery()
+
+  const [text, setText] = useState<string>(answer?.status !== 4002 ? answer?.data : '')
+  const [shareToggle, setShareToggle] = useState<boolean>(false)
 
   // 감정 선택
   useEffect(() => {
     // setIsEmotionModal(true)
   }, [])
+
+  const handlePressComplete = () => {
+    // TODO: Mutation으로 Post날리기
+    apis
+      .postTodayAnswer(text, 1)
+      .then(() => {
+        setIsWriteModal(false)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   return (
     <ModalWrapper flex="center" _alignItems="start">
@@ -45,33 +67,39 @@ const QuestionWriteModal = () => {
         </ModalHeader>
         <QuestionWrapper flex="start" direction="column" _gap="18px">
           <style.Grid flex="start" direction="column" _gap="10px">
-            <style.TextP typo="h6" textColor="logo" textAlign="center">
-              내가 좋아하는 색깔과 그 색깔이 가장 잘 어울리는 사물 혹은 사람을 떠올려볼까나요?
+            <style.TextP typo="h6" textColor="logo" textAlign="center" wordBreak="keep-all">
+              {question?.title}
             </style.TextP>
 
-            <style.TextP typo="b2" textColor="gray5" textAlign="center">
-              색은 나의 성격과 행복을 반영해요
+            <style.TextP typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
+              {question?.phrase}
             </style.TextP>
           </style.Grid>
           <style.TextP typo="c" textColor="side500" textAlign="center">
-            2023년 03월 01일
+            {`${question?.date[0] as string}년 ${question?.date[1] as string}월 ${question?.date[2] as string}년`}
           </style.TextP>
         </QuestionWrapper>
         <StrikeThrough />
-        <AnswerTextArea placeholder="여기에 기록해주세요!" />
+        <AnswerTextArea
+          placeholder="여기에 기록해주세요!"
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value)
+          }}
+        />
         <FooterWrapper flex="start" direction="column">
           <style.Grid flex="end" _height="14px">
-            <style.TextSpan typo="c_b">500 / 500</style.TextSpan>
+            <style.TextSpan typo="c_b">{text.length} / 500</style.TextSpan>
           </style.Grid>
           <style.Grid flex="between" _alignItems="start" _padding="10px 0 0 0 ">
-            <style.TextP typo="b1">나혼자 보기</style.TextP>
+            <Toggle label={['나만 보기', '타인과 공유']} value={shareToggle} setValue={setShareToggle} />
             <Button
               buttonType="noFilled"
               contentType="text"
               text="완료"
-              _onClick={() => {
-                setIsWriteModal(false)
-              }}
+              textColor="logo"
+              _disabled={text.length < 4}
+              _onClick={handlePressComplete}
             />
           </style.Grid>
         </FooterWrapper>
