@@ -2,19 +2,28 @@ import React from 'react'
 import styled from 'styled-components'
 
 // components
-import { Button, LandingBubble } from 'components'
+import { MainBackground, Question, QuestionWriteModal, ContinuousDate, EmotionModal } from 'components'
+
+// store
+import useQuestionStore from 'stores/useQuestionStore'
 
 const MainPage = () => {
+  const { isWriteModalOn, isEmotionModalOn } = useQuestionStore()
   return (
     <MainWrapper>
-      <LandingBubble />
-      <Button buttonType="secondary" contentType="text" text="메인 페이지야!" textColor="gray6" textSize="h3" />
+      <ContinuousDate />
+      <MainBackground />
+      <Question />
+      {Boolean(isWriteModalOn) && <QuestionWriteModal />}
+      {Boolean(isEmotionModalOn) && <EmotionModal />}
     </MainWrapper>
   )
 }
 
 const MainWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  width: 100%;
   justify-content: center;
   align-items: center;
 `

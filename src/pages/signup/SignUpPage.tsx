@@ -130,7 +130,7 @@ const SignUpPage = () => {
       {step !== 7 &&
         ((windowSize as number) < 1024 ? (
           <style.TextSpan
-            textSize="h4"
+            typo="h4"
             textColor="black"
             _margin={
               [0, 1, 5, 6].includes(step) ? '60px 0px 110px 0px' : step === 2 ? '60px 0px 8px 0px' : '60px 0px 80px 0px'
@@ -162,7 +162,7 @@ const SignUpPage = () => {
                   handlePrevStep()
                 }}
               />
-              <style.TextSpan textSize="h4" textColor="black">
+              <style.TextSpan typo="h4" textColor="black">
                 {stepTextData[step]}
               </style.TextSpan>
               {step !== 6 ? (
@@ -210,7 +210,7 @@ const SignUpPage = () => {
         ))}
 
       {step === 2 && (
-        <style.TextSpan textSize="b2" textColor="gray6" _margin="0px 0px 60px 0px">
+        <style.TextSpan typo="b2" textColor="gray6" _margin="0px 0px 60px 0px">
           최대 2가지 선택 가능
         </style.TextSpan>
       )}
@@ -377,10 +377,10 @@ const SignUpPage = () => {
           step === 7 && (
             <AlarmWrapper>
               <SpanWrapper>
-                <style.TextSpan textSize="h5" textColor="black">
+                <style.TextSpan typo="h5" textColor="black">
                   매일 기록을 잊지 않도록
                 </style.TextSpan>
-                <style.TextSpan textSize="h4" textColor="black">
+                <style.TextSpan typo="h4" textColor="black">
                   알람을 드려도 될까요?
                 </style.TextSpan>
               </SpanWrapper>

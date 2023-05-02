@@ -30,7 +30,7 @@ const RadioButton = ({
               }}
             />
 
-            <style.TextSpan textSize={labelSize}>{option.label}</style.TextSpan>
+            <style.TextSpan typo={labelSize}>{option.label}</style.TextSpan>
           </RadioButtonWrapper>
         )
       })}

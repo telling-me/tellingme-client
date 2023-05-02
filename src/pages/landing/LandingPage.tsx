@@ -79,7 +79,6 @@ const AbsoluteLogoBubble = styled(motion.div)`
 
 const borderCircle = styled(motion.div)`
   position: absolute;
-  border-radius: 100%;
   border: 2px dashed #ffffff;
   border-radius: 100%;
 `

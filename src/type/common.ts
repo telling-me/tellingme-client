@@ -60,6 +60,11 @@ export type ColorType =
   | 'gradient'
 
 export type IconType =
+  | 'menu'
+  | 'logos1'
+  | 'logos2'
+  | 'logos3'
+  | 'logos4'
   | 'warning'
   | 'xcircle'
   | 'heart'
@@ -81,6 +86,9 @@ export type IconType =
   | 'briefcase'
   | 'cookpot'
   | 'smiley'
+  | 'logo'
   | 'close'
+  | 'bubble'
+  | 'setting'
 
 export type DropdownType = 'year' | 'month' | 'day' | 'mbti'

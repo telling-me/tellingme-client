@@ -61,10 +61,10 @@ const NewsLetterPage = () => {
     <NewsLetterComponent>
       <NewsLetterHeader>
         <Icons.Logo width="103px" height="43px" />
-        <style.TextSpan textSize="h3_b" textColor="gray7" _margin="28px 0px 24px 0px">
+        <style.TextSpan typo="h3_b" textColor="gray7" _margin="28px 0px 24px 0px">
           서비스 출시 알림 신청하기
         </style.TextSpan>
-        <style.TextSpan textSize="b1" textColor="gray8">
+        <style.TextSpan typo="b1" textColor="gray8">
           서비스가 출시되면 가장 먼저 알려드릴게요!
         </style.TextSpan>
       </NewsLetterHeader>
@@ -76,7 +76,7 @@ const NewsLetterPage = () => {
         <Input label="성함" _placeholder="성함을 입력해주세요." _value={name} _setValue={setName} _margin="28px 0px" />
 
         <NewsLetterFunnel>
-          <style.TextSpan textSize="h6" textColor="black" _margin="0px 10px">
+          <style.TextSpan typo="h6" textColor="black" _margin="0px 10px">
             유입 경로
           </style.TextSpan>
 
@@ -184,7 +184,7 @@ const NewsLetterPage = () => {
             }}
           />
 
-          <style.TextSpan textSize="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
+          <style.TextSpan typo="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
             개인정보 수집 및 이용 동의서
           </style.TextSpan>
 
@@ -214,7 +214,7 @@ const NewsLetterPage = () => {
             }}
           />
 
-          <style.TextSpan textSize="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
+          <style.TextSpan typo="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
             광고성 정보 수신 동의서
           </style.TextSpan>
 

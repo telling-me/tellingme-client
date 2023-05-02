@@ -73,6 +73,10 @@ const Icon = ({ icon, iconSize, iconColor, iconShadow, _margin, _onClick }: IIco
         <Icons.Smiley width={size} height={size} fill={color} />
       ) : icon === 'close' ? (
         <Icons.Close width={size} height={size} stroke={color} />
+      ) : icon === 'bubble' ? (
+        <Icons.Bubble width={size} height={size} stroke={color} />
+      ) : icon === 'setting' ? (
+        <Icons.Setting width={size} height={size} stroke={color} />
       ) : (
         <></>
       )}
