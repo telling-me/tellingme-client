@@ -38,8 +38,6 @@ export const DropdownInnerWrapper = styled.div<{ dropdownSize: DropdownSizeType 
   flex-direction: row;
   align-items: center;
 
-  width: 100%
-
   gap: ${({ dropdownSize }) => (dropdownSize === 'small' ? '8px' : '10px')};
 `
 

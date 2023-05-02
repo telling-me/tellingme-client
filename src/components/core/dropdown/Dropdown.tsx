@@ -53,7 +53,7 @@ const Dropdown = ({
   return (
     <DropdownComponent _margin={_margin} _maxWidth={_maxWidth}>
       {label !== undefined && (
-        <style.TextSpan textSize={dropdownSize === 'small' ? 'b1' : 'h6'} textColor="black" _margin="0px 0px 0px 10px">
+        <style.TextSpan typo={dropdownSize === 'small' ? 'b1' : 'h6'} textColor="black" _margin="0px 0px 0px 10px">
           {label}
         </style.TextSpan>
       )}
@@ -67,7 +67,7 @@ const Dropdown = ({
         <DropdownInnerWrapper dropdownSize={dropdownSize}>
           <DropdownSelectedField>
             <style.TextSpan
-              textSize={dropdownSize === 'small' ? 'b2' : 'b1'}
+              typo={dropdownSize === 'small' ? 'b2' : 'b1'}
               textColor={_selected === undefined ? 'gray4' : 'black'}
             >
               {_selected === undefined ? defaultText : _selected}
@@ -94,7 +94,7 @@ const Dropdown = ({
                   setOpen(false)
                 }}
               >
-                <style.TextSpan textSize={dropdownSize === 'small' ? 'b2' : 'b1'} textColor="black">
+                <style.TextSpan typo={dropdownSize === 'small' ? 'b2' : 'b1'} textColor="black">
                   {v}
                 </style.TextSpan>
               </DropdownItem>
