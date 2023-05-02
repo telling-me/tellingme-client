@@ -90,5 +90,7 @@ export type IconType =
   | 'close'
   | 'bubble'
   | 'setting'
+  | 'rows'
+  | 'columns'
 
 export type DropdownType = 'year' | 'month' | 'day' | 'mbti'
