@@ -23,7 +23,7 @@ const Question = () => {
     <style.Grid flex="start" _width="auto" direction="column" align="center" _margin="0 25px">
       <QuestionDateWrapper flex="center">
         <style.TextSpan typo="c" textColor="side500">
-          {`${question?.date[0] as string}년 ${question?.date[1] as string}월 ${question?.date[2] as string}년`}
+          {`${question?.date[0] as string}년 ${question?.date[1] as string}월 ${question?.date[2] as string}일`}
         </style.TextSpan>
       </QuestionDateWrapper>
       {/**

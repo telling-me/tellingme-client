@@ -25,3 +25,15 @@ export const useGetTodayAnswerQuery = <T>(options?: T) => {
     ...options
   })
 }
+
+export const useGetAnswerRecordCountQuery = <T>(options?: T) => {
+  return useQuery(['answerCount'], async () => await apis.getAnswerRecordCount(), {
+    retry: 0,
+    onError: (err: IError) => {
+      console.log(err)
+    },
+    staleTime: 36000000,
+    cacheTime: Infinity,
+    ...options
+  })
+}

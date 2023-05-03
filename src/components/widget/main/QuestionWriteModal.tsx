@@ -76,7 +76,7 @@ const QuestionWriteModal = () => {
             </style.TextP>
           </style.Grid>
           <style.TextP typo="c" textColor="side500" textAlign="center">
-            {`${question?.date[0] as string}년 ${question?.date[1] as string}월 ${question?.date[2] as string}년`}
+            {`${question?.date[0] as string}년 ${question?.date[1] as string}월 ${question?.date[2] as string}일`}
           </style.TextP>
         </QuestionWrapper>
         <StrikeThrough />
