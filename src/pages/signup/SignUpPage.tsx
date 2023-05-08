@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
@@ -218,7 +219,7 @@ const SignUpPage = () => {
       {
         // 서비스 이용 약관 (추후에 디자인 나오면 약관 모달 달아야 함)
         step === 0 ? (
-          <CheckBox label="전체 동의합니다" buttonText="전문 보기" _checked={isAgree} _setChecked={setIsAgree} />
+          <CheckBox label="전체 동의합니다" buttonText="전문 보기" _checked={isAgree} setChecked={setIsAgree} />
         ) : // 닉네임
         step === 1 ? (
           <Input

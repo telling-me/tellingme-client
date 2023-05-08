@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 
 import { PersonalAgreeData, AdAgreeData } from './agreeData'
@@ -33,6 +34,17 @@ const NewsLetterPage = () => {
   const [adAgree, setAdAgree] = useState(false)
   const [aaOpen, setAaOpen] = useState(false)
 
+  const [alertOpen, setAlertOpen] = useState<number>(0)
+
+  const alertTexts = [
+    '이메일을 입력해주세요',
+    '이메일 형식이 올바르지 않습니다',
+    '성함을 입력해주세요',
+    '기타를 입력해주세요',
+    '유입 경로를 선택해주세요',
+    '필수 동의 항목을 체크해주세요'
+  ]
+
   const newsLetterQuery = useNewsLetterQuery({
     email,
     name,
@@ -40,20 +52,20 @@ const NewsLetterPage = () => {
   })
 
   const handleApply = () => {
-    if (
-      email !== '' &&
-      name !== '' &&
-      ((funnel === 'etc' && etcFunnel !== '') || (funnel !== 'etc' && funnel !== '')) &&
-      personalAgree &&
-      adAgree
-    ) {
-      if (!emailCheck(email)) {
-        alert('이메일 형식 x')
-      } else {
-        newsLetterQuery.refetch().catch(() => {})
-      }
+    if (email === '') {
+      setAlertOpen(1)
+    } else if (!emailCheck(email)) {
+      setAlertOpen(2)
+    } else if (name === '') {
+      setAlertOpen(3)
+    } else if (funnel === 'etc' && etcFunnel === '') {
+      setAlertOpen(4)
+    } else if (funnel !== 'etc' && funnel === '') {
+      setAlertOpen(5)
+    } else if (!personalAgree || !adAgree) {
+      setAlertOpen(6)
     } else {
-      alert('빈칸 있음')
+      newsLetterQuery.refetch().catch(() => {})
     }
   }
 
@@ -123,27 +135,23 @@ const NewsLetterPage = () => {
 
       <NewsLetterFooter>
         <CheckBox
+          checkSize="small"
           label="(필수) 개인 정보 수집 및 이용에 동의합니다."
           buttonText="보기"
-          labelSize="c"
-          mainLabelGap="4px"
-          mainSize="small"
           _checked={personalAgree}
-          _setChecked={setPersonalAgree}
-          _onClick={() => {
+          setChecked={setPersonalAgree}
+          buttonOnClick={() => {
             setPaOpen(true)
           }}
         />
         <CheckBox
+          checkSize="small"
           label="(필수) 광고성 정보 수신에 동의합니다."
           buttonText="보기"
-          labelSize="c"
-          mainLabelGap="4px"
-          mainSize="small"
           _checked={adAgree}
-          _setChecked={setAdAgree}
+          setChecked={setAdAgree}
           _margin="8px 0px 36px 0px"
-          _onClick={() => {
+          buttonOnClick={() => {
             setAaOpen(true)
           }}
         />
@@ -219,6 +227,35 @@ const NewsLetterPage = () => {
           </style.TextSpan>
 
           <PersonalAgreeContent>{AdAgreeData}</PersonalAgreeContent>
+        </Modal>
+      )}
+      {alertOpen !== 0 && (
+        <Modal
+          _width="100%"
+          _maxWidth="425px"
+          _height="150px"
+          _borderRadius="20px"
+          _padding="30px 20px 20px 20px"
+          _onClick={() => {
+            setAlertOpen(0)
+          }}
+        >
+          <style.TextP typo="b1" textColor="black">
+            {alertTexts[alertOpen - 1]}
+          </style.TextP>
+
+          <Button
+            buttonType="secondary"
+            contentType="text"
+            text="확인"
+            textSize="h6"
+            textColor="logo"
+            _margin="28px 0px 0px 0px"
+            _padding="18px 127px"
+            _onClick={() => {
+              setAlertOpen(0)
+            }}
+          />
         </Modal>
       )}
     </NewsLetterComponent>
