@@ -12,6 +12,12 @@ const useCommonStore = create<ICommonStore>()(
         set((state) => {
           state.prevPage = value
         })
+      },
+      currPage: 0,
+      setCurrPage: (value) => {
+        set((state) => {
+          state.currPage = value
+        })
       }
     }))
   )

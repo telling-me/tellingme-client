@@ -23,7 +23,8 @@ const MainPage = () => {
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 475px;
+  padding: 0 25px;
   justify-content: center;
   align-items: center;
 `

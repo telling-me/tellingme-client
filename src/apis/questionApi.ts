@@ -1,4 +1,4 @@
-import { API } from 'configs/axios'
+import { API } from './api'
 
 export const questionApi = {
   getTodayQuestion: async () => await API.get('/api/question/'),
