@@ -1,7 +1,12 @@
 import styled, { css } from 'styled-components'
 import type { CheckSizeType } from './type'
 
-export const CheckBoxComponent = styled.div<{ checkSize: CheckSizeType; _margin?: string; _disabled: boolean }>`
+export const CheckBoxComponent = styled.div<{
+  checkSize: CheckSizeType
+  _margin?: string
+  _maxWidth?: string
+  _disabled: boolean
+}>`
   display: flex;
   align-items: center;
 
@@ -27,6 +32,7 @@ export const CheckBoxComponent = styled.div<{ checkSize: CheckSizeType; _margin?
         `}
 
   ${({ _margin }) => _margin != null && `margin: ${_margin};`}
+  ${({ _maxWidth }) => _maxWidth != null && `max-width: ${_maxWidth};`}
 `
 
 export const CheckBoxButton = styled.button`

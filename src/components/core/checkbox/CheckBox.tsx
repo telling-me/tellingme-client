@@ -12,10 +12,11 @@ const CheckBox = ({
   buttonOnClick,
   checkSize = 'large',
   _margin,
+  _maxWidth,
   _disabled = false
 }: ICheckBox) => {
   return (
-    <CheckBoxComponent checkSize={checkSize} _margin={_margin} _disabled={_disabled}>
+    <CheckBoxComponent checkSize={checkSize} _margin={_margin} _maxWidth={_maxWidth} _disabled={_disabled}>
       <CheckSquare _checked={_checked} setChecked={setChecked} checkSize={checkSize} _disabled={_disabled} />
 
       <style.TextP

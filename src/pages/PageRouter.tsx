@@ -9,6 +9,7 @@ import CommonLayout from 'components/layout/CommonLayout'
 import LandingLayout from 'components/layout/LandingLayout'
 import KakaoLayout from 'components/layout/KakaoLayout'
 import AppleLayout from 'components/layout/AppleLayout'
+import NewsLetterLayout from 'components/layout/NewsLetterLayout'
 
 // path
 import { PAGE_URL } from 'configs/path'
@@ -47,7 +48,11 @@ const PageRouter = () => {
           {
             // 뉴스 레터
           }
-          <Route path={PAGE_URL.NewsLetter} element={<Switch.NewsLetterPage />} />
+
+          <Route path={PAGE_URL.NewsLetter} element={<NewsLetterLayout />}>
+            <Route index element={<Switch.NewsLetterPage />} />
+            <Route path={PAGE_URL.NewsLetterComplete} element={<Switch.NewsLetterCompletePage />} />
+          </Route>
         </Routes>
       </AnimatePresence>
     </>

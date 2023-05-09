@@ -14,4 +14,5 @@ export interface ICheckBox extends ICheckSquare {
   buttonText?: string
   buttonOnClick?: MouseEventHandler<HTMLButtonElement>
   _margin?: string
+  _maxWidth?: string
 }

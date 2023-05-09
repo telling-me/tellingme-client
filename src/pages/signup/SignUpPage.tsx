@@ -219,7 +219,13 @@ const SignUpPage = () => {
       {
         // 서비스 이용 약관 (추후에 디자인 나오면 약관 모달 달아야 함)
         step === 0 ? (
-          <CheckBox label="전체 동의합니다" buttonText="전문 보기" _checked={isAgree} setChecked={setIsAgree} />
+          <CheckBox
+            label="전체 동의합니다"
+            buttonText="전문 보기"
+            _checked={isAgree}
+            setChecked={setIsAgree}
+            _maxWidth="425px"
+          />
         ) : // 닉네임
         step === 1 ? (
           <Input
