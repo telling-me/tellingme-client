@@ -1,13 +1,14 @@
 import type { Dispatch, SetStateAction } from 'react'
 
+export type DropdownSizeType = 'small' | 'large'
+
 export interface IDropdown {
-  label?: string
+  dropdownSize: DropdownSizeType
   defaultText: string
   data: string[] | number[]
   _selected: string | undefined
   _setSelected: Dispatch<SetStateAction<string | undefined>>
-  _width?: string
-  _padding?: string
+  label?: string
+  _maxWidth?: string
   _margin?: string
-  _flexGrow?: string
 }

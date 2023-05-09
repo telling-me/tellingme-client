@@ -5,6 +5,8 @@ import { ReactComponent as LogoS1 } from './logo_s1.svg'
 import { ReactComponent as LogoS2 } from './logo_s2.svg'
 import { ReactComponent as LogoS3 } from './logo_s3.svg'
 import { ReactComponent as LogoS4 } from './logo_s4.svg'
+import { ReactComponent as Bubble } from './bubble.svg'
+import { ReactComponent as Setting } from './Setting.svg'
 import { ReactComponent as Warning } from './Warning.svg'
 import { ReactComponent as XCircle } from './XCircle.svg'
 import { ReactComponent as Heart } from './Heart.svg'
@@ -27,11 +29,18 @@ import { ReactComponent as Briefcase } from './Briefcase.svg'
 import { ReactComponent as Cookpot } from './Cookpot.svg'
 import { ReactComponent as Smiley } from './Smiley.svg'
 import { ReactComponent as Logo } from './Logo.svg'
+import { ReactComponent as Close } from './Close.svg'
+import { ReactComponent as ToolTipTriangle } from './ToolTipTriangle.svg'
+import { ReactComponent as ToolTipTriangle2 } from './ToolTipTriangle2.svg'
+import { ReactComponent as Rows } from './Rows.svg'
+import { ReactComponent as Columns } from './Columns.svg'
 
 interface IIconIndex extends IStringKey {
   Menu: string | FunctionComponent<any> | ComponentClass<any, any>
   Warning: string | FunctionComponent<any> | ComponentClass<any, any>
   XCircle: string | FunctionComponent<any> | ComponentClass<any, any>
+  Bubble: string | FunctionComponent<any> | ComponentClass<any, any>
+  Setting: string | FunctionComponent<any> | ComponentClass<any, any>
   Heart: string | FunctionComponent<any> | ComponentClass<any, any>
   Check: string | FunctionComponent<any> | ComponentClass<any, any>
   ArrowLeft: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -52,6 +61,15 @@ interface IIconIndex extends IStringKey {
   Cookpot: string | FunctionComponent<any> | ComponentClass<any, any>
   Smiley: string | FunctionComponent<any> | ComponentClass<any, any>
   Logo: string | FunctionComponent<any> | ComponentClass<any, any>
+  LogoS1: string | FunctionComponent<any> | ComponentClass<any, any>
+  LogoS2: string | FunctionComponent<any> | ComponentClass<any, any>
+  LogoS3: string | FunctionComponent<any> | ComponentClass<any, any>
+  LogoS4: string | FunctionComponent<any> | ComponentClass<any, any>
+  Close: string | FunctionComponent<any> | ComponentClass<any, any>
+  ToolTipTriangle: string | FunctionComponent<any> | ComponentClass<any, any>
+  ToolTipTriangle2: string | FunctionComponent<any> | ComponentClass<any, any>
+  Rows: string | FunctionComponent<any> | ComponentClass<any, any>
+  Columns: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
@@ -60,6 +78,8 @@ const Icon: IIconIndex = {
   LogoS2,
   LogoS3,
   LogoS4,
+  Bubble,
+  Setting,
   Warning,
   XCircle,
   Heart,
@@ -81,7 +101,12 @@ const Icon: IIconIndex = {
   Briefcase,
   Cookpot,
   Smiley,
-  Logo
+  Logo,
+  Close,
+  ToolTipTriangle,
+  ToolTipTriangle2,
+  Rows,
+  Columns
 }
 
 export default Icon

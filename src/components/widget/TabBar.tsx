@@ -5,9 +5,9 @@ import styled from 'styled-components'
 // components
 import style from 'styles/styled-components/styled'
 
-const NavBar = () => {
+const TabBar = () => {
   return (
-    <NavBarWrapper>
+    <TabBarWrapper>
       <li>
         <ul>
           <Link to="/app/allanswer">
@@ -25,14 +25,14 @@ const NavBar = () => {
           </Link>
         </ul>
       </li>
-    </NavBarWrapper>
+    </TabBarWrapper>
   )
 }
 
-const NavBarWrapper = styled.nav`
+const TabBarWrapper = styled.nav`
   position: absolute;
-  z-index: 9999;
+  z-index: 6000;
   right: 30px;
   top: 50%;
 `
-export default NavBar
+export default TabBar

@@ -1,73 +1,82 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-
-import React from 'react'
-import { InputComponent, InputInnerFrame, InputOuterFrame, InputSpan } from './style'
+import React, { useState } from 'react'
+import { InputComponent, InputInnerFrame, InputOuterFrame2 } from './style'
+import style from 'styles/styled-components/styled'
 import type { IInput } from './type'
-
 import { Icon } from 'components'
 
 const Input = ({
+  _placeholder,
+  _value,
+  setValue,
   label,
   infoText,
   errorText,
   isError = false,
   setIsError,
   _disabled = false,
-  _placeholder = '',
-  _value,
-  _margin = '0px',
-  _setValue
+  _margin,
+  _width = '100%',
+  _maxWidth
 }: IInput) => {
-  const handleChange = (e: { target: { value: React.SetStateAction<string> } }) => {
-    _setValue(e.target.value)
+  const [isVisible, setIsVisible] = useState(false)
 
-    if (setIsError !== undefined) {
+  const handleChange = (e: { target: { value: React.SetStateAction<string> } }) => {
+    setValue(e.target.value)
+
+    if (setIsError != null && isError) {
       setIsError(false)
     }
   }
 
-  const resetInput = () => {
-    _setValue('')
+  const handleReset = () => {
+    setValue('')
   }
 
   return (
-    <InputComponent _margin={_margin}>
-      {label !== undefined && (
-        <InputSpan textSize="h6" textColor="black">
+    <InputComponent _margin={_margin} _width={_width} _maxWidth={_maxWidth}>
+      {label != null && (
+        <style.TextSpan typo="h6" textColor="black" _margin="0 0 0 10px">
           {label}
-        </InputSpan>
+        </style.TextSpan>
       )}
 
-      <InputOuterFrame isError={isError} _disabled={_disabled}>
+      <InputOuterFrame2 isVisible={isVisible} _value={_value}>
         <InputInnerFrame
-          value={_value}
           placeholder={_placeholder}
-          disabled={_disabled}
+          value={_value}
           onChange={handleChange}
           isError={isError}
-          _disabled={_disabled}
+          disabled={_disabled}
+          onFocus={() => {
+            setIsVisible(true)
+          }}
+          onBlur={() => {
+            setIsVisible(false)
+          }}
         />
 
-        {_disabled ? (
-          <Icon icon="xcircle" iconSize="medium" iconColor="side200" />
-        ) : isError ? (
-          <Icon icon="warning" iconSize="medium" iconColor="error400" />
-        ) : _value.length > 0 ? (
-          <Icon icon="xcircle" iconSize="medium" iconColor="side500" _onClick={resetInput} />
+        {isError ? (
+          <Icon icon="warning" iconSize="medium" iconColor="error400" _margin="0px 30px 0px auto" />
         ) : (
-          <Icon icon="xcircle" iconSize="medium" iconColor="side200" />
+          <Icon
+            icon="xcircle"
+            iconSize="medium"
+            iconColor="side500"
+            _margin="0px 30px 0px auto"
+            _onClick={handleReset}
+          />
         )}
-      </InputOuterFrame>
+      </InputOuterFrame2>
 
-      {!isError && infoText !== undefined && !_disabled && (
-        <InputSpan textSize="c" textColor="gray7">
+      {!isError && infoText != null && (
+        <style.TextSpan typo="c" textColor={_disabled ? 'gray5' : 'gray7'} _margin="0 0 0 10px">
           {infoText}
-        </InputSpan>
+        </style.TextSpan>
       )}
-      {isError && errorText !== undefined && !_disabled && (
-        <InputSpan textSize="c" textColor="error500">
+      {isError && errorText != null && (
+        <style.TextSpan typo="c" textColor="error500" _margin="0 0 0 10px">
           {errorText}
-        </InputSpan>
+        </style.TextSpan>
       )}
     </InputComponent>
   )

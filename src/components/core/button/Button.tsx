@@ -58,7 +58,7 @@ const Button = ({
       ref={_ref}
     >
       {contentType === 'text' ? (
-        <style.TextSpan textSize={textSize} textColor={textColor}>
+        <style.TextSpan typo={textSize} textColor={textColor}>
           {text}
         </style.TextSpan>
       ) : contentType === 'icon' ? (
@@ -66,7 +66,7 @@ const Button = ({
       ) : contentType === 'row' || contentType === 'col' ? (
         <BothFrame contentType={contentType} _gap={_gap as string}>
           <Icon icon={icon as IconType} iconSize={iconSize as IconSizeType} iconColor={iconColor as ColorType} />
-          <style.TextSpan textSize={textSize} textColor={textColor}>
+          <style.TextSpan typo={textSize} textColor={textColor}>
             {text}
           </style.TextSpan>
         </BothFrame>
@@ -74,7 +74,7 @@ const Button = ({
         <WithInputFrame>
           <BothFrame contentType="row" _gap={_gap as string}>
             <Icon icon={icon as IconType} iconSize={iconSize as IconSizeType} iconColor={iconColor as ColorType} />
-            <style.TextSpan textSize={textSize} textColor={textColor}>
+            <style.TextSpan typo={textSize} textColor={textColor}>
               {text}
             </style.TextSpan>
           </BothFrame>

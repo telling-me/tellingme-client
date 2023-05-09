@@ -12,7 +12,8 @@
       "stores/*": ["stores/*"],
       "utils/*": ["utils/*"],
       "styles/*": ["styles/*"],
-      "assets/*": ["assets/*"]
+      "assets/*": ["assets/*"],
+      "data/*": ["data/*"]
     },
 
     "allowJs": true,

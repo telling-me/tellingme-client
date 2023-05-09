@@ -1,11 +1,18 @@
 import type { Dispatch, MouseEventHandler, SetStateAction } from 'react'
 
-export interface ICheckBox {
+export type CheckSizeType = 'small' | 'large'
+
+export interface ICheckSquare {
+  _checked: boolean
+  setChecked: Dispatch<SetStateAction<boolean>>
+  checkSize?: CheckSizeType
+  _disabled?: boolean
+}
+
+export interface ICheckBox extends ICheckSquare {
   label: string
   buttonText?: string
-  _checked: boolean
-  _disabled?: boolean
-  _setChecked: Dispatch<SetStateAction<boolean>>
-  _onClick?: MouseEventHandler<HTMLButtonElement>
+  buttonOnClick?: MouseEventHandler<HTMLButtonElement>
   _margin?: string
+  _maxWidth?: string
 }

@@ -1,77 +1,83 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import type { DropdownSizeType } from './type'
 
-export const DropdownComponent = styled.div<{ _width?: string; _margin?: string; _flexGrow?: string }>`
+export const DropdownComponent = styled.div<{ _margin?: string; _maxWidth?: string }>`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
   gap: 8px;
 
   position: relative;
 
-  max-width: 425px;
+  width: 100%;
 
-  ${({ _width }) => _width !== undefined && `width: ${_width}`}
-  ${({ _margin }) => _margin !== undefined && `margin: ${_margin}`}
-  ${({ _flexGrow }) => _flexGrow !== undefined && `flex-grow: ${_flexGrow}`}
+  ${({ _maxWidth }) => _maxWidth != null && `max-width: ${_maxWidth}`}
+  ${({ _margin }) => _margin != null && `margin: ${_margin}`};
 `
 
-export const DropdownButton = styled.button<{ _padding?: string }>`
+export const DropdownButton = styled.button<{ dropdownSize: DropdownSizeType }>`
+  width: 100%;
+  background-color: ${(props) => props.theme.colors.side.side200};
+
+  cursor: pointer;
+
+  ${({ dropdownSize }) =>
+    dropdownSize === 'small'
+      ? css`
+          border-radius: 16px;
+          padding: 10px 16px 10px 20px;
+        `
+      : css`
+          border-radius: 18px;
+          padding: 16.5px 30px;
+        `}
+`
+
+export const DropdownInnerWrapper = styled.div<{ dropdownSize: DropdownSizeType }>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: start;
+
+  gap: ${({ dropdownSize }) => (dropdownSize === 'small' ? '8px' : '10px')};
+`
+
+export const DropdownSelectedField = styled.div`
   text-align: left;
 
   width: 100%;
-  border-radius: 18px;
-
-  ${(props) => `
-    background-color: ${props.theme.colors.side.side200};
-  `}
-
-  ${({ _padding }) => _padding !== undefined && `padding: ${_padding}`}
 `
 
-export const DropdownList = styled.div<{ label?: string }>`
+export const DropdownList = styled.div<{ dropdownSize: DropdownSizeType; listLength: string }>`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 
   position: absolute;
-  top: ${({ label }) => (label === undefined ? '83px' : '100px')};
-
-  width: 100%;
-  max-height: 208px;
-  border-radius: 18px;
-
+  bottom: ${({ listLength }) => `-${parseInt(listLength) + 8}px`};
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
   }
 
-  ${(props) => `
-    background-color: ${props.theme.colors.side.side200};
-  `}
+  width: 100%;
+  height: ${({ listLength }) => `${listLength}px`};
+  max-height: 208px;
+  background-color: ${(props) => props.theme.colors.side.side200};
+  border-radius: ${({ dropdownSize }) => (dropdownSize === 'small' ? '16px' : '18px')};
 `
 
-export const DropdownItem = styled.button<{ _padding?: string }>`
-  display: block;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 17.5px 30px;
+export const DropdownItem = styled.button<{ dropdownSize: DropdownSizeType }>`
+  text-align: left;
+  cursor: pointer;
 
-  width: 100%;
-  border-radius: 18px;
+  padding: ${({ dropdownSize }) => (dropdownSize === 'small' ? '12px 30px' : '17.5px 30px')};
 
-  ${(props) => `
-    background-color: ${props.theme.colors.side.side200};
+  &:hover,
+  &:focus {
+    background-color: ${(props) => props.theme.colors.side.side300};
+  }
 
-    &:active {
-      background-color: ${props.theme.colors.side.side300};
-    }
-  `}
-
-  ${({ _padding }) => _padding !== undefined && `padding: ${_padding}`}
+  &:active {
+    background-color: ${(props) => props.theme.colors.side.side300};
+    color: ${(props) => props.theme.colors.side.side500};
+  }
 `

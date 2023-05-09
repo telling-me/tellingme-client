@@ -1,30 +1,34 @@
-import React from 'react'
-
-import { CheckBoxButton, CheckBoxComponent, CheckBoxFrame, CheckBoxMain } from './style'
-import type { ICheckBox } from './type'
-
 import style from 'styles/styled-components/styled'
+import React from 'react'
+import { CheckBoxButton, CheckBoxComponent } from './style'
+import type { ICheckBox } from './type'
+import CheckSquare from './CheckSquare'
 
-const CheckBox = ({ label, buttonText, _checked, _setChecked, _disabled = false, _onClick, _margin }: ICheckBox) => {
-  const handleChange = (e: { target: { checked: boolean | ((prevState: boolean) => boolean) } }) => {
-    _setChecked(e.target.checked)
-
-    console.log(e.target.checked)
-  }
-
+const CheckBox = ({
+  _checked,
+  setChecked,
+  label,
+  buttonText,
+  buttonOnClick,
+  checkSize = 'large',
+  _margin,
+  _maxWidth,
+  _disabled = false
+}: ICheckBox) => {
   return (
-    <CheckBoxComponent _disabled={_disabled} _margin={_margin}>
-      <CheckBoxFrame>
-        <CheckBoxMain type="checkbox" checked={_checked} onChange={handleChange} disabled={_disabled} />
-        <style.TextSpan textSize="b1" textColor={_disabled ? 'gray3' : 'black'}>
-          {label}
-        </style.TextSpan>
-      </CheckBoxFrame>
+    <CheckBoxComponent checkSize={checkSize} _margin={_margin} _maxWidth={_maxWidth} _disabled={_disabled}>
+      <CheckSquare _checked={_checked} setChecked={setChecked} checkSize={checkSize} _disabled={_disabled} />
 
-      <CheckBoxButton onClick={_onClick} disabled={_disabled}>
-        <style.TextSpan textSize="c" textColor={_disabled ? 'gray3' : 'primary700'}>
-          {buttonText}
-        </style.TextSpan>
+      <style.TextP
+        typo={checkSize === 'small' ? 'c' : 'b1'}
+        textColor={_disabled ? 'gray3' : 'black'}
+        _margin="0px 0px 0px 10px"
+      >
+        {label}
+      </style.TextP>
+
+      <CheckBoxButton onClick={buttonOnClick} disabled={_disabled}>
+        {buttonText}
       </CheckBoxButton>
     </CheckBoxComponent>
   )

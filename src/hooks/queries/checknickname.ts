@@ -15,8 +15,8 @@ export const useCheckNickname = (
       setIsError(true)
       setErrorText(err.response.data.message)
     },
-    onSuccess: () => {
-      if (useFilterling(nickname)) {
+    onSuccess: (res: any) => {
+      if (res.data === '' && useFilterling(nickname)) {
         setStep(2)
       } else {
         setIsError(true)

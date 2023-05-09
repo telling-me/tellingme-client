@@ -13,6 +13,11 @@ export interface ILoginData {
 export interface ITest {
   result: string
 }
+export interface INewsLetterData {
+  email: string
+  name: string
+  funnel: string
+}
 export interface IKakaoTokenData {
   client_id: string
   redirect_uri: string
@@ -40,6 +45,11 @@ export const userApi = {
   test: async () => {
     const data = await API.get('/')
     return data
+  },
+  newsLetter: async (newsLetterData: INewsLetterData) => {
+    return await API.post('/api/newsLetter/', newsLetterData, {
+      headers: { 'Content-Type': 'application/json' }
+    })
   },
   getKakaoToken: async (data: IKakaoTokenData) => {
     return await KAKAO_TOKEN_API.post('/oauth/token', {

@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import {
   AlarmWrapper,
+  BirthDateWrapper,
   ContentWrapper,
   MoveButtonWrapper,
   SignUpHeader,
@@ -110,7 +112,7 @@ const SignUpPage = () => {
 
         {[4, 5, 6].includes(step) && (
           <Button
-            buttonType="none"
+            buttonType="noFilled"
             contentType="text"
             text="건너뛰기"
             textSize={(windowSize as number) > 767 ? 'h6' : 'b1'}
@@ -129,7 +131,7 @@ const SignUpPage = () => {
       {step !== 7 &&
         ((windowSize as number) < 1024 ? (
           <style.TextSpan
-            textSize="h4"
+            typo="h4"
             textColor="black"
             _margin={
               [0, 1, 5, 6].includes(step) ? '60px 0px 110px 0px' : step === 2 ? '60px 0px 8px 0px' : '60px 0px 80px 0px'
@@ -161,7 +163,7 @@ const SignUpPage = () => {
                   handlePrevStep()
                 }}
               />
-              <style.TextSpan textSize="h4" textColor="black">
+              <style.TextSpan typo="h4" textColor="black">
                 {stepTextData[step]}
               </style.TextSpan>
               {step !== 6 ? (
@@ -209,7 +211,7 @@ const SignUpPage = () => {
         ))}
 
       {step === 2 && (
-        <style.TextSpan textSize="b2" textColor="gray6" _margin="0px 0px 60px 0px">
+        <style.TextSpan typo="b2" textColor="gray6" _margin="0px 0px 60px 0px">
           최대 2가지 선택 가능
         </style.TextSpan>
       )}
@@ -217,7 +219,13 @@ const SignUpPage = () => {
       {
         // 서비스 이용 약관 (추후에 디자인 나오면 약관 모달 달아야 함)
         step === 0 ? (
-          <CheckBox label="전체 동의합니다" buttonText="전문 보기" _checked={isAgree} _setChecked={setIsAgree} />
+          <CheckBox
+            label="전체 동의합니다"
+            buttonText="전문 보기"
+            _checked={isAgree}
+            setChecked={setIsAgree}
+            _maxWidth="425px"
+          />
         ) : // 닉네임
         step === 1 ? (
           <Input
@@ -227,7 +235,8 @@ const SignUpPage = () => {
             isError={isError}
             setIsError={setIsError}
             _value={nickname}
-            _setValue={setNickname}
+            setValue={setNickname}
+            _maxWidth="425px"
           />
         ) : // 고민
         step === 2 ? (
@@ -338,7 +347,7 @@ const SignUpPage = () => {
           </ContentWrapper>
         ) : // 생년월일
         step === 5 ? (
-          <ContentWrapper type="birthDate">
+          <BirthDateWrapper>
             {birthDateData.map(
               (
                 v: {
@@ -352,35 +361,34 @@ const SignUpPage = () => {
                 return (
                   <Dropdown
                     key={i}
+                    dropdownSize="large"
                     defaultText={v.defaultText}
                     data={v.data}
                     _selected={i === 0 ? year : i === 1 ? month : day}
                     _setSelected={i === 0 ? setYear : i === 1 ? setMonth : setDay}
-                    _padding={v._padding}
-                    _flexGrow={v._flexGrow}
                   />
                 )
               }
             )}
-          </ContentWrapper>
+          </BirthDateWrapper>
         ) : // mbti
         step === 6 ? (
           <Dropdown
+            dropdownSize="large"
             defaultText="mbti 선택"
             data={mbtiData}
             _selected={mbti}
             _setSelected={setMbti}
-            _width="100%"
-            _padding="16.5px 30px"
+            _maxWidth="425px"
           />
         ) : (
           step === 7 && (
             <AlarmWrapper>
               <SpanWrapper>
-                <style.TextSpan textSize="h5" textColor="black">
+                <style.TextSpan typo="h5" textColor="black">
                   매일 기록을 잊지 않도록
                 </style.TextSpan>
-                <style.TextSpan textSize="h4" textColor="black">
+                <style.TextSpan typo="h4" textColor="black">
                   알람을 드려도 될까요?
                 </style.TextSpan>
               </SpanWrapper>
@@ -405,7 +413,7 @@ const SignUpPage = () => {
                 }}
               />
               <Button
-                buttonType="none"
+                buttonType="noFilled"
                 contentType="text"
                 text="괜찮아요"
                 textSize="b1"

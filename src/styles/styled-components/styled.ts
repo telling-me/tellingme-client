@@ -6,13 +6,12 @@ import { type ColorType, type TextSizeType } from 'type/common'
 
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
-import useChangeTextSize from 'hooks/useChangeTextSize'
 
 export interface IGrid {
   flex?: 'start' | 'end' | 'between' | 'center'
   flexOption?: string
   direction?: 'column' | 'row'
-  alignItems?: 'start' | 'end' | 'center' | 'stretch'
+  _alignItems?: 'start' | 'end' | 'center' | 'stretch'
   wrap?: 'wrap' | 'nowrap'
   _width?: string
   _margin?: string
@@ -24,27 +23,12 @@ export interface IGrid {
 }
 
 export interface IText {
-  typo?:
-    | 'h1_b'
-    | 'h1'
-    | 'h2_b'
-    | 'h2'
-    | 'h3_b'
-    | 'h3'
-    | 'h4_b'
-    | 'h4'
-    | 'h5_b'
-    | 'h5'
-    | 'h6_b'
-    | 'h6'
-    | 'b1_b'
-    | 'b1'
-    | 'b2_b'
-    | 'b2'
-    | 'c_b'
-    | 'c'
+  typo?: TextSizeType
+  textColor?: ColorType
+  textAlign?: 'start' | 'end' | 'left' | 'right' | 'center' | 'justify' | 'match-parent'
   _margin?: string
   _width?: string
+  wordBreak?: 'break-all' | 'break-word' | 'keep-all' | 'normal'
 }
 
 const Grid = styled(motion.div)<IGrid>`
@@ -60,14 +44,14 @@ const Grid = styled(motion.div)<IGrid>`
       : flex === 'between'
       ? theme.common.flexBetween
       : flex === 'center' && theme.common.flexCenter};
-  ${({ alignItems }) =>
-    alignItems === 'start'
+  ${({ _alignItems }) =>
+    _alignItems === 'start'
       ? 'align-items: flex-start'
-      : alignItems === 'end'
+      : _alignItems === 'end'
       ? 'align-items: flex-end'
-      : alignItems === 'stretch'
+      : _alignItems === 'stretch'
       ? 'align-items: stretch'
-      : alignItems === 'center' && 'align-items: center'};
+      : _alignItems === 'center' && 'align-items: center'};
   ${({ direction }) => direction === 'column' && 'flex-direction: column'};
   ${({ wrap }) => wrap === 'wrap' && 'flex-wrap: wrap'};
   ${({ flexOption }) => flexOption != null && `flex: ${flexOption}`};
@@ -81,11 +65,14 @@ const Grid = styled(motion.div)<IGrid>`
   ${({ _gap }) => _gap != null && `gap: ${_gap}`};
   ${({ _overflow }) => _overflow != null && `overflow: ${_overflow}`};
 `
+
+// text
 const TextH1 = styled.h1<IText>`
-  white-space: nowrap;
+  white-space: normal;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
-
+  ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
   ${({ theme, typo }) =>
     typo === 'h1_b' ||
     typo === 'h1' ||
@@ -103,13 +90,15 @@ const TextH1 = styled.h1<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
 `
 
 const TextH2 = styled.h2<IText>`
-  white-space: nowrap;
+  white-space: normal;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
-
+  ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
   ${({ theme, typo }) =>
     typo === 'h1_b' ||
     typo === 'h1' ||
@@ -127,13 +116,15 @@ const TextH2 = styled.h2<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
 `
 
 const TextH3 = styled.h3<IText>`
-  white-space: nowrap;
+  white-space: normal;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
-
+  ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
   ${({ theme, typo }) =>
     typo === 'h1_b' ||
     typo === 'h1' ||
@@ -151,13 +142,15 @@ const TextH3 = styled.h3<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
 `
 
 const TextH4 = styled.h4<IText>`
-  white-space: nowrap;
+  white-space: normal;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
-
+  ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
   ${({ theme, typo }) =>
     typo === 'h1_b' ||
     typo === 'h1' ||
@@ -175,13 +168,15 @@ const TextH4 = styled.h4<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
 `
 
 const TextH5 = styled.h5<IText>`
-  white-space: nowrap;
+  white-space: normal;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
-
+  ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
   ${({ theme, typo }) =>
     typo === 'h1_b' ||
     typo === 'h1' ||
@@ -199,13 +194,15 @@ const TextH5 = styled.h5<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
 `
 
 const TextP = styled.p<IText>`
-  white-space: nowrap;
+  white-space: normal;
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
-
+  ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
   ${({ theme, typo }) =>
     typo === 'h1_b' ||
     typo === 'h1' ||
@@ -223,20 +220,33 @@ const TextP = styled.p<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
 `
 
-const TextSpan = styled.span<{
-  textSize?: TextSizeType
-  textColor?: ColorType
-  _margin?: string
-  _width?: string
-  _textAlign?: string
-}>`
-  white-space: nowrap;
+const TextSpan = styled.span<IText>`
+  white-space: normal;
 
   ${({ _width }) => _width != null && `width: ${_width}`}
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
-  ${({ textSize }) => `font-size: ${useChangeTextSize(textSize as TextSizeType)}`}
+  ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
+  ${({ wordBreak }) => wordBreak != null && `word-break: ${wordBreak}`};
+  ${({ theme, typo }) =>
+    typo === 'h1_b' ||
+    typo === 'h1' ||
+    typo === 'h2_b' ||
+    typo === 'h2' ||
+    typo === 'h3_b' ||
+    typo === 'h3' ||
+    typo === 'h4_b' ||
+    typo === 'h4' ||
+    typo === 'h5_b' ||
+    typo === 'h5' ||
+    typo === 'h6_b' ||
+    typo === 'h6'
+      ? theme.typo.title[typo]
+      : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
+      ? theme.typo.body[typo]
+      : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
   ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
 `
 

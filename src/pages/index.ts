@@ -5,3 +5,4 @@ export { default as AppleLoginButtonPage } from './login/apple/AppleLoginButtonP
 export * from './landing'
 export * from './app'
 export * from './signup'
+export * from './newsletter'
