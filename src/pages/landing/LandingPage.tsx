@@ -1,39 +1,93 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // components
 import Icon from 'assets/icons'
 import Logo from 'assets/images/logo.png'
 import styled from 'styled-components'
-import { LandingBubble } from 'components'
+import style from 'styles/styled-components/styled'
+import { Button, LandingBubble, Modal } from 'components'
+
+// config
+import { KAKAO_AUTH_URL } from 'configs/kakao'
+import { APPLE_AUTH_URL } from 'configs/apple'
 
 // animation
 import { motion } from 'framer-motion'
 import { landingCircleAni, landingLogoAni, landingBubbleAni, landingSubAni } from 'styles/ani'
 
 const LandingPage = () => {
+  const [loginOpen, setLoginOpen] = useState(false)
   return (
-    <LandingWrapper>
-      <AbsoluteLogoBubble variants={landingBubbleAni} initial="init" animate="ani">
-        <LandingBubble />
-      </AbsoluteLogoBubble>
-      <LandingLogo variants={landingLogoAni} initial="init" animate="ani" custom={2} src={Logo} />
-      <AbsoluteLogoS1 variants={landingSubAni} initial="init" animate="ani" custom={2}>
-        <Icon.LogoS1 />
-      </AbsoluteLogoS1>
-      <AbsoluteLogoS2 variants={landingSubAni} initial="init" animate="ani" custom={3}>
-        <Icon.LogoS2 />
-      </AbsoluteLogoS2>
-      <AbsoluteLogoS3 variants={landingSubAni} initial="init" animate="ani" custom={4}>
-        <Icon.LogoS3 />
-      </AbsoluteLogoS3>
-      <AbsoluteLogoS4 variants={landingSubAni} initial="init" animate="ani" custom={5}>
-        <Icon.LogoS4 />
-      </AbsoluteLogoS4>
-      <AbsoluteCircle1 initial="init" animate="ani" custom={2} variants={landingCircleAni} />
-      <AbsoluteCircle2 initial="init" animate="ani" custom={3} variants={landingCircleAni} />
-      <AbsoluteCircle3 initial="init" animate="ani" custom={4} variants={landingCircleAni} />
-      <AbsoluteCircle4 initial="init" animate="ani" custom={5} variants={landingCircleAni} />
-    </LandingWrapper>
+    <>
+      {loginOpen && (
+        <Modal
+          _width="100%"
+          _maxWidth="325px"
+          _height="345px"
+          _borderRadius="20px"
+          _padding="24px"
+          _onClick={() => {
+            setLoginOpen(false)
+          }}
+        >
+          <style.Grid flex="between" direction="column" _height="100%">
+            <style.Grid flex="start" direction="column" _alignItems="start" _gap="6px" _margin="32px 0 0 0">
+              <style.TextP typo="h5">하루 한번</style.TextP>
+              <style.TextP typo="h5">질문에 답변하며</style.TextP>
+              <style.TextP typo="h5_b">나를 깨닫는 시간</style.TextP>
+            </style.Grid>
+            <style.Grid flex="start" direction="column" _gap="12px">
+              <Button
+                buttonType="primary"
+                contentType="text"
+                text="카카오 로그인"
+                _width="100%"
+                _height="46px"
+                _onClick={() => {
+                  window.location.href = KAKAO_AUTH_URL
+                }}
+              />
+              <Button
+                buttonType="primary"
+                contentType="text"
+                text="애플 로그인"
+                _width="100%"
+                _height="46px"
+                _onClick={() => {
+                  window.location.href = APPLE_AUTH_URL
+                }}
+              />
+            </style.Grid>
+          </style.Grid>
+        </Modal>
+      )}
+      <LandingWrapper
+        onClick={() => {
+          setLoginOpen(true)
+        }}
+      >
+        <AbsoluteLogoBubble variants={landingBubbleAni} initial="init" animate="ani">
+          <LandingBubble />
+        </AbsoluteLogoBubble>
+        <LandingLogo variants={landingLogoAni} initial="init" animate="ani" custom={2} src={Logo} />
+        <AbsoluteLogoS1 variants={landingSubAni} initial="init" animate="ani" custom={2}>
+          <Icon.LogoS1 />
+        </AbsoluteLogoS1>
+        <AbsoluteLogoS2 variants={landingSubAni} initial="init" animate="ani" custom={3}>
+          <Icon.LogoS2 />
+        </AbsoluteLogoS2>
+        <AbsoluteLogoS3 variants={landingSubAni} initial="init" animate="ani" custom={4}>
+          <Icon.LogoS3 />
+        </AbsoluteLogoS3>
+        <AbsoluteLogoS4 variants={landingSubAni} initial="init" animate="ani" custom={5}>
+          <Icon.LogoS4 />
+        </AbsoluteLogoS4>
+        <AbsoluteCircle1 initial="init" animate="ani" custom={2} variants={landingCircleAni} />
+        <AbsoluteCircle2 initial="init" animate="ani" custom={3} variants={landingCircleAni} />
+        <AbsoluteCircle3 initial="init" animate="ani" custom={4} variants={landingCircleAni} />
+        <AbsoluteCircle4 initial="init" animate="ani" custom={5} variants={landingCircleAni} />
+      </LandingWrapper>
+    </>
   )
 }
 
@@ -74,7 +128,7 @@ const AbsoluteLogoS4 = styled(motion.div)`
 `
 const AbsoluteLogoBubble = styled(motion.div)`
   position: absolute;
-  z-index: 8000;
+  z-index: 7000;
 `
 
 const borderCircle = styled(motion.div)`
@@ -109,7 +163,7 @@ const AbsoluteCircle4 = styled(borderCircle)`
 
 const LandingLogo = styled(motion.img)`
   position: absolute;
-  z-index: 9000;
+  z-index: 8000;
   top: calc(50% - 130px);
   width: 554px;
   height: 234px;

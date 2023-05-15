@@ -30,6 +30,7 @@ const PageRouter = () => {
             <Route path={PAGE_URL.Login_Apple} element={<Switch.AppleLoginButtonPage />} />
             <Route path={PAGE_URL.Login} element={<Switch.LoginButtonPage />} />
             <Route path={PAGE_URL.SignUp} element={<Switch.SignUpPage />} />
+            <Route path={'*'} element={<Switch.ErrorPage />} />
           </Route>
           {
             // 임시 로그인 라우터
@@ -40,10 +41,10 @@ const PageRouter = () => {
             // 앱
           }
           <Route path={PAGE_URL.App} element={<CommonLayout />}>
-            <Route index element={<Switch.MainPage />} />
             <Route index path={PAGE_URL.Main} element={<Switch.MainPage />} />
             <Route path={PAGE_URL.AllAnswer} element={<Switch.AllAnswerPage />} />
-            <Route path={PAGE_URL.MyAnswer} element={<Switch.MyAnswerPage />} />
+            <Route path={PAGE_URL.MyAnswer} element={<Switch.MyAnswerPage />} />{' '}
+            <Route path={'*'} element={<Switch.ErrorPage />} />
           </Route>
           {
             // 뉴스 레터

@@ -6,6 +6,8 @@ export interface ICommonFilter {
 export interface ICommonStore {
   prevPage: number
   setPrevPage: (value: number) => void
+  currPage: number
+  setCurrPage: (value: number) => void
 }
 
 export interface IQuestionStore {
