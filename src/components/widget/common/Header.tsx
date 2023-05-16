@@ -11,7 +11,16 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <Icons.Logo />
-      <Button icon="setting" contentType="icon" buttonType="noFilled" iconColor="gray6" iconSize="small" />
+      <Button
+        icon="setting"
+        contentType="icon"
+        buttonType="noFilled"
+        iconColor="gray6"
+        iconSize="small"
+        _onClick={() => {
+          window.location.href = '/setting'
+        }}
+      />
     </HeaderWrapper>
   )
 }
@@ -35,6 +44,11 @@ const HeaderWrapper = styled.header`
 
   @media all and (max-width: 767px) {
     padding: 20px 21px 12px 25px;
+
+  z-index: 1;
+
+  button {
+    cursor: pointer;
   }
 `
 
