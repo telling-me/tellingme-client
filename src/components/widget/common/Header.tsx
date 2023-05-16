@@ -34,6 +34,8 @@ const HeaderWrapper = styled.header`
   background-color: ${({ theme }) => theme.colors.side.side100};
   transition: 0.3s;
 
+  z-index: 1;
+
   @media all and (min-width: 1200px) {
     max-width: 1200px;
   }
@@ -44,12 +46,6 @@ const HeaderWrapper = styled.header`
 
   @media all and (max-width: 767px) {
     padding: 20px 21px 12px 25px;
-
-  z-index: 1;
-
-  button {
-    cursor: pointer;
-  }
 `
 
 export default Header
