@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { PersonalAgreeData, AdAgreeData } from './agreeData'
 import {
+  ApplyButton,
   NewsLetterComponent,
   NewsLetterFooter,
   NewsLetterForm,
@@ -19,6 +20,7 @@ import { useNewsLetterQuery } from 'hooks/queries'
 import useWindowSize from 'hooks/useWindowSize'
 
 import { emailCheck } from 'utils/signRegex'
+import { LoadingDots } from 'components/core/loadingdots'
 
 const NewsLetterPage = () => {
   const windowSize = useWindowSize().width
@@ -34,6 +36,8 @@ const NewsLetterPage = () => {
   const [aaOpen, setAaOpen] = useState(false)
 
   const [alertOpen, setAlertOpen] = useState<number>(0)
+
+  const [loading, setLoading] = useState(false)
 
   const alertTexts = [
     '이메일을 입력해주세요',
@@ -64,9 +68,16 @@ const NewsLetterPage = () => {
     } else if (!personalAgree || !adAgree) {
       setAlertOpen(6)
     } else {
+      setLoading(true)
       newsLetterQuery.refetch().catch(() => {})
     }
   }
+
+  useEffect(() => {
+    if (funnel !== 'etc') {
+      setEtcFunnel('')
+    }
+  }, [funnel])
 
   return (
     <NewsLetterComponent>
@@ -154,18 +165,19 @@ const NewsLetterPage = () => {
             setAaOpen(true)
           }}
         />
-        <Button
-          buttonType="primary"
-          contentType="text"
-          text="신청하기"
-          textSize="h6"
-          textColor="primary700"
-          _width="100%"
-          _height="55px"
-          _onClick={() => {
+        <ApplyButton
+          onClick={() => {
             handleApply()
           }}
-        />
+        >
+          {loading ? (
+            <LoadingDots />
+          ) : (
+            <style.TextP typo="h6" textColor="primary700">
+              신청하기
+            </style.TextP>
+          )}
+        </ApplyButton>
       </NewsLetterFooter>
 
       {paOpen && (
