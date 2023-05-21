@@ -8,11 +8,10 @@ import {
   NewsLetterForm,
   NewsLetterFunnel,
   NewsLetterHeader,
-  NewsLetterHr,
   PersonalAgreeContent
 } from './style'
 
-import { Button, CheckBox, Input, Modal, RadioButton } from 'components'
+import { Button, CheckBox, Input, Modal, RadioButton, Hr } from 'components'
 import style from 'styles/styled-components/styled'
 import Icons from 'assets/icons'
 
@@ -91,7 +90,7 @@ const NewsLetterPage = () => {
         </style.TextSpan>
       </NewsLetterHeader>
 
-      <NewsLetterHr />
+      <Hr _margin="36px 0px" />
 
       <NewsLetterForm>
         <Input label="이메일 주소" _placeholder="이메일을 입력해주세요." _value={email} setValue={setEmail} />
@@ -135,13 +134,13 @@ const NewsLetterPage = () => {
             _value={etcFunnel}
             setValue={setEtcFunnel}
             _disabled={funnel !== 'etc'}
-            _margin="24px 0px 0px 34px"
+            _margin="4px 0px 0px 34px"
             _width="calc(100% - 34px)"
           />
         </NewsLetterFunnel>
       </NewsLetterForm>
 
-      <NewsLetterHr />
+      <Hr _margin="36px 0px" />
 
       <NewsLetterFooter>
         <CheckBox
