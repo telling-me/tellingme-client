@@ -5,7 +5,7 @@ export const InputComponent = styled.div<{ _margin?: string; _width: string; _ma
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 28px;
+  gap: 8px;
 
   ${({ _width }) => `width: ${_width}`};
   ${({ _maxWidth }) => _maxWidth != null && `max-width: ${_maxWidth};`}
@@ -19,6 +19,7 @@ export const InputOuterFrame2 = styled.div<{ isVisible: boolean; _value: string 
   position: relative;
 
   width: 100%;
+  padding: 15px 0px;
 
   cursor: text;
 
