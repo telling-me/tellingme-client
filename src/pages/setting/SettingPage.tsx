@@ -1,21 +1,55 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import SettingContent from 'components/widget/setting/SettingContent'
 import SettingHeader from 'components/widget/setting/SettingHeader'
 import SettingMenu from 'components/widget/setting/SettingMenu'
-import React from 'react'
+import useWindowSize from 'hooks/useWindowSize'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const SettingPage = () => {
-  return (
-    <SettingWrapper>
-      <SettingHeader />
+  const [isMenu, setIsMenu] = useState(true)
+  const [pageNumber, setPageNumber] = useState(0)
+  const windowWidth = useWindowSize().width
 
-      <SettingMain>
-        <SettingMenu />
-      </SettingMain>
-    </SettingWrapper>
+  return (
+    <>
+      {windowWidth > 767 ? (
+        <SettingWrapper>
+          <SettingHeader />
+
+          <SettingMain>
+            <SettingMenu setPageNumber={setPageNumber} />
+            <SettingContent pageNumber={pageNumber} />
+          </SettingMain>
+        </SettingWrapper>
+      ) : isMenu ? (
+        <SettingWrapper>
+          <SettingHeader />
+
+          <SettingMain>
+            <SettingMenu setPageNumber={setPageNumber} setIsMenu={setIsMenu} />
+          </SettingMain>
+        </SettingWrapper>
+      ) : (
+        !isMenu && (
+          <SettingWrapper>
+            <SettingMain>
+              <SettingContent pageNumber={pageNumber} setIsMenu={setIsMenu} />
+            </SettingMain>
+          </SettingWrapper>
+        )
+      )}
+    </>
   )
 }
 
-const SettingWrapper = styled.div``
+const SettingWrapper = styled.div`
+  background-color: ${({ theme }) => theme.colors.side.side100};
+
+  @media all and (max-width: 767px) {
+    position: relative;
+  }
+`
 
 const SettingMain = styled.div`
   display: flex;

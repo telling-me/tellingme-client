@@ -16,7 +16,7 @@ const SettingHeader = () => {
         <Icon icon="arrowleft" iconSize="medium" iconColor="gray6" />
       </BackButton>
 
-      <style.TextP typo="h6_b" textColor="gray6" _margin="0px auto 0px 0px">
+      <style.TextP typo="h6_b" textColor="gray6" _margin="0 auto">
         설정
       </style.TextP>
     </SettingHeaderWrapper>
@@ -25,35 +25,40 @@ const SettingHeader = () => {
 
 const SettingHeaderWrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
 
   width: 100%;
-  height: 64px;
+  height: 66px;
+
+  background-color: ${({ theme }) => theme.colors.side.side100};
 
   @media all and (min-width: 1200px) {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 0px 12px 0px;
+    padding: 20px 0px 14px 0px;
   }
 
   @media all and (min-width: 768px) and (max-width: 1199px) {
-    padding: 20px 60px 12px 60px;
+    padding: 20px 60px 14px 60px;
   }
 
   @media all and (max-width: 767px) {
-    padding: 20px 25px 12px 25px;
+    padding: 20px 25px 14px 21px;
+  }
+
+  p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `
 
 const BackButton = styled.button`
   display: flex;
-  justify-content: center;
   align-items: center;
 
   width: 32px;
   height: 32px;
-  margin-right: calc(50% - 45px);
 
   cursor: pointer;
 `

@@ -1,16 +1,19 @@
-import { Icon } from 'components'
 import React from 'react'
+
+// component
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
+import { Icon } from 'components'
 
 interface ISettingMenuList {
   text: string
   icon?: boolean
+  _onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const SettingMenuList = ({ text, icon = true }: ISettingMenuList) => {
+const SettingMenuList = ({ text, icon = true, _onClick }: ISettingMenuList) => {
   return (
-    <SettingMenuListWrapper>
+    <SettingMenuListWrapper onClick={_onClick}>
       <style.TextP typo="b1" textColor="gray8">
         {text}
       </style.TextP>
@@ -25,11 +28,19 @@ const SettingMenuListWrapper = styled.button`
   align-items: center;
 
   width: 100%;
+  height: 60px
 
   cursor: pointer;
 
   &:hover {
     background-color: ${(props) => props.theme.colors.side.side200};
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    
+    height: 32px;
   }
 
   @media all and (min-width: 1200px) {
@@ -43,7 +54,7 @@ const SettingMenuListWrapper = styled.button`
   }
 
   @media all and (max-width: 767px) {
-    padding: 18px 25px 18px 25px;
+    padding: 14px 21px 14px 25px;
   }
 `
 
