@@ -5,17 +5,19 @@ interface IChoiceChips {
   chipText: string
   _disabled?: boolean
   _margin?: string
+  _active?: boolean
+  _onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const ChoiceChips = ({ chipText, _disabled = false, _margin }: IChoiceChips) => {
+const ChoiceChips = ({ chipText, _disabled = false, _margin, _active = false, _onClick }: IChoiceChips) => {
   return (
-    <ChoiceChipsComponent _margin={_margin} disabled={_disabled}>
+    <ChoiceChipsComponent _margin={_margin} disabled={_disabled} _active={_active} onClick={_onClick}>
       {chipText}
     </ChoiceChipsComponent>
   )
 }
 
-const ChoiceChipsComponent = styled.button<{ _margin?: string }>`
+const ChoiceChipsComponent = styled.button<{ _margin?: string; _active: boolean }>`
   width: fit-content;
   height: fit-content;
   padding: 8px 12px;
@@ -43,6 +45,16 @@ const ChoiceChipsComponent = styled.button<{ _margin?: string }>`
   `}
 
   ${({ _margin }) => _margin != null && `margin: ${_margin};`}
+  ${({ _active, theme }) =>
+    _active &&
+    css`
+      background-color: ${theme.colors.side.side500};
+      color: ${theme.colors.side.side200};
+
+      &:hover {
+        color: ${theme.colors.side.side200};
+      }
+    `}
 `
 
 export default ChoiceChips
