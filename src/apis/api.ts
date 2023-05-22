@@ -12,10 +12,8 @@ export const KAKAO_USER_INFO_API = axios.create({
   baseURL: process.env.REACT_APP_KAKAO_USER_INFO_API_URL
 })
 
-// TODO: 서버와 연결 확인하기
 API.interceptors.request.use(function (config) {
-  const token = getCookie('access_token')
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/restrict-template-expressions
+  const token = getCookie('accessToken')
   config.headers.accessToken = token ?? ''
 
   return config
