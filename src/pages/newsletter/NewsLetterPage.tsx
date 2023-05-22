@@ -94,7 +94,7 @@ const NewsLetterPage = () => {
 
       <NewsLetterForm>
         <Input label="이메일 주소" _placeholder="이메일을 입력해주세요." _value={email} setValue={setEmail} />
-        <Input label="성함" _placeholder="성함을 입력해주세요." _value={name} setValue={setName} _margin="48px 0px" />
+        <Input label="성함" _placeholder="성함을 입력해주세요." _value={name} setValue={setName} _margin="28px 0px" />
 
         <NewsLetterFunnel>
           <style.TextSpan typo="h6" textColor="black" _margin="0px 10px">
@@ -118,6 +118,10 @@ const NewsLetterPage = () => {
               {
                 label: '그 외 광고',
                 value: 'ad'
+              },
+              {
+                label: '축제 부스',
+                value: 'festival'
               },
               {
                 label: '기타',
