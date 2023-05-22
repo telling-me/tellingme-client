@@ -5,13 +5,19 @@ import 'styles/global.css'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 // router
-import { PageRouter } from './pages'
+import { PageRouter, RouteChangeTracker } from './pages'
+
+// vercel web analytics
+import { Analytics } from '@vercel/analytics/react'
 
 function App() {
+  // google analytics 4
+  RouteChangeTracker()
   return (
     <>
       <PageRouter />
       <ReactQueryDevtools initialIsOpen={false} />
+      <Analytics />
     </>
   )
 }
