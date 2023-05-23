@@ -11,7 +11,6 @@ const Toggle = ({
   leftColor = 'side400',
   rightColor = 'logo',
   _disabled = false,
-  _margin,
   setValue,
   _onClick = () => {}
 }: IToggle) => {
@@ -21,7 +20,6 @@ const Toggle = ({
         setValue(!value)
         _onClick()
       }}
-      _margin={_margin}
     >
       {label && Array.isArray(label) && !value && (
         <style.TextSpan typo="c" textColor="gray8">

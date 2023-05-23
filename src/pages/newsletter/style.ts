@@ -23,6 +23,16 @@ export const NewsLetterHeader = styled.div`
   max-width: 425px;
 `
 
+export const NewsLetterHr = styled.div`
+  width: 100%;
+  max-width: 425px;
+  height: 0px;
+
+  margin: 36px 0px;
+  border: 1px solid #e6e4e2;
+  border-radius: 8px;
+`
+
 export const NewsLetterForm = styled.div`
   display: flex;
   flex-direction: column;

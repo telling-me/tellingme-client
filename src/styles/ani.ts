@@ -1,10 +1,11 @@
 import { Theme } from 'styles/DefaultTheme'
 
-// modal
-export const modalAni = {
-  init: { opacity: 0 },
-  ani: { opacity: 1 },
-  exit: { opacity: 0 }
+// main app
+// TODO: 위 아래 전환 슬라이드 애니메이션 추가 필요
+export const AppAni = {
+  init: { y: '-100%', transition: { type: 'spring', duration: 0.4 } },
+  ani: { y: 0, transition: { type: 'spring', duration: 0.4 } },
+  exit: { y: '100%', transition: { type: 'spring', duration: 0.4 } }
 }
 
 // landing

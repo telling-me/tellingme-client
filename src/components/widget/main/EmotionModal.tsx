@@ -8,13 +8,10 @@ import useQuestionStore from 'stores/useQuestionStore'
 // component
 import { Button } from 'components/core'
 
-// ani
-import { modalAni } from 'styles/ani'
-
 const EmotionModal = () => {
   const { setIsEmotionModal } = useQuestionStore()
   return (
-    <ModalWrapper flex="center" variants={modalAni} initial="init" animate="ani" exit="exit">
+    <ModalWrapper flex="center">
       <ModalInnerWrapper flex="between" direction="column">
         <style.Grid flex="center" direction="column" _gap="8px">
           <style.TextP typo="b1">오늘의 감정을 떠올려 보아요</style.TextP>
@@ -61,10 +58,6 @@ const ModalWrapper = styled(style.Grid)`
   z-index: 9500;
   background-color: rgba(24, 24, 24, 0.28);
   backdrop-filter: blur(6px);
-
-  @media all and (max-width: 767px) {
-    align-items: end;
-  }
 `
 
 const ModalInnerWrapper = styled(style.Grid)`
@@ -73,14 +66,6 @@ const ModalInnerWrapper = styled(style.Grid)`
   background-color: ${({ theme }) => theme.colors.side.side100};
   border-radius: 20px;
   padding: 42px 20px;
-  transition: 0.2s;
-
-  @media all and (max-width: 767px) {
-    width: 100%;
-    height: 494px;
-    padding: 42px 20px 8px 20px;
-    border-radius: 20px 20px 0 0;
-  }
 `
 
 const Emotion = styled(style.Grid)`
@@ -94,12 +79,11 @@ const Emotion = styled(style.Grid)`
 `
 
 const EmotionGridWrapper = styled(style.Grid)`
-  max-width: 264px;
-  height: 284px;
-  display: grid;
-  justify-items: center;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  width: 264px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 48px;
+  border-radius: 8px;
 `
 
 export default EmotionModal

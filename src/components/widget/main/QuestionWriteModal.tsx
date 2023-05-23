@@ -5,7 +5,7 @@ import style from 'styles/styled-components/styled'
 import useQuestionStore from 'stores/useQuestionStore'
 
 // components
-import { Button, Modal, Toggle } from 'components/core'
+import { Button, Toggle } from 'components/core'
 
 // assets
 import Icon from 'assets/icons'
@@ -21,13 +21,12 @@ const QuestionWriteModal = () => {
   const { data: { data: answer = null } = {} } = useGetTodayAnswerQuery()
   const { data: { data: question = null } = {} } = useGetTodayQuestionQuery()
 
-  const [cancel, setCancel] = useState<boolean>(false)
-  const [text, setText] = useState<string>(answer !== null && answer?.status !== 4002 ? answer?.data : '')
+  const [text, setText] = useState<string>(answer?.status !== 4002 ? answer?.data : '')
   const [shareToggle, setShareToggle] = useState<boolean>(false)
 
-  // 감정 선택 모달
+  // 감정 선택
   useEffect(() => {
-    setIsEmotionModal(true)
+    // setIsEmotionModal(true)
   }, [])
 
   const handlePressComplete = () => {
@@ -43,120 +42,74 @@ const QuestionWriteModal = () => {
   }
 
   return (
-    <>
-      <Modal>
-        <ModalWrapper flex="center" _alignItems="start">
-          <ModalInnerWrapper flex="start" direction="column" _height="100%">
-            <ModalHeader flex="between">
-              <style.Grid _width="56px" _height="56px" />
-              <style.Grid
-                flex="center"
-                _width="max-content"
-                onClick={() => {
-                  setIsEmotionModal(true)
-                }}
-              >
-                <Icon.Bubble width="56px" height="56px" />
-              </style.Grid>
-              <Button
-                icon="close"
-                contentType="icon"
-                buttonType="noFilled"
-                _onClick={() => {
-                  setCancel(true)
-                }}
-                iconColor="gray6"
-                iconSize="medium"
-              />
-            </ModalHeader>
-            <QuestionWrapper flex="start" direction="column" _gap="18px">
-              <style.Grid flex="start" direction="column" _gap="10px">
-                <style.TextP typo="h6" textColor="logo" textAlign="center" wordBreak="keep-all">
-                  {question?.title}
-                </style.TextP>
-
-                <style.TextP typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
-                  {question?.phrase}
-                </style.TextP>
-              </style.Grid>
-              <style.TextP typo="c" textColor="side500" textAlign="center">
-                {`${question?.date[0] as string}년 ${question?.date[1] as string}월 ${question?.date[2] as string}일`}
-              </style.TextP>
-            </QuestionWrapper>
-            <StrikeThrough />
-            <AnswerTextArea
-              placeholder="여기에 기록해주세요!"
-              value={text}
-              maxLength={500}
-              onChange={(e) => {
-                setText(e.target.value)
-              }}
-            />
-            <FooterWrapper flex="start" direction="column">
-              <style.Grid flex="end" _height="14px">
-                <style.TextSpan typo="c_b" textColor="gray6">
-                  {text?.length} / 500
-                </style.TextSpan>
-              </style.Grid>
-              <style.Grid flex="between" _alignItems="start" _padding="10px 0 0 0 ">
-                <Toggle label={['나혼자 보기', '타인과 공유']} value={shareToggle} setValue={setShareToggle} />
-                <Button
-                  buttonType="noFilled"
-                  contentType="text"
-                  text="완료"
-                  _height="100%"
-                  textColor={text?.length < 4 ? 'gray6' : 'logo'}
-                  _disabled={text?.length < 4}
-                  _onClick={handlePressComplete}
-                />
-              </style.Grid>
-            </FooterWrapper>
-          </ModalInnerWrapper>
-        </ModalWrapper>
-      </Modal>
-      {cancel && (
-        <Modal _width="100%" _maxWidth="325px" _height="174px" _borderRadius="20px" _padding="30px 20px 20px 20px">
-          <style.Grid flex="between" direction="column" _height="100%">
-            <style.Grid flex="center" direction="column" _gap="8px" _alignItems="center">
-              <style.TextP typo="b1" textColor="black">
-                작성을 취소하고 나가시겠어요?
-              </style.TextP>
-              <style.TextP typo="b2" textColor="gray7">
-                작성한 답변은 초기화돼요
-              </style.TextP>
-            </style.Grid>
-            <style.Grid flex="between">
-              <Button
-                _width="135px"
-                _height="55px"
-                buttonType="tertiary"
-                contentType="text"
-                textColor="logo"
-                text="아니오"
-                _onClick={() => {
-                  setCancel(false)
-                }}
-              ></Button>
-              <Button
-                _width="135px"
-                _height="55px"
-                buttonType="secondary"
-                contentType="text"
-                textColor="logo"
-                text="나갈래요"
-                _onClick={() => {
-                  setIsWriteModal(false)
-                }}
-              ></Button>
-            </style.Grid>
+    <ModalWrapper flex="center" _alignItems="start">
+      <ModalInnerWrapper flex="start" direction="column" _height="100%">
+        <ModalHeader flex="between">
+          <style.Grid _width="56px" _height="56px" />
+          <style.Grid
+            flex="center"
+            onClick={() => {
+              setIsEmotionModal(true)
+            }}
+          >
+            <Icon.Bubble width="56px" height="56px" />
           </style.Grid>
-        </Modal>
-      )}
-    </>
+          <Button
+            icon="close"
+            contentType="icon"
+            buttonType="noFilled"
+            _onClick={() => {
+              setIsWriteModal(false)
+            }}
+            iconColor="gray6"
+            iconSize="medium"
+          />
+        </ModalHeader>
+        <QuestionWrapper flex="start" direction="column" _gap="18px">
+          <style.Grid flex="start" direction="column" _gap="10px">
+            <style.TextP typo="h6" textColor="logo" textAlign="center" wordBreak="keep-all">
+              {question?.title}
+            </style.TextP>
+
+            <style.TextP typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
+              {question?.phrase}
+            </style.TextP>
+          </style.Grid>
+          <style.TextP typo="c" textColor="side500" textAlign="center">
+            {`${question?.date[0] as string}년 ${question?.date[1] as string}월 ${question?.date[2] as string}일`}
+          </style.TextP>
+        </QuestionWrapper>
+        <StrikeThrough />
+        <AnswerTextArea
+          placeholder="여기에 기록해주세요!"
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value)
+          }}
+        />
+        <FooterWrapper flex="start" direction="column">
+          <style.Grid flex="end" _height="14px">
+            <style.TextSpan typo="c_b">{text.length} / 500</style.TextSpan>
+          </style.Grid>
+          <style.Grid flex="between" _alignItems="start" _padding="10px 0 0 0 ">
+            <Toggle label={['나만 보기', '타인과 공유']} value={shareToggle} setValue={setShareToggle} />
+            <Button
+              buttonType="noFilled"
+              contentType="text"
+              text="완료"
+              textColor="logo"
+              _disabled={text.length < 4}
+              _onClick={handlePressComplete}
+            />
+          </style.Grid>
+        </FooterWrapper>
+      </ModalInnerWrapper>
+    </ModalWrapper>
   )
 }
 
 const ModalWrapper = styled(style.Grid)`
+  position: absolute;
   width: 100vw;
   height: 100vh;
   z-index: 9000;

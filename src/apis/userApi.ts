@@ -1,4 +1,4 @@
-import { API, KAKAO_TOKEN_API, KAKAO_USER_INFO_API } from 'apis/api'
+import { API, KAKAO_TOKEN_API, KAKAO_USER_INFO_API } from 'configs/axios'
 
 type SocialLoginType = 'kakao' | 'apple'
 

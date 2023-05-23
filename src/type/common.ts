@@ -92,6 +92,5 @@ export type IconType =
   | 'setting'
   | 'rows'
   | 'columns'
-  | 'caretright'
 
 export type DropdownType = 'year' | 'month' | 'day' | 'mbti'
