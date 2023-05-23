@@ -50,6 +50,8 @@ export const InputInnerFrame = styled.input<{ isError?: boolean }>`
   width: 100%;
   padding: 20px 30px;
 
+  ${({ theme }) => theme.typo.body.b1}
+
   &::placeholder {
     color: ${(props) => props.theme.colors.gray.gray4};
   }
