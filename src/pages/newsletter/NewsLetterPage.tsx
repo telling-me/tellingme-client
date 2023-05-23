@@ -121,6 +121,10 @@ const NewsLetterPage = () => {
                 value: 'ad'
               },
               {
+                label: '축제 부스',
+                value: 'festival'
+              },
+              {
                 label: '기타',
                 value: 'etc'
               }
