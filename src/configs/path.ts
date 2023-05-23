@@ -15,5 +15,8 @@ export enum PAGE_URL {
 
   // NewsLetter
   NewsLetter = 'newsletter',
-  NewsLetterComplete = 'complete'
+  NewsLetterComplete = 'complete',
+
+  // Setting
+  Setting = 'setting'
 }

@@ -79,8 +79,10 @@ const Icon = ({ icon, iconSize, iconColor, iconShadow, _margin, _onClick }: IIco
         <Icons.Setting width={size} height={size} stroke={color} />
       ) : icon === 'rows' ? (
         <Icons.Rows width={size} height={size} stroke={color} />
+      ) : icon === 'columns' ? (
+        <Icons.Columns width={size} height={size} stroke={color} />
       ) : (
-        icon === 'columns' && <Icons.Columns width={size} height={size} stroke={color} />
+        icon === 'caretright' && <Icons.CaretRight width={size} height={size} stroke={color} />
       )}
     </IconComponent>
   )

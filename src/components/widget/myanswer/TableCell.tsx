@@ -38,18 +38,19 @@ const CellInnerWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+  transition: 0.2s;
 
-  @media all and (min-width: 1024px) {
+  @media all and (min-width: 1200px) {
     max-width: 1200px;
     margin: 0 auto;
   }
 
-  @media all and (min-width: 768px) and (max-width: 1023px) {
-    margin: 0px 60px;
+  @media all and (min-width: 768px) and (max-width: 1199px) {
+    padding: 0px 60px;
   }
 
   @media all and (max-width: 767px) {
-    margin: 0px 25px;
+    padding: 0px 25px;
   }
 `
 

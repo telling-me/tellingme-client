@@ -1,7 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 
+// type
 import type { IDropdown } from './type'
+
+// component
 import {
   DropdownButton,
   DropdownComponent,
@@ -10,7 +12,6 @@ import {
   DropdownList,
   DropdownSelectedField
 } from './style'
-
 import style from 'styles/styled-components/styled'
 import { Icon } from 'components'
 

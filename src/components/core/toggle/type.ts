@@ -7,6 +7,7 @@ export interface IToggle {
   rightColor?: ColorType
   _disabled?: boolean
   value: boolean
+  _margin?: string
   setValue: Dispatch<SetStateAction<boolean>>
   _onClick?: () => void
 }
