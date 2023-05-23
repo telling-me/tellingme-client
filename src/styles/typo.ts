@@ -81,7 +81,7 @@ const typo: ITypo = {
       `,
     h6_b: `
       font-weight: ${font.weight.bold};
-      font-size: ${font.size.h6};
+      font-size${font.size.h6};
       line-height: ${font.lineHeight.h6};
       `,
     h6: `

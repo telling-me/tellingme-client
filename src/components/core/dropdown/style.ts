@@ -29,7 +29,7 @@ export const DropdownButton = styled.button<{ dropdownSize: DropdownSizeType }>`
         `
       : css`
           border-radius: 18px;
-          padding: 16.5px 20px;
+          padding: 16.5px 30px;
         `}
 `
 
@@ -38,7 +38,7 @@ export const DropdownInnerWrapper = styled.div<{ dropdownSize: DropdownSizeType 
   flex-direction: row;
   align-items: center;
 
-  gap: ${({ dropdownSize }) => (dropdownSize === 'small' ? '8px' : '4px')};
+  gap: ${({ dropdownSize }) => (dropdownSize === 'small' ? '8px' : '10px')};
 `
 
 export const DropdownSelectedField = styled.div`
@@ -50,8 +50,6 @@ export const DropdownSelectedField = styled.div`
 export const DropdownList = styled.div<{ dropdownSize: DropdownSizeType; listLength: string }>`
   display: flex;
   flex-direction: column;
-
-  z-index: 100;
 
   position: absolute;
   bottom: ${({ listLength }) => `-${parseInt(listLength) + 8}px`};
@@ -71,7 +69,7 @@ export const DropdownItem = styled.button<{ dropdownSize: DropdownSizeType }>`
   text-align: left;
   cursor: pointer;
 
-  padding: ${({ dropdownSize }) => (dropdownSize === 'small' ? '12px 30px' : '17.5px 20px')};
+  padding: ${({ dropdownSize }) => (dropdownSize === 'small' ? '12px 30px' : '17.5px 30px')};
 
   &:hover,
   &:focus {

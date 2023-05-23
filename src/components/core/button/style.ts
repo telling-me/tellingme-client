@@ -61,8 +61,6 @@ export const ButtonComponent = styled.button<{
   align-items: center;
   border-radius: 20px;
 
-  cursor: pointer;
-
   &:hover {
     cursor: pointer;
   }

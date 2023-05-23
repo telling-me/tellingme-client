@@ -1,7 +1,6 @@
-import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const ModalBackground = styled(motion.div)`
+export const ModalBackground = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -16,7 +15,6 @@ export const ModalBackground = styled(motion.div)`
 
   background: rgba(24, 24, 24, 0.28);
   backdrop-filter: blur(6px);
-  z-index: 9000;
 `
 
 export const ModalComponent = styled.div<{

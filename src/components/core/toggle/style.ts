@@ -1,11 +1,9 @@
 import styled from 'styled-components'
 
-export const ToggleComponent = styled.div<{ _margin?: string }>`
+export const ToggleComponent = styled.div`
   ${({ theme }) => theme.common.flexStart}
   gap: 10px;
   cursor: pointer;
-
-  ${({ _margin }) => _margin != null && `margin: ${_margin};`}
 `
 export const ToggleWrapper = styled.div<{ checked: boolean }>`
   width: 40px;
