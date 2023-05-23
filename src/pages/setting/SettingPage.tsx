@@ -26,7 +26,7 @@ const SettingPage = () => {
         <SettingWrapper>
           <SettingHeader />
 
-          <SettingMain>
+          <SettingMain isMenu={isMenu}>
             <SettingMenu setPageNumber={setPageNumber} setIsMenu={setIsMenu} />
           </SettingMain>
         </SettingWrapper>
@@ -51,12 +51,20 @@ const SettingWrapper = styled.div`
   }
 `
 
-const SettingMain = styled.div`
+const SettingMain = styled.div<{ isMenu?: boolean }>`
   display: flex;
 
   @media all and (min-width: 1200px) {
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+  @media all and (min-width: 768px) {
+    height: calc(100vh - 66px);
+  }
+
+  @media all and (max-width: 767px) {
+    height: ${({ isMenu }) => (isMenu != null ? 'calc(100vh - 66px)' : '100vh')};
   }
 `
 

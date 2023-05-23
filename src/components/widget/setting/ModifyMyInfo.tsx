@@ -56,17 +56,9 @@ const ModifyMyInfoWrapper = styled.div`
   width: 100%;
   max-width: 429px;
 
-  overflow: scroll;
+  overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
-  }
-
-  @media all and (min-width: 768px) {
-    height: calc(100vh - 164px);
-  }
-
-  @media all and (max-width: 767px) {
-    height: calc(100vh - 108px);
   }
 `
 

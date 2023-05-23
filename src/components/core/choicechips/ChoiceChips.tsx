@@ -23,6 +23,8 @@ const ChoiceChipsComponent = styled.button<{ _margin?: string; _active: boolean 
   padding: 8px 12px;
   border-radius: 20px;
 
+  cursor: pointer;
+
   ${(props) => css`
     background-color: ${props.theme.colors.side.side200};
     color: ${props.theme.colors.gray.gray7};

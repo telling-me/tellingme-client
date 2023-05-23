@@ -9,6 +9,7 @@ import style from 'styles/styled-components/styled'
 import { Toggle } from 'components'
 
 import SettingMenuList from './SettingMenuList'
+import ServiceInfo from './ServiceInfo'
 
 interface ISettingMenu {
   setPageNumber: Dispatch<SetStateAction<number>>
@@ -49,11 +50,16 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
       })}
 
       <SettingMenuList text="로그아웃" icon={false} _onClick={() => {}} />
+
+      <ServiceInfo />
     </SettingMenuWrapper>
   )
 }
 
 const SettingMenuWrapper = styled.div`
+  ${({ theme }) => theme.common.flexCenter}
+  flex-direction: column;
+
   width: 100%;
   height: calc(100vh-64px);
 
@@ -78,10 +84,9 @@ const PushAlarmWrapper = styled.div`
   @media all and (min-width: 1200px) {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 18px 60px 18px 60px;
   }
 
-  @media all and (min-width: 768px) and (max-width: 1199px) {
+  @media all and (min-width: 768px) {
     padding: 18px 60px 18px 60px;
   }
 

@@ -28,7 +28,7 @@ const SettingMenuListWrapper = styled.button`
   align-items: center;
 
   width: 100%;
-  height: 60px
+  height: 60px;
 
   cursor: pointer;
 
@@ -39,7 +39,7 @@ const SettingMenuListWrapper = styled.button`
   p {
     display: flex;
     align-items: center;
-    
+
     height: 32px;
   }
 
