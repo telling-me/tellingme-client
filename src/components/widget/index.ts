@@ -4,6 +4,9 @@ export { default as Header } from './common/Header'
 export { default as TabBar } from './common/TabBar'
 export { default as Footer } from './common/Footer'
 
+// landing
+export { default as LandingBrand } from './landing/LandingBrand'
+
 // main
 export { default as Question } from './main/Question'
 export { default as ContinuousDate } from './main/ContinuousDate'

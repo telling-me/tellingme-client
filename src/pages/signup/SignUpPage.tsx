@@ -115,7 +115,7 @@ const SignUpPage = () => {
             buttonType="noFilled"
             contentType="text"
             text="건너뛰기"
-            textSize={(windowSize as number) > 767 ? 'h6' : 'b1'}
+            textSize={windowSize > 767 ? 'h6' : 'b1'}
             textColor="logo"
             textHoverColor="primary200"
             _margin="0px 0px 0px auto"
@@ -129,7 +129,7 @@ const SignUpPage = () => {
       {step !== 7 && <ProgressBar percent={`${(99 / 7) * (step + 1)}`} />}
 
       {step !== 7 &&
-        ((windowSize as number) < 1024 ? (
+        (windowSize < 1024 ? (
           <style.TextSpan
             typo="h4"
             textColor="black"
@@ -140,7 +140,7 @@ const SignUpPage = () => {
             {stepTextData[step]}
           </style.TextSpan>
         ) : (
-          (windowSize as number) >= 1024 && (
+          windowSize >= 1024 && (
             <WebMoveButtonWrapper
               _margin={
                 [0, 1, 5, 6].includes(step)
@@ -428,7 +428,7 @@ const SignUpPage = () => {
         )
       }
 
-      {(windowSize as number) < 1024 && step !== 7 && (
+      {windowSize < 1024 && step !== 7 && (
         <MoveButtonWrapper>
           <Button
             buttonType="secondary"
