@@ -108,7 +108,7 @@ const SignUpPage = () => {
   return (
     <SignUpWrapper>
       <SignUpHeader>
-        <BasicIcon.Logo _margin="12px 0px 12px 0px" />
+        <BasicIcon.Logo width="81" height="34" _margin="12px 0px 12px 0px" />
 
         {[4, 5, 6].includes(step) && (
           <Button

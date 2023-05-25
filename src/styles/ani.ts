@@ -33,12 +33,12 @@ export const landingSubAni = {
 export const landingCircleAni = {
   init: {
     scale: 0,
-    background: `${Theme.gradient.default_gradient()} padding-box, linear-gradient(51.82deg, #7cefa7 1.24%, #8fd3f4 89.34%) border-box`
+    background: `${Theme.gradient.default_gradient()} padding-box, ${Theme.gradient.default_gradient()} border-box`
   },
   ani: (i: number) => ({
     scale: 1,
     rotateZ: 360,
-    background: `linear-gradient(#fff,#fff) padding-box, linear-gradient(51.82deg, #7cefa7 1.24%, #8fd3f4 89.34%) border-box`,
+    background: `linear-gradient(#fffdfa,#fffdfa) padding-box, ${Theme.gradient.default_gradient()} border-box`,
     transition: {
       delay: i * 0.2,
       duration: 1,
