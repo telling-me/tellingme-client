@@ -8,9 +8,14 @@ import { SelectInnerWrapper } from './style'
 interface IModifyGender {
   gender: string
   setGender: React.Dispatch<React.SetStateAction<string>>
+  canChangeGender: boolean
 }
 
-const ModifyGender = ({ gender, setGender }: IModifyGender) => {
+const ModifyGender = ({ gender, setGender, canChangeGender }: IModifyGender) => {
+  const handleClick = (value: string) => {
+    setGender(value)
+  }
+
   return (
     <>
       <style.TextP typo="h6" textColor="black" _margin="0px 0px 0px 10px">
@@ -21,8 +26,24 @@ const ModifyGender = ({ gender, setGender }: IModifyGender) => {
       </style.TextP>
 
       <SelectInnerWrapper>
-        <ChoiceChips chipText="남성" _active={gender === 'male'} />
-        <ChoiceChips chipText="여성" _active={gender === 'female'} />
+        <ChoiceChips
+          chipText="남성"
+          _active={gender === 'male'}
+          _onClick={() => {
+            if (canChangeGender) {
+              handleClick('male')
+            }
+          }}
+        />
+        <ChoiceChips
+          chipText="여성"
+          _active={gender === 'female'}
+          _onClick={() => {
+            if (canChangeGender) {
+              handleClick('female')
+            }
+          }}
+        />
       </SelectInnerWrapper>
     </>
   )

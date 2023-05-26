@@ -12,9 +12,10 @@ interface IModifyBirth {
   setMonth: React.Dispatch<React.SetStateAction<string | undefined>>
   day: string | undefined
   setDay: React.Dispatch<React.SetStateAction<string | undefined>>
+  canChangeBirthDate: boolean
 }
 
-const ModifyBirth = ({ year, setYear, month, setMonth, day, setDay }: IModifyBirth) => {
+const ModifyBirth = ({ year, setYear, month, setMonth, day, setDay, canChangeBirthDate }: IModifyBirth) => {
   const birthDateData: Array<{
     defaultText: string
     data: string[] | number[]
@@ -60,6 +61,8 @@ const ModifyBirth = ({ year, setYear, month, setMonth, day, setDay }: IModifyBir
               data={data.data}
               _selected={data._selected}
               _setSelected={data._setSelected}
+              direction="up"
+              _disabled={!canChangeBirthDate}
             />
           )
         })}

@@ -88,5 +88,8 @@ export const userApi = {
         headers: { 'Content-Type': 'application/json' }
       }
     )
+  },
+  getUserInfo: async () => {
+    return await API.get('/api/user')
   }
 }
