@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 
 // components
 import Icon from 'assets/icons'
@@ -11,28 +11,9 @@ import { landingCircleAni, landingLogoAni, landingBubbleAni, landingSubAni } fro
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
 
-// store
-import useCommonStore from 'stores/useCommonStore'
-
 const LandingBrand = () => {
   const windowSize = useWindowSize()
   const landingRef = useRef<HTMLDivElement>(null)
-
-  // store
-  const { landingScrollY } = useCommonStore()
-
-  // scroll event
-  useEffect(() => {
-    const wheelHandler = (e: any) => {
-      e.preventDefault()
-      // 스크롤을 내릴 때 landingScrollY로 이동
-      if (e.deltaY > 0) window.scrollTo({ top: landingScrollY, behavior: 'smooth' })
-    }
-    landingRef.current?.addEventListener('wheel', wheelHandler, { passive: false })
-    return () => {
-      landingRef.current?.removeEventListener('wheel', wheelHandler)
-    }
-  }, [landingScrollY])
 
   return (
     <LandingWrapper ref={landingRef}>
@@ -93,6 +74,7 @@ const LandingWrapper = styled(motion.div)`
   align-items: center;
   position: relative;
   overflow: hidden;
+  scroll-snap-align: start;
 `
 
 const LogoWrapper = styled(motion.div)`
