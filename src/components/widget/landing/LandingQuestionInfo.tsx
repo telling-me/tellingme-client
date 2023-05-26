@@ -40,7 +40,7 @@ const LandingQuestionInfo = () => {
     return () => {
       infoRef.current?.removeEventListener('wheel', wheelHandler)
     }
-  }, [])
+  }, [landingScrollY])
 
   return (
     <QuestionInfo ref={infoRef}>

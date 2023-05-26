@@ -32,7 +32,7 @@ const LandingBrand = () => {
     return () => {
       landingRef.current?.removeEventListener('wheel', wheelHandler)
     }
-  }, [])
+  }, [landingScrollY])
 
   return (
     <LandingWrapper ref={landingRef}>
