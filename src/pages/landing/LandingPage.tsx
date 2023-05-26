@@ -1,9 +1,14 @@
 import React from 'react'
 
 // components
-import { LandingBrand } from 'components'
+import { LandingBrand, LandingQuestionInfo } from 'components'
 
 const LandingPage = () => {
-  return <LandingBrand />
+  return (
+    <>
+      <LandingBrand />
+      <LandingQuestionInfo />
+    </>
+  )
 }
 export default LandingPage

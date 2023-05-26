@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 // components
 import Icon from 'assets/icons'
@@ -7,12 +7,35 @@ import styled from 'styled-components'
 // animation
 import { motion } from 'framer-motion'
 import { landingCircleAni, landingLogoAni, landingBubbleAni, landingSubAni } from 'styles/ani'
+
+// hooks
 import useWindowSize from 'hooks/useWindowSize'
+
+// store
+import useCommonStore from 'stores/useCommonStore'
 
 const LandingBrand = () => {
   const windowSize = useWindowSize()
+  const landingRef = useRef<HTMLDivElement>(null)
+
+  // store
+  const { landingScrollY } = useCommonStore()
+
+  // scroll event
+  useEffect(() => {
+    const wheelHandler = (e: any) => {
+      e.preventDefault()
+      // 스크롤을 내릴 때 landingScrollY로 이동
+      if (e.deltaY > 0) window.scrollTo({ top: landingScrollY, behavior: 'smooth' })
+    }
+    landingRef.current?.addEventListener('wheel', wheelHandler, { passive: false })
+    return () => {
+      landingRef.current?.removeEventListener('wheel', wheelHandler)
+    }
+  }, [])
+
   return (
-    <LandingWrapper>
+    <LandingWrapper ref={landingRef}>
       <AbsoluteLogoBubble variants={landingBubbleAni} initial="init" animate="ani">
         <Icon.Bubble width={windowSize.width / 2} />
       </AbsoluteLogoBubble>
@@ -65,10 +88,11 @@ const LandingBrand = () => {
 
 const LandingWrapper = styled(motion.div)`
   display: flex;
-  height: 100%;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: hidden;
 `
 
 const LogoWrapper = styled(motion.div)`

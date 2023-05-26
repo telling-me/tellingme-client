@@ -6,6 +6,8 @@ export interface ICommonFilter {
 export interface ICommonStore {
   prevPage: number
   setPrevPage: (value: number) => void
+  landingScrollY: number
+  setLandingScrollY: (value: number) => void
 }
 
 export interface IQuestionStore {

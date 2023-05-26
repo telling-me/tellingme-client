@@ -26,7 +26,8 @@ export const landingSubAni = {
   ani: (i: number) => ({
     scale: 1,
     rotateZ: 360,
-    transition: { delay: i * 0.2, type: 'spring' }
+    // transition: { delay: i * 0.2, type: 'spring' }
+    transition: { type: 'spring' }
   })
 }
 

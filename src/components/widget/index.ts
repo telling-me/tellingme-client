@@ -6,6 +6,7 @@ export { default as Footer } from './common/Footer'
 
 // landing
 export { default as LandingBrand } from './landing/LandingBrand'
+export { default as LandingQuestionInfo } from './landing/LandingQuestionInfo'
 
 // main
 export { default as Question } from './main/Question'

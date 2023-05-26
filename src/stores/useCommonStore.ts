@@ -12,6 +12,12 @@ const useCommonStore = create<ICommonStore>()(
         set((state) => {
           state.prevPage = value
         })
+      },
+      landingScrollY: 0,
+      setLandingScrollY: (value) => {
+        set((state) => {
+          state.landingScrollY = value
+        })
       }
     }))
   )
