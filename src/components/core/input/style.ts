@@ -25,6 +25,7 @@ export const InputOuterFrame2 = styled.div<{ isVisible: boolean; _value: string 
 
   svg {
     visibility: hidden;
+    z-index: 1;
   }
 
   ${({ isVisible }) =>
@@ -61,7 +62,8 @@ export const InputInnerFrame = styled.input<{ isError?: boolean }>`
   border-radius: 18px;
 
   &:focus {
-    outline: 2px solid ${(props) => props.theme.colors.side.side400};
+    outline: none;
+    border: 2px solid ${(props) => props.theme.colors.side.side400};
   }
 
   &:disabled {
