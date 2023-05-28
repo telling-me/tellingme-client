@@ -24,8 +24,6 @@ const ModifyPurpose = ({ purpose, setPurpose }: IModifyPurpose) => {
     }
   }
 
-  console.log(purpose)
-
   return (
     <>
       <style.TextP typo="h6" textColor="black" _margin="0px 0px 0px 10px">

@@ -47,14 +47,18 @@ export const DropdownSelectedField = styled.div`
   width: 100%;
 `
 
-export const DropdownList = styled.div<{ dropdownSize: DropdownSizeType; listLength: string }>`
+export const DropdownList = styled.div<{
+  dropdownSize: DropdownSizeType
+  listLength: string
+  direction: 'up' | 'down'
+}>`
   display: flex;
   flex-direction: column;
 
   z-index: 100;
 
   position: absolute;
-  bottom: ${({ listLength }) => `-${parseInt(listLength) + 8}px`};
+  // bottom: ${({ listLength }) => `-${parseInt(listLength) + 8}px`};/
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
@@ -65,6 +69,9 @@ export const DropdownList = styled.div<{ dropdownSize: DropdownSizeType; listLen
   max-height: 208px;
   background-color: ${(props) => props.theme.colors.side.side200};
   border-radius: ${({ dropdownSize }) => (dropdownSize === 'small' ? '16px' : '18px')};
+
+  ${({ direction, listLength }) =>
+    direction === 'up' ? `top: -${parseInt(listLength) + 8}px` : `bottom: -${parseInt(listLength) + 8}px;`}
 `
 
 export const DropdownItem = styled.button<{ dropdownSize: DropdownSizeType }>`

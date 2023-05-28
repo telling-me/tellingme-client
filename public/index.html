@@ -15,6 +15,8 @@
     <meta name="appleid-signin-redirect-uri" content="http://localhost:3000/oauth/apple" />
     <meta name="appleid-signin-state" content="signin" />
     <meta name="appleid-signin-use-popup" content="true" />
+    <!-- safari -->
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
     <!-- or false defaults to false -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -65,5 +67,10 @@
   </body>
   <style>
     @import url('//cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css');
+
+    html {
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+    }
   </style>
 </html>

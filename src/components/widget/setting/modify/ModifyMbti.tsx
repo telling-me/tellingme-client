@@ -19,7 +19,14 @@ const ModifyMbti = ({ mbti, setMbti }: IModifyMbti) => {
         mbti
       </style.TextP>
 
-      <Dropdown defaultText="mbti 선택" dropdownSize="large" data={mbtiData} _selected={mbti} _setSelected={setMbti} />
+      <Dropdown
+        defaultText="mbti 선택"
+        dropdownSize="large"
+        data={mbtiData}
+        _selected={mbti}
+        _setSelected={setMbti}
+        direction="up"
+      />
     </>
   )
 }
