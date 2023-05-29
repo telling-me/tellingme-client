@@ -11,23 +11,12 @@ import useWindowSize from 'hooks/useWindowSize'
 // utils
 import { mediaQuery } from 'utils/mediaQuery'
 
-const LandingEmotion = () => {
+const LandingAnswer = () => {
   const windowSize = useWindowSize()
+
   return (
-    <EmotionInfo>
-      <EmotionModal
-        _height="100%"
-        flex="center"
-        _padding={mediaQuery(windowSize.width) === 'desktop' ? '220px 0 0 550px' : '160px 0 0 0'}
-        _alignItems={mediaQuery(windowSize.width) === 'mobile' ? 'end' : 'center'}
-      >
-        {mediaQuery(windowSize.width) === 'mobile' ? (
-          <Icon.LandingEmotionModalMobile width={210} />
-        ) : (
-          <Icon.LandingEmotionModal width={425} />
-        )}
-      </EmotionModal>
-      <EmotionInfoWrapper
+    <AnswerWrapper>
+      <Grid
         flex="center"
         direction="column"
         _gap="32px"
@@ -44,7 +33,7 @@ const LandingEmotion = () => {
             }
             textColor="logo"
           >
-            오늘 하루,
+            매일 매일,
           </TextH1>
           <Grid
             flex="center"
@@ -62,7 +51,7 @@ const LandingEmotion = () => {
               }
               textColor="logo"
             >
-              느꼈던 마음을
+              기록한 답변을 보며
             </TextH1>
             <TextH1
               typo={
@@ -74,7 +63,7 @@ const LandingEmotion = () => {
               }
               textColor="logo"
             >
-              뱁새티콘으로 표현해요
+              나를 되돌아봐요
             </TextH1>
           </Grid>
         </Grid>
@@ -95,7 +84,7 @@ const LandingEmotion = () => {
             }
             textColor="gray8"
           >
-            총 6가지 뱁새 감정티콘으로
+            꾸준히 기록은 나에 대해
           </TextH2>
           <TextH2
             typo={
@@ -107,60 +96,52 @@ const LandingEmotion = () => {
             }
             textColor="gray8"
           >
-            하루 감정을 정리해보세요
+            더 많은 걸 알게 해줘요!
           </TextH2>
         </Grid>
-      </EmotionInfoWrapper>
-      <EmotionBackground _width="100%">
-        {mediaQuery(windowSize.width) === 'mobile' ? (
-          <Icon.LandingEmotionLine width="100%" />
-        ) : (
-          <Icon.LandingEmotionBg width="100%" />
-        )}
-      </EmotionBackground>
-    </EmotionInfo>
+      </Grid>
+      <BackgroundBlur />
+      <Grid
+        flex="center"
+        _margin={mediaQuery(windowSize.width) === 'mobile' ? '60px 0 0' : '120px 0 0'}
+        direction={mediaQuery(windowSize.width) === 'desktop' ? 'row' : 'column-reverse'}
+        _gap="32px"
+      >
+        <QuestionSlide flex="center">
+          <Icon.LandingQuestionList width={mediaQuery(windowSize.width) === 'mobile' ? '232px' : '375px'} />
+        </QuestionSlide>
+        <AnswerSlide flex="start">
+          <Icon.LandingAnswer1 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '303px'} />
+          <Icon.LandingAnswer2 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '303px'} />
+        </AnswerSlide>
+      </Grid>
+    </AnswerWrapper>
   )
 }
 
 const { Grid, TextH1, TextH2 } = style
 
-const EmotionInfo = styled.div`
+const AnswerWrapper = styled.div`
   position: relative;
-
-  @media all and (min-width: 1200px) {
-    height: 976px;
-  }
-
-  @media all and (min-width: 768px) and (max-width: 1199px) {
-    height: 938px;
-  }
-
-  @media all and (max-width: 767px) {
-    height: 620px;
-  }
-  background-color: ${({ theme }) => theme.colors.side.side200};
 `
 
-const EmotionInfoWrapper = styled(Grid)`
-  position: relative;
-  z-index: 1;
+const QuestionSlide = styled(Grid)`
+  flex: 8 0 0;
 `
 
-const EmotionModal = styled(Grid)`
-  position: absolute;
-  z-index: 1;
+const AnswerSlide = styled(Grid)`
+  flex: 9 0 0;
+  svg {
+    flex-shrink: 0;
+  }
 `
 
-const EmotionBackground = styled(Grid)`
+const BackgroundBlur = styled.div`
+  width: 100%;
+  height: 109px;
   position: absolute;
   bottom: 0;
-  right: 0;
-  padding-left: 60px;
-
-  @media all and (max-width: 767px) {
-    padding-left: 0;
-    left: 0px;
-  }
+  background: linear-gradient(180deg, rgba(255, 253, 250, 0.2) 0%, #fffdfa 100%);
 `
 
-export default LandingEmotion
+export default LandingAnswer

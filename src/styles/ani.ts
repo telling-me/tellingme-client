@@ -1,3 +1,4 @@
+import { keyframes } from 'styled-components'
 import { Theme } from 'styles/DefaultTheme'
 
 // main app
@@ -25,9 +26,8 @@ export const landingSubAni = {
   init: { scale: 0 },
   ani: (i: number) => ({
     scale: 1,
-    rotateZ: 360,
-    // transition: { delay: i * 0.2, type: 'spring' }
-    transition: { type: 'spring' }
+    rotate: 360,
+    transition: { delay: 0.4, type: 'spring' }
   })
 }
 
@@ -38,7 +38,6 @@ export const landingCircleAni = {
   },
   ani: (i: number) => ({
     scale: 1,
-    rotateZ: 360,
     background: `linear-gradient(#fffdfa,#fffdfa) padding-box, ${Theme.gradient.default_gradient()} border-box`,
     transition: {
       delay: i * 0.2,
@@ -47,3 +46,33 @@ export const landingCircleAni = {
     }
   })
 }
+
+export const floatAni = keyframes`
+0%{
+		transform: translatey(0px);
+}
+50%{
+		transform: translatey(-10px);
+}
+100%{
+		transform: translatey(0px);
+}
+`
+
+export const rotateAni = keyframes`
+from {
+  transform: rotate(0deg);
+}
+to {
+  transform: rotate(360deg);
+}
+`
+
+export const rotateReverseAni = keyframes`
+from {
+  transform: rotate(0deg);
+}
+to {
+  transform: rotate(-360deg);
+}
+`

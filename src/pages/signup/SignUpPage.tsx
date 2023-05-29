@@ -26,12 +26,14 @@ import { Button, CheckBox, Dropdown, Input, ProgressBar, Icon } from 'components
 import style from 'styles/styled-components/styled'
 import BasicIcon from 'assets/icons'
 import useWindowSize from 'hooks/useWindowSize'
+import { useTheme } from 'styled-components'
 
 const SignUpPage = () => {
   const windowSize = useWindowSize().width
   const location = useLocation()
   const socialId = location.state.socialId
   const socialLoginType = location.state.socialLoginType
+  const theme = useTheme()
 
   const [step, setStep] = useState(0)
 
@@ -108,7 +110,7 @@ const SignUpPage = () => {
   return (
     <SignUpWrapper>
       <SignUpHeader>
-        <BasicIcon.Logo width="81" height="34" _margin="12px 0px 12px 0px" />
+        <BasicIcon.Logo fill={theme.colors.logo} width="81" height="34" _margin="12px 0px 12px 0px" />
 
         {[4, 5, 6].includes(step) && (
           <Button

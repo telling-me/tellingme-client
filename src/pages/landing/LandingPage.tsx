@@ -1,7 +1,14 @@
 import React from 'react'
 
 // components
-import { LandingBrand, LandingQuestionInfo, LandingEmotion } from 'components'
+import {
+  LandingBrand,
+  LandingQuestion,
+  LandingEmotion,
+  LandingAnswer,
+  LandingCatchPhrase,
+  LandingFooter
+} from 'components'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
@@ -10,9 +17,12 @@ const LandingPage = () => {
     <LandingWrapper>
       <LandingBrand />
       <LandingInfo>
-        <LandingQuestionInfo />
+        <LandingQuestion />
         <LandingEmotion />
+        <LandingAnswer />
+        <LandingCatchPhrase />
       </LandingInfo>
+      <LandingFooter />
     </LandingWrapper>
   )
 }
