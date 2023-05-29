@@ -61,6 +61,7 @@ const FooterWrapper = styled.div`
   padding: 25px 60px;
   background-color: ${({ theme }) => theme.colors.side.side200};
   scroll-snap-align: start;
+  ${({ theme }) => theme.common.flexCenter}
 
   @media all and (max-width: 767px) {
     padding: 25px;
