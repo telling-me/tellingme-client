@@ -25,6 +25,7 @@ import { Button, CheckBox, Dropdown, Input, ProgressBar, Icon } from 'components
 import style from 'styles/styled-components/styled'
 import BasicIcon from 'assets/icons'
 import useWindowSize from 'hooks/useWindowSize'
+import { requestPermission } from 'firebase-messaging-sw'
 
 const SignUpPage = () => {
   const windowSize = useWindowSize().width
@@ -478,6 +479,7 @@ const SignUpPage = () => {
               _disabled={mbti === undefined}
               _onClick={() => {
                 handleNextStep()
+                requestPermission()
               }}
             />
           )}

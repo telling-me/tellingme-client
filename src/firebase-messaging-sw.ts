@@ -19,7 +19,7 @@ if (firebase.apps.length === 0) {
 
 const messaging = firebase.messaging()
 
-function requestPermission() {
+export function requestPermission() {
   console.log('Requesting permission...')
 
   void Notification.requestPermission().then((permission) => {
@@ -47,5 +47,3 @@ function requestPermission() {
     console.log('Message received. ', payload)
   })
 }
-
-requestPermission()
