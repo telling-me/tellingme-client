@@ -91,5 +91,17 @@ export const userApi = {
   },
   getUserInfo: async () => {
     return await API.get('/api/user')
+  },
+  getUserNoti: async () => {
+    return await API.get('/api/user/notification')
+  },
+  postUserNoti: async () => {
+    return await API.post(
+      `/api/user/update/notification`,
+      {},
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
   }
 }

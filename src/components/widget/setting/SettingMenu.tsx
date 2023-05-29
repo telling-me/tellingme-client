@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // type
 import type { Dispatch, SetStateAction } from 'react'
@@ -10,6 +10,7 @@ import { Toggle } from 'components'
 
 import SettingMenuList from './SettingMenuList'
 import ServiceInfo from './ServiceInfo'
+import { useGetUserNotiQuery, usePostUserNotiQuery } from 'hooks/queries/userInfo'
 
 interface ISettingMenu {
   setPageNumber: Dispatch<SetStateAction<number>>
@@ -20,7 +21,15 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   const MENU_LIST_ITEMS_TEXTS = ['내 정보 수정하기', '이용 약관', '개인정보 처리방침', '회원 탈퇴']
   const MENU_LIST_ITEMS_ICONS = [true, true, true, true, false]
 
-  const [acceptPush, setAcceptPush] = useState(false)
+  const [userNoti, setUserNoti] = useState(false)
+  const resNoti = useGetUserNotiQuery().data
+  const userNotiQuery = usePostUserNotiQuery()
+
+  useEffect(() => {
+    if (resNoti != null) {
+      setUserNoti(resNoti.data.allowNotification)
+    }
+  }, [resNoti])
 
   return (
     <SettingMenuWrapper>
@@ -29,7 +38,14 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
           푸시 알림 받기
         </style.TextP>
 
-        <Toggle value={acceptPush} setValue={setAcceptPush} _margin="0px 0px 0px auto" />
+        <Toggle
+          value={userNoti}
+          setValue={setUserNoti}
+          _margin="0px 0px 0px auto"
+          _onClick={() => {
+            userNotiQuery.refetch().catch(() => {})
+          }}
+        />
       </PushAlarmWrapper>
 
       {MENU_LIST_ITEMS_TEXTS.map((text, i) => {
