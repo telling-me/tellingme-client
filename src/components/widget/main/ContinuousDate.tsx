@@ -1,11 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
+
 // hooks
 import { useGetAnswerRecordCountQuery } from 'hooks/queries/question'
 
+// utils
+import { formatStringDate } from 'utils/date'
+
 const ContinuousDate = () => {
-  const { data: { data: count = null } = {} } = useGetAnswerRecordCountQuery()
+  const { data: { data: count = null } = {} } = useGetAnswerRecordCountQuery(formatStringDate(new Date()))
   return (
     <DateWrapper flex="center" _width="max-content" _padding="10px 12px" _margin="8px 0 0 0">
       {count > 0 ? (

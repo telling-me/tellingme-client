@@ -9,15 +9,20 @@ import Icon from 'assets/icons'
 import useQuestionStore from 'stores/useQuestionStore'
 
 // hooks
-import { useGetTodayAnswerQuery, useGetTodayQuestionQuery } from 'hooks/queries'
+import { useGetAnswerQuery, useGetQuestionQuery } from 'hooks/queries'
+
+// utils
+import { formatStringDate } from 'utils/date'
 
 const Question = () => {
+  const today = new Date()
+
   // store
   const { setIsWriteModal } = useQuestionStore()
 
   // query
-  const { data: { data: answer = null } = {} } = useGetTodayAnswerQuery()
-  const { data: { data: question = null } = {} } = useGetTodayQuestionQuery()
+  const { data: { data: answer = null } = {} } = useGetAnswerQuery(formatStringDate(today))
+  const { data: { data: question = null } = {} } = useGetQuestionQuery(formatStringDate(today))
 
   return (
     <style.Grid flex="start" _width="auto" direction="column" align="center" _margin="0 25px">
