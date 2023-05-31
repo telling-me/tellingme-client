@@ -35,6 +35,15 @@ export interface IJoinResponseDto {
   socialId: string
   socialLoginType: SocialLoginType
 }
+export interface IUserInfoDto {
+  birthDate?: string
+  gender?: string
+  job: number
+  jobInfo: string
+  mbti?: string
+  nickname: string
+  purpose: string
+}
 export const userApi = {
   login: async (loginData: ILoginData) => await API.post('/member/auth/login', loginData),
   signup: async (joinResponseDto: IJoinResponseDto) => {
@@ -103,5 +112,8 @@ export const userApi = {
         headers: { 'Content-Type': 'application/json' }
       }
     )
+  },
+  patchUserInfo: async (userInfoDto: IUserInfoDto) => {
+    return await API.patch('/api/user/update', userInfoDto)
   }
 }

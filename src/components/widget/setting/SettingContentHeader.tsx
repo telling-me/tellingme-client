@@ -12,9 +12,11 @@ import useWindowSize from 'hooks/useWindowSize'
 interface ISettingContentHeader {
   pageNumber: number
   setIsMenu?: Dispatch<SetStateAction<boolean>>
+  _disabled?: boolean
+  _onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const SettingContentHeader = ({ pageNumber, setIsMenu }: ISettingContentHeader) => {
+const SettingContentHeader = ({ pageNumber, setIsMenu, _disabled, _onClick }: ISettingContentHeader) => {
   const CONTENT_HEADERS = ['내 정보 수정하기', '이용 약관', '개인정보 처리방침', '회원 탈퇴']
   const windowWidth = useWindowSize().width
 
@@ -40,9 +42,9 @@ const SettingContentHeader = ({ pageNumber, setIsMenu }: ISettingContentHeader) 
         {CONTENT_HEADERS[pageNumber]}
       </style.TextP>
 
-      {pageNumber === 0 && (
-        <CompleteButton>
-          <style.TextSpan typo="b1_b" textColor="gray2">
+      {pageNumber === 0 && _disabled != null && _onClick != null && (
+        <CompleteButton _disabled={_disabled} onClick={_onClick}>
+          <style.TextSpan typo="b1_b" textColor={_disabled ? 'gray2' : 'logo'}>
             완료
           </style.TextSpan>
         </CompleteButton>
@@ -86,11 +88,11 @@ const BackButton = styled.button`
   cursor: pointer;
 `
 
-const CompleteButton = styled.button`
+const CompleteButton = styled.button<{ _disabled?: boolean }>`
   position: absolute;
   right: 0;
 
-  cursor: pointer;
+  ${({ _disabled }) => _disabled != null && !_disabled && 'cursor: pointer;'}
 `
 
 export default SettingContentHeader

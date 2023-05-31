@@ -18,7 +18,11 @@ const ModifyPurpose = ({ purpose, setPurpose }: IModifyPurpose) => {
     const purposeIndex = purpose.indexOf(index)
 
     if (purposeIndex !== -1) {
-      setPurpose([purpose[1 - purposeIndex]])
+      if (purpose.length === 1) {
+        setPurpose([])
+      } else {
+        setPurpose([purpose[1 - purposeIndex]])
+      }
     } else if (purpose.length < 2) {
       setPurpose([...purpose, index])
     }

@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
 // component
 import styled from 'styled-components'
@@ -13,8 +15,13 @@ import ModifyMbti from './modify/ModifyMbti'
 
 // hooks
 import { useGetUserInfoQuery } from 'hooks/queries/userInfo'
+import SettingContentHeader from './SettingContentHeader'
 
-const ModifyMyInfo = () => {
+interface IModifyMyInfo {
+  setIsMenu?: Dispatch<SetStateAction<boolean>>
+}
+
+const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   const [nickname, setNickname] = useState('')
   const [purpose, setPurpose] = useState<string[]>([])
   const [job, setJob] = useState('')
@@ -27,7 +34,21 @@ const ModifyMyInfo = () => {
   const [canChangeBirthDate, setCanChangeBirthDate] = useState(false)
   const [mbti, setMbti] = useState<string | undefined>(undefined)
 
+  const [_disabled, setDisabled] = useState(false)
+
   const res = useGetUserInfoQuery().data
+
+  const _onClick = () => {
+    console.log('onClick')
+  }
+
+  useEffect(() => {
+    if (nickname.length === 0 || purpose[0] === undefined || (job === '5' && jobInfo.length === 0)) {
+      setDisabled(true)
+    } else {
+      setDisabled(false)
+    }
+  }, [nickname, purpose, job, jobInfo])
 
   useEffect(() => {
     if (res != null) {
@@ -54,6 +75,8 @@ const ModifyMyInfo = () => {
 
   return (
     <ModifyMyInfoWrapper>
+      <SettingContentHeader pageNumber={0} setIsMenu={setIsMenu} _disabled={_disabled} _onClick={_onClick} />
+
       <ModifyMyInfoContent>
         {/* 닉네임 */}
         <ModifyNickname nickname={nickname} setNickname={setNickname} />

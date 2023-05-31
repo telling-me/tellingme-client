@@ -18,9 +18,10 @@ interface ISettingContent {
 const SettingContent = ({ pageNumber, setIsMenu }: ISettingContent) => {
   return (
     <SettingContentWrapper>
-      <SettingContentHeader pageNumber={pageNumber} setIsMenu={setIsMenu} />
+      {pageNumber !== 0 && <SettingContentHeader pageNumber={pageNumber} setIsMenu={setIsMenu} />}
+
       {pageNumber === 0 ? (
-        <ModifyMyInfo />
+        <ModifyMyInfo setIsMenu={setIsMenu} />
       ) : pageNumber === 1 ? (
         <TermsOfService />
       ) : pageNumber === 2 ? (
