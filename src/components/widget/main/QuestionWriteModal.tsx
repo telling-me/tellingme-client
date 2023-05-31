@@ -11,15 +11,21 @@ import { Button, Toggle } from 'components/core'
 import Icon from 'assets/icons'
 
 // hooks
-import { useGetTodayAnswerQuery, useGetTodayQuestionQuery } from 'hooks/queries'
+import { useGetAnswerQuery, useGetQuestionQuery } from 'hooks/queries'
+
+// apis
 import { apis } from 'apis/apis'
+
+// utils
+import { formatStringDate } from 'utils/date'
 
 const QuestionWriteModal = () => {
   // store
   const { setIsEmotionModal, setIsWriteModal } = useQuestionStore()
+
   // query
-  const { data: { data: answer = null } = {} } = useGetTodayAnswerQuery()
-  const { data: { data: question = null } = {} } = useGetTodayQuestionQuery()
+  const { data: { data: answer = null } = {} } = useGetAnswerQuery(formatStringDate(new Date()))
+  const { data: { data: question = null } = {} } = useGetQuestionQuery(formatStringDate(new Date()))
 
   const [text, setText] = useState<string>(answer?.status !== 4002 ? answer?.data : '')
   const [shareToggle, setShareToggle] = useState<boolean>(false)
@@ -32,7 +38,7 @@ const QuestionWriteModal = () => {
   const handlePressComplete = () => {
     // TODO: Mutation으로 Post날리기
     apis
-      .postTodayAnswer(text, 1)
+      .postAnswer(formatStringDate(new Date()), text, 1)
       .then(() => {
         setIsWriteModal(false)
       })
