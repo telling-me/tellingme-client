@@ -13,8 +13,8 @@ const MainBackground = () => {
   return (
     <BackgroundWrapper>
       <BackgroundCircle
-        _width={`${(windowSize.width as number) - 60}px`}
-        _height={`${(windowSize.width as number) - 60}px`}
+        _width={`${windowSize.width - 60}px`}
+        _height={`${windowSize.width - 60}px`}
         animate={{ rotate: 360 }}
         transition={{ ease: 'linear', duration: 120, repeat: Infinity }}
       >
