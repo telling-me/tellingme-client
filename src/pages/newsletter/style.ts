@@ -30,6 +30,7 @@ export const NewsLetterHr = styled.div`
 
   margin: 36px 0px;
   border: 1px solid #e6e4e2;
+  border-radius: 8px;
 `
 
 export const NewsLetterForm = styled.div`
@@ -76,4 +77,27 @@ export const PersonalAgreeContent = styled.div`
   font-size: 12px;
   line-height: 16px;
   white-space: pre-wrap;
+`
+
+export const ApplyButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 55px;
+  padding: 18px 32px;
+
+  border-radius: 20px;
+  background-color: ${(props) => props.theme.colors.primary.primary100};
+
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: ${(props) => props.theme.shadow.shadow1};
+  }
+
+  &:active {
+    background-color: ${(props) => props.theme.colors.primary.primary300};
+  }
 `

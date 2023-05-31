@@ -13,8 +13,12 @@ const Modal = ({ _width, _maxWidth, _height, _maxHeight, _borderRadius, _padding
         _width={_width}
         _maxWidth={_maxWidth}
         _height={_height}
+        _maxHeight={_maxHeight}
         _borderRadius={_borderRadius}
         _padding={_padding}
+        onClick={(e) => {
+          e.stopPropagation()
+        }}
       >
         {children}
       </ModalComponent>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
@@ -25,12 +26,14 @@ import { Button, CheckBox, Dropdown, Input, ProgressBar, Icon } from 'components
 import style from 'styles/styled-components/styled'
 import BasicIcon from 'assets/icons'
 import useWindowSize from 'hooks/useWindowSize'
+import { useTheme } from 'styled-components'
 
 const SignUpPage = () => {
   const windowSize = useWindowSize().width
   const location = useLocation()
   const socialId = location.state.socialId
   const socialLoginType = location.state.socialLoginType
+  const theme = useTheme()
 
   const [step, setStep] = useState(0)
 
@@ -107,14 +110,14 @@ const SignUpPage = () => {
   return (
     <SignUpWrapper>
       <SignUpHeader>
-        <BasicIcon.Logo _margin="12px 0px 12px 0px" />
+        <BasicIcon.Logo fill={theme.colors.logo} width="81" height="34" _margin="12px 0px 12px 0px" />
 
         {[4, 5, 6].includes(step) && (
           <Button
             buttonType="noFilled"
             contentType="text"
             text="건너뛰기"
-            textSize={(windowSize as number) > 767 ? 'h6' : 'b1'}
+            textSize={windowSize > 767 ? 'h6' : 'b1'}
             textColor="logo"
             textHoverColor="primary200"
             _margin="0px 0px 0px auto"
@@ -128,7 +131,7 @@ const SignUpPage = () => {
       {step !== 7 && <ProgressBar percent={`${(99 / 7) * (step + 1)}`} />}
 
       {step !== 7 &&
-        ((windowSize as number) < 1024 ? (
+        (windowSize < 1024 ? (
           <style.TextSpan
             typo="h4"
             textColor="black"
@@ -139,7 +142,7 @@ const SignUpPage = () => {
             {stepTextData[step]}
           </style.TextSpan>
         ) : (
-          (windowSize as number) >= 1024 && (
+          windowSize >= 1024 && (
             <WebMoveButtonWrapper
               _margin={
                 [0, 1, 5, 6].includes(step)
@@ -218,7 +221,13 @@ const SignUpPage = () => {
       {
         // 서비스 이용 약관 (추후에 디자인 나오면 약관 모달 달아야 함)
         step === 0 ? (
-          <CheckBox label="전체 동의합니다" buttonText="전문 보기" _checked={isAgree} _setChecked={setIsAgree} />
+          <CheckBox
+            label="전체 동의합니다"
+            buttonText="전문 보기"
+            _checked={isAgree}
+            setChecked={setIsAgree}
+            _maxWidth="425px"
+          />
         ) : // 닉네임
         step === 1 ? (
           <Input
@@ -421,7 +430,7 @@ const SignUpPage = () => {
         )
       }
 
-      {(windowSize as number) < 1024 && step !== 7 && (
+      {windowSize < 1024 && step !== 7 && (
         <MoveButtonWrapper>
           <Button
             buttonType="secondary"

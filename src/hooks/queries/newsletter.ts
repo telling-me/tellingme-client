@@ -13,7 +13,10 @@ export const useNewsLetterQuery = ({ email, name, funnel }: INewsLetterData) => 
       }),
     {
       enabled: false,
-      retry: 0
+      retry: 0,
+      onSuccess: () => {
+        window.location.href = '/newsletter/complete'
+      }
     }
   )
 }

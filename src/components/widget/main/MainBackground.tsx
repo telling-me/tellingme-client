@@ -14,14 +14,14 @@ const MainBackground = () => {
     <>
       <BackgroundWrapper>
         <BackgroundCircle
-          _width={`${(windowSize.width as number) - 60}px`}
-          _height={`${(windowSize.width as number) - 60}px`}
+          _width={`${windowSize.width - 60}px`}
+          _height={`${windowSize.width - 60}px`}
           animate={{
             rotate: 360
           }}
           transition={{ ease: 'linear', duration: 120, repeat: Infinity }}
         >
-          <SmallLogoWrapper size={windowSize.width as number}>
+          <SmallLogoWrapper size={windowSize.width}>
             <Icon.LogoS1 width="44px" height="44px" />
             <Icon.LogoS2 width="42px" height="42px" />
             <Icon.LogoS3 width="18px" height="18px" />

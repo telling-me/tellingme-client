@@ -4,7 +4,7 @@ export interface IGradient {
 
 const gradient: IGradient = {
   default_gradient: (degree?: number) => `
-    linear-gradient(${degree ?? 51.82}deg, #7CEFA7 1.24%, #8FD3F4 89.34%);
+    linear-gradient(${degree ?? 56.9}deg, #B0F5CA 22.63%, #8FD3F4 114.48%)
   `
 }
 

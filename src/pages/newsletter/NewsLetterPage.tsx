@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { PersonalAgreeData, AdAgreeData } from './agreeData'
 import {
+  ApplyButton,
   NewsLetterComponent,
   NewsLetterFooter,
   NewsLetterForm,
@@ -19,6 +20,7 @@ import { useNewsLetterQuery } from 'hooks/queries'
 import useWindowSize from 'hooks/useWindowSize'
 
 import { emailCheck } from 'utils/signRegex'
+import { LoadingDots } from 'components/core/loadingdots'
 
 const NewsLetterPage = () => {
   const windowSize = useWindowSize().width
@@ -33,6 +35,19 @@ const NewsLetterPage = () => {
   const [adAgree, setAdAgree] = useState(false)
   const [aaOpen, setAaOpen] = useState(false)
 
+  const [alertOpen, setAlertOpen] = useState<number>(0)
+
+  const [loading, setLoading] = useState(false)
+
+  const alertTexts = [
+    '이메일을 입력해주세요',
+    '이메일 형식이 올바르지 않습니다',
+    '성함을 입력해주세요',
+    '기타를 입력해주세요',
+    '유입 경로를 선택해주세요',
+    '필수 동의 항목을 체크해주세요'
+  ]
+
   const newsLetterQuery = useNewsLetterQuery({
     email,
     name,
@@ -40,22 +55,29 @@ const NewsLetterPage = () => {
   })
 
   const handleApply = () => {
-    if (
-      email !== '' &&
-      name !== '' &&
-      ((funnel === 'etc' && etcFunnel !== '') || (funnel !== 'etc' && funnel !== '')) &&
-      personalAgree &&
-      adAgree
-    ) {
-      if (!emailCheck(email)) {
-        alert('이메일 형식 x')
-      } else {
-        newsLetterQuery.refetch().catch(() => {})
-      }
+    if (email === '') {
+      setAlertOpen(1)
+    } else if (!emailCheck(email)) {
+      setAlertOpen(2)
+    } else if (name === '') {
+      setAlertOpen(3)
+    } else if (funnel === 'etc' && etcFunnel === '') {
+      setAlertOpen(4)
+    } else if (funnel !== 'etc' && funnel === '') {
+      setAlertOpen(5)
+    } else if (!personalAgree || !adAgree) {
+      setAlertOpen(6)
     } else {
-      alert('빈칸 있음')
+      setLoading(true)
+      newsLetterQuery.refetch().catch(() => {})
     }
   }
+
+  useEffect(() => {
+    if (funnel !== 'etc') {
+      setEtcFunnel('')
+    }
+  }, [funnel])
 
   return (
     <NewsLetterComponent>
@@ -123,42 +145,39 @@ const NewsLetterPage = () => {
 
       <NewsLetterFooter>
         <CheckBox
+          checkSize="small"
           label="(필수) 개인 정보 수집 및 이용에 동의합니다."
           buttonText="보기"
-          labelSize="c"
-          mainLabelGap="4px"
-          mainSize="small"
           _checked={personalAgree}
-          _setChecked={setPersonalAgree}
-          _onClick={() => {
+          setChecked={setPersonalAgree}
+          buttonOnClick={() => {
             setPaOpen(true)
           }}
         />
         <CheckBox
+          checkSize="small"
           label="(필수) 광고성 정보 수신에 동의합니다."
           buttonText="보기"
-          labelSize="c"
-          mainLabelGap="4px"
-          mainSize="small"
           _checked={adAgree}
-          _setChecked={setAdAgree}
+          setChecked={setAdAgree}
           _margin="8px 0px 36px 0px"
-          _onClick={() => {
+          buttonOnClick={() => {
             setAaOpen(true)
           }}
         />
-        <Button
-          buttonType="primary"
-          contentType="text"
-          text="신청하기"
-          textSize="h6"
-          textColor="primary700"
-          _width="100%"
-          _height="55px"
-          _onClick={() => {
+        <ApplyButton
+          onClick={() => {
             handleApply()
           }}
-        />
+        >
+          {loading ? (
+            <LoadingDots />
+          ) : (
+            <style.TextP typo="h6" textColor="primary700">
+              신청하기
+            </style.TextP>
+          )}
+        </ApplyButton>
       </NewsLetterFooter>
 
       {paOpen && (
@@ -219,6 +238,35 @@ const NewsLetterPage = () => {
           </style.TextSpan>
 
           <PersonalAgreeContent>{AdAgreeData}</PersonalAgreeContent>
+        </Modal>
+      )}
+      {alertOpen !== 0 && (
+        <Modal
+          _width="100%"
+          _maxWidth="425px"
+          _height="150px"
+          _borderRadius="20px"
+          _padding="30px 20px 20px 20px"
+          _onClick={() => {
+            setAlertOpen(0)
+          }}
+        >
+          <style.TextP typo="b1" textColor="black">
+            {alertTexts[alertOpen - 1]}
+          </style.TextP>
+
+          <Button
+            buttonType="secondary"
+            contentType="text"
+            text="확인"
+            textSize="h6"
+            textColor="logo"
+            _margin="28px 0px 0px 0px"
+            _padding="18px 127px"
+            _onClick={() => {
+              setAlertOpen(0)
+            }}
+          />
         </Modal>
       )}
     </NewsLetterComponent>

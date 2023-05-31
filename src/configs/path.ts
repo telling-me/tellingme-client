@@ -14,5 +14,6 @@ export enum PAGE_URL {
   AllAnswer = 'Allanswer',
 
   // NewsLetter
-  NewsLetter = 'newsletter'
+  NewsLetter = 'newsletter',
+  NewsLetterComplete = 'complete'
 }

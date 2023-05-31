@@ -2,8 +2,8 @@ import { useQuery } from 'react-query'
 import { apis } from 'apis/apis'
 import { type IError } from 'type/db'
 
-export const useGetTodayQuestionQuery = <T>(options?: T) => {
-  return useQuery(['todayQuestion'], async () => await apis.getTodayQuestion(), {
+export const useGetQuestionQuery = <T>(date: string, options?: T) => {
+  return useQuery(['question', date], async () => await apis.getQuestion(date), {
     retry: 0,
     onError: (err: IError) => {
       console.log(err)
@@ -14,8 +14,8 @@ export const useGetTodayQuestionQuery = <T>(options?: T) => {
   })
 }
 
-export const useGetTodayAnswerQuery = <T>(options?: T) => {
-  return useQuery(['todayAnswer'], async () => await apis.getTodayAnswer(), {
+export const useGetAnswerQuery = <T>(date: string, options?: T) => {
+  return useQuery(['answer', date], async () => await apis.getAnswer(date), {
     retry: 0,
     onError: (err: IError) => {
       console.log(err)
@@ -26,8 +26,8 @@ export const useGetTodayAnswerQuery = <T>(options?: T) => {
   })
 }
 
-export const useGetAnswerRecordCountQuery = <T>(options?: T) => {
-  return useQuery(['answerCount'], async () => await apis.getAnswerRecordCount(), {
+export const useGetAnswerRecordCountQuery = <T>(date: string, options?: T) => {
+  return useQuery(['answerCount'], async () => await apis.getAnswerRecordCount(date), {
     retry: 0,
     onError: (err: IError) => {
       console.log(err)

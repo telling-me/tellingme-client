@@ -10,7 +10,7 @@ import useChangeColor from 'hooks/useChangeColor'
 export interface IGrid {
   flex?: 'start' | 'end' | 'between' | 'center'
   flexOption?: string
-  direction?: 'column' | 'row'
+  direction?: 'column' | 'row' | 'column-reverse' | 'row-reverse'
   _alignItems?: 'start' | 'end' | 'center' | 'stretch'
   wrap?: 'wrap' | 'nowrap'
   _width?: string
@@ -32,6 +32,7 @@ export interface IText {
 }
 
 const Grid = styled(motion.div)<IGrid>`
+  transition: 0.2s;
   ${({ _width }) => (_width != null ? `width: ${_width}` : 'width: 100%')};
   ${({ _height }) => _height != null && `height: ${_height}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
@@ -52,7 +53,7 @@ const Grid = styled(motion.div)<IGrid>`
       : _alignItems === 'stretch'
       ? 'align-items: stretch'
       : _alignItems === 'center' && 'align-items: center'};
-  ${({ direction }) => direction === 'column' && 'flex-direction: column'};
+  ${({ direction }) => direction != null && `flex-direction: ${direction}`};
   ${({ wrap }) => wrap === 'wrap' && 'flex-wrap: wrap'};
   ${({ flexOption }) => flexOption != null && `flex: ${flexOption}`};
   ${({ align }) =>
@@ -69,6 +70,8 @@ const Grid = styled(motion.div)<IGrid>`
 // text
 const TextH1 = styled.h1<IText>`
   white-space: normal;
+  transition: 0.2s;
+
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
@@ -95,6 +98,8 @@ const TextH1 = styled.h1<IText>`
 
 const TextH2 = styled.h2<IText>`
   white-space: normal;
+  transition: 0.2s;
+
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
@@ -121,6 +126,8 @@ const TextH2 = styled.h2<IText>`
 
 const TextH3 = styled.h3<IText>`
   white-space: normal;
+  transition: 0.2s;
+
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
@@ -147,6 +154,8 @@ const TextH3 = styled.h3<IText>`
 
 const TextH4 = styled.h4<IText>`
   white-space: normal;
+  transition: 0.2s;
+
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
@@ -173,6 +182,8 @@ const TextH4 = styled.h4<IText>`
 
 const TextH5 = styled.h5<IText>`
   white-space: normal;
+  transition: 0.2s;
+
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
@@ -199,6 +210,8 @@ const TextH5 = styled.h5<IText>`
 
 const TextP = styled.p<IText>`
   white-space: normal;
+  transition: 0.2s;
+
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
   ${({ textAlign }) => textAlign != null && `text-align: ${textAlign}`};
@@ -225,6 +238,7 @@ const TextP = styled.p<IText>`
 
 const TextSpan = styled.span<IText>`
   white-space: normal;
+  transition: 0.2s;
 
   ${({ _width }) => _width != null && `width: ${_width}`}
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};

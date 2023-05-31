@@ -23,6 +23,7 @@ export const ModalComponent = styled.div<{
   _width?: string
   _maxWidth?: string
   _height?: string
+  _maxHeight?: string
   _borderRadius?: string
   _padding?: string
 }>`
@@ -35,6 +36,7 @@ export const ModalComponent = styled.div<{
   ${({ _width }) => _width != null && `width: ${_width}`};
   ${({ _maxWidth }) => _maxWidth != null && `max-width: ${_maxWidth}`};
   ${({ _height }) => _height != null && `height: ${_height}`};
+  ${({ _maxHeight }) => _maxHeight != null && `max-height: ${_maxHeight}`};
   ${({ _borderRadius }) => _borderRadius != null && `border-radius: ${_borderRadius}`};
   ${({ _padding }) => _padding != null && `padding: ${_padding}`}
 `
