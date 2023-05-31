@@ -1,3 +1,4 @@
+import { keyframes } from 'styled-components'
 import { Theme } from 'styles/DefaultTheme'
 
 // modal
@@ -24,20 +25,19 @@ export const landingSubAni = {
   init: { scale: 0 },
   ani: (i: number) => ({
     scale: 1,
-    rotateZ: 360,
-    transition: { delay: i * 0.2, type: 'spring' }
+    rotate: 360,
+    transition: { delay: 0.4, type: 'spring' }
   })
 }
 
 export const landingCircleAni = {
   init: {
     scale: 0,
-    background: `${Theme.gradient.default_gradient()} padding-box, linear-gradient(51.82deg, #7cefa7 1.24%, #8fd3f4 89.34%) border-box`
+    background: `${Theme.gradient.default_gradient()} padding-box, ${Theme.gradient.default_gradient()} border-box`
   },
   ani: (i: number) => ({
     scale: 1,
-    rotateZ: 360,
-    background: `linear-gradient(#fff,#fff) padding-box, linear-gradient(51.82deg, #7cefa7 1.24%, #8fd3f4 89.34%) border-box`,
+    background: `linear-gradient(#fffdfa,#fffdfa) padding-box, ${Theme.gradient.default_gradient()} border-box`,
     transition: {
       delay: i * 0.2,
       duration: 1,
@@ -45,3 +45,33 @@ export const landingCircleAni = {
     }
   })
 }
+
+export const floatAni = keyframes`
+0%{
+		transform: translatey(0px);
+}
+50%{
+		transform: translatey(-10px);
+}
+100%{
+		transform: translatey(0px);
+}
+`
+
+export const rotateAni = keyframes`
+from {
+  transform: rotate(0deg);
+}
+to {
+  transform: rotate(360deg);
+}
+`
+
+export const rotateReverseAni = keyframes`
+from {
+  transform: rotate(0deg);
+}
+to {
+  transform: rotate(-360deg);
+}
+`

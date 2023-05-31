@@ -1,10 +1,20 @@
 import { type FunctionComponent, type ComponentClass } from 'react'
 import { type IStringKey } from 'type/common'
 import { ReactComponent as Menu } from './menu.svg'
-import { ReactComponent as LogoS1 } from './logo_s1.svg'
-import { ReactComponent as LogoS2 } from './logo_s2.svg'
-import { ReactComponent as LogoS3 } from './logo_s3.svg'
-import { ReactComponent as LogoS4 } from './logo_s4.svg'
+import { ReactComponent as LandingEmotionBg } from './LandingEmotionBg.svg'
+import { ReactComponent as LandingEmotionLine } from './LandingEmotionLine.svg'
+import { ReactComponent as LandingEmotionModal } from './LandingEmotionModal.svg'
+import { ReactComponent as LandingEmotionModalMobile } from './LandingEmotionModalMobile.svg'
+import { ReactComponent as LandingCatchPhraseCircle } from './LandingCatchPhraseCircle.svg'
+import { ReactComponent as LandingAnswer1 } from './LandingAnswer1.svg'
+import { ReactComponent as LandingAnswer2 } from './LandingAnswer2.svg'
+import { ReactComponent as LandingQuestionList } from './LandingQuestionList.svg'
+import { ReactComponent as LandingPhone } from './LandingPhone.svg'
+import { ReactComponent as LandingCircle } from './LandingCircle.svg'
+import { ReactComponent as LogoSmallBubble1 } from './LogoSmallBubble1.svg'
+import { ReactComponent as LogoSmallBubble2 } from './LogoSmallBubble2.svg'
+import { ReactComponent as LogoSmallBubble3 } from './LogoSmallBubble3.svg'
+import { ReactComponent as LogoSmallBubble4 } from './LogoSmallBubble4.svg'
 import { ReactComponent as Bubble } from './bubble.svg'
 import { ReactComponent as Setting } from './Setting.svg'
 import { ReactComponent as Warning } from './Warning.svg'
@@ -27,6 +37,7 @@ import { ReactComponent as Pen } from './Pen.svg'
 import { ReactComponent as Bagpack } from './Bagpack.svg'
 import { ReactComponent as Briefcase } from './Briefcase.svg'
 import { ReactComponent as Cookpot } from './Cookpot.svg'
+import { ReactComponent as ScrollDown } from './ScrollDown.svg'
 import { ReactComponent as Smiley } from './Smiley.svg'
 import { ReactComponent as Logo } from './Logo.svg'
 import { ReactComponent as Close } from './Close.svg'
@@ -35,6 +46,7 @@ import { ReactComponent as ToolTipTriangle2 } from './ToolTipTriangle2.svg'
 import { ReactComponent as Rows } from './Rows.svg'
 import { ReactComponent as Columns } from './Columns.svg'
 import { ReactComponent as CaretRight } from './CaretRight.svg'
+import { ReactComponent as Insta } from './Insta.svg'
 
 interface IIconIndex extends IStringKey {
   Menu: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -60,26 +72,48 @@ interface IIconIndex extends IStringKey {
   Bagpack: string | FunctionComponent<any> | ComponentClass<any, any>
   Briefcase: string | FunctionComponent<any> | ComponentClass<any, any>
   Cookpot: string | FunctionComponent<any> | ComponentClass<any, any>
+  ScrollDown: string | FunctionComponent<any> | ComponentClass<any, any>
   Smiley: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingEmotionBg: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingPhone: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingEmotionLine: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingEmotionModal: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingEmotionModalMobile: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingCatchPhraseCircle: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingQuestionList: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingAnswer1: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingAnswer2: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingCircle: string | FunctionComponent<any> | ComponentClass<any, any>
   Logo: string | FunctionComponent<any> | ComponentClass<any, any>
-  LogoS1: string | FunctionComponent<any> | ComponentClass<any, any>
-  LogoS2: string | FunctionComponent<any> | ComponentClass<any, any>
-  LogoS3: string | FunctionComponent<any> | ComponentClass<any, any>
-  LogoS4: string | FunctionComponent<any> | ComponentClass<any, any>
+  LogoSmallBubble1: string | FunctionComponent<any> | ComponentClass<any, any>
+  LogoSmallBubble2: string | FunctionComponent<any> | ComponentClass<any, any>
+  LogoSmallBubble3: string | FunctionComponent<any> | ComponentClass<any, any>
+  LogoSmallBubble4: string | FunctionComponent<any> | ComponentClass<any, any>
   Close: string | FunctionComponent<any> | ComponentClass<any, any>
   ToolTipTriangle: string | FunctionComponent<any> | ComponentClass<any, any>
   ToolTipTriangle2: string | FunctionComponent<any> | ComponentClass<any, any>
   Rows: string | FunctionComponent<any> | ComponentClass<any, any>
   Columns: string | FunctionComponent<any> | ComponentClass<any, any>
   CaretRight: string | FunctionComponent<any> | ComponentClass<any, any>
+  Insta: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
   Menu,
-  LogoS1,
-  LogoS2,
-  LogoS3,
-  LogoS4,
+  LandingEmotionBg,
+  LandingEmotionLine,
+  LandingEmotionModal,
+  LandingEmotionModalMobile,
+  LandingCatchPhraseCircle,
+  LandingQuestionList,
+  LandingAnswer1,
+  LandingAnswer2,
+  LandingPhone,
+  LandingCircle,
+  LogoSmallBubble1,
+  LogoSmallBubble2,
+  LogoSmallBubble3,
+  LogoSmallBubble4,
   Bubble,
   Setting,
   Warning,
@@ -102,6 +136,7 @@ const Icon: IIconIndex = {
   Bagpack,
   Briefcase,
   Cookpot,
+  ScrollDown,
   Smiley,
   Logo,
   Close,
@@ -109,7 +144,8 @@ const Icon: IIconIndex = {
   ToolTipTriangle2,
   Rows,
   Columns,
-  CaretRight
+  CaretRight,
+  Insta
 }
 
 export default Icon
