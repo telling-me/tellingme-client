@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // components
 import Icon from 'assets/icons'
@@ -10,14 +11,18 @@ import { mediaQuery } from 'utils/mediaQuery'
 
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
+import { Button } from 'components/core'
 
 const LandingCatchPhrase = () => {
   const windowSize = useWindowSize()
+  const navigate = useNavigate()
   return (
     <CatchPhraseWrapper>
-      <CatchPhraseBackground>
-        <Icon.LandingCatchPhraseCircle />
-      </CatchPhraseBackground>
+      {mediaQuery(windowSize.width) === 'mobile' ? null : (
+        <CatchPhraseBackground>
+          <Icon.LandingCatchPhraseCircle />
+        </CatchPhraseBackground>
+      )}
       <CatchPhraseText _height="100%" flex="center" direction="column" _gap="32px" _padding="0 8px">
         <Grid flex="center" direction="column" _gap="8px">
           <TextH1
@@ -58,6 +63,30 @@ const LandingCatchPhrase = () => {
             >
               이 순간부터 느껴봐요!
             </TextH1>
+          </Grid>
+          <Grid
+            flex="center"
+            _gap="15px"
+            _margin={mediaQuery(windowSize.width) === 'desktop' ? '24px 0 0' : '16px 0 0'}
+          >
+            <Button
+              _padding="18px 32px"
+              buttonType="tertiary"
+              contentType="text"
+              text="뉴스레터 신청"
+              textColor="logo"
+              _onClick={() => {
+                navigate('/newsletter')
+              }}
+            />
+            <Button
+              _padding="18px 32px"
+              buttonType="secondary"
+              contentType="text"
+              text="로그인하기"
+              textColor="logo"
+              // TODO: _onClick={() => {로그인 모달창 띄우기}}
+            />
           </Grid>
         </Grid>
       </CatchPhraseText>

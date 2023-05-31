@@ -36,6 +36,7 @@ const LandingWrapper = styled(motion.div)`
 `
 
 const LandingInfo = styled.section`
+  scroll-snap-stop: always;
   scroll-snap-align: start;
 `
 export default LandingPage

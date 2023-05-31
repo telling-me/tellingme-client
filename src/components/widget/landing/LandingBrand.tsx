@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef } from 'react'
 
 // components
@@ -374,7 +373,7 @@ const BorderCircle = styled(motion.div)<{ zIndex: number; order: number }>`
           return css`
             animation: ${rotateAni} 20s linear infinite;
             circle {
-              stroke-dasharray: 20 40;
+              stroke-dasharray: 10 40;
             }
             @media all and (min-width: 1200px) {
               width: 1092px;
@@ -400,7 +399,7 @@ const BorderCircle = styled(motion.div)<{ zIndex: number; order: number }>`
           return css`
             animation: ${rotateReverseAni} 24s linear infinite;
             circle {
-              stroke-dasharray: 20 30;
+              stroke-dasharray: 10 30;
             }
             @media all and (min-width: 1200px) {
               width: 1400px;
