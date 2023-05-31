@@ -205,6 +205,7 @@ const SignUpPage = () => {
                   _disabled={mbti === undefined}
                   _onClick={() => {
                     handleNextStep()
+                    requestPermission()
                   }}
                 />
               )}
