@@ -115,5 +115,23 @@ export const userApi = {
   },
   patchUserInfo: async (userInfoDto: IUserInfoDto) => {
     return await API.patch('/api/user/update', userInfoDto)
+  },
+  deleteUser: async () => {
+    return await API.post(
+      '/api/user/withdraw',
+      {},
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
+  },
+  logout: async () => {
+    return await API.post(
+      '/api/user/logout',
+      {},
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
   }
 }

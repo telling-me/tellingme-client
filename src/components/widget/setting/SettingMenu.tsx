@@ -11,6 +11,7 @@ import { Toggle } from 'components'
 import SettingMenuList from './SettingMenuList'
 import ServiceInfo from './ServiceInfo'
 import { useGetUserNotiQuery, usePostUserNotiQuery } from 'hooks/queries/userInfo'
+import { useLogoutMutation } from 'hooks/mutations/user'
 
 interface ISettingMenu {
   setPageNumber: Dispatch<SetStateAction<number>>
@@ -24,6 +25,7 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   const [userNoti, setUserNoti] = useState(false)
   const resNoti = useGetUserNotiQuery().data
   const userNotiQuery = usePostUserNotiQuery()
+  const { mutate } = useLogoutMutation()
 
   useEffect(() => {
     if (resNoti != null) {
@@ -65,7 +67,13 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
         )
       })}
 
-      <SettingMenuList text="로그아웃" icon={false} _onClick={() => {}} />
+      <SettingMenuList
+        text="로그아웃"
+        icon={false}
+        _onClick={() => {
+          mutate()
+        }}
+      />
 
       <ServiceInfo />
     </SettingMenuWrapper>

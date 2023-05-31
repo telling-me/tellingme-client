@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 
 // component
 import styled from 'styled-components'
-import { Hr } from 'components'
+import style from 'styles/styled-components/styled'
+import { Button, Hr, Modal } from 'components'
 
 import ModifyNickname from './modify/ModifyNickname'
 import ModifyPurpose from './modify/ModifyPurpose'
@@ -12,10 +12,11 @@ import ModifyJob from './modify/ModifyJob'
 import ModifyGender from './modify/ModifyGender'
 import ModifyBirth from './modify/ModifyBirth'
 import ModifyMbti from './modify/ModifyMbti'
+import SettingContentHeader from './SettingContentHeader'
 
 // hooks
 import { useGetUserInfoQuery } from 'hooks/queries/userInfo'
-import SettingContentHeader from './SettingContentHeader'
+import { usePatchUserInfoMutation } from 'hooks/mutations/user'
 
 interface IModifyMyInfo {
   setIsMenu?: Dispatch<SetStateAction<boolean>>
@@ -35,11 +36,32 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   const [mbti, setMbti] = useState<string | undefined>(undefined)
 
   const [_disabled, setDisabled] = useState(false)
+  const [open, setOpen] = useState(false)
 
   const res = useGetUserInfoQuery().data
+  const { mutate } = usePatchUserInfoMutation()
+
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const _onClick = () => {
-    console.log('onClick')
+    mutate({
+      birthDate:
+        year !== undefined && month !== undefined && day !== undefined
+          ? `${year}-${month.length === 1 ? `0${month}` : month}-${day.length === 1 ? `0${day}` : day}`
+          : ``,
+      gender,
+      job: parseInt(job),
+      jobInfo: job === '5' ? jobInfo : '',
+      mbti: mbti !== undefined ? mbti : '',
+      nickname,
+      purpose: `[${purpose.join(',')}]`
+    })
   }
 
   useEffect(() => {
@@ -75,7 +97,7 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
 
   return (
     <ModifyMyInfoWrapper>
-      <SettingContentHeader pageNumber={0} setIsMenu={setIsMenu} _disabled={_disabled} _onClick={_onClick} />
+      <SettingContentHeader pageNumber={0} setIsMenu={setIsMenu} _disabled={_disabled} _onClick={handleOpen} />
 
       <ModifyMyInfoContent>
         {/* 닉네임 */}
@@ -109,6 +131,44 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
         {/* mbti */}
         <ModifyMbti mbti={mbti} setMbti={setMbti} />
       </ModifyMyInfoContent>
+
+      {open && (
+        <Modal _width="100%" _maxWidth="425px" _padding="30px 20px 20px" _borderRadius="20px">
+          <ModalChildren>
+            <ModalTexts>
+              <style.TextP typo="b1" textColor="black">
+                회원 정보를 수정하시겠어요?
+              </style.TextP>
+              <style.TextP typo="b2" textColor="gray7">
+                성별과 생년월일은 한번 설정 후 변경할 수 없어요
+              </style.TextP>
+            </ModalTexts>
+
+            <ModalButtons>
+              <Button
+                buttonType="tertiary"
+                contentType="text"
+                text="취소"
+                textSize="h6"
+                textColor="logo"
+                _width="135px"
+                _padding="18px 0"
+                _onClick={handleClose}
+              />
+              <Button
+                buttonType="secondary"
+                contentType="text"
+                text="수정하기"
+                textSize="h6"
+                textColor="logo"
+                _width="135px"
+                _padding="18px 0"
+                _onClick={_onClick}
+              />
+            </ModalButtons>
+          </ModalChildren>
+        </Modal>
+      )}
     </ModifyMyInfoWrapper>
   )
 }
@@ -125,6 +185,23 @@ const ModifyMyInfoWrapper = styled.div`
 
 const ModifyMyInfoContent = styled.div`
   padding: 0px 2px;
+`
+
+const ModalTexts = styled.div`
+  ${({ theme }) => theme.common.flexCenter}
+  flex-direction: column;
+  gap: 8px;
+`
+
+const ModalButtons = styled.div`
+  display: flex;
+  gap: 15px;
+`
+
+const ModalChildren = styled.div`
+  ${({ theme }) => theme.common.flexCenter}
+  flex-direction: column;
+  gap: 28px;
 `
 
 export default ModifyMyInfo
