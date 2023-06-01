@@ -68,7 +68,9 @@ const SignUpPage = () => {
     socialLoginType
   })
 
-  const { mutate } = useCheckNicknameMutation(nickname, setIsError, setErrorText, setStep)
+  const { mutate } = useCheckNicknameMutation(nickname, setIsError, setErrorText, () => {
+    setStep(2)
+  })
 
   const handleCheckNickname = () => {
     mutate()

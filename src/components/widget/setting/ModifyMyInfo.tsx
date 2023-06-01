@@ -16,7 +16,7 @@ import SettingContentHeader from './SettingContentHeader'
 
 // hooks
 import { useGetUserInfoQuery } from 'hooks/queries/userInfo'
-import { usePatchUserInfoMutation } from 'hooks/mutations/user'
+import { useCheckNicknameMutation, usePatchUserInfoMutation } from 'hooks/mutations/user'
 
 interface IModifyMyInfo {
   setIsMenu?: Dispatch<SetStateAction<boolean>>
@@ -24,6 +24,7 @@ interface IModifyMyInfo {
 
 const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   const [nickname, setNickname] = useState('')
+  const [originalNn, setOriginalNn] = useState('')
   const [purpose, setPurpose] = useState<string[]>([])
   const [job, setJob] = useState('')
   const [jobInfo, setJobInfo] = useState('')
@@ -36,21 +37,18 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   const [mbti, setMbti] = useState<string | undefined>(undefined)
 
   const [_disabled, setDisabled] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [errorText, setErrorText] = useState('')
   const [open, setOpen] = useState(false)
 
   const res = useGetUserInfoQuery().data
-  const { mutate } = usePatchUserInfoMutation()
-
-  const handleOpen = () => {
+  const { mutate: patchUserInfo } = usePatchUserInfoMutation()
+  const { mutate: checkNickname } = useCheckNicknameMutation(nickname, setIsError, setErrorText, () => {
     setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
+  })
 
   const _onClick = () => {
-    mutate({
+    patchUserInfo({
       birthDate:
         year !== undefined && month !== undefined && day !== undefined
           ? `${year}-${month.length === 1 ? `0${month}` : month}-${day.length === 1 ? `0${day}` : day}`
@@ -75,6 +73,7 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   useEffect(() => {
     if (res != null) {
       setNickname(res.data.nickname)
+      setOriginalNn(res.data.nickname)
       setPurpose(JSON.parse(res.data.purpose).map((v: number) => v.toString()))
       setJob(res.data.job.toString())
       setJobInfo(res.data.jobInfo == null ? '' : res.data.jobInfo)
@@ -97,11 +96,28 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
 
   return (
     <ModifyMyInfoWrapper>
-      <SettingContentHeader pageNumber={0} setIsMenu={setIsMenu} _disabled={_disabled} _onClick={handleOpen} />
+      <SettingContentHeader
+        pageNumber={0}
+        setIsMenu={setIsMenu}
+        _disabled={_disabled}
+        _onClick={() => {
+          if (nickname !== originalNn) {
+            checkNickname()
+          } else {
+            setOpen(true)
+          }
+        }}
+      />
 
       <ModifyMyInfoContent>
         {/* 닉네임 */}
-        <ModifyNickname nickname={nickname} setNickname={setNickname} />
+        <ModifyNickname
+          nickname={nickname}
+          setNickname={setNickname}
+          isError={isError}
+          setIsError={setIsError}
+          errorText={errorText}
+        />
         <Hr _margin="24px 0px" />
 
         {/* 고민 */}
@@ -153,7 +169,9 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
                 textColor="logo"
                 _width="135px"
                 _padding="18px 0"
-                _onClick={handleClose}
+                _onClick={() => {
+                  setOpen(false)
+                }}
               />
               <Button
                 buttonType="secondary"

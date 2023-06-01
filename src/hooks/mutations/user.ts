@@ -62,13 +62,13 @@ export const useCheckNicknameMutation = <T>(
   nickname: string,
   setIsError: React.Dispatch<React.SetStateAction<boolean>>,
   setErrorText: React.Dispatch<React.SetStateAction<string>>,
-  setStep: React.Dispatch<React.SetStateAction<number>>,
+  handleNickname: () => void,
   options?: T
 ) => {
   return useMutation(async () => await apis.checkNickname(nickname), {
     onSuccess: (res: any) => {
       if (res.data === '' && useFilterling(nickname)) {
-        setStep(2)
+        handleNickname()
       } else {
         setIsError(true)
 
