@@ -4,6 +4,7 @@ import useDeleteToken from 'hooks/useDeleteToken'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { type IError } from 'type/db'
+import { useFilterling } from '..'
 
 export const useLoginMutation = <T>(persistent: boolean, options?: T) => {
   const navigate = useNavigate()
@@ -52,6 +53,39 @@ export const useLogoutMutation = <T>(options?: T) => {
     },
     onError: (err: IError) => {
       console.log(err)
+    },
+    ...options
+  })
+}
+
+export const useCheckNicknameMutation = <T>(
+  nickname: string,
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>,
+  setErrorText: React.Dispatch<React.SetStateAction<string>>,
+  setStep: React.Dispatch<React.SetStateAction<number>>,
+  options?: T
+) => {
+  return useMutation(async () => await apis.checkNickname(nickname), {
+    onSuccess: (res: any) => {
+      if (res.data === '' && useFilterling(nickname)) {
+        setStep(2)
+      } else {
+        setIsError(true)
+
+        if (res.data.status === 1100) {
+          setErrorText('중복된 닉네임입니다')
+        } else if (res.data.status === 1101) {
+          setErrorText('2-8글자 이내로 작성해주세요')
+        } else if ([1102, 1103, 1104].includes(res.data.status)) {
+          setErrorText('영문, 숫자, 띄어쓰기, 특수문자 사용 불가합니다')
+        } else {
+          setErrorText('사용불가 닉네임입니다')
+        }
+      }
+    },
+    onError: () => {
+      setIsError(true)
+      setErrorText('사용불가 닉네임입니다')
     },
     ...options
   })

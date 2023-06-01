@@ -16,7 +16,7 @@ import {
 import type { ColorType, IconType } from 'type/common'
 
 // hooks
-import { useCheckNickname } from 'hooks/queries/checknickname'
+import { useCheckNicknameMutation } from 'hooks/mutations/user'
 import { useSignUpQuery } from 'hooks/queries'
 
 // component
@@ -68,10 +68,10 @@ const SignUpPage = () => {
     socialLoginType
   })
 
-  const nicknameQuery = useCheckNickname(nickname, setIsError, setErrorText, setStep)
+  const { mutate } = useCheckNicknameMutation(nickname, setIsError, setErrorText, setStep)
 
   const handleCheckNickname = () => {
-    nicknameQuery.refetch().catch(() => {})
+    mutate()
   }
 
   const handleSignUp = () => {
