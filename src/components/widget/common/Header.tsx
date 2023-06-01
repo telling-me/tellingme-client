@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 // components
 import { Button } from 'components/core'
@@ -8,9 +8,10 @@ import { Button } from 'components/core'
 import Icons from 'assets/icons'
 
 const Header = () => {
+  const theme = useTheme()
   return (
     <HeaderWrapper>
-      <Icons.Logo />
+      <Icons.Logo width={81} fill={theme.colors.logo} />
       <Button icon="setting" contentType="icon" buttonType="noFilled" iconColor="gray6" iconSize="small" />
     </HeaderWrapper>
   )

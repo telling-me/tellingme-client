@@ -26,8 +26,8 @@ const CommonLayout = () => {
       transition: { type: 'spring', duration: 0.6 }
     },
     exit: {
-      x: (windowSize.width as number) < 1024 ? (prevPage < currPage ? '-150%' : '150%') : 0,
-      y: (windowSize.width as number) < 1024 ? 0 : prevPage < currPage ? '-150%' : '150%',
+      x: windowSize.width < 1024 ? (prevPage < currPage ? '-150%' : '150%') : 0,
+      y: windowSize.width < 1024 ? 0 : prevPage < currPage ? '-150%' : '150%',
       transition: { type: 'spring', duration: 0.6 }
     }
   }

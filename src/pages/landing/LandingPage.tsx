@@ -14,16 +14,18 @@ import { motion } from 'framer-motion'
 
 const LandingPage = () => {
   return (
-    <LandingWrapper>
-      <LandingBrand />
-      <LandingInfo>
-        <LandingQuestion />
-        <LandingEmotion />
-        <LandingAnswer />
-        <LandingCatchPhrase />
-      </LandingInfo>
-      <LandingFooter />
-    </LandingWrapper>
+    <>
+      <LandingWrapper>
+        <LandingBrand />
+        <LandingInfo>
+          <LandingQuestion />
+          <LandingEmotion />
+          <LandingAnswer />
+          <LandingCatchPhrase />
+        </LandingInfo>
+        <LandingFooter />
+      </LandingWrapper>
+    </>
   )
 }
 

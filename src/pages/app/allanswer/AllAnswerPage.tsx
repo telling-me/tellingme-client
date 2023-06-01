@@ -2,12 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 // components
-import { LandingBubble, Button } from 'components'
+import { Button } from 'components'
 
 const AllAnswerPage = () => {
   return (
     <AllAnswerWrapper>
-      <LandingBubble />
       <Button
         buttonType="primary"
         contentType="text"
