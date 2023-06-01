@@ -12,8 +12,8 @@ export const useCheckIdQuery = (loginType: string, socialId: string, idToken?: s
     onSuccess: (res: any) => {
       navigate('/app/main')
       useSaveToken({
-        accessToken: res.data.data.accessToken,
-        refreshToken: res.data.data.refreshToken
+        accessToken: res.data.accessToken,
+        refreshToken: res.data.refreshToken
       })
     },
     onError: (err: any) => {

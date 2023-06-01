@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
@@ -17,7 +16,7 @@ import {
 import type { ColorType, IconType } from 'type/common'
 
 // hooks
-import { useCheckNickname } from 'hooks/queries/checknickname'
+import { useCheckNicknameMutation } from 'hooks/mutations/user'
 import { useSignUpQuery } from 'hooks/queries'
 
 // component
@@ -26,6 +25,7 @@ import { Button, CheckBox, Dropdown, Input, ProgressBar, Icon } from 'components
 import style from 'styles/styled-components/styled'
 import BasicIcon from 'assets/icons'
 import useWindowSize from 'hooks/useWindowSize'
+import { requestPermission } from 'firebase-messaging-sw'
 import { useTheme } from 'styled-components'
 
 const SignUpPage = () => {
@@ -68,10 +68,12 @@ const SignUpPage = () => {
     socialLoginType
   })
 
-  const nicknameQuery = useCheckNickname(nickname, setIsError, setErrorText, setStep)
+  const { mutate } = useCheckNicknameMutation(nickname, setIsError, setErrorText, () => {
+    setStep(2)
+  })
 
   const handleCheckNickname = () => {
-    nicknameQuery.refetch().catch(() => {})
+    mutate()
   }
 
   const handleSignUp = () => {
@@ -205,6 +207,7 @@ const SignUpPage = () => {
                   _disabled={mbti === undefined}
                   _onClick={() => {
                     handleNextStep()
+                    requestPermission()
                   }}
                 />
               )}
@@ -481,6 +484,7 @@ const SignUpPage = () => {
               _disabled={mbti === undefined}
               _onClick={() => {
                 handleNextStep()
+                requestPermission()
               }}
             />
           )}

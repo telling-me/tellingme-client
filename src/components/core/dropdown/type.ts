@@ -8,7 +8,9 @@ export interface IDropdown {
   data: string[] | number[]
   _selected: string | undefined
   _setSelected: Dispatch<SetStateAction<string | undefined>>
+  direction?: 'up' | 'down'
   label?: string
   _maxWidth?: string
   _margin?: string
+  _disabled?: boolean
 }

@@ -29,7 +29,7 @@ export const DropdownButton = styled.button<{ dropdownSize: DropdownSizeType }>`
         `
       : css`
           border-radius: 18px;
-          padding: 16.5px 30px;
+          padding: 16.5px 20px;
         `}
 `
 
@@ -38,7 +38,7 @@ export const DropdownInnerWrapper = styled.div<{ dropdownSize: DropdownSizeType 
   flex-direction: row;
   align-items: center;
 
-  gap: ${({ dropdownSize }) => (dropdownSize === 'small' ? '8px' : '10px')};
+  gap: ${({ dropdownSize }) => (dropdownSize === 'small' ? '8px' : '4px')};
 `
 
 export const DropdownSelectedField = styled.div`
@@ -47,12 +47,18 @@ export const DropdownSelectedField = styled.div`
   width: 100%;
 `
 
-export const DropdownList = styled.div<{ dropdownSize: DropdownSizeType; listLength: string }>`
+export const DropdownList = styled.div<{
+  dropdownSize: DropdownSizeType
+  listLength: string
+  direction: 'up' | 'down'
+}>`
   display: flex;
   flex-direction: column;
 
+  z-index: 100;
+
   position: absolute;
-  bottom: ${({ listLength }) => `-${parseInt(listLength) + 8}px`};
+  // bottom: ${({ listLength }) => `-${parseInt(listLength) + 8}px`};/
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
@@ -63,13 +69,16 @@ export const DropdownList = styled.div<{ dropdownSize: DropdownSizeType; listLen
   max-height: 208px;
   background-color: ${(props) => props.theme.colors.side.side200};
   border-radius: ${({ dropdownSize }) => (dropdownSize === 'small' ? '16px' : '18px')};
+
+  ${({ direction, listLength }) =>
+    direction === 'up' ? `top: -${parseInt(listLength) + 8}px` : `bottom: -${parseInt(listLength) + 8}px;`}
 `
 
 export const DropdownItem = styled.button<{ dropdownSize: DropdownSizeType }>`
   text-align: left;
   cursor: pointer;
 
-  padding: ${({ dropdownSize }) => (dropdownSize === 'small' ? '12px 30px' : '17.5px 30px')};
+  padding: ${({ dropdownSize }) => (dropdownSize === 'small' ? '12px 30px' : '17.5px 20px')};
 
   &:hover,
   &:focus {

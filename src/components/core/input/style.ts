@@ -5,7 +5,7 @@ export const InputComponent = styled.div<{ _margin?: string; _width: string; _ma
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 28px;
+  gap: 8px;
 
   ${({ _width }) => `width: ${_width}`};
   ${({ _maxWidth }) => _maxWidth != null && `max-width: ${_maxWidth};`}
@@ -19,11 +19,13 @@ export const InputOuterFrame2 = styled.div<{ isVisible: boolean; _value: string 
   position: relative;
 
   width: 100%;
+  padding: 15px 0px;
 
   cursor: text;
 
   svg {
     visibility: hidden;
+    z-index: 1;
   }
 
   ${({ isVisible }) =>
@@ -50,6 +52,8 @@ export const InputInnerFrame = styled.input<{ isError?: boolean }>`
   width: 100%;
   padding: 20px 30px;
 
+  ${({ theme }) => theme.typo.body.b1}
+
   &::placeholder {
     color: ${(props) => props.theme.colors.gray.gray4};
   }
@@ -58,7 +62,8 @@ export const InputInnerFrame = styled.input<{ isError?: boolean }>`
   border-radius: 18px;
 
   &:focus {
-    outline: 2px solid ${(props) => props.theme.colors.side.side400};
+    outline: none;
+    border: 2px solid ${(props) => props.theme.colors.side.side400};
   }
 
   &:disabled {

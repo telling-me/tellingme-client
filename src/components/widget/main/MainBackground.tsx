@@ -24,7 +24,6 @@ const MainBackground = () => {
     </BackgroundWrapper>
   )
 }
-
 const BackgroundWrapper = styled(style.Grid)`
   ${({ theme }) => theme.common.flexCenter}
   position: absolute;

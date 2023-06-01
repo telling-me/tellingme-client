@@ -15,6 +15,8 @@
     <meta name="appleid-signin-redirect-uri" content="http://localhost:3000/oauth/apple" />
     <meta name="appleid-signin-state" content="signin" />
     <meta name="appleid-signin-use-popup" content="true" />
+    <!-- safari -->
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
     <!-- or false defaults to false -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -37,6 +39,16 @@
       window.location.host !== 'localhost:3000' &&
         document.write('<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />')
     </script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+
+    <!-- message(push) 추가 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
   </head>
   <body>
@@ -55,5 +67,10 @@
   </body>
   <style>
     @import url('//cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css');
+
+    html {
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+    }
   </style>
 </html>

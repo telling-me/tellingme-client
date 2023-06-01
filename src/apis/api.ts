@@ -14,7 +14,8 @@ export const KAKAO_USER_INFO_API = axios.create({
 
 API.interceptors.request.use(function (config) {
   const token = getCookie('accessToken')
-  config.headers.accessToken = token ?? ''
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/restrict-template-expressions
+  if (token) config.headers.accessToken = token
 
   return config
 })

@@ -12,7 +12,16 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <Icons.Logo width={81} fill={theme.colors.logo} />
-      <Button icon="setting" contentType="icon" buttonType="noFilled" iconColor="gray6" iconSize="small" />
+      <Button
+        icon="setting"
+        contentType="icon"
+        buttonType="noFilled"
+        iconColor="gray6"
+        iconSize="small"
+        _onClick={() => {
+          window.location.href = '/setting'
+        }}
+      />
     </HeaderWrapper>
   )
 }
@@ -25,6 +34,8 @@ const HeaderWrapper = styled.header`
   position: absolute;
   background-color: ${({ theme }) => theme.colors.side.side100};
   transition: 0.3s;
+
+  z-index: 1;
 
   @media all and (min-width: 1200px) {
     max-width: 1200px;
