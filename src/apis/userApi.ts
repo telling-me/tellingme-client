@@ -1,4 +1,4 @@
-import { API, KAKAO_TOKEN_API, KAKAO_USER_INFO_API } from 'configs/axios'
+import { API, KAKAO_TOKEN_API, KAKAO_USER_INFO_API } from 'apis/api'
 
 type SocialLoginType = 'kakao' | 'apple'
 
@@ -34,6 +34,15 @@ export interface IJoinResponseDto {
   purpose: string
   socialId: string
   socialLoginType: SocialLoginType
+}
+export interface IUserInfoDto {
+  birthDate?: string
+  gender?: string
+  job: number
+  jobInfo: string
+  mbti?: string
+  nickname: string
+  purpose: string
 }
 export const userApi = {
   login: async (loginData: ILoginData) => await API.post('/member/auth/login', loginData),
@@ -84,6 +93,42 @@ export const userApi = {
     return await API.post(
       '/api/oauth/nickname',
       { nickname },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
+  },
+  getUserInfo: async () => {
+    return await API.get('/api/user')
+  },
+  getUserNoti: async () => {
+    return await API.get('/api/user/notification')
+  },
+  postUserNoti: async () => {
+    return await API.post(
+      `/api/user/update/notification`,
+      {},
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
+  },
+  patchUserInfo: async (userInfoDto: IUserInfoDto) => {
+    return await API.patch('/api/user/update', userInfoDto)
+  },
+  deleteUser: async () => {
+    return await API.post(
+      '/api/user/withdraw',
+      {},
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
+  },
+  logout: async () => {
+    return await API.post(
+      '/api/user/logout',
+      {},
       {
         headers: { 'Content-Type': 'application/json' }
       }

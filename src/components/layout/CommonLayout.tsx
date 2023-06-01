@@ -3,13 +3,35 @@ import { Outlet } from 'react-router-dom'
 
 // animation
 import { motion } from 'framer-motion'
-import { AppAni } from 'styles/ani'
 
 // components
 import styled from 'styled-components'
 import { Header, TabBar } from 'components'
+import useWindowSize from 'hooks/useWindowSize'
+import useCommonStore from 'stores/useCommonStore'
 
 const CommonLayout = () => {
+  const windowSize = useWindowSize()
+  const { prevPage, currPage } = useCommonStore()
+
+  const AppAni = {
+    init: {
+      x: window.innerWidth < 1024 ? (prevPage < currPage ? '150%' : '-150%') : 0,
+      y: window.innerWidth < 1024 ? 0 : prevPage < currPage ? '150%' : '-150%',
+      transition: { type: 'spring', duration: 0 }
+    },
+    ani: {
+      x: 0,
+      y: 0,
+      transition: { type: 'spring', duration: 0.6 }
+    },
+    exit: {
+      x: windowSize.width < 1024 ? (prevPage < currPage ? '-150%' : '150%') : 0,
+      y: windowSize.width < 1024 ? 0 : prevPage < currPage ? '-150%' : '150%',
+      transition: { type: 'spring', duration: 0.6 }
+    }
+  }
+
   return (
     <ParentWrapper>
       <InnerWrapper>

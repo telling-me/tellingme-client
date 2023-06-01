@@ -1,13 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
-
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
-
 // assets
 import Icon from 'assets/icons'
-
 const MainBackground = () => {
   const windowSize = useWindowSize()
   return (
@@ -28,7 +25,6 @@ const MainBackground = () => {
     </BackgroundWrapper>
   )
 }
-
 const BackgroundWrapper = styled(style.Grid)`
   ${({ theme }) => theme.common.flexCenter}
   position: absolute;
@@ -40,15 +36,12 @@ const BackgroundCircle = styled(style.Grid)`
     linear-gradient(51.82deg, #7cefa7 1.24%, #8fd3f4 89.34%) border-box;
   border: 2px dashed #fffdfa;
   border-radius: 100%;
-
   // max
   max-width: 1200px;
   max-height: 1200px;
-
   // min
   min-width: 408px;
   min-height: 408px;
 `
 const SmallLogoWrapper = styled(style.Grid)``
-
 export default MainBackground

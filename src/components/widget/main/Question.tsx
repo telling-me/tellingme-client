@@ -25,24 +25,14 @@ const Question = () => {
   const { data: { data: question = null } = {} } = useGetQuestionQuery(formatStringDate(today))
 
   return (
-    <style.Grid flex="start" _width="auto" direction="column" align="center" _margin="0 25px">
+    <style.Grid flex="start" _width="100%" direction="column" align="center">
       <QuestionDateWrapper flex="center">
         <style.TextSpan typo="c" textColor="side500">
           {`${question?.date[0] as string}년 ${question?.date[1] as string}월 ${question?.date[2] as string}일`}
         </style.TextSpan>
       </QuestionDateWrapper>
-      {/**
-       * TODO: width가 425px 에서 내려가야됨
-       */}
       <QuestionWrapper flex="center" _margin="53px 0 36px">
-        <QuestionInnerWrapper
-          flex="center"
-          _width="100%"
-          _height="70px"
-          direction="column"
-          _gap="16px"
-          _margin="0 30px"
-        >
+        <QuestionInnerWrapper flex="center" _width="100%" _height="70px" direction="column" _gap="16px">
           <style.TextP typo="b1" textColor="logo" textAlign="center" wordBreak="keep-all">
             {question?.title}
           </style.TextP>
@@ -65,7 +55,7 @@ const Question = () => {
       >
         <Icon.Pen width="30px" height="30px" />
       </QuestionButtonWrapper>
-      {answer?.status !== 4002 && (
+      {answer !== null && answer?.status !== 4002 && (
         <style.TextP typo="c" textColor="logo" _margin="12px 0 0 0">
           답변 완료!
         </style.TextP>
@@ -91,7 +81,7 @@ const QuestionWrapper = styled(style.Grid)`
 `
 
 const QuestionInnerWrapper = styled(style.Grid)`
-  max-width: 265px;
+  width: 265px;
 `
 
 const BubbleWrapper = styled(style.Grid)`

@@ -57,14 +57,15 @@ const HeaderWrapper = styled.div`
   height: fit-content;
 
   background-color: ${(props) => props.theme.colors.side.side100};
+  transition: 0.2s;
 
-  @media all and (min-width: 1024px) {
+  @media all and (min-width: 1200px) {
     max-width: 1200px;
     margin: 0 auto;
     padding: 8px 0px 12px 0px;
   }
 
-  @media all and (min-width: 768px) and (max-width: 1023px) {
+  @media all and (min-width: 768px) and (max-width: 1199px) {
     padding: 8px 60px 12px 60px;
   }
 

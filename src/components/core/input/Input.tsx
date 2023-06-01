@@ -1,8 +1,15 @@
 import React, { useState } from 'react'
-import { InputComponent, InputInnerFrame, InputOuterFrame2 } from './style'
+
+// component
 import style from 'styles/styled-components/styled'
+import Icons from 'assets/icons'
+import { InputComponent, InputInnerFrame, InputOuterFrame2 } from './style'
+
+// type
 import type { IInput } from './type'
-import { Icon } from 'components'
+
+// hooks
+import useChangeColor from 'hooks/useChangeColor'
 
 const Input = ({
   _placeholder,
@@ -56,14 +63,21 @@ const Input = ({
         />
 
         {isError ? (
-          <Icon icon="warning" iconSize="medium" iconColor="error400" _margin="0px 30px 0px auto" />
+          <Icons.Warning
+            width="24"
+            height="24"
+            stroke={useChangeColor('error400')}
+            style={{ margin: '0 30px 0 auto' }}
+          />
         ) : (
-          <Icon
-            icon="xcircle"
-            iconSize="medium"
-            iconColor="side500"
-            _margin="0px 30px 0px auto"
-            _onClick={handleReset}
+          <Icons.XCircle
+            width="24"
+            height="24"
+            stroke={useChangeColor('side500')}
+            style={{ margin: '0 30px 0 auto' }}
+            onClick={() => {
+              handleReset()
+            }}
           />
         )}
       </InputOuterFrame2>
