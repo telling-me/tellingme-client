@@ -1,10 +1,9 @@
-export { default as LandingHeader } from './LandingHeader'
-export { default as LandingBubble } from './LandingBubble'
 export { default as Header } from './common/Header'
 export { default as TabBar } from './common/TabBar'
 export { default as Footer } from './common/Footer'
 
 // landing
+export { default as LandingHeader } from './landing/LandingHeader'
 export { default as LandingBrand } from './landing/LandingBrand'
 export { default as LandingQuestion } from './landing/LandingQuestion'
 export { default as LandingEmotion } from './landing/LandingEmotion'

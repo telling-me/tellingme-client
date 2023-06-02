@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // component
 import { Icon } from 'components'
@@ -6,14 +7,18 @@ import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 
 const SettingHeader = () => {
+  const navigate = useNavigate()
   return (
     <SettingHeaderWrapper>
-      <BackButton
-        onClick={() => {
-          window.location.href = '/app/main'
-        }}
-      >
-        <Icon icon="arrowleft" iconSize="medium" iconColor="gray6" />
+      <BackButton>
+        <Icon
+          icon="arrowleft"
+          iconSize="medium"
+          iconColor="gray6"
+          _onClick={() => {
+            navigate('/app/main')
+          }}
+        />
       </BackButton>
 
       <style.TextP typo="h6_b" textColor="gray6" _margin="0 auto">

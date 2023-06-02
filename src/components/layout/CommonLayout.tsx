@@ -6,11 +6,17 @@ import { motion } from 'framer-motion'
 
 // components
 import styled from 'styled-components'
-import { Header, TabBar } from 'components'
+import { Header, QuestionWriteModal, TabBar } from 'components'
+
+// hooks
 import useWindowSize from 'hooks/useWindowSize'
+
+// stores
 import useCommonStore from 'stores/useCommonStore'
 
 const CommonLayout = () => {
+  const params = new URLSearchParams(window.location.search)
+
   const windowSize = useWindowSize()
   const { prevPage, currPage } = useCommonStore()
 
@@ -33,15 +39,18 @@ const CommonLayout = () => {
   }
 
   return (
-    <ParentWrapper>
-      <InnerWrapper>
-        <Header />
-        <Inner initial="init" animate="ani" exit="exit" variants={AppAni}>
-          <Outlet />
-        </Inner>
-        <TabBar />
-      </InnerWrapper>
-    </ParentWrapper>
+    <>
+      <ParentWrapper>
+        <InnerWrapper>
+          <Header />
+          <Inner initial="init" animate="ani" exit="exit" variants={AppAni}>
+            <Outlet />
+          </Inner>
+          <TabBar />
+        </InnerWrapper>
+      </ParentWrapper>
+      {params.get('date') != null && <QuestionWriteModal />}
+    </>
   )
 }
 

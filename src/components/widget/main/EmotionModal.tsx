@@ -16,18 +16,18 @@ const EmotionModal = () => {
   return (
     <ModalWrapper flex="center" variants={modalAni} initial="init" animate="ani" exit="exit">
       <ModalInnerWrapper flex="between" direction="column">
-        <style.Grid flex="center" direction="column" _gap="8px">
-          <style.TextP typo="b1">오늘의 감정을 떠올려 보아요</style.TextP>
-          <style.TextP typo="b2" textColor="gray5">
+        <Grid flex="center" direction="column" _gap="8px">
+          <TextP typo="b1">오늘의 감정을 떠올려 보아요</TextP>
+          <TextP typo="b2" textColor="gray5">
             나는 어떤 마음이었을까?
-          </style.TextP>
-        </style.Grid>
+          </TextP>
+        </Grid>
         <EmotionGridWrapper>
           {new Array(12).fill(null).map((item, idx) => (
             <Emotion key={idx} />
           ))}
         </EmotionGridWrapper>
-        <style.Grid flex="center" _gap="15px">
+        <Grid flex="center" _gap="15px">
           <Button
             buttonType="tertiary"
             contentType="text"
@@ -48,11 +48,13 @@ const EmotionModal = () => {
               setIsEmotionModal(false)
             }}
           />
-        </style.Grid>
+        </Grid>
       </ModalInnerWrapper>
     </ModalWrapper>
   )
 }
+
+const { Grid, TextP } = style
 
 const ModalWrapper = styled(style.Grid)`
   position: absolute;

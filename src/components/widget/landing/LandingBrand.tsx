@@ -22,6 +22,7 @@ import useWindowSize from 'hooks/useWindowSize'
 
 // utils
 import { mediaQuery } from 'utils/mediaQuery'
+import LandingHeader from './LandingHeader'
 
 const LandingBrand = () => {
   const windowSize = useWindowSize()
@@ -30,6 +31,7 @@ const LandingBrand = () => {
 
   return (
     <LandingWrapper ref={landingRef}>
+      <LandingHeader />
       <AbsoluteLogoBubble variants={landingBubbleAni} initial="init" animate="ani">
         <Icon.Bubble />
       </AbsoluteLogoBubble>
@@ -86,7 +88,7 @@ const LandingWrapper = styled(motion.div)`
 
 const LogoWrapper = styled(motion.div)`
   position: absolute;
-  z-index: 9000;
+  z-index: 8500;
   svg {
     transition: 0.3s;
     @media all and (min-width: 1200px) {

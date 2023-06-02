@@ -8,6 +8,8 @@ import { ReactComponent as LandingEmotionModalMobile } from './LandingEmotionMod
 import { ReactComponent as LandingCatchPhraseCircle } from './LandingCatchPhraseCircle.svg'
 import { ReactComponent as LandingAnswer1 } from './LandingAnswer1.svg'
 import { ReactComponent as LandingAnswer2 } from './LandingAnswer2.svg'
+import { ReactComponent as LandingAnswer3 } from './LandingAnswer3.svg'
+import { ReactComponent as LandingAnswer4 } from './LandingAnswer4.svg'
 import { ReactComponent as LandingQuestionList } from './LandingQuestionList.svg'
 import { ReactComponent as LandingPhone } from './LandingPhone.svg'
 import { ReactComponent as LandingCircle } from './LandingCircle.svg'
@@ -83,6 +85,8 @@ interface IIconIndex extends IStringKey {
   LandingQuestionList: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingAnswer1: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingAnswer2: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingAnswer3: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingAnswer4: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingCircle: string | FunctionComponent<any> | ComponentClass<any, any>
   Logo: string | FunctionComponent<any> | ComponentClass<any, any>
   LogoSmallBubble1: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -108,6 +112,8 @@ const Icon: IIconIndex = {
   LandingQuestionList,
   LandingAnswer1,
   LandingAnswer2,
+  LandingAnswer3,
+  LandingAnswer4,
   LandingPhone,
   LandingCircle,
   LogoSmallBubble1,

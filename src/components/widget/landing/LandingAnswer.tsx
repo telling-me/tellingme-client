@@ -131,10 +131,8 @@ const LandingAnswer = () => {
             <Slider {...settings}>
               <Icon.LandingAnswer1 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '303px'} />
               <Icon.LandingAnswer2 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '303px'} />
-              <Icon.LandingAnswer2 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '303px'} />
-              <Icon.LandingAnswer1 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '303px'} />
-              <Icon.LandingAnswer2 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '303px'} />
-              <Icon.LandingAnswer1 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '303px'} />
+              <Icon.LandingAnswer3 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '303px'} />
+              <Icon.LandingAnswer4 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '303px'} />
             </Slider>
           </AnswerSlide>
         </Grid>

@@ -1,16 +1,24 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 // components
 import { Button } from 'components/core'
 
 // assets
 import Icons from 'assets/icons'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Header = () => {
+  const theme = useTheme()
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  if (location.pathname.includes('setting')) {
+    return <></>
+  }
   return (
     <HeaderWrapper>
-      <Icons.Logo />
+      <Icons.Logo width={81} fill={theme.colors.logo} />
       <Button
         icon="setting"
         contentType="icon"
@@ -18,7 +26,7 @@ const Header = () => {
         iconColor="gray6"
         iconSize="small"
         _onClick={() => {
-          window.location.href = '/setting'
+          navigate('setting')
         }}
       />
     </HeaderWrapper>
@@ -46,6 +54,7 @@ const HeaderWrapper = styled.header`
 
   @media all and (max-width: 767px) {
     padding: 20px 21px 12px 25px;
+  }
 `
 
 export default Header

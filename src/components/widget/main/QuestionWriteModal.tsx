@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import style from 'styles/styled-components/styled'
+import { useLocation, useNavigate } from 'react-router-dom'
 // store
 import useQuestionStore from 'stores/useQuestionStore'
 
 // components
-import { Button, Modal, Toggle } from 'components/core'
+import { Button, EmotionModal, Modal, Toggle } from 'components'
+import styled from 'styled-components'
+import style from 'styles/styled-components/styled'
 
 // assets
 import Icon from 'assets/icons'
@@ -20,12 +21,17 @@ import { apis } from 'apis/apis'
 import { formatStringDate } from 'utils/date'
 
 const QuestionWriteModal = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+
   // store
-  const { setIsEmotionModal, setIsWriteModal } = useQuestionStore()
+  const { isEmotionModalOn, setIsEmotionModal } = useQuestionStore()
 
   // query
   const { data: { data: answer = null } = {} } = useGetAnswerQuery(formatStringDate(new Date()))
   const { data: { data: question = null } = {} } = useGetQuestionQuery(formatStringDate(new Date()))
+
+  const backUrl = location.hash.split('?date')[1]
 
   const [cancel, setCancel] = useState<boolean>(false)
   const [text, setText] = useState<string>(answer !== null && answer?.status !== 4002 ? answer?.data : '')
@@ -41,7 +47,7 @@ const QuestionWriteModal = () => {
     apis
       .postAnswer(formatStringDate(new Date()), text, 1)
       .then(() => {
-        setIsWriteModal(false)
+        navigate(backUrl)
       })
       .catch((err) => {
         console.log(err)
@@ -119,6 +125,7 @@ const QuestionWriteModal = () => {
             </FooterWrapper>
           </ModalInnerWrapper>
         </ModalWrapper>
+        {Boolean(isEmotionModalOn) && <EmotionModal />}
       </Modal>
       {cancel && (
         <Modal _width="100%" _maxWidth="325px" _height="174px" _borderRadius="20px" _padding="30px 20px 20px 20px">
@@ -151,7 +158,7 @@ const QuestionWriteModal = () => {
                 textColor="logo"
                 text="나갈래요"
                 _onClick={() => {
-                  setIsWriteModal(false)
+                  navigate(backUrl)
                 }}
               ></Button>
             </style.Grid>
