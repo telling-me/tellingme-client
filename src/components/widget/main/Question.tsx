@@ -23,18 +23,18 @@ const Question = () => {
     <Grid flex="start" _width="100%" direction="column" align="center">
       <QuestionDateWrapper flex="center">
         <TextSpan typo="c" textColor="side500">
-          {`${question?.date[0] as string}년 ${question?.date[1] as string}월 ${question?.date[2] as string}일`}
+          {`${question?.date?.[0] as string}년 ${question?.date?.[1] as string}월 ${question?.date?.[2] as string}일`}
         </TextSpan>
       </QuestionDateWrapper>
       <QuestionWrapper flex="center" _margin="53px 0 36px">
         <QuestionInnerWrapper flex="center" _width="100%" _height="70px" direction="column" _gap="16px">
-          {question?.title.split('\n').map((line: string) => (
+          {question?.title?.split('\n').map((line: string) => (
             <TextP key={line} typo="b1" textColor="logo" textAlign="center" wordBreak="keep-all">
               {line}
             </TextP>
           ))}
 
-          {question?.phrase.split('\n').map((line: string) => (
+          {question?.phrase?.split('\n').map((line: string) => (
             <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
               {line}
             </TextP>
