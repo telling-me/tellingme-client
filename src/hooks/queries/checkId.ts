@@ -1,28 +1,14 @@
 import { apis } from 'apis/apis'
-import { useNavigate } from 'react-router-dom'
 
-// hooks
-import useSaveToken from 'hooks/useSaveToken'
-
-export const useCheckIdQuery = (loginType: string, socialId: string, idToken?: string) => {
-  const navigate = useNavigate()
+export const useCheckIdQuery = (loginType: string, socialId: string) => {
   return {
     queryKey: ['userToken'],
-    queryFn: async () => await apis.checkUserInfo(loginType, socialId, idToken),
+    queryFn: async () => await apis.checkUserInfo(loginType, socialId),
     onSuccess: (res: any) => {
-      navigate('/app/main')
-      useSaveToken({
-        accessToken: res.data.accessToken,
-        refreshToken: res.data.refreshToken
-      })
+      return res
     },
     onError: (err: any) => {
-      navigate('/signup', {
-        state: {
-          socialId: err.response.data.socialId,
-          socialLoginType: err.response.data.socialLoginType
-        }
-      })
+      return err
     },
     enabled: socialId.length > 0,
     retry: 0

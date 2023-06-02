@@ -12,11 +12,9 @@ export enum PAGE_URL {
   Main = 'main',
   MyAnswer = 'myAnswer',
   AllAnswer = 'Allanswer',
+  Setting = 'setting',
 
   // NewsLetter
   NewsLetter = 'newsletter',
-  NewsLetterComplete = 'complete',
-
-  // Setting
-  Setting = 'setting'
+  NewsLetterComplete = 'complete'
 }

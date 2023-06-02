@@ -10,7 +10,6 @@ import LandingLayout from 'components/layout/LandingLayout'
 import KakaoLayout from 'components/layout/KakaoLayout'
 import AppleLayout from 'components/layout/AppleLayout'
 import NewsLetterLayout from 'components/layout/NewsLetterLayout'
-import SettingLayout from 'components/layout/SettingLayout'
 
 // path
 import { PAGE_URL } from 'configs/path'
@@ -45,6 +44,7 @@ const PageRouter = () => {
             <Route index path={PAGE_URL.Main} element={<Switch.MainPage />} />
             <Route path={PAGE_URL.AllAnswer} element={<Switch.AllAnswerPage />} />
             <Route path={PAGE_URL.MyAnswer} element={<Switch.MyAnswerPage />} />{' '}
+            <Route path={PAGE_URL.Setting} element={<Switch.SettingPage />} />
             <Route path={'*'} element={<Switch.ErrorPage />} />
           </Route>
           {
@@ -53,12 +53,6 @@ const PageRouter = () => {
           <Route path={PAGE_URL.NewsLetter} element={<NewsLetterLayout />}>
             <Route index element={<Switch.NewsLetterPage />} />
             <Route path={PAGE_URL.NewsLetterComplete} element={<Switch.NewsLetterCompletePage />} />
-          </Route>
-          {
-            // 세팅
-          }
-          <Route path={PAGE_URL.Setting} element={<SettingLayout />}>
-            <Route index element={<Switch.SettingPage />} />
           </Route>
         </Routes>
       </AnimatePresence>

@@ -14,8 +14,15 @@ export const KAKAO_USER_INFO_API = axios.create({
 
 API.interceptors.request.use(function (config) {
   const token = getCookie('accessToken')
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/restrict-template-expressions
-  if (token) config.headers.accessToken = token
+
+  // TODO: 추후에 API 통신 시, 토큰이 필요한 API에 대해서만 토큰을 넣어주도록 수정
+  if (
+    (config.url?.includes('answer') ?? false) ||
+    (config.url?.includes('question') ?? false) ||
+    (config.url?.includes('user') ?? false)
+  ) {
+    if (token !== null || token !== undefined) config.headers.accessToken = token
+  }
 
   return config
 })

@@ -2,20 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 // components
-import { MainBackground, Question, QuestionWriteModal, ContinuousDate, EmotionModal } from 'components'
-
-// store
-import useQuestionStore from 'stores/useQuestionStore'
+import { MainBackground, Question, ContinuousDate } from 'components'
 
 const MainPage = () => {
-  const { isWriteModalOn, isEmotionModalOn } = useQuestionStore()
   return (
     <MainWrapper>
       <ContinuousDate />
       <MainBackground />
       <Question />
-      {Boolean(isWriteModalOn) && <QuestionWriteModal />}
-      {Boolean(isEmotionModalOn) && <EmotionModal />}
     </MainWrapper>
   )
 }

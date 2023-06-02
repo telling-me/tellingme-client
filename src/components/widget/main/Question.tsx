@@ -5,72 +5,68 @@ import style from 'styles/styled-components/styled'
 // assets
 import Icon from 'assets/icons'
 
-// store
-import useQuestionStore from 'stores/useQuestionStore'
-
 // hooks
 import { useGetAnswerQuery, useGetQuestionQuery } from 'hooks/queries'
 
 // utils
 import { formatStringDate } from 'utils/date'
+import { Link } from 'react-router-dom'
 
 const Question = () => {
   const today = new Date()
-
-  // store
-  const { setIsWriteModal } = useQuestionStore()
 
   // query
   const { data: { data: answer = null } = {} } = useGetAnswerQuery(formatStringDate(today))
   const { data: { data: question = null } = {} } = useGetQuestionQuery(formatStringDate(today))
 
   return (
-    <style.Grid flex="start" _width="100%" direction="column" align="center">
+    <Grid flex="start" _width="100%" direction="column" align="center">
       <QuestionDateWrapper flex="center">
-        <style.TextSpan typo="c" textColor="side500">
+        <TextSpan typo="c" textColor="side500">
           {`${question?.date[0] as string}년 ${question?.date[1] as string}월 ${question?.date[2] as string}일`}
-        </style.TextSpan>
+        </TextSpan>
       </QuestionDateWrapper>
       <QuestionWrapper flex="center" _margin="53px 0 36px">
         <QuestionInnerWrapper flex="center" _width="100%" _height="70px" direction="column" _gap="16px">
-          <style.TextP typo="b1" textColor="logo" textAlign="center" wordBreak="keep-all">
-            {question?.title}
-          </style.TextP>
+          {question?.title.split('\n').map((line: string) => (
+            <TextP key={line} typo="b1" textColor="logo" textAlign="center" wordBreak="keep-all">
+              {line}
+            </TextP>
+          ))}
 
-          <style.TextP typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
-            {question?.phrase}
-          </style.TextP>
+          {question?.phrase.split('\n').map((line: string) => (
+            <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
+              {line}
+            </TextP>
+          ))}
         </QuestionInnerWrapper>
         <BubbleWrapper _width="max-content">
           <Icon.Bubble width="43px" height="35px" />
         </BubbleWrapper>
       </QuestionWrapper>
-      <QuestionButtonWrapper
-        flex="center"
-        _width="55px"
-        _height="55px"
-        onClick={() => {
-          setIsWriteModal(true)
-        }}
-      >
-        <Icon.Pen width="30px" height="30px" />
-      </QuestionButtonWrapper>
-      {answer !== null && answer?.status !== 4002 && (
-        <style.TextP typo="c" textColor="logo" _margin="12px 0 0 0">
+      <Link to={`?date=${formatStringDate(today)}`}>
+        <QuestionButtonWrapper flex="center" _width="55px" _height="55px">
+          <Icon.Pen width="30px" height="30px" />
+        </QuestionButtonWrapper>
+      </Link>
+      {answer !== null && answer?.status !== 4003 && (
+        <TextP typo="c" textColor="logo" _margin="12px 0 0 0">
           답변 완료!
-        </style.TextP>
+        </TextP>
       )}
-    </style.Grid>
+    </Grid>
   )
 }
 
-const QuestionDateWrapper = styled(style.Grid)`
+const { Grid, TextP, TextSpan } = style
+
+const QuestionDateWrapper = styled(Grid)`
   width: 125px;
   height: 30px;
   background-color: ${({ theme }) => theme.colors.side.side200};
   border-radius: 20px;
 `
-const QuestionWrapper = styled(style.Grid)`
+const QuestionWrapper = styled(Grid)`
   width: 100%;
   max-width: 425px;
   height: 142px;
@@ -80,16 +76,16 @@ const QuestionWrapper = styled(style.Grid)`
   position: relative;
 `
 
-const QuestionInnerWrapper = styled(style.Grid)`
+const QuestionInnerWrapper = styled(Grid)`
   width: 265px;
 `
 
-const BubbleWrapper = styled(style.Grid)`
+const BubbleWrapper = styled(Grid)`
   position: absolute;
   top: -17px;
 `
 
-const QuestionButtonWrapper = styled(style.Grid)`
+const QuestionButtonWrapper = styled(Grid)`
   background-color: ${({ theme }) => theme.colors.side.side100};
   box-shadow: ${({ theme }) => theme.shadow.shadow1};
   border-radius: 20px;
