@@ -56,7 +56,7 @@ export const userApi = {
     return data
   },
   newsLetter: async (newsLetterData: INewsLetterData) => {
-    return await API.post('/api/newsLetter/', newsLetterData, {
+    return await API.post('/api/newsLetter', newsLetterData, {
       headers: { 'Content-Type': 'application/json' }
     })
   },
