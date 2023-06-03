@@ -1,5 +1,5 @@
-import firebase from 'firebase'
-import 'firebase/messaging'
+import { initializeApp } from 'firebase/app'
+import { getMessaging, getToken } from 'firebase/messaging'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -11,39 +11,32 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 }
 
-if (firebase.apps.length === 0) {
-  firebase.initializeApp(firebaseConfig)
-} else {
-  firebase.app()
-}
+// Initialize Firebase
+const app = initializeApp(firebaseConfig)
 
-const messaging = firebase.messaging()
+// Initialize Firebase Cloud Messaging and get a reference to the service
+const messaging = getMessaging(app)
 
 export function requestPermission() {
-  console.log('Requesting permission...')
+  console.log('푸시 허가 받는 중 ...')
 
   void Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
-      console.log('Notification permission granted.')
-    } else if (permission === 'denied') {
-      console.log('Notification permission denied')
+      console.log('푸시 허가 완료')
+    } else {
+      console.log('푸시 허가 거부')
     }
   })
 
-  messaging
-    .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
-    .then((currentToken) => {
-      if (currentToken.length > 0) {
-        console.log('token : ', currentToken)
+  getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
+    .then((token) => {
+      if (token.length > 0) {
+        console.log('푸시 토큰 : ', token)
       } else {
-        console.log('No registration token available. Request permission to generate one.')
+        console.log('푸시 토큰 유효하지 않음')
       }
     })
     .catch((err) => {
-      console.log('An error occurred while retrieving token. ', err)
+      console.log('푸시 에러 : ', err)
     })
-
-  messaging.onMessage((payload) => {
-    console.log('Message received. ', payload)
-  })
 }
