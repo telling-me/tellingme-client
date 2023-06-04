@@ -1,10 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState } from 'react'
+
+// components
+import styled from 'styled-components'
 import SettingContent from 'components/widget/setting/SettingContent'
 import SettingHeader from 'components/widget/setting/SettingHeader'
 import SettingMenu from 'components/widget/setting/SettingMenu'
+
+// hooks
 import useWindowSize from 'hooks/useWindowSize'
-import React, { useState } from 'react'
-import styled from 'styled-components'
 
 const SettingPage = () => {
   const [isMenu, setIsMenu] = useState(true)
@@ -45,6 +48,8 @@ const SettingPage = () => {
 
 const SettingWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.side.side100};
+
+  width: 100%;
 
   @media all and (max-width: 767px) {
     position: relative;
