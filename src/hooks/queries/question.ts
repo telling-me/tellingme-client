@@ -27,7 +27,7 @@ export const useGetAnswerQuery = <T>(date: string, options?: T) => {
 }
 
 export const useGetAnswerRecordCountQuery = <T>(date: string, options?: T) => {
-  return useQuery(['answerCount'], async () => await apis.getAnswerRecordCount(date), {
+  return useQuery(['answer', 'answerCount'], async () => await apis.getAnswerRecordCount(date), {
     retry: 0,
     onError: (err: IError) => {
       console.log(err)

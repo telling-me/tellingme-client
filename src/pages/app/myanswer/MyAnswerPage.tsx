@@ -1,48 +1,39 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
 // components
-import { TableHeader, Table } from 'components'
+import { TableHeader, Table, NoneData, Ready } from 'components'
+
+// hooks
+import { useGetMyAnswerListQuery } from 'hooks/queries/answer'
+
+// stores
+import useAnswerStore from 'stores/useAnswerStore'
 
 const MyAnswerPage = () => {
-  const [isNormal, setIsNormal] = useState(true)
+  const [isVertical, setIsVertical] = useState(true)
+  const { myAnswerFilter } = useAnswerStore()
+
+  const { data: { data: myAnswer = null } = {} } = useGetMyAnswerListQuery(myAnswerFilter.month, myAnswerFilter.year)
 
   const handleChangeMode = () => {
-    setIsNormal(!isNormal)
+    setIsVertical(!isVertical)
   }
-
-  const fakeData = [
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01'],
-    [1, '텔링미를 사용하실 때 드는 기분은?', '2023. 03. 01']
-  ]
 
   return (
     <MyAnswerWrapper>
-      <TableHeader isSelected={isNormal} _onClick={handleChangeMode} />
-
-      {isNormal ? <Table data={fakeData} /> : <>준비가 되지 않았숩니당 ~!</>}
+      <TableHeader isSelected={isVertical} _onClick={handleChangeMode} />
+      {myAnswer === null || myAnswer === undefined || myAnswer?.length === 0 ? (
+        <NoneData />
+      ) : isVertical ? (
+        <Table data={myAnswer} />
+      ) : (
+        <Ready />
+      )}
     </MyAnswerWrapper>
   )
 }
+
 const MyAnswerWrapper = styled.div`
   display: flex;
   justify-content: center;

@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
+import { motion } from 'framer-motion'
 
 // assets
 import Icon from 'assets/icons'
-import { motion } from 'framer-motion'
 
 // ani
 import { rotateAni, floatAni } from 'styles/ani'

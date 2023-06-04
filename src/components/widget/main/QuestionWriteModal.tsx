@@ -1,58 +1,80 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+
 // store
 import useQuestionStore from 'stores/useQuestionStore'
+import useAnswerStore from 'stores/useAnswerStore'
 
 // components
-import { Button, EmotionModal, Modal, Toggle } from 'components'
-import styled from 'styled-components'
+import { Button, EmotionIcon, EmotionModal, Modal, Toggle } from 'components'
+import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
-
-// assets
-import Icon from 'assets/icons'
+// components - style
+import { DropdownItem, DropdownList } from 'components/core/dropdown/style'
 
 // hooks
+import { useQueryClient } from 'react-query'
 import { useGetAnswerQuery, useGetQuestionQuery } from 'hooks/queries'
-
-// apis
-import { apis } from 'apis/apis'
+import { useUpdateAnswerMutation, usePostAnswerMutation, useDeleteAnswerMutation } from 'hooks/mutations'
 
 // utils
 import { formatStringDate } from 'utils/date'
 
+// assets
+import Icon from 'assets/icons'
+
 const QuestionWriteModal = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const theme = useTheme()
+  const date = new URLSearchParams(window.location.search).get('date')
+  const MAX_LENGTH = 500
+  const MIN_LENGTH = 4
 
   // store
   const { isEmotionModalOn, setIsEmotionModal } = useQuestionStore()
+  const { emotion, setEmotion } = useAnswerStore()
 
   // query
-  const { data: { data: answer = null } = {} } = useGetAnswerQuery(formatStringDate(new Date()))
-  const { data: { data: question = null } = {} } = useGetQuestionQuery(formatStringDate(new Date()))
+  const queryClient = useQueryClient()
+  const { data: { data: answer = null } = {}, isSuccess } = useGetAnswerQuery(
+    formatStringDate(new Date(date as string))
+  )
+  const { data: { data: question = null } = {} } = useGetQuestionQuery(formatStringDate(new Date(date as string)))
+
+  // mutation
+  const { mutate: postAnswerMutate } = usePostAnswerMutation()
+  const { mutate: editAnswerMutate } = useUpdateAnswerMutation()
+  const { mutate: deleteAnswerMutate } = useDeleteAnswerMutation()
 
   const backUrl = location.hash.split('?date')[1]
 
   const [cancel, setCancel] = useState<boolean>(false)
-  const [text, setText] = useState<string>(answer !== null && answer?.status !== 4002 ? answer?.data : '')
+  const [deleteModal, setDeleteModal] = useState<boolean>(false)
+  const [menu, setMenu] = useState<boolean>(false)
+  const [text, setText] = useState<string>(answer?.content ?? '')
   const [shareToggle, setShareToggle] = useState<boolean>(false)
+  const [editable, setEditable] = useState<boolean>(false)
 
-  // 감정 선택 모달
+  const [alreadyAnswered, setAlreadyAnswered] = useState<boolean>(true)
+
   useEffect(() => {
-    setIsEmotionModal(true)
-  }, [])
+    if (isSuccess) {
+      setAlreadyAnswered(Boolean(answer?.content))
+      setText(answer?.content ?? '')
+    }
+  }, [isSuccess])
 
-  const handlePressComplete = () => {
-    // TODO: Mutation으로 Post날리기
-    apis
-      .postAnswer(formatStringDate(new Date()), text, 1)
-      .then(() => {
-        navigate(backUrl)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  useEffect(() => {
+    // 감정 선택 모달 열리기
+    if (!alreadyAnswered) setIsEmotionModal(true)
+
+    // 답변이 있으면 감정 아이콘 세팅
+    // TODO: 첫번째 들어갔을 때 안됨
+    setEmotion(answer?.emotion ?? null)
+
+    setEditable(!alreadyAnswered)
+  }, [alreadyAnswered])
 
   return (
     <>
@@ -60,87 +82,156 @@ const QuestionWriteModal = () => {
         <ModalWrapper flex="center" _alignItems="start">
           <ModalInnerWrapper flex="start" direction="column" _height="100%">
             <ModalHeader flex="between">
-              <style.Grid _width="56px" _height="56px" />
-              <style.Grid
-                flex="center"
-                _width="max-content"
+              <ButtonWrapper
+                flex="start"
                 onClick={() => {
-                  setIsEmotionModal(true)
+                  if (!editable) navigate(backUrl)
                 }}
               >
-                <Icon.Bubble width="56px" height="56px" />
-              </style.Grid>
-              <Button
-                icon="close"
-                contentType="icon"
-                buttonType="noFilled"
-                _onClick={() => {
-                  setCancel(true)
+                {!editable && <Icon.ArrowLeft width={20} stroke={theme.colors.gray.gray6} />}
+              </ButtonWrapper>
+              <Grid
+                flex="center"
+                _width="44px"
+                _height="44px"
+                onClick={() => {
+                  if (!alreadyAnswered) setIsEmotionModal(true)
                 }}
-                iconColor="gray6"
-                iconSize="medium"
-              />
+              >
+                <EmotionIcon emotion={emotion} width={36} fill={theme.colors.logo} stroke={theme.colors.logo} />
+              </Grid>
+              <ButtonWrapper
+                flex="end"
+                onClick={() => {
+                  if (editable) setCancel(true)
+                  else setMenu(!menu)
+                }}
+              >
+                {editable ? (
+                  <Icon.Close width={24} stroke={theme.colors.gray.gray6} />
+                ) : (
+                  <>
+                    <Icon.More width={4} stroke={theme.colors.gray.gray6} />
+                    {menu && (
+                      <DropdownList dropdownSize="small" listLength="104px" direction="down">
+                        <DropdownItem
+                          dropdownSize="small"
+                          onClick={() => {
+                            setEditable(true)
+                          }}
+                        >
+                          <TextSpan typo="b2" textColor="black">
+                            수정
+                          </TextSpan>
+                        </DropdownItem>
+                        <DropdownItem
+                          dropdownSize="small"
+                          onClick={() => {
+                            console.log('dsfd')
+                            setDeleteModal(true)
+                          }}
+                        >
+                          <TextSpan typo="b2" textColor="black">
+                            삭제
+                          </TextSpan>
+                        </DropdownItem>
+                      </DropdownList>
+                    )}
+                  </>
+                )}
+              </ButtonWrapper>
             </ModalHeader>
             <QuestionWrapper flex="start" direction="column" _gap="18px">
-              <style.Grid flex="start" direction="column" _gap="10px">
-                <style.TextP typo="h6" textColor="logo" textAlign="center" wordBreak="keep-all">
+              <Grid flex="start" direction="column" _gap="10px">
+                <TextP typo="h6" textColor="logo" textAlign="center" wordBreak="keep-all">
                   {question?.title}
-                </style.TextP>
+                </TextP>
 
-                <style.TextP typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
+                <TextP typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
                   {question?.phrase}
-                </style.TextP>
-              </style.Grid>
-              <style.TextP typo="c" textColor="side500" textAlign="center">
+                </TextP>
+              </Grid>
+              <TextP typo="c" textColor="side500" textAlign="center">
                 {`${question?.date?.[0] as string}년 ${question?.date?.[1] as string}월 ${
                   question?.date?.[2] as string
                 }일`}
-              </style.TextP>
+              </TextP>
             </QuestionWrapper>
             <StrikeThrough />
             <AnswerTextArea
               placeholder="여기에 기록해주세요!"
               value={text}
-              maxLength={500}
+              maxLength={MAX_LENGTH}
               onChange={(e) => {
                 setText(e.target.value)
               }}
+              disabled={!editable}
             />
             <FooterWrapper flex="start" direction="column">
-              <style.Grid flex="end" _height="14px">
-                <style.TextSpan typo="c_b" textColor="gray6">
-                  {text?.length} / 500
-                </style.TextSpan>
-              </style.Grid>
-              <style.Grid flex="between" _alignItems="start" _padding="10px 0 0 0 ">
-                <Toggle label={['나혼자 보기', '타인과 공유']} value={shareToggle} setValue={setShareToggle} />
-                <Button
-                  buttonType="noFilled"
-                  contentType="text"
-                  text="완료"
-                  _height="100%"
-                  textColor={text?.length < 4 ? 'gray6' : 'logo'}
-                  _disabled={text?.length < 4}
-                  _onClick={handlePressComplete}
-                />
-              </style.Grid>
+              <Grid flex="end" _height="14px">
+                <TextP typo="c_b" textColor="gray6">
+                  {text?.length} / {MAX_LENGTH}
+                </TextP>
+              </Grid>
+              {editable && (
+                <Grid flex="between" _alignItems="start" _padding="10px 0 0 0 ">
+                  <Toggle label={['나혼자 보기', '타인과 공유']} value={shareToggle} setValue={setShareToggle} />
+                  <Button
+                    buttonType="noFilled"
+                    contentType="text"
+                    text="완료"
+                    _height="100%"
+                    textColor={text?.length < MIN_LENGTH ? 'gray6' : 'logo'}
+                    _disabled={text?.length < MIN_LENGTH}
+                    _onClick={() => {
+                      if (!alreadyAnswered)
+                        postAnswerMutate(
+                          { date: date as string, content: text, emotion: emotion as number },
+                          {
+                            onSuccess: async () => {
+                              await queryClient.invalidateQueries('answer')
+                              navigate(backUrl)
+                            },
+                            onError: (error) => {
+                              console.log(error)
+                            }
+                          }
+                        )
+                      editAnswerMutate(
+                        { date: date as string, content: text },
+                        {
+                          onSuccess: async () => {
+                            await queryClient.invalidateQueries('answer')
+                            navigate(backUrl)
+                          },
+                          onError: (error) => {
+                            console.log(error)
+                          }
+                        }
+                      )
+                    }}
+                  />
+                </Grid>
+              )}
             </FooterWrapper>
           </ModalInnerWrapper>
         </ModalWrapper>
         {Boolean(isEmotionModalOn) && <EmotionModal />}
       </Modal>
+
+      {/* modal */}
       {cancel && (
         <Modal _width="100%" _maxWidth="325px" _height="174px" _borderRadius="20px" _padding="30px 20px 20px 20px">
-          <style.Grid flex="between" direction="column" _height="100%">
-            <style.Grid flex="center" direction="column" _gap="8px" _alignItems="center">
-              <style.TextP typo="b1" textColor="black">
+          <Grid flex="between" direction="column" _height="100%">
+            <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
+              <TextP typo="b1" textColor="black">
                 작성을 취소하고 나가시겠어요?
-              </style.TextP>
-              <style.TextP typo="b2" textColor="gray7">
+              </TextP>
+              <TextP typo="b2" textColor="gray7">
                 작성한 답변은 초기화돼요
-              </style.TextP>
-            </style.Grid>
-            <style.Grid flex="between">
+              </TextP>
+            </Grid>
+            <Grid flex="between">
               <Button
                 _width="135px"
                 _height="55px"
@@ -163,31 +254,80 @@ const QuestionWriteModal = () => {
                   navigate(backUrl)
                 }}
               ></Button>
-            </style.Grid>
-          </style.Grid>
+            </Grid>
+          </Grid>
+        </Modal>
+      )}
+
+      {deleteModal && (
+        <Modal _width="100%" _maxWidth="325px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
+          <Grid flex="between" direction="column" _height="100%">
+            <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
+              <TextP typo="b1" textColor="black">
+                답변을 삭제할까요?
+              </TextP>
+            </Grid>
+            <Grid flex="between">
+              <Button
+                _width="135px"
+                _height="55px"
+                buttonType="tertiary"
+                contentType="text"
+                textColor="logo"
+                text="취소"
+                _onClick={() => {
+                  setDeleteModal(false)
+                }}
+              ></Button>
+              <Button
+                _width="135px"
+                _height="55px"
+                buttonType="secondary"
+                contentType="text"
+                textColor="logo"
+                text="삭제하기"
+                _onClick={() => {
+                  deleteAnswerMutate(
+                    { date: date as string },
+                    {
+                      onSuccess: async () => {
+                        await queryClient.invalidateQueries('answer')
+                        navigate(backUrl)
+                      },
+                      onError: (error) => {
+                        console.log(error)
+                      }
+                    }
+                  )
+                }}
+              ></Button>
+            </Grid>
+          </Grid>
         </Modal>
       )}
     </>
   )
 }
 
-const ModalWrapper = styled(style.Grid)`
+const { Grid, TextP, TextSpan } = style
+
+const ModalWrapper = styled(Grid)`
   width: 100vw;
   height: 100vh;
   z-index: 9000;
   background-color: ${({ theme }) => theme.colors.side.side100};
 `
-const ModalInnerWrapper = styled(style.Grid)`
+const ModalInnerWrapper = styled(Grid)`
   max-width: 1200px;
   margin: 0 20px;
 `
 
-const ModalHeader = styled(style.Grid)`
+const ModalHeader = styled(Grid)`
   margin: 20px 0;
   align-items: flex-start;
 `
 
-const QuestionWrapper = styled(style.Grid)`
+const QuestionWrapper = styled(Grid)`
   max-width: 300px;
   margin: 20px 0 60px 0;
 `
@@ -215,8 +355,15 @@ const AnswerTextArea = styled.textarea`
     line-height: 24px;
   }
 `
-const FooterWrapper = styled(style.Grid)`
-  height: 108px;
+const FooterWrapper = styled(Grid)`
+  margin-bottom: 46px;
+`
+const ButtonWrapper = styled(Grid)`
+  width: 90px;
+  position: relative;
+  svg {
+    cursor: pointer;
+  }
 `
 
 export default QuestionWriteModal

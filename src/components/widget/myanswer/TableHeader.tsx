@@ -1,20 +1,33 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Dropdown } from 'components/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+// components
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
+import { Dropdown } from 'components'
 import NormalListButton from './NormalListButton'
 import SlideListButton from './SlideListButton'
+
+// type
 import type { IMyAnswerMode } from './type'
+
+// store
+import useAnswerStore from 'stores/useAnswerStore'
 
 const TableHeader = ({ isSelected, _onClick }: IMyAnswerMode) => {
   const nowYear = new Date().getFullYear()
   const nowMonth = new Date().getMonth() + 1
-  const yearData = new Array(nowYear - 2022).fill(0).map((_, i) => (2023 + i).toString() + '년')
-  const monthData = new Array(12).fill(0).map((_, i) => (i + 1).toString() + '월')
+  const yearData = new Array(nowYear - 2022).fill(0).map((_, i) => (2023 + i).toString())
+  const monthData = new Array(12).fill(0).map((_, i) => (i + 1).toString())
 
-  const [year, setYear] = useState<string | undefined>(nowYear.toString() + '년')
-  const [month, setMonth] = useState<string | undefined>(nowMonth.toString() + '월')
+  const { setMyAnswerMonth, setMyAnswerYear } = useAnswerStore()
+
+  const [year, setYear] = useState<string | undefined>(nowYear.toString())
+  const [month, setMonth] = useState<string | undefined>(nowMonth.toString())
+
+  useEffect(() => {
+    setMyAnswerMonth(month as string)
+    setMyAnswerYear(year as string)
+  }, [year, month])
 
   return (
     <HeaderWrapper>
@@ -23,6 +36,7 @@ const TableHeader = ({ isSelected, _onClick }: IMyAnswerMode) => {
           dropdownSize="small"
           defaultText=""
           data={yearData}
+          unit="년"
           _selected={year}
           _setSelected={setYear}
           _maxWidth="111px"
@@ -31,6 +45,7 @@ const TableHeader = ({ isSelected, _onClick }: IMyAnswerMode) => {
           dropdownSize="small"
           defaultText=""
           data={monthData}
+          unit="월"
           _selected={month}
           _setSelected={setMonth}
           _maxWidth="94px"

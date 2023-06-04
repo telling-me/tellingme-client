@@ -11,8 +11,14 @@ export interface ICommonStore {
 }
 
 export interface IQuestionStore {
-  isWriteModalOn: boolean
-  setIsWriteModal: (value: boolean) => void
   isEmotionModalOn: boolean
   setIsEmotionModal: (value: boolean) => void
+}
+
+export interface IAnswerStore {
+  myAnswerFilter: { month: string; year: string }
+  setMyAnswerMonth: (value: string) => void
+  setMyAnswerYear: (value: string) => void
+  emotion: number | null
+  setEmotion: (value: number) => void
 }

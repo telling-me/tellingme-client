@@ -28,28 +28,28 @@ const Question = () => {
       </QuestionDateWrapper>
       <QuestionWrapper flex="center" _margin="53px 0 36px">
         <QuestionInnerWrapper flex="center" _width="100%" _height="70px" direction="column" _gap="16px">
-          {question?.title?.split('\n').map((line: string) => (
+          {question?.title?.split('\n')?.map((line: string) => (
             <TextP key={line} typo="b1" textColor="logo" textAlign="center" wordBreak="keep-all">
               {line}
             </TextP>
           ))}
 
-          {question?.phrase?.split('\n').map((line: string) => (
+          {question?.phrase?.split('\n')?.map((line: string) => (
             <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
               {line}
             </TextP>
           ))}
         </QuestionInnerWrapper>
-        <BubbleWrapper _width="max-content">
+        <EmotionWrapper _width="max-content">
           <Icon.Bubble width="43px" height="35px" />
-        </BubbleWrapper>
+        </EmotionWrapper>
       </QuestionWrapper>
       <Link to={`?date=${formatStringDate(today)}`}>
         <QuestionButtonWrapper flex="center" _width="55px" _height="55px">
           <Icon.Pen width="30px" height="30px" />
         </QuestionButtonWrapper>
       </Link>
-      {answer !== null && answer?.status !== 4003 && (
+      {answer !== null && answer?.code !== 'NOT_FOUND_ANSWER' && (
         <TextP typo="c" textColor="logo" _margin="12px 0 0 0">
           답변 완료!
         </TextP>
@@ -80,7 +80,7 @@ const QuestionInnerWrapper = styled(Grid)`
   width: 265px;
 `
 
-const BubbleWrapper = styled(Grid)`
+const EmotionWrapper = styled(Grid)`
   position: absolute;
   top: -17px;
 `

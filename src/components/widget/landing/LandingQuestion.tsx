@@ -5,6 +5,11 @@ import Icon from 'assets/icons'
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 
+// react-slick
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+
 // animation
 import { motion } from 'framer-motion'
 
@@ -16,6 +21,17 @@ import { mediaQuery } from 'utils/mediaQuery'
 
 const LandingQuestionInfo = () => {
   const windowSize = useWindowSize()
+  const settings = {
+    centerMode: true,
+    dots: false,
+    infinite: true,
+    speed: 500,
+    variableWidth: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    focusOnSelect: true,
+    arrows: false
+  }
 
   const infoRef = useRef<HTMLDivElement>(null)
 
@@ -128,7 +144,18 @@ const LandingQuestionInfo = () => {
           </MeridiemWrapper>
         </TimeChanger>
         <QuestionChanger flex="center">
-          <Icon.LandingPhone width={mediaQuery(windowSize.width) === 'mobile' ? '232px' : '375px'} />
+          <QuestionList flex="center">
+            <Icon.LandingQuestionList width={mediaQuery(windowSize.width) === 'mobile' ? '232px' : '375px'} />
+          </QuestionList>
+          <QuestionSlider>
+            <Slider {...settings}>
+              <Icon.LandingQuestion1 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '325px'} />
+              <Icon.LandingQuestion2 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '325px'} />
+              <Icon.LandingQuestion3 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '325px'} />
+              <Icon.LandingQuestion4 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '325px'} />
+              <Icon.LandingQuestion5 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '325px'} />
+            </Slider>
+          </QuestionSlider>
         </QuestionChanger>
       </Grid>
     </QuestionInfo>
@@ -209,8 +236,36 @@ const TimeText = styled(TextP)`
   font-size: 56px;
 
   @media all and (max-width: 767px) {
-    ${({ theme }) => theme.typo.title.h2_b}
+    ${({ theme }) => theme.typo.title.h2_b};
   }
 `
 
-const QuestionChanger = styled(Grid)``
+const QuestionChanger = styled(Grid)`
+  position: relative;
+  transition: 0.3s;
+  height: 648px;
+
+  @media all and (max-width: 767px) {
+    height: 400px;
+  }
+  svg {
+    filter: drop-shadow(${({ theme }) => theme.shadow.shadow1});
+  }
+`
+
+const QuestionList = styled(Grid)`
+  position: absolute;
+  bottom: 0;
+`
+
+const QuestionSlider = styled(Grid)`
+  padding-top: 170px;
+  @media all and (max-width: 767px) {
+    padding-top: 110px;
+  }
+  .slick-track {
+    div div {
+      margin: 0 30px;
+    }
+  }
+`

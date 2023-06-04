@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 
 // react-slick
@@ -117,7 +116,6 @@ const LandingAnswer = () => {
             </TextH2>
           </Grid>
         </Grid>
-        <BackgroundBlur />
         <Grid
           flex="center"
           _margin={mediaQuery(windowSize.width) === 'mobile' ? '60px 0 0' : '120px 0 0'}
@@ -125,7 +123,7 @@ const LandingAnswer = () => {
           _gap="32px"
         >
           <QuestionSlide flex="center">
-            <Icon.LandingQuestionList width={mediaQuery(windowSize.width) === 'mobile' ? '232px' : '375px'} />
+            <Icon.LandingAnswerList width={mediaQuery(windowSize.width) === 'mobile' ? '232px' : '375px'} />
           </QuestionSlide>
           <AnswerSlide>
             <Slider {...settings}>
@@ -135,6 +133,7 @@ const LandingAnswer = () => {
               <Icon.LandingAnswer4 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '303px'} />
             </Slider>
           </AnswerSlide>
+          <BackgroundBlur />
         </Grid>
       </AnswerWrapper>
     </>
@@ -145,12 +144,16 @@ const { Grid, TextH1, TextH2 } = style
 
 const AnswerWrapper = styled.div`
   position: relative;
+  overflow: auto;
 `
 
 const QuestionSlide = styled(Grid)`
   max-width: 600px;
   @media all and (max-width: 1199px) {
     max-width: 100%;
+  }
+  svg {
+    filter: drop-shadow(${({ theme }) => theme.shadow.shadow1});
   }
 `
 
@@ -166,6 +169,10 @@ const AnswerSlide = styled(Grid)`
 
   .slick-track .slick-slide {
     max-height: 482px;
+
+    @media all and (max-width: 767px) {
+      max-height: 318px;
+    }
   }
 `
 
