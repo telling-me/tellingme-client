@@ -18,7 +18,12 @@ const TabBar = () => {
   }, [location])
 
   // 질문 작성 시 TabBar 노출 여부
-  if (location.pathname.includes('main') && new URLSearchParams(window.location.search).get('date') != null) return null
+  if (
+    (location.pathname.includes('main') && new URLSearchParams(window.location.search).get('date') != null) ||
+    location.pathname.includes('setting')
+  )
+    return null
+  
   return (
     <TabBarWrapper size={window.innerWidth}>
       {/* Desktop 버전에만 필요 */}
