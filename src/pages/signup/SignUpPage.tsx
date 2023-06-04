@@ -1,41 +1,48 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-
-import {
-  AlarmWrapper,
-  BirthDateWrapper,
-  ContentWrapper,
-  MoveButtonWrapper,
-  SignUpHeader,
-  SignUpWrapper,
-  SpanWrapper,
-  WebMoveButtonWrapper
-} from './style'
-
-// type
-import type { ColorType, IconType } from 'type/common'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 // hooks
 import { useCheckNicknameMutation } from 'hooks/mutations/user'
 import { useSignUpQuery } from 'hooks/queries'
+import useWindowSize from 'hooks/useWindowSize'
 
 // component
-import { birthDateData, genderData, jobData, mbtiData, purposeData, stepTextData } from './data'
-import { Button, CheckBox, Dropdown, Input, ProgressBar, Icon } from 'components'
-import style from 'styles/styled-components/styled'
-import BasicIcon from 'assets/icons'
-import useWindowSize from 'hooks/useWindowSize'
-import { requestPermission } from 'firebase-messaging-sw'
-import { useTheme } from 'styled-components'
+import styled from 'styled-components'
+import {
+  CreateBirthDate,
+  CreateGender,
+  CreateJob,
+  CreateMbti,
+  CreateNickname,
+  CreateNotification,
+  CreatePurpose,
+  CreateTermsOfService,
+  ProgressBar,
+  SignUpBottomButton,
+  SignUpHeader,
+  SignUpTitle
+} from 'components'
 
 const SignUpPage = () => {
+  // 화면 너비
   const windowSize = useWindowSize().width
+
+  // 페이지
+  const navigate = useNavigate()
+
+  // socialId, socialLoginType 가져오기
   const location = useLocation()
   const socialId = location.state.socialId
   const socialLoginType = location.state.socialLoginType
-  const theme = useTheme()
 
+  // 회원가입 단계 정보
   const [step, setStep] = useState(0)
+  const handlePrevStep = () => {
+    setStep(step - 1)
+  }
+  const handleNextStep = () => {
+    setStep(step + 1)
+  }
 
   // JoinResponseDto
   const [isAgree, setIsAgree] = useState(false)
@@ -52,6 +59,27 @@ const SignUpPage = () => {
   const [mbti, setMbti] = useState<string | undefined>(undefined)
   const [allowNotification, setAllowNotification] = useState<boolean>(false)
 
+  // step 이동 버튼 disabled 여부
+  const canMove = () => {
+    return (
+      (step === 0 && !isAgree) ||
+      (step === 1 && nickname === '') ||
+      (step === 2 && purpose.length === 0) ||
+      (step === 3 && (job === undefined || (job === 5 && jobInfo === ''))) ||
+      (step === 4 && gender === '') ||
+      (step === 5 && (year === undefined || month === undefined || day === undefined))
+    )
+  }
+  const canLastMove = () => {
+    return mbti === undefined
+  }
+
+  // 닉네임 확인
+  const { mutate: handleCheckNickname } = useCheckNicknameMutation(nickname, setIsError, setErrorText, () => {
+    setStep(2)
+  })
+
+  // 회원가입
   const signupQuery = useSignUpQuery({
     allowNotification,
     birthDate:
@@ -67,28 +95,12 @@ const SignUpPage = () => {
     socialId,
     socialLoginType
   })
-
-  const { mutate } = useCheckNicknameMutation(nickname, setIsError, setErrorText, () => {
-    setStep(2)
-  })
-
-  const handleCheckNickname = () => {
-    mutate()
-  }
-
   const handleSignUp = () => {
     signupQuery.refetch().catch(() => {})
-    window.location.href = '/login'
+    navigate('/login')
   }
 
-  const handlePrevStep = () => {
-    setStep(step - 1)
-  }
-
-  const handleNextStep = () => {
-    setStep(step + 1)
-  }
-
+  // 건너뛰기
   const handleSkip = () => {
     if (step === 4) {
       setGender('')
@@ -111,387 +123,95 @@ const SignUpPage = () => {
 
   return (
     <SignUpWrapper>
-      <SignUpHeader>
-        <BasicIcon.Logo fill={theme.colors.logo} width="81" height="34" _margin="12px 0px 12px 0px" />
-
-        {[4, 5, 6].includes(step) && (
-          <Button
-            buttonType="noFilled"
-            contentType="text"
-            text="건너뛰기"
-            textSize={windowSize > 767 ? 'h6' : 'b1'}
-            textColor="logo"
-            textHoverColor="primary200"
-            _margin="0px 0px 0px auto"
-            _onClick={() => {
-              handleSkip()
-            }}
-          />
-        )}
-      </SignUpHeader>
+      <SignUpHeader step={step} windowSize={windowSize} handleSkip={handleSkip} />
 
       {step !== 7 && <ProgressBar percent={`${(99 / 7) * (step + 1)}`} />}
 
-      {step !== 7 &&
-        (windowSize < 1024 ? (
-          <style.TextSpan
-            typo="h4"
-            textColor="black"
-            _margin={
-              [0, 1, 5, 6].includes(step) ? '60px 0px 110px 0px' : step === 2 ? '60px 0px 8px 0px' : '60px 0px 80px 0px'
-            }
-          >
-            {stepTextData[step]}
-          </style.TextSpan>
-        ) : (
-          windowSize >= 1024 && (
-            <WebMoveButtonWrapper
-              _margin={
-                [0, 1, 5, 6].includes(step)
-                  ? '60px 0px 110px 0px'
-                  : step === 2
-                  ? '60px 0px 8px 0px'
-                  : '60px 0px 80px 0px'
-              }
-            >
-              <Button
-                buttonType="secondary"
-                contentType="icon"
-                icon="arrowleft"
-                iconSize="medium"
-                iconColor="logo"
-                _margin="0px auto 0px 0px"
-                _padding="16px"
-                _disabled={step === 0}
-                _onClick={() => {
-                  handlePrevStep()
-                }}
-              />
-              <style.TextSpan typo="h4" textColor="black">
-                {stepTextData[step]}
-              </style.TextSpan>
-              {step !== 6 ? (
-                <Button
-                  buttonType="secondary"
-                  contentType="icon"
-                  icon="arrowright"
-                  iconSize="medium"
-                  iconColor="logo"
-                  _margin="0px 0px 0px auto"
-                  _padding="16px"
-                  _disabled={
-                    (step === 0 && !isAgree) ||
-                    (step === 1 && nickname === '') ||
-                    (step === 2 && purpose.length === 0) ||
-                    (step === 3 && (job === undefined || (job === 5 && jobInfo === ''))) ||
-                    (step === 4 && gender === '') ||
-                    (step === 5 && (year === undefined || month === undefined || day === undefined))
-                  }
-                  _onClick={() => {
-                    if (step === 1) {
-                      handleCheckNickname()
-                    } else {
-                      handleNextStep()
-                    }
-                  }}
-                />
-              ) : (
-                <Button
-                  buttonType="secondary"
-                  contentType="text"
-                  text="완료"
-                  textSize="h6"
-                  textColor="logo"
-                  _margin="0px 0px 0px auto"
-                  _padding="18px 32px"
-                  _disabled={mbti === undefined}
-                  _onClick={() => {
-                    handleNextStep()
-                    requestPermission()
-                  }}
-                />
-              )}
-            </WebMoveButtonWrapper>
-          )
-        ))}
-
-      {step === 2 && (
-        <style.TextSpan typo="b2" textColor="gray6" _margin="0px 0px 60px 0px">
-          최대 2가지 선택 가능
-        </style.TextSpan>
-      )}
+      <SignUpTitle
+        step={step}
+        handlePrevStep={handlePrevStep}
+        handleNextStep={handleNextStep}
+        windowSize={windowSize}
+        canMove={canMove}
+        canLastMove={canLastMove}
+        handleCheckNickname={handleCheckNickname}
+      />
 
       {
         // 서비스 이용 약관 (추후에 디자인 나오면 약관 모달 달아야 함)
         step === 0 ? (
-          <CheckBox
-            label="전체 동의합니다"
-            buttonText="전문 보기"
-            _checked={isAgree}
-            setChecked={setIsAgree}
-            _maxWidth="425px"
-          />
+          <CreateTermsOfService isAgree={isAgree} setIsAgree={setIsAgree} />
         ) : // 닉네임
         step === 1 ? (
-          <Input
-            _placeholder="2-8글자 이내"
-            infoText="영문, 숫자, 띄어쓰기, 특수문자 불가"
+          <CreateNickname
             errorText={errorText}
             isError={isError}
             setIsError={setIsError}
-            _value={nickname}
-            setValue={setNickname}
-            _maxWidth="425px"
+            nickname={nickname}
+            setNickname={setNickname}
           />
         ) : // 고민
         step === 2 ? (
-          <ContentWrapper type="purpose">
-            {purposeData.map((v: { text: string; icon: IconType }, i: number) => {
-              return (
-                <Button
-                  key={i}
-                  buttonType="tertiaryModified"
-                  contentType="col"
-                  text={v.text}
-                  textSize="h6"
-                  textColor="gray7"
-                  icon={v.icon}
-                  iconSize="large"
-                  iconColor="gradient"
-                  _active={purpose.includes(i.toString())}
-                  _gap="15px"
-                  _width="105px"
-                  _height="114px"
-                  _onClick={() => {
-                    const idx = purpose.indexOf(i.toString())
-
-                    if (idx === -1 && purpose.length < 2) {
-                      setPurpose([...purpose, i.toString()])
-                    } else if (idx !== -1) {
-                      setPurpose([...purpose.slice(0, idx), ...purpose.slice(idx + 1)])
-                    }
-                  }}
-                />
-              )
-            })}
-          </ContentWrapper>
+          <CreatePurpose purpose={purpose} setPurpose={setPurpose} />
         ) : // 직업
         step === 3 ? (
-          <ContentWrapper type="job">
-            {jobData.map((v: { text: string; icon: IconType }, i: number) => {
-              return (
-                <Button
-                  key={i}
-                  buttonType="tertiaryModified"
-                  contentType="row"
-                  text={v.text}
-                  textSize="h6"
-                  textColor="gray7"
-                  icon={v.icon}
-                  iconSize="large"
-                  iconColor="gradient"
-                  _active={job === i}
-                  _gap="23px"
-                  _width="205px"
-                  _height="55px"
-                  _padding="0px 0px 0px 24px"
-                  _justifyContent="flex-start"
-                  _onClick={() => {
-                    setJob(i)
-                  }}
-                />
-              )
-            })}
-            <Button
-              buttonType="tertiaryModified"
-              contentType={job === 5 ? 'withInput' : 'row'}
-              text="기타"
-              textSize="h6"
-              textColor="gray7"
-              icon="heart"
-              iconSize="large"
-              iconColor="gradient"
-              jobInfo={jobInfo}
-              setJobInfo={setJobInfo}
-              _active={job === 5}
-              _gap="23px"
-              _width="205px"
-              _height={job === 5 ? '102px' : '55px'}
-              _padding="0px 0px 0px 24px"
-              _justifyContent="flex-start"
-              _onClick={() => {
-                setJob(5)
-              }}
-            />
-          </ContentWrapper>
+          <CreateJob job={job} setJob={setJob} jobInfo={jobInfo} setJobInfo={setJobInfo} />
         ) : // 성별
         step === 4 ? (
-          <ContentWrapper type="gender">
-            {genderData.map((v: { text: string; icon: IconType; iconColor: ColorType }, i: number) => {
-              return (
-                <Button
-                  key={i}
-                  buttonType="tertiaryModified"
-                  contentType="col"
-                  text={v.text}
-                  textSize="h6"
-                  textColor="gray7"
-                  icon={v.icon}
-                  iconSize="large"
-                  iconColor={v.iconColor}
-                  _active={(gender === 'male' && v.text === '남성') || (gender === 'female' && v.text === '여성')}
-                  _gap="15px"
-                  _width="103px"
-                  _height="114px"
-                  _onClick={() => {
-                    setGender(i === 0 ? 'male' : 'female')
-                  }}
-                />
-              )
-            })}
-          </ContentWrapper>
+          <CreateGender gender={gender} setGender={setGender} />
         ) : // 생년월일
         step === 5 ? (
-          <BirthDateWrapper>
-            {birthDateData.map(
-              (
-                v: {
-                  defaultText: string
-                  data: string[] | number[]
-                  _padding: string
-                  _flexGrow: string
-                },
-                i: number
-              ) => {
-                return (
-                  <Dropdown
-                    key={i}
-                    dropdownSize="large"
-                    defaultText={v.defaultText}
-                    data={v.data}
-                    _selected={i === 0 ? year : i === 1 ? month : day}
-                    _setSelected={i === 0 ? setYear : i === 1 ? setMonth : setDay}
-                  />
-                )
-              }
-            )}
-          </BirthDateWrapper>
+          <CreateBirthDate year={year} setYear={setYear} month={month} setMonth={setMonth} day={day} setDay={setDay} />
         ) : // mbti
         step === 6 ? (
-          <Dropdown
-            dropdownSize="large"
-            defaultText="mbti 선택"
-            data={mbtiData}
-            _selected={mbti}
-            _setSelected={setMbti}
-            _maxWidth="425px"
-          />
+          <CreateMbti mbti={mbti} setMbti={setMbti} />
         ) : (
-          step === 7 && (
-            <AlarmWrapper>
-              <SpanWrapper>
-                <style.TextSpan typo="h5" textColor="black">
-                  매일 기록을 잊지 않도록
-                </style.TextSpan>
-                <style.TextSpan typo="h4" textColor="black">
-                  알람을 드려도 될까요?
-                </style.TextSpan>
-              </SpanWrapper>
-
-              <Icon
-                icon="bellringing"
-                iconSize="xl"
-                iconColor="gradient"
-                iconShadow="shadow2"
-                _margin="110px 0px 90px 0px"
-              />
-
-              <Button
-                buttonType="secondary"
-                contentType="text"
-                text="네, 좋아요!"
-                textSize="h6"
-                textColor="logo"
-                _padding="18px 32px"
-                _onClick={() => {
-                  setAllowNotification(true)
-                }}
-              />
-              <Button
-                buttonType="noFilled"
-                contentType="text"
-                text="괜찮아요"
-                textSize="b1"
-                textColor="gray5"
-                _margin="26px 0px 0px 0px"
-                _onClick={() => {
-                  handleSignUp()
-                }}
-              />
-            </AlarmWrapper>
-          )
+          // 알람
+          step === 7 && <CreateNotification setAllowNotification={setAllowNotification} _onClick={handleSignUp} />
         )
       }
 
-      {windowSize < 1024 && step !== 7 && (
-        <MoveButtonWrapper>
-          <Button
-            buttonType="secondary"
-            contentType="icon"
-            icon="arrowleft"
-            iconSize="medium"
-            iconColor="logo"
-            _padding="16px"
-            _disabled={step === 0}
-            _onClick={() => {
-              handlePrevStep()
-            }}
-          />
-          {step !== 6 ? (
-            <Button
-              buttonType="secondary"
-              contentType="icon"
-              icon="arrowright"
-              iconSize="medium"
-              iconColor="logo"
-              _margin="0 0px 0 auto"
-              _padding="16px"
-              _disabled={
-                (step === 0 && !isAgree) ||
-                (step === 1 && nickname === '') ||
-                (step === 2 && purpose.length === 0) ||
-                (step === 3 && (job === undefined || (job === 5 && jobInfo === ''))) ||
-                (step === 4 && gender === '') ||
-                (step === 5 && (year === undefined || month === undefined || day === undefined))
-              }
-              _onClick={() => {
-                if (step === 1) {
-                  handleCheckNickname()
-                } else {
-                  handleNextStep()
-                }
-              }}
-            />
-          ) : (
-            <Button
-              buttonType="secondary"
-              contentType="text"
-              text="완료"
-              textSize="h6"
-              textColor="logo"
-              _margin="0px 0px 0px auto"
-              _padding="18px 32px"
-              _disabled={mbti === undefined}
-              _onClick={() => {
-                handleNextStep()
-                requestPermission()
-              }}
-            />
-          )}
-        </MoveButtonWrapper>
-      )}
+      <SignUpBottomButton
+        step={step}
+        handlePrevStep={handlePrevStep}
+        handleNextStep={handleNextStep}
+        windowSize={windowSize}
+        canMove={canMove}
+        canLastMove={canLastMove}
+        handleCheckNickname={handleCheckNickname}
+      />
     </SignUpWrapper>
   )
 }
+
+const SignUpWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 100vh;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+
+  ${(props) => `background-color: ${props.theme.colors.side.side200}`}
+
+  height: max-content;
+  padding: 0px 8px;
+
+  @media all and (min-width: 1024px) {
+    max-width: 1216px;
+    margin: 0 auto;
+  }
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    margin: 0px 44px;
+  }
+
+  @media all and (max-width: 767px) {
+    margin: 0px 9px;
+  }
+`
 
 export default SignUpPage

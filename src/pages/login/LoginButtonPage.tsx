@@ -4,15 +4,14 @@ import React from 'react'
 import { KAKAO_AUTH_URL } from 'configs/kakao'
 
 // component
-import { Button } from 'components'
 import styled from 'styled-components'
+import { Button } from 'components'
 
 const LoginButtonPage = () => {
   return (
     <LoginButtonWrapper>
       <Button
-        buttonType="tertiaryModified"
-        contentType="text"
+        buttonType="tertiary"
         text="카카오 로그인 테스트"
         textColor="primary800"
         textSize="h2"

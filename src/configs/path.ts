@@ -3,7 +3,6 @@ export enum PAGE_URL {
   Home = '/',
   Login = 'login',
   Login_Apple = 'login/apple',
-  SignUp = 'signup',
   Kakao = '/oauth/kakao',
   Apple = '/oauth/apple',
 
@@ -16,5 +15,9 @@ export enum PAGE_URL {
 
   // NewsLetter
   NewsLetter = 'newsletter',
-  NewsLetterComplete = 'complete'
+  NewsLetterComplete = 'complete',
+
+  // SignUp
+  SignUp = 'signup',
+  SignUpComplete = '/signup/complete'
 }

@@ -1,48 +1,44 @@
-// component
+import React from 'react'
+
+// components
 import styled, { css } from 'styled-components'
 
 // type
-import type { ButtonType } from './type'
-import type { ColorType } from 'type/common'
+import type { ButtonType, IOnlyButton } from './type'
 
-// hooks
-import useChangeColor from 'hooks/useChangeColor'
+const IconButton = ({
+  buttonType,
+  _width,
+  _height,
+  _margin = '0',
+  _disabled = false,
+  _onClick,
+  children
+}: IOnlyButton) => {
+  return (
+    <IconButtonComponent
+      buttonType={buttonType}
+      _width={_width}
+      _height={_height}
+      _margin={_margin}
+      disabled={_disabled}
+      onClick={_onClick}
+    >
+      {children}
+    </IconButtonComponent>
+  )
+}
 
-export const ButtonComponent = styled.button<{
-  buttonType: ButtonType
-  textHoverColor?: ColorType
-  _active?: boolean
-  _width?: string
-  _height?: string
-  _margin?: string
-  _padding?: string
-}>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const IconButtonComponent = styled.button<{ buttonType: ButtonType; _width: string; _height: string; _margin: string }>`
+  ${({ theme }) => theme.common.flexCenter}
+
   border-radius: 20px;
 
   cursor: pointer;
 
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:disabled {
-    cursor: default;
-  }
-
-  ${({ textHoverColor }) =>
-    textHoverColor !== undefined &&
-    css`
-      &:hover span {
-        color: ${useChangeColor(textHoverColor)};
-      }
-    `}
-  ${({ _width }) => _width !== undefined && `width: ${_width};`}
-  ${({ _height }) => _height !== undefined && `height: ${_height};`}
-  ${({ _margin }) => _margin !== undefined && `margin: ${_margin};`}
-  ${({ _padding }) => _padding !== undefined && `padding: ${_padding};`}
+  ${({ _width }) => `width: ${_width};`}
+  ${({ _height }) => `height: ${_height};`}
+  ${({ _margin }) => `margin: ${_margin};`}
 
   ${(props) =>
     props.buttonType === 'primary' &&
@@ -131,3 +127,5 @@ export const ButtonComponent = styled.button<{
       box-shadow: ${({ theme }) => theme.shadow.shadow2};
     `}
 `
+
+export default IconButton

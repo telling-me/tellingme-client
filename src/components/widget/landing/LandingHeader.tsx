@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
-import styled, { useTheme } from 'styled-components'
 
 // components
+import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Button, Modal } from 'components'
-import Icon from 'assets/icons'
+import { Button, IconButton, Modal } from 'components'
+
+// assets
+import Icons from 'assets/icons'
 
 // configs
 import { KAKAO_AUTH_URL } from 'configs/kakao'
 import { APPLE_AUTH_URL } from 'configs/apple'
+
+// hooks
+import useChangeColor from 'hooks/useChangeColor'
 
 const LandingHeader = () => {
   const theme = useTheme()
@@ -16,10 +21,10 @@ const LandingHeader = () => {
 
   return (
     <HeaderWrapper>
-      <Icon.Logo width={81} fill={theme.colors.logo} />
+      <Icons.Logo width={81} fill={theme.colors.logo} />
+
       <Button
         buttonType="secondary"
-        contentType="text"
         textSize="h6"
         textColor="logo"
         text="시작하기"
@@ -39,17 +44,17 @@ const LandingHeader = () => {
             setLoginModal(false)
           }}
         >
-          <Button
+          <IconButton
             buttonType="noFilled"
-            contentType="icon"
-            icon="close"
-            iconSize="medium"
-            iconColor="gray6"
-            _margin="0px 0px 0px auto"
+            _width="fit-content"
+            _height="fit-content"
+            _margin="0 0 0 auto"
             _onClick={() => {
               setLoginModal(false)
             }}
-          />
+          >
+            <Icons.Close width="24" height="24" stroke={useChangeColor('gray6')} />
+          </IconButton>
           <Grid _height="100%" flex="between" direction="column">
             <Grid flex="start" direction="column" _gap="6px" _alignItems="start" _margin="9px 0 0 0">
               <TextH3 typo="h5" textColor="black">
@@ -68,7 +73,6 @@ const LandingHeader = () => {
                 _width="100%"
                 _height="48px"
                 buttonType="fourth"
-                contentType="text"
                 text="카카오 로그인"
                 _onClick={() => {
                   window.location.href = KAKAO_AUTH_URL
@@ -78,7 +82,6 @@ const LandingHeader = () => {
                 _width="100%"
                 _height="48px"
                 buttonType="tertiary"
-                contentType="text"
                 text="애플 로그인"
                 _onClick={() => {
                   window.location.href = APPLE_AUTH_URL

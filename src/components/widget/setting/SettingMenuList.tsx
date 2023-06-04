@@ -3,7 +3,12 @@ import React from 'react'
 // component
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Icon } from 'components'
+
+// assets
+import Icons from 'assets/icons'
+
+// hooks
+import useChangeColor from 'hooks/useChangeColor'
 
 interface ISettingMenuList {
   text: string
@@ -17,8 +22,7 @@ const SettingMenuList = ({ text, icon = true, _onClick }: ISettingMenuList) => {
       <style.TextP typo="b1" textColor="gray8">
         {text}
       </style.TextP>
-
-      {icon && <Icon icon="caretright" iconSize="medium" iconColor="gray6" _margin="0px 0px 0px auto" />}
+      {icon && <Icons.CaretRight width="24" height="24" stroke={useChangeColor('gray6')} />}
     </SettingMenuListWrapper>
   )
 }
@@ -34,6 +38,10 @@ const SettingMenuListWrapper = styled.button`
 
   &:hover {
     background-color: ${(props) => props.theme.colors.side.side200};
+  }
+
+  svg {
+    margin: 0 0 0 auto;
   }
 
   p {

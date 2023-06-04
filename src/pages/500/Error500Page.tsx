@@ -9,7 +9,7 @@ import { Button } from 'components'
 // assets
 import Icons from 'assets/icons'
 
-const ErrorPage = () => {
+const Error500Page = () => {
   const navigate = useNavigate()
 
   return (
@@ -17,23 +17,23 @@ const ErrorPage = () => {
       <Icons.Error404 width="120" height="120" />
 
       <style.TextP typo="h2_b" textColor="logo">
-        404
+        500
       </style.TextP>
 
       <style.TextH1 typo="h6_b" textColor="gray8" _margin="20px 0 0 0">
-        원하시는 페이지를 찾을 수 없어요.
+        예상하지 못한 오류가 발생했어요!
       </style.TextH1>
 
       <style.TextP typo="b2" textColor="gray8" _margin="12px 0 0 0">
-        방문하시려는 페이지가 잘못 입력되었거나,
+        현재 이 서비스가 정상적으로
       </style.TextP>
 
       <ErrorInfo>
         <style.TextP typo="b2" textColor="gray8">
-          변경 또는 삭제되어 이용하실 수 없습니다.
+          작동할 수 있도록 열심히 노력중이에요.
         </style.TextP>
         <style.TextP typo="b2" textColor="gray8">
-          주소를 다시 한번 확인 해주세요.
+          잠시 후 다시 방문해주세요.
         </style.TextP>
       </ErrorInfo>
 
@@ -68,4 +68,4 @@ const ErrorInfo = styled.div`
   margin-top: 8px;
 `
 
-export default ErrorPage
+export default Error500Page

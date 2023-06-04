@@ -1,12 +1,15 @@
 import React from 'react'
-import styled, { useTheme } from 'styled-components'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 // components
-import { Button } from 'components/core'
+import styled, { useTheme } from 'styled-components'
+import { IconButton } from 'components'
 
 // assets
 import Icons from 'assets/icons'
-import { useLocation, useNavigate } from 'react-router-dom'
+
+// hooks
+import useChangeColor from 'hooks/useChangeColor'
 
 const Header = () => {
   const theme = useTheme()
@@ -19,16 +22,17 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <Icons.Logo width={81} fill={theme.colors.logo} />
-      <Button
-        icon="setting"
-        contentType="icon"
+
+      <IconButton
         buttonType="noFilled"
-        iconColor="gray6"
-        iconSize="small"
+        _width="fit-content"
+        _height="fit-content"
         _onClick={() => {
           navigate('setting')
         }}
-      />
+      >
+        <Icons.Setting width="24" height="24" stroke={useChangeColor('gray6')} />
+      </IconButton>
     </HeaderWrapper>
   )
 }
