@@ -22,7 +22,7 @@ const TableCell = ({ emotion, question, date }: ITableCell) => {
 
           <QuestionDateWrapper>
             <TextP typo="b2" textColor="black">
-              {question}
+              {question.replace(/\\n/gm, ' ')}
             </TextP>
             <TextP typo="c" textColor="side500">
               {`${date?.[0]}년 ${date?.[1]}월 ${date?.[2]}일`}

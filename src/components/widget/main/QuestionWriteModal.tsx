@@ -49,8 +49,12 @@ const QuestionWriteModal = () => {
 
   const backUrl = location.hash.split('?date')[1]
 
+  // modal state
   const [cancel, setCancel] = useState<boolean>(false)
   const [deleteModal, setDeleteModal] = useState<boolean>(false)
+  const [saveModal, setSaveModal] = useState<boolean>(false)
+  const [editModal, setEditModal] = useState<boolean>(false)
+
   const [menu, setMenu] = useState<boolean>(false)
   const [text, setText] = useState<string>(answer?.content ?? '')
   const [shareToggle, setShareToggle] = useState<boolean>(false)
@@ -127,7 +131,6 @@ const QuestionWriteModal = () => {
                         <DropdownItem
                           dropdownSize="small"
                           onClick={() => {
-                            console.log('dsfd')
                             setDeleteModal(true)
                           }}
                         >
@@ -143,13 +146,20 @@ const QuestionWriteModal = () => {
             </ModalHeader>
             <QuestionWrapper flex="start" direction="column" _gap="18px">
               <Grid flex="start" direction="column" _gap="10px">
-                <TextP typo="h6" textColor="logo" textAlign="center" wordBreak="keep-all">
-                  {question?.title}
-                </TextP>
-
-                <TextP typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
-                  {question?.phrase}
-                </TextP>
+                <Grid>
+                  {question?.title?.split('\\n')?.map((line: string) => (
+                    <TextP key={line} typo="h6" textColor="logo" textAlign="center" wordBreak="keep-all">
+                      {line}
+                    </TextP>
+                  ))}
+                </Grid>
+                <Grid>
+                  {question?.phrase?.split('\\n')?.map((line: string) => (
+                    <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
+                      {line}
+                    </TextP>
+                  ))}
+                </Grid>
               </Grid>
               <TextP typo="c" textColor="side500" textAlign="center">
                 {`${question?.date?.[0] as string}년 ${question?.date?.[1] as string}월 ${
@@ -183,31 +193,8 @@ const QuestionWriteModal = () => {
                     textColor={text?.length < MIN_LENGTH ? 'gray6' : 'logo'}
                     _disabled={text?.length < MIN_LENGTH}
                     _onClick={() => {
-                      if (!alreadyAnswered)
-                        postAnswerMutate(
-                          { date: date as string, content: text, emotion: emotion as number },
-                          {
-                            onSuccess: async () => {
-                              await queryClient.invalidateQueries('answer')
-                              navigate(backUrl)
-                            },
-                            onError: (error) => {
-                              console.log(error)
-                            }
-                          }
-                        )
-                      editAnswerMutate(
-                        { date: date as string, content: text },
-                        {
-                          onSuccess: async () => {
-                            await queryClient.invalidateQueries('answer')
-                            navigate(backUrl)
-                          },
-                          onError: (error) => {
-                            console.log(error)
-                          }
-                        }
-                      )
+                      if (!alreadyAnswered) setSaveModal(true)
+                      else setEditModal(true)
                     }}
                   />
                 </Grid>
@@ -284,6 +271,101 @@ const QuestionWriteModal = () => {
                 _onClick={() => {
                   deleteAnswerMutate(
                     { date: date as string },
+                    {
+                      onSuccess: async () => {
+                        await queryClient.invalidateQueries('answer')
+                        navigate(backUrl)
+                      },
+                      onError: (error) => {
+                        console.log(error)
+                      }
+                    }
+                  )
+                }}
+              ></Button>
+            </Grid>
+          </Grid>
+        </Modal>
+      )}
+      {saveModal && (
+        <Modal _width="100%" _maxWidth="325px" _height="174px" _borderRadius="20px" _padding="30px 20px 20px 20px">
+          <Grid flex="between" direction="column" _height="100%">
+            <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
+              <TextP typo="b1" textColor="black">
+                답변을 등록할까요?
+              </TextP>
+              <TextP typo="b2" textColor="gray7">
+                글을 등록한 후에는 감정을 바꿀 수 없어요
+              </TextP>
+            </Grid>
+            <Grid flex="between">
+              <Button
+                _width="135px"
+                _height="55px"
+                buttonType="tertiary"
+                contentType="text"
+                textColor="logo"
+                text="취소"
+                _onClick={() => {
+                  setSaveModal(false)
+                }}
+              ></Button>
+              <Button
+                _width="135px"
+                _height="55px"
+                buttonType="secondary"
+                contentType="text"
+                textColor="logo"
+                text="저장하기"
+                _onClick={() => {
+                  postAnswerMutate(
+                    { date: date as string, content: text, emotion: emotion as number },
+                    {
+                      onSuccess: async () => {
+                        await queryClient.invalidateQueries('answer')
+                        navigate(backUrl)
+                      },
+                      onError: (error) => {
+                        console.log(error)
+                      }
+                    }
+                  )
+                }}
+              ></Button>
+            </Grid>
+          </Grid>
+        </Modal>
+      )}
+      {editModal && (
+        <Modal _width="100%" _maxWidth="325px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
+          <Grid flex="between" direction="column" _height="100%">
+            <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
+              <TextP typo="b1" textColor="black">
+                답변을 수정할까요?
+              </TextP>
+            </Grid>
+            <Grid flex="between">
+              <Button
+                _width="135px"
+                _height="55px"
+                buttonType="tertiary"
+                contentType="text"
+                textColor="logo"
+                text="취소"
+                _onClick={() => {
+                  setEditModal(false)
+                }}
+              ></Button>
+              <Button
+                _width="135px"
+                _height="55px"
+                buttonType="secondary"
+                contentType="text"
+                textColor="logo"
+                text="수정하기"
+                _onClick={() => {
+                  editAnswerMutate(
+                    { date: date as string, content: text },
                     {
                       onSuccess: async () => {
                         await queryClient.invalidateQueries('answer')

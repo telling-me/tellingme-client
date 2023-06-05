@@ -13,7 +13,8 @@ import { formatStringDate } from 'utils/date'
 import { Link } from 'react-router-dom'
 
 const Question = () => {
-  const today = new Date()
+  // 새벽 6시 업데이트
+  const today = new Date(new Date().getTime() - 6 * 60 * 60 * 1000)
 
   // query
   const { data: { data: answer = null } = {} } = useGetAnswerQuery(formatStringDate(today))
@@ -28,17 +29,20 @@ const Question = () => {
       </QuestionDateWrapper>
       <QuestionWrapper flex="center" _margin="53px 0 36px">
         <QuestionInnerWrapper flex="center" _width="100%" _height="70px" direction="column" _gap="16px">
-          {question?.title?.split('\n')?.map((line: string) => (
-            <TextP key={line} typo="b1" textColor="logo" textAlign="center" wordBreak="keep-all">
-              {line}
-            </TextP>
-          ))}
-
-          {question?.phrase?.split('\n')?.map((line: string) => (
-            <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
-              {line}
-            </TextP>
-          ))}
+          <Grid>
+            {question?.title?.split('\\n')?.map((line: string) => (
+              <TextP key={line} typo="b1" textColor="logo" textAlign="center" wordBreak="keep-all">
+                {line}
+              </TextP>
+            ))}
+          </Grid>
+          <Grid>
+            {question?.phrase?.split('\\n')?.map((line: string) => (
+              <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
+                {line}
+              </TextP>
+            ))}
+          </Grid>
         </QuestionInnerWrapper>
         <EmotionWrapper _width="max-content">
           <Icon.Bubble width="43px" height="35px" />
