@@ -17,7 +17,7 @@ export const answerApi = {
       }
     ),
 
-  deleteAnswer: async (date: string) => await API.post('/api/answer/delete', { params: { date } }),
+  deleteAnswer: async (date: string) => await API.delete('/api/answer/delete', { data: { date } }),
 
   updateAnswer: async (date: string, content: string) => await API.patch('/api/answer/update', { date, content })
 }
