@@ -1,5 +1,6 @@
-import { initializeApp } from 'firebase/app'
-import { getMessaging, getToken } from 'firebase/messaging'
+/* eslint-disable @typescript-eslint/no-throw-literal */
+import firebase from 'firebase'
+import 'firebase/messaging'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -11,32 +12,59 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 }
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig)
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig)
+} else {
+  firebase.app()
+}
 
-// Initialize Firebase Cloud Messaging and get a reference to the service
-const messaging = getMessaging(app)
+const messaging = firebase.messaging()
 
 export function requestPermission() {
-  console.log('푸시 허가 받는 중 ...')
+  console.log('Requesting permission...')
 
   void Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
-      console.log('푸시 허가 완료')
-    } else {
-      console.log('푸시 허가 거부')
+      console.log('Notification permission granted.')
+    } else if (permission === 'denied') {
+      console.log('Notification permission denied')
     }
   })
 
-  getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
-    .then((token) => {
-      if (token.length > 0) {
-        console.log('푸시 토큰 : ', token)
+  messaging
+    .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
+    .then((currentToken) => {
+      if (currentToken.length > 0) {
+        console.log('token : ', currentToken)
+        subscribeTokenToTopic(currentToken)
       } else {
-        console.log('푸시 토큰 유효하지 않음')
+        console.log('No registration token available. Request permission to generate one.')
       }
     })
     .catch((err) => {
-      console.log('푸시 에러 : ', err)
+      console.log('An error occurred while retrieving token. ', err)
+    })
+
+  messaging.onMessage((payload) => {
+    console.log('Message received. ', payload)
+  })
+}
+
+function subscribeTokenToTopic(token: string) {
+  fetch(`https://iid.googleapis.com/iid/v1/${token}/rel/topics/notification`, {
+    method: 'POST',
+    headers: new Headers({
+      Authorization: `Bearer ${process.env.REACT_APP_FIREBASE_SERVER_KEY as string}`
+    })
+  })
+    .then((response) => {
+      if (response.status < 200 || response.status >= 400) {
+        throw response
+      }
+
+      console.log('성공', response)
+    })
+    .catch((error) => {
+      console.error(error)
     })
 }

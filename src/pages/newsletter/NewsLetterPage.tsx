@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import { PersonalAgreeData, AdAgreeData } from './agreeData'
 import {
   ApplyButton,
@@ -11,15 +10,21 @@ import {
   PersonalAgreeContent
 } from './style'
 
-import { Button, CheckBox, Input, Modal, RadioButton, Hr } from 'components'
+// components
 import style from 'styles/styled-components/styled'
+import { Button, CheckBox, Input, Modal, RadioButton, Hr, IconButton } from 'components'
+import { LoadingDots } from 'components/core/loadingdots'
+
+// assets
 import Icons from 'assets/icons'
 
+// hooks
 import { useNewsLetterQuery } from 'hooks/queries'
 import useWindowSize from 'hooks/useWindowSize'
+import useChangeColor from 'hooks/useChangeColor'
 
+// utils
 import { emailCheck } from 'utils/signRegex'
-import { LoadingDots } from 'components/core/loadingdots'
 
 const NewsLetterPage = () => {
   const windowSize = useWindowSize().width
@@ -194,17 +199,17 @@ const NewsLetterPage = () => {
             setPaOpen(false)
           }}
         >
-          <Button
+          <IconButton
             buttonType="noFilled"
-            contentType="icon"
-            icon="close"
-            iconSize="medium"
-            iconColor="gray6"
-            _margin="0px 0px 0px auto"
+            _width="fit-content"
+            _height="fit-content"
+            _margin="0 0 0 auto"
             _onClick={() => {
               setPaOpen(false)
             }}
-          />
+          >
+            <Icons.Close width="24" height="24" stroke={useChangeColor('gray6')} />
+          </IconButton>
 
           <style.TextSpan typo="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
             개인정보 수집 및 이용 동의서
@@ -224,17 +229,17 @@ const NewsLetterPage = () => {
             setAaOpen(false)
           }}
         >
-          <Button
+          <IconButton
             buttonType="noFilled"
-            contentType="icon"
-            icon="close"
-            iconSize="medium"
-            iconColor="gray6"
-            _margin="0px 0px 0px auto"
+            _width="fit-content"
+            _height="fit-content"
+            _margin="0 0 0 auto"
             _onClick={() => {
               setAaOpen(false)
             }}
-          />
+          >
+            <Icons.Close width="24" height="24" stroke={useChangeColor('gray6')} />
+          </IconButton>
 
           <style.TextSpan typo="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
             광고성 정보 수신 동의서
@@ -260,7 +265,6 @@ const NewsLetterPage = () => {
 
           <Button
             buttonType="secondary"
-            contentType="text"
             text="확인"
             textSize="h6"
             textColor="logo"

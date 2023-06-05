@@ -1,12 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 // config
 import { APPLE_LOGIN_CLIENT_ID, APPLE_LOGIN_REDIRECT_URL } from 'configs/apple'
 
 // component
-import { Button } from 'components'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Button } from 'components'
 
 const LoginButtonPage = () => {
   const config = {
@@ -28,8 +28,7 @@ const LoginButtonPage = () => {
       <LoginButtonWrapper>
         <Link to={href}>
           <Button
-            buttonType="tertiaryModified"
-            contentType="text"
+            buttonType="tertiary"
             text="애플 로그인 테스트"
             textColor="primary800"
             textSize="h2"

@@ -2,24 +2,30 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // component
-import { Icon } from 'components'
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
+import { IconButton } from 'components'
+
+// assets
+import Icons from 'assets/icons'
+
+// hooks
+import useChangeColor from 'hooks/useChangeColor'
 
 const SettingHeader = () => {
   const navigate = useNavigate()
   return (
     <SettingHeaderWrapper>
-      <BackButton>
-        <Icon
-          icon="arrowleft"
-          iconSize="medium"
-          iconColor="gray6"
-          _onClick={() => {
-            navigate('/app/main')
-          }}
-        />
-      </BackButton>
+      <IconButton
+        buttonType="noFilled"
+        _width="fit-content"
+        _height="fit-content"
+        _onClick={() => {
+          navigate('/app/main')
+        }}
+      >
+        <Icons.ArrowLeft width="24" height="24" stroke={useChangeColor('gray6')} />
+      </IconButton>
 
       <style.TextP typo="h6_b" textColor="gray6" _margin="0 auto">
         설정
@@ -56,16 +62,6 @@ const SettingHeaderWrapper = styled.div`
     left: 50%;
     transform: translateX(-50%);
   }
-`
-
-const BackButton = styled.button`
-  display: flex;
-  align-items: center;
-
-  width: 32px;
-  height: 32px;
-
-  cursor: pointer;
 `
 
 export default SettingHeader

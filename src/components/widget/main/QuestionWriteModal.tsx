@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+
 // store
 import useQuestionStore from 'stores/useQuestionStore'
 
 // components
-import { Button, EmotionModal, Modal, Toggle } from 'components'
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
+import { Button, EmotionModal, IconButton, Modal, Toggle } from 'components'
 
 // assets
-import Icon from 'assets/icons'
+import Icons from 'assets/icons'
 
 // hooks
 import { useGetAnswerQuery, useGetQuestionQuery } from 'hooks/queries'
@@ -19,6 +20,7 @@ import { apis } from 'apis/apis'
 
 // utils
 import { formatStringDate } from 'utils/date'
+import useChangeColor from 'hooks/useChangeColor'
 
 const QuestionWriteModal = () => {
   const navigate = useNavigate()
@@ -68,18 +70,19 @@ const QuestionWriteModal = () => {
                   setIsEmotionModal(true)
                 }}
               >
-                <Icon.Bubble width="56px" height="56px" />
+                <Icons.Bubble width="56px" height="56px" />
               </style.Grid>
-              <Button
-                icon="close"
-                contentType="icon"
+
+              <IconButton
                 buttonType="noFilled"
+                _width="fit-content"
+                _height="fit-content"
                 _onClick={() => {
                   setCancel(true)
                 }}
-                iconColor="gray6"
-                iconSize="medium"
-              />
+              >
+                <Icons.Close width="24" height="24" stroke={useChangeColor('gray6')} />
+              </IconButton>
             </ModalHeader>
             <QuestionWrapper flex="start" direction="column" _gap="18px">
               <style.Grid flex="start" direction="column" _gap="10px">
@@ -116,7 +119,6 @@ const QuestionWriteModal = () => {
                 <Toggle label={['나혼자 보기', '타인과 공유']} value={shareToggle} setValue={setShareToggle} />
                 <Button
                   buttonType="noFilled"
-                  contentType="text"
                   text="완료"
                   _height="100%"
                   textColor={text?.length < 4 ? 'gray6' : 'logo'}
@@ -145,7 +147,6 @@ const QuestionWriteModal = () => {
                 _width="135px"
                 _height="55px"
                 buttonType="tertiary"
-                contentType="text"
                 textColor="logo"
                 text="아니오"
                 _onClick={() => {
@@ -156,7 +157,6 @@ const QuestionWriteModal = () => {
                 _width="135px"
                 _height="55px"
                 buttonType="secondary"
-                contentType="text"
                 textColor="logo"
                 text="나갈래요"
                 _onClick={() => {

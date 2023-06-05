@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import type { IDropdown } from './type'
 
 // component
+import style from 'styles/styled-components/styled'
 import {
   DropdownButton,
   DropdownComponent,
@@ -12,8 +13,12 @@ import {
   DropdownList,
   DropdownSelectedField
 } from './style'
-import style from 'styles/styled-components/styled'
-import { Icon } from 'components'
+
+// assets
+import Icons from 'assets/icons'
+
+// hooks
+import useChangeColor from 'hooks/useChangeColor'
 
 /**
  * @param {DropdownSizeType} dropdownSize - (필수) dropdown 사이즈
@@ -81,11 +86,19 @@ const Dropdown = ({
             </style.TextSpan>
           </DropdownSelectedField>
 
-          <Icon
-            icon={open ? 'caretup' : 'caretdown'}
-            iconSize={dropdownSize === 'small' ? 'small' : 'medium'}
-            iconColor={dropdownSize === 'small' ? 'gray6' : 'side500'}
-          />
+          {open ? (
+            <Icons.CaretUp
+              width={dropdownSize === 'small' ? '20' : '24'}
+              height={dropdownSize === 'small' ? '20' : '24'}
+              stroke={useChangeColor(dropdownSize === 'small' ? 'gray6' : 'side500')}
+            />
+          ) : (
+            <Icons.CaretDown
+              width={dropdownSize === 'small' ? '20' : '24'}
+              height={dropdownSize === 'small' ? '20' : '24'}
+              stroke={useChangeColor(dropdownSize === 'small' ? 'gray6' : 'side500')}
+            />
+          )}
         </DropdownInnerWrapper>
       </DropdownButton>
 

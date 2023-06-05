@@ -163,7 +163,6 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
             <ModalButtons>
               <Button
                 buttonType="tertiary"
-                contentType="text"
                 text="취소"
                 textSize="h6"
                 textColor="logo"
@@ -175,7 +174,6 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
               />
               <Button
                 buttonType="secondary"
-                contentType="text"
                 text="수정하기"
                 textSize="h6"
                 textColor="logo"
