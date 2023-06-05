@@ -1,11 +1,19 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
+
 // store
 import useCommonStore from 'stores/useCommonStore'
+
 // components
+import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Button } from 'components/core'
+import { IconButton } from 'components'
+
+// assets
+import Icons from 'assets/icons'
+
+// hooks
+import useChangeColor from 'hooks/useChangeColor'
 
 const TabBar = () => {
   const location = useLocation()
@@ -64,56 +72,61 @@ const TabBar = () => {
                 to="#"
                 // to="/app/allanswer"
               >
-                {/* TODO: 1차 배포 후 수정피요 */}
-                <Button
+                <IconButton
+                  buttonType={location.pathname.includes('allanswer') ? 'logo' : 'noFilled'}
                   _width="41px"
                   _height="41px"
-                  icon="briefcase"
-                  buttonType={location.pathname.includes('allanswer') ? 'logo' : 'noFilled'}
-                  contentType="icon"
-                  iconColor={location.pathname.includes('allanswer') ? 'side100' : 'gray1'}
-                  iconSize="medium"
+                  _disabled={true}
                   _onClick={() => {
                     setCurrPage(-1)
                   }}
-                  _disabled={true}
-                />
+                >
+                  <Icons.Briefcase
+                    width="24"
+                    height="24"
+                    fill={useChangeColor(location.pathname.includes('allanswer') ? 'side100' : 'gray1')}
+                  />
+                </IconButton>
               </Link>
             </TabWrapper>
           </ul>
           <ul>
             <TabWrapper>
               <Link to="/app/main">
-                <Button
+                <IconButton
+                  buttonType={location.pathname.includes('main') ? 'logo' : 'noFilled'}
                   _width="41px"
                   _height="41px"
-                  icon="bagpack"
-                  buttonType={location.pathname.includes('main') ? 'logo' : 'noFilled'}
-                  contentType="icon"
-                  iconColor={location.pathname.includes('main') ? 'side100' : 'gray3'}
-                  iconSize="medium"
                   _onClick={() => {
                     setCurrPage(0)
                   }}
-                />
+                >
+                  <Icons.Bagpack
+                    width="24"
+                    height="24"
+                    fill={useChangeColor(location.pathname.includes('main') ? 'side100' : 'gray3')}
+                  />
+                </IconButton>
               </Link>
             </TabWrapper>
           </ul>
           <ul>
             <TabWrapper>
               <Link to="/app/myanswer">
-                <Button
+                <IconButton
+                  buttonType={location.pathname.includes('myanswer') ? 'logo' : 'noFilled'}
                   _width="41px"
                   _height="41px"
-                  icon="handshake"
-                  buttonType={location.pathname.includes('myanswer') ? 'logo' : 'noFilled'}
-                  contentType="icon"
-                  iconColor={location.pathname.includes('myanswer') ? 'side100' : 'gray3'}
-                  iconSize="medium"
                   _onClick={() => {
                     setCurrPage(1)
                   }}
-                />
+                >
+                  <Icons.Handshake
+                    width="24"
+                    height="24"
+                    stroke={useChangeColor(location.pathname.includes('myanswer') ? 'side100' : 'gray3')}
+                  />
+                </IconButton>
               </Link>
             </TabWrapper>
           </ul>

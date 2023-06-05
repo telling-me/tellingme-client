@@ -10,6 +10,7 @@ import LandingLayout from 'components/layout/LandingLayout'
 import KakaoLayout from 'components/layout/KakaoLayout'
 import AppleLayout from 'components/layout/AppleLayout'
 import NewsLetterLayout from 'components/layout/NewsLetterLayout'
+import SignUpLayout from 'components/layout/SignUpLayout'
 
 // path
 import { PAGE_URL } from 'configs/path'
@@ -30,6 +31,7 @@ const PageRouter = () => {
             <Route path={PAGE_URL.Login_Apple} element={<Switch.AppleLoginButtonPage />} />
             <Route path={PAGE_URL.Login} element={<Switch.LoginButtonPage />} />
             <Route path={PAGE_URL.SignUp} element={<Switch.SignUpPage />} />
+            <Route path={'*'} element={<Switch.ErrorPage />} />
           </Route>
           {
             // 임시 로그인 라우터
@@ -54,6 +56,13 @@ const PageRouter = () => {
             <Route path={PAGE_URL.NewsLetterComplete} element={<Switch.NewsLetterCompletePage />} />
           </Route>
           <Route path={'*'} element={<Switch.ErrorPage />} />
+          {
+            // 회원 가입
+          }
+          <Route path={PAGE_URL.SignUp} element={<SignUpLayout />}>
+            <Route index element={<Switch.SignUpPage />} />
+            <Route path={PAGE_URL.SignUpComplete} element={<Switch.SignUpCompletePage />} />
+          </Route>
         </Routes>
       </AnimatePresence>
     </>

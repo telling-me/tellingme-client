@@ -1,11 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-// components
-import Icon from 'assets/icons'
-import { Button } from 'components'
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
+import { Button } from 'components'
+
+// assets
+import Icons from 'assets/icons'
 
 const ErrorPage = () => {
   const navigate = useNavigate()

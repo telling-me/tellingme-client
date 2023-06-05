@@ -2,12 +2,10 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
+import { Button } from 'components/core'
 
 // store
 import useQuestionStore from 'stores/useQuestionStore'
-
-// component
-import { Button } from 'components/core'
 
 // ani
 import { modalAni } from 'styles/ani'
@@ -62,7 +60,6 @@ const EmotionModal = () => {
         <Grid flex="center" _gap="15px">
           <Button
             buttonType="tertiary"
-            contentType="text"
             _width="135px"
             _height="55px"
             text="취소"
@@ -73,7 +70,6 @@ const EmotionModal = () => {
           />
           <Button
             buttonType="secondary"
-            contentType="text"
             _width="135px"
             _height="55px"
             text="확인"

@@ -1,30 +1,38 @@
-import type { Dispatch, MouseEventHandler, RefObject, SetStateAction } from 'react'
-import { type IconType, type ColorType, type TextSizeType } from 'type/common'
-import { type IconSizeType } from '../icon/type'
+import type { Dispatch, MouseEventHandler, SetStateAction } from 'react'
+import type { ColorType, TextSizeType } from 'type/common'
 
-export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'tertiaryModified' | 'fourth' | 'noFilled' | 'logo'
-export type ContentType = 'icon' | 'text' | 'row' | 'col' | 'withInput'
+export type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'fourth' | 'noFilled' | 'logo'
 
 export interface IButton {
   buttonType: ButtonType
-  contentType: ContentType
   text?: string
   textSize?: TextSizeType
   textColor?: ColorType
   textHoverColor?: ColorType
-  icon?: IconType
-  iconSize?: IconSizeType
-  iconColor?: ColorType
-  jobInfo?: string
-  setJobInfo?: Dispatch<SetStateAction<string>>
   _active?: boolean
   _width?: string
   _height?: string
   _margin?: string
   _padding?: string
-  _gap?: string
-  _justifyContent?: string
   _disabled?: boolean
   _onClick?: MouseEventHandler<HTMLButtonElement>
-  _ref?: RefObject<HTMLButtonElement>
+}
+
+export interface INotOnlyButton {
+  text: string
+  _active: boolean
+  _onClick: MouseEventHandler<HTMLButtonElement>
+  children: React.ReactNode
+  _value?: string
+  setValue?: Dispatch<SetStateAction<string>>
+}
+
+export interface IOnlyButton {
+  buttonType: ButtonType
+  _width: string
+  _height: string
+  _margin?: string
+  _disabled?: boolean
+  _onClick: React.MouseEventHandler<HTMLButtonElement>
+  children: React.ReactNode
 }

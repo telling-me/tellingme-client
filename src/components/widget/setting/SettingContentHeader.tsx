@@ -4,10 +4,14 @@ import type { Dispatch, SetStateAction } from 'react'
 // component
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Icon } from 'components'
+import { IconButton } from 'components'
 
 // hook
 import useWindowSize from 'hooks/useWindowSize'
+import useChangeColor from 'hooks/useChangeColor'
+
+// assets
+import Icons from 'assets/icons'
 
 interface ISettingContentHeader {
   pageNumber: number
@@ -23,19 +27,19 @@ const SettingContentHeader = ({ pageNumber, setIsMenu, _disabled, _onClick }: IS
   return (
     <HeaderWrapper>
       {windowWidth < 768 && (
-        <BackButton>
-          <Icon
-            icon="arrowleft"
-            iconSize="medium"
-            iconColor="gray6"
-            _onClick={() => {
-              if (setIsMenu != null) {
-                setIsMenu(true)
-              }
-            }}
-            _margin="0 0 0 -4px"
-          />
-        </BackButton>
+        <IconButton
+          buttonType="noFilled"
+          _width="fit-content"
+          _height="fit-content"
+          _margin="0 0 0 -4px"
+          _onClick={() => {
+            if (setIsMenu != null) {
+              setIsMenu(true)
+            }
+          }}
+        >
+          <Icons.ArrowLeft width="24" height="24" stroke={useChangeColor('gray6')} />
+        </IconButton>
       )}
 
       <style.TextP typo="h6_b" textColor="gray6" _margin="0px 0px 0px auto">
@@ -76,16 +80,6 @@ const HeaderWrapper = styled.div`
     height: 66px;
     padding: 20px 0 14px 0;
   }
-`
-
-const BackButton = styled.button`
-  display: flex;
-  align-items: center;
-
-  width: 32px;
-  height: 32px;
-
-  cursor: pointer;
 `
 
 const CompleteButton = styled.button<{ _disabled?: boolean }>`

@@ -178,7 +178,6 @@ const QuestionWriteModal = () => {
                   <Toggle label={['나혼자 보기', '타인과 공유']} value={shareToggle} setValue={setShareToggle} />
                   <Button
                     buttonType="noFilled"
-                    contentType="text"
                     text="완료"
                     _height="100%"
                     textColor={text?.length < MIN_LENGTH ? 'gray6' : 'logo'}
@@ -236,7 +235,6 @@ const QuestionWriteModal = () => {
                 _width="135px"
                 _height="55px"
                 buttonType="tertiary"
-                contentType="text"
                 textColor="logo"
                 text="아니오"
                 _onClick={() => {
@@ -247,7 +245,6 @@ const QuestionWriteModal = () => {
                 _width="135px"
                 _height="55px"
                 buttonType="secondary"
-                contentType="text"
                 textColor="logo"
                 text="나갈래요"
                 _onClick={() => {
@@ -272,7 +269,6 @@ const QuestionWriteModal = () => {
                 _width="135px"
                 _height="55px"
                 buttonType="tertiary"
-                contentType="text"
                 textColor="logo"
                 text="취소"
                 _onClick={() => {
@@ -283,7 +279,6 @@ const QuestionWriteModal = () => {
                 _width="135px"
                 _height="55px"
                 buttonType="secondary"
-                contentType="text"
                 textColor="logo"
                 text="삭제하기"
                 _onClick={() => {

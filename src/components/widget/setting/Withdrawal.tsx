@@ -7,6 +7,8 @@ import { Button, CheckSquare, Modal } from 'components'
 
 // data
 import { SETTING_WITHDRAWAL_DOCS } from 'data/docs'
+
+// hooks
 import { useDeleteUser } from 'hooks/mutations/user'
 
 const Withdrawal = () => {
@@ -48,7 +50,6 @@ const Withdrawal = () => {
 
       <Button
         buttonType="secondary"
-        contentType="text"
         text="탈퇴하기"
         textSize="h6"
         textColor={!agree ? 'gray4' : 'logo'}
@@ -73,7 +74,6 @@ const Withdrawal = () => {
             <ModalButtons>
               <Button
                 buttonType="tertiary"
-                contentType="text"
                 text="취소"
                 textSize="h6"
                 textColor="logo"
@@ -83,7 +83,6 @@ const Withdrawal = () => {
               />
               <Button
                 buttonType="secondary"
-                contentType="text"
                 text="떠나기"
                 textSize="h6"
                 textColor="logo"

@@ -2,16 +2,18 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // components
-import Icon from 'assets/icons'
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
+import { Button } from 'components'
+
+// assets
+import Icon from 'assets/icons'
 
 // utils
 import { mediaQuery } from 'utils/mediaQuery'
 
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
-import { Button } from 'components/core'
 
 const LandingCatchPhrase = () => {
   const windowSize = useWindowSize()
@@ -72,7 +74,6 @@ const LandingCatchPhrase = () => {
             <Button
               _padding="18px 32px"
               buttonType="tertiary"
-              contentType="text"
               text="뉴스레터 신청"
               textColor="logo"
               _onClick={() => {
@@ -82,7 +83,6 @@ const LandingCatchPhrase = () => {
             <Button
               _padding="18px 32px"
               buttonType="secondary"
-              contentType="text"
               text="로그인하기"
               textColor="logo"
               // TODO: _onClick={() => {로그인 모달창 띄우기}}
