@@ -19,7 +19,6 @@ const NoneData = () => {
         </TextP>
         <Button
           buttonType="secondary"
-          contentType="text"
           text="답변하러 갈래요"
           _padding="18px 32px"
           textSize="h6"

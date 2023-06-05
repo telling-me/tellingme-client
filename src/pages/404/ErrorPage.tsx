@@ -6,7 +6,7 @@ import style from 'styles/styled-components/styled'
 import { Button } from 'components'
 
 // assets
-import Icons from 'assets/icons'
+import Icon from 'assets/icons'
 
 const ErrorPage = () => {
   const navigate = useNavigate()
@@ -30,7 +30,6 @@ const ErrorPage = () => {
         </TextP>
         <Button
           buttonType="secondary"
-          contentType="text"
           text="홈으로 갈래요"
           _padding="18px 32px"
           textSize="h6"
