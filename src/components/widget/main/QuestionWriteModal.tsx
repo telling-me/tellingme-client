@@ -127,7 +127,6 @@ const QuestionWriteModal = () => {
                         <DropdownItem
                           dropdownSize="small"
                           onClick={() => {
-                            console.log('dsfd')
                             setDeleteModal(true)
                           }}
                         >
