@@ -303,7 +303,6 @@ const QuestionWriteModal = () => {
                 _width="135px"
                 _height="55px"
                 buttonType="tertiary"
-                contentType="text"
                 textColor="logo"
                 text="취소"
                 _onClick={() => {
@@ -314,7 +313,6 @@ const QuestionWriteModal = () => {
                 _width="135px"
                 _height="55px"
                 buttonType="secondary"
-                contentType="text"
                 textColor="logo"
                 text="저장하기"
                 _onClick={() => {
@@ -349,7 +347,6 @@ const QuestionWriteModal = () => {
                 _width="135px"
                 _height="55px"
                 buttonType="tertiary"
-                contentType="text"
                 textColor="logo"
                 text="취소"
                 _onClick={() => {
@@ -360,7 +357,6 @@ const QuestionWriteModal = () => {
                 _width="135px"
                 _height="55px"
                 buttonType="secondary"
-                contentType="text"
                 textColor="logo"
                 text="수정하기"
                 _onClick={() => {
