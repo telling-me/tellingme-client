@@ -143,13 +143,20 @@ const QuestionWriteModal = () => {
             </ModalHeader>
             <QuestionWrapper flex="start" direction="column" _gap="18px">
               <Grid flex="start" direction="column" _gap="10px">
-                <TextP typo="h6" textColor="logo" textAlign="center" wordBreak="keep-all">
-                  {question?.title}
-                </TextP>
-
-                <TextP typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
-                  {question?.phrase}
-                </TextP>
+                <Grid>
+                  {question?.title?.split('\\n')?.map((line: string) => (
+                    <TextP key={line} typo="h6" textColor="logo" textAlign="center" wordBreak="keep-all">
+                      {line}
+                    </TextP>
+                  ))}
+                </Grid>
+                <Grid>
+                  {question?.phrase?.split('\\n')?.map((line: string) => (
+                    <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
+                      {line}
+                    </TextP>
+                  ))}
+                </Grid>
               </Grid>
               <TextP typo="c" textColor="side500" textAlign="center">
                 {`${question?.date?.[0] as string}년 ${question?.date?.[1] as string}월 ${
