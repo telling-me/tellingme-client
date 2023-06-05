@@ -1,9 +1,9 @@
 import { apis } from 'apis/apis'
 
-export const useCheckIdQuery = (loginType: string, socialId: string) => {
+export const useCheckIdQuery = (loginType: string, socialId: string, idToken?: string) => {
   return {
     queryKey: ['userToken'],
-    queryFn: async () => await apis.checkUserInfo(loginType, socialId),
+    queryFn: async () => await apis.checkUserInfo(loginType, socialId, idToken),
     onSuccess: (res: any) => {
       return res
     },

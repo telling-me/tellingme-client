@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 // store
-import useQuestionStore from 'stores/useQuestionStore'
 import useCommonStore from 'stores/useCommonStore'
 
 // components
@@ -20,7 +19,6 @@ const TabBar = () => {
   const location = useLocation()
 
   // store
-  const { isWriteModalOn } = useQuestionStore()
   const { setPrevPage, setCurrPage } = useCommonStore()
 
   useEffect(() => {
@@ -28,7 +26,12 @@ const TabBar = () => {
   }, [location])
 
   // 질문 작성 시 TabBar 노출 여부
-  if ((location.pathname.includes('main') && isWriteModalOn) || location.pathname === '/app/setting') return null
+  if (
+    (location.pathname.includes('main') && new URLSearchParams(window.location.search).get('date') != null) ||
+    location.pathname.includes('setting')
+  )
+    return null
+  
   return (
     <TabBarWrapper size={window.innerWidth}>
       {/* Desktop 버전에만 필요 */}

@@ -10,6 +10,7 @@ export interface IDropdown {
   _setSelected: Dispatch<SetStateAction<string | undefined>>
   direction?: 'up' | 'down'
   label?: string
+  unit?: string
   _maxWidth?: string
   _margin?: string
   _disabled?: boolean

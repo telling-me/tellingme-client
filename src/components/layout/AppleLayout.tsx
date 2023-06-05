@@ -1,25 +1,35 @@
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+// hooks
+import { useSaveToken } from 'hooks'
+import { useCheckIdQuery } from 'hooks/queries'
 
 const ApplyLayout = () => {
   const [idToken] = useState<string>(useLocation().hash.split('#code=')[1].split('&id_token=')[1])
 
-  const [socialId, setSocialId] = useState<string>('')
+  const navigate = useNavigate()
 
-  void fetch('http://3.38.8.152:8080/api/oauth/apple', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      idToken
-    },
-    body: JSON.stringify({ socialId: '' })
-  })
-    .then(async (response) => await response.json())
-    .then((result) => {
-      setSocialId(result.socialId.split('Optional[')[1].split(']')[0])
-      console.log(socialId)
-    })
-  return <>{idToken}</>
+  try {
+    const res: any = useCheckIdQuery('apple', '', idToken)
+
+    if (res.isError === true) {
+      navigate('/signup', {
+        state: {
+          socialId: res.error.response.data.socialId,
+          socialLoginType: res.error.response.data.socialLoginType
+        }
+      })
+    } else {
+      useSaveToken({
+        accessToken: res.data.data.accessToken,
+        refreshToken: res.data.data.refreshToken
+      })
+      navigate('/app/main')
+    }
+  } catch (err: unknown) {}
+
+  return <></>
 }
 
 export default ApplyLayout

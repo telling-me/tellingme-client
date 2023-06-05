@@ -1,17 +1,23 @@
 import { type FunctionComponent, type ComponentClass } from 'react'
 import { type IStringKey } from 'type/common'
+import { ReactComponent as NotFound } from './NotFound.svg'
 import { ReactComponent as Menu } from './menu.svg'
 import { ReactComponent as LandingEmotionBg } from './LandingEmotionBg.svg'
 import { ReactComponent as LandingEmotionLine } from './LandingEmotionLine.svg'
 import { ReactComponent as LandingEmotionModal } from './LandingEmotionModal.svg'
 import { ReactComponent as LandingEmotionModalMobile } from './LandingEmotionModalMobile.svg'
 import { ReactComponent as LandingCatchPhraseCircle } from './LandingCatchPhraseCircle.svg'
+import { ReactComponent as LandingAnswerList } from './LandingAnswerList.svg'
 import { ReactComponent as LandingAnswer1 } from './LandingAnswer1.svg'
 import { ReactComponent as LandingAnswer2 } from './LandingAnswer2.svg'
 import { ReactComponent as LandingAnswer3 } from './LandingAnswer3.svg'
 import { ReactComponent as LandingAnswer4 } from './LandingAnswer4.svg'
 import { ReactComponent as LandingQuestionList } from './LandingQuestionList.svg'
-import { ReactComponent as LandingPhone } from './LandingPhone.svg'
+import { ReactComponent as LandingQuestion1 } from './LandingQuestion1.svg'
+import { ReactComponent as LandingQuestion2 } from './LandingQuestion2.svg'
+import { ReactComponent as LandingQuestion3 } from './LandingQuestion3.svg'
+import { ReactComponent as LandingQuestion4 } from './LandingQuestion4.svg'
+import { ReactComponent as LandingQuestion5 } from './LandingQuestion5.svg'
 import { ReactComponent as LandingCircle } from './LandingCircle.svg'
 import { ReactComponent as LogoSmallBubble1 } from './LogoSmallBubble1.svg'
 import { ReactComponent as LogoSmallBubble2 } from './LogoSmallBubble2.svg'
@@ -35,6 +41,7 @@ import { ReactComponent as Handshake } from './Handshake.svg'
 import { ReactComponent as Health } from './Health.svg'
 import { ReactComponent as Values } from './Values.svg'
 import { ReactComponent as Magnet } from './Magnet.svg'
+import { ReactComponent as More } from './More.svg'
 import { ReactComponent as Pen } from './Pen.svg'
 import { ReactComponent as Bagpack } from './Bagpack.svg'
 import { ReactComponent as Briefcase } from './Briefcase.svg'
@@ -52,6 +59,7 @@ import { ReactComponent as Insta } from './Insta.svg'
 import { ReactComponent as Error404 } from './Error404.svg'
 
 interface IIconIndex extends IStringKey {
+  NotFound: string | FunctionComponent<any> | ComponentClass<any, any>
   Menu: string | FunctionComponent<any> | ComponentClass<any, any>
   Warning: string | FunctionComponent<any> | ComponentClass<any, any>
   XCircle: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -71,6 +79,7 @@ interface IIconIndex extends IStringKey {
   Health: string | FunctionComponent<any> | ComponentClass<any, any>
   Values: string | FunctionComponent<any> | ComponentClass<any, any>
   Magnet: string | FunctionComponent<any> | ComponentClass<any, any>
+  More: string | FunctionComponent<any> | ComponentClass<any, any>
   Pen: string | FunctionComponent<any> | ComponentClass<any, any>
   Bagpack: string | FunctionComponent<any> | ComponentClass<any, any>
   Briefcase: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -78,12 +87,17 @@ interface IIconIndex extends IStringKey {
   ScrollDown: string | FunctionComponent<any> | ComponentClass<any, any>
   Smiley: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingEmotionBg: string | FunctionComponent<any> | ComponentClass<any, any>
-  LandingPhone: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingEmotionLine: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingEmotionModal: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingEmotionModalMobile: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingCatchPhraseCircle: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingQuestionList: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingQuestion1: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingQuestion2: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingQuestion3: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingQuestion4: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingQuestion5: string | FunctionComponent<any> | ComponentClass<any, any>
+  LandingAnswerList: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingAnswer1: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingAnswer2: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingAnswer3: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -105,6 +119,7 @@ interface IIconIndex extends IStringKey {
 }
 
 const Icon: IIconIndex = {
+  NotFound,
   Menu,
   LandingEmotionBg,
   LandingEmotionLine,
@@ -112,11 +127,16 @@ const Icon: IIconIndex = {
   LandingEmotionModalMobile,
   LandingCatchPhraseCircle,
   LandingQuestionList,
+  LandingQuestion1,
+  LandingQuestion2,
+  LandingQuestion3,
+  LandingQuestion4,
+  LandingQuestion5,
+  LandingAnswerList,
   LandingAnswer1,
   LandingAnswer2,
   LandingAnswer3,
   LandingAnswer4,
-  LandingPhone,
   LandingCircle,
   LogoSmallBubble1,
   LogoSmallBubble2,
@@ -131,6 +151,7 @@ const Icon: IIconIndex = {
   ArrowLeft,
   ArrowRight,
   Male,
+  More,
   Female,
   BellRinging,
   CaretUp,

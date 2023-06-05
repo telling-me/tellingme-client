@@ -6,14 +6,15 @@ import { TableCell } from 'components'
 const Table = ({ data }: ITable) => {
   return (
     <TableWrapper>
-      {data.map((v, i) => {
-        return <TableCell key={i} emotion={v[0]} question={v[1]} date={v[2]} />
+      {data?.map((v, i) => {
+        return <TableCell key={i} emotion={v?.emotion} question={v?.title} date={v?.date} />
       })}
     </TableWrapper>
   )
 }
 
 const TableWrapper = styled.div`
+  width: 100%;
   height: 100%;
   margin-top: 250px;
 

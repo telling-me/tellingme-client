@@ -30,6 +30,7 @@ const PageRouter = () => {
             <Route index element={<Switch.LandingPage />} />
             <Route path={PAGE_URL.Login_Apple} element={<Switch.AppleLoginButtonPage />} />
             <Route path={PAGE_URL.Login} element={<Switch.LoginButtonPage />} />
+            <Route path={PAGE_URL.SignUp} element={<Switch.SignUpPage />} />
             <Route path={'*'} element={<Switch.ErrorPage />} />
           </Route>
           {
@@ -54,6 +55,7 @@ const PageRouter = () => {
             <Route index element={<Switch.NewsLetterPage />} />
             <Route path={PAGE_URL.NewsLetterComplete} element={<Switch.NewsLetterCompletePage />} />
           </Route>
+          <Route path={'*'} element={<Switch.ErrorPage />} />
           {
             // 회원 가입
           }

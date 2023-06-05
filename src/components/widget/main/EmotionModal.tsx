@@ -1,7 +1,6 @@
-import React from 'react'
-
-// components
-import styled from 'styled-components'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
 import { Button } from 'components/core'
 
@@ -11,8 +10,31 @@ import useQuestionStore from 'stores/useQuestionStore'
 // ani
 import { modalAni } from 'styles/ani'
 
+// hooks
+import { useGetAnswerQuery } from 'hooks'
+
+// utils
+import { formatStringDate } from 'utils/date'
+import { emotionList } from 'data/emotion'
+import useAnswerStore from 'stores/useAnswerStore'
+
 const EmotionModal = () => {
+  const theme = useTheme()
+  const date = new URLSearchParams(window.location.search).get('date')
+  const backUrl = location.hash.split('?date')[1]
+
+  // query
+  const { data: { data: answer = null } = {} } = useGetAnswerQuery(formatStringDate(new Date(date as string)))
+
+  const navigate = useNavigate()
+
   const { setIsEmotionModal } = useQuestionStore()
+  const { emotion, setEmotion } = useAnswerStore()
+
+  useEffect(() => {
+    setEmotion(answer?.code === 'NOT_FOUND_ANSWER' ? null : answer?.emotion)
+  }, [])
+
   return (
     <ModalWrapper flex="center" variants={modalAni} initial="init" animate="ani" exit="exit">
       <ModalInnerWrapper flex="between" direction="column">
@@ -23,8 +45,16 @@ const EmotionModal = () => {
           </TextP>
         </Grid>
         <EmotionGridWrapper>
-          {new Array(12).fill(null).map((item, idx) => (
-            <Emotion key={idx} />
+          {emotionList.map((emotion, idx) => (
+            <Emotion
+              key={idx}
+              flex="center"
+              onClick={() => {
+                setEmotion(emotion.idx)
+              }}
+            >
+              <emotion.icon width={50} stroke={theme.colors.logo} fill={theme.colors.logo} />
+            </Emotion>
           ))}
         </EmotionGridWrapper>
         <Grid flex="center" _gap="15px">
@@ -34,6 +64,7 @@ const EmotionModal = () => {
             _height="55px"
             text="취소"
             _onClick={() => {
+              if (answer.code === 'NOT_FOUND_ANSWER') navigate(backUrl)
               setIsEmotionModal(false)
             }}
           />
@@ -45,6 +76,7 @@ const EmotionModal = () => {
             _onClick={() => {
               setIsEmotionModal(false)
             }}
+            _disabled={emotion === null}
           />
         </Grid>
       </ModalInnerWrapper>
@@ -86,7 +118,6 @@ const ModalInnerWrapper = styled(style.Grid)`
 const Emotion = styled(style.Grid)`
   width: 56px;
   height: 56px;
-  background-color: ${({ theme }) => theme.colors.gray.gray1};
 
   &:hover {
     cursor: pointer;

@@ -1,26 +1,40 @@
 import React from 'react'
-import type { ITableCell } from './type'
-import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
 
-const TableCell = ({ emotion, question, date }: ITableCell) => {
-  return (
-    <CellOuterWrapper>
-      <CellInnerWrapper>
-        <EmotionWrapper></EmotionWrapper>
+// type
+import type { ITableCell } from './type'
 
-        <QuestionDateWrapper>
-          <style.TextP typo="b2" textColor="black">
-            {question}
-          </style.TextP>
-          <style.TextP typo="c" textColor="side500">
-            {date}
-          </style.TextP>
-        </QuestionDateWrapper>
-      </CellInnerWrapper>
-    </CellOuterWrapper>
+// utils
+import { formatStringDate } from 'utils/date'
+import EmotionIcon from '../main/EmotionIcon'
+
+const TableCell = ({ emotion, question, date }: ITableCell) => {
+  const theme = useTheme()
+  return (
+    <Link to={`?date=${formatStringDate(new Date(date))}`}>
+      <CellOuterWrapper>
+        <CellInnerWrapper>
+          <EmotionWrapper>
+            <EmotionIcon emotion={emotion} width={30} fill={theme.colors.logo} stroke={theme.colors.logo} />
+          </EmotionWrapper>
+
+          <QuestionDateWrapper>
+            <TextP typo="b2" textColor="black">
+              {question}
+            </TextP>
+            <TextP typo="c" textColor="side500">
+              {`${date?.[0]}년 ${date?.[1]}월 ${date?.[2]}일`}
+            </TextP>
+          </QuestionDateWrapper>
+        </CellInnerWrapper>
+      </CellOuterWrapper>
+    </Link>
   )
 }
+
+const { TextP } = style
 
 const CellOuterWrapper = styled.button`
   width: 100%;
@@ -57,7 +71,6 @@ const CellInnerWrapper = styled.div`
 const EmotionWrapper = styled.div`
   width: 36px;
   height: 36px;
-  background-color: #e2f7f2;
 `
 
 const QuestionDateWrapper = styled.div`

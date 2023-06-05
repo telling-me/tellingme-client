@@ -7,12 +7,6 @@ import { type IQuestionStore } from './type'
 const useQuestionStore = create<IQuestionStore>()(
   devtools(
     immer((set) => ({
-      isWriteModalOn: false,
-      setIsWriteModal: (value) => {
-        set((state) => {
-          state.isWriteModalOn = value
-        })
-      },
       isEmotionModalOn: false,
       setIsEmotionModal: (value) => {
         set((state) => {
