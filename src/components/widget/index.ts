@@ -43,3 +43,6 @@ export { default as CreateNickname } from './signup/create/CreateNickname'
 export { default as CreateNotification } from './signup/create/CreateNotification'
 export { default as CreatePurpose } from './signup/create/CreatePurpose'
 export { default as CreateTermsOfService } from './signup/create/CreateTermsOfService'
+
+// loginModal
+export { default as LoginModal } from './LoginModal'

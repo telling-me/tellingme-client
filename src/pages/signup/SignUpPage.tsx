@@ -97,7 +97,7 @@ const SignUpPage = () => {
   })
   const handleSignUp = () => {
     signupQuery.refetch().catch(() => {})
-    navigate('/login')
+    navigate('/signup/complete')
   }
 
   // 건너뛰기
