@@ -21,7 +21,7 @@ const TableCell = ({ emotion, question, date }: ITableCell) => {
           </EmotionWrapper>
 
           <QuestionDateWrapper>
-            <TextP typo="b2" textColor="black">
+            <TextP typo="b2" textColor="black" ellipsis={true} _width="100%">
               {question.replace(/\\n/gm, ' ')}
             </TextP>
             <TextP typo="c" textColor="side500">
@@ -74,6 +74,7 @@ const EmotionWrapper = styled.div`
 `
 
 const QuestionDateWrapper = styled.div`
+  max-width: calc(100% - 50px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
