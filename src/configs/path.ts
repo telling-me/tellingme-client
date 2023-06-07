@@ -16,6 +16,8 @@ export enum PAGE_URL {
   // NewsLetter
   NewsLetter = 'newsletter',
   NewsLetterComplete = 'complete',
+  NewsLetterUnsubscribe = 'unsubscribe',
+  NewsLetterUnsubscribeComplete = 'unsubscribe/complete',
 
   // SignUp
   SignUp = 'signup',

@@ -60,6 +60,12 @@ export const userApi = {
       headers: { 'Content-Type': 'application/json' }
     })
   },
+  unsubscribeNewsLetter: async (email: string) => {
+    return await API.delete(`/api/newsLetter`, {
+      headers: { 'Content-Type': 'application/json' },
+      data: { email }
+    })
+  },
   getKakaoToken: async (data: IKakaoTokenData) => {
     return await KAKAO_TOKEN_API.post('/oauth/token', {
       grant_type: 'authorization_code',

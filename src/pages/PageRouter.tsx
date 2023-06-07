@@ -54,6 +54,11 @@ const PageRouter = () => {
           <Route path={PAGE_URL.NewsLetter} element={<NewsLetterLayout />}>
             <Route index element={<Switch.NewsLetterPage />} />
             <Route path={PAGE_URL.NewsLetterComplete} element={<Switch.NewsLetterCompletePage />} />
+            <Route path={PAGE_URL.NewsLetterUnsubscribe} element={<Switch.NewsLetterUnsubscribePage />} />
+            <Route
+              path={PAGE_URL.NewsLetterUnsubscribeComplete}
+              element={<Switch.NewsLetterUnsubscribeCompletePage />}
+            />
           </Route>
           <Route path={'*'} element={<Switch.ErrorPage />} />
           {
