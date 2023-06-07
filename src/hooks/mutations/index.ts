@@ -7,3 +7,4 @@ export { useUpdateAnswerMutation } from './answer'
 
 // user
 // export { useLoginMutation } from './user'
+export { useUnsubscribeNewsLetterMutation } from './user'

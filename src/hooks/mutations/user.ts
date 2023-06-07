@@ -75,3 +75,13 @@ export const useCheckNicknameMutation = <T>(
     ...options
   })
 }
+
+export const useUnsubscribeNewsLetterMutation = <T>(option?: T) => {
+  return useMutation(async (data: { email: string }) => await apis.unsubscribeNewsLetter(data.email), {
+    onSuccess() {},
+    onError: (err) => {
+      console.log(err)
+    },
+    ...option
+  })
+}
