@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-throw-literal */
-import firebase from 'firebase/app'
-import 'firebase/messaging'
+import { initializeApp } from 'firebase/app'
+import { getMessaging, getToken } from 'firebase/messaging'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -12,13 +11,8 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 }
 
-if (firebase.apps.length === 0) {
-  firebase.initializeApp(firebaseConfig)
-} else {
-  firebase.app()
-}
-
-const messaging = firebase.messaging()
+const app = initializeApp(firebaseConfig)
+const messaging = getMessaging(app)
 
 export function requestPermission() {
   console.log('Requesting permission...')
@@ -27,20 +21,24 @@ export function requestPermission() {
     if (permission === 'granted') {
       console.log('Notification permission granted.')
 
-      messaging
-        .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
-        .then((currentToken) => {
-          if (currentToken.length > 0) {
-            console.log('token : ', currentToken)
+      getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
+        .then((token: string) => {
+          if (token.length > 0) {
+            console.log(`token: ${token}`)
           } else {
+            // Show permission request UI
             console.log('No registration token available. Request permission to generate one.')
+            // ...
           }
         })
         .catch((err) => {
           console.log('An error occurred while retrieving token. ', err)
+          // ...
         })
     } else if (permission === 'denied') {
       console.log('Notification permission denied')
     }
   })
 }
+
+requestPermission()
