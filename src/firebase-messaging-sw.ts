@@ -36,7 +36,6 @@ export function requestPermission() {
     .then((currentToken) => {
       if (currentToken.length > 0) {
         console.log('token : ', currentToken)
-        subscribeTokenToTopic(currentToken)
       } else {
         console.log('No registration token available. Request permission to generate one.')
       }
@@ -48,23 +47,4 @@ export function requestPermission() {
   messaging.onMessage((payload) => {
     console.log('Message received. ', payload)
   })
-}
-
-function subscribeTokenToTopic(token: string) {
-  fetch(`https://iid.googleapis.com/iid/v1/${token}/rel/topics/notification`, {
-    method: 'POST',
-    headers: new Headers({
-      Authorization: `Bearer ${process.env.REACT_APP_FIREBASE_SERVER_KEY as string}`
-    })
-  })
-    .then((response) => {
-      if (response.status < 200 || response.status >= 400) {
-        throw response
-      }
-
-      console.log('성공', response)
-    })
-    .catch((error) => {
-      console.error(error)
-    })
 }

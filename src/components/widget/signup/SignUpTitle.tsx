@@ -1,5 +1,6 @@
 import React from 'react'
-import { requestPermission } from 'firebase-messaging-sw'
+
+// type
 import type { ISignUpTitleAndBottomButton } from './type'
 
 // data
@@ -92,7 +93,6 @@ const SignUpTitle = ({
                   _disabled={canLastMove()}
                   _onClick={() => {
                     handleNextStep()
-                    requestPermission()
                   }}
                 />
               )}
