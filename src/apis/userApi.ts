@@ -117,7 +117,7 @@ export const userApi = {
   },
   deleteUser: async () => {
     return await API.post(
-      '/api/user/withdraw',
+      '/api/oauth/withdraw',
       {},
       {
         headers: { 'Content-Type': 'application/json' }
@@ -126,7 +126,7 @@ export const userApi = {
   },
   logout: async () => {
     return await API.post(
-      '/api/user/logout',
+      '/api/oauth/logout',
       {},
       {
         headers: { 'Content-Type': 'application/json' }
