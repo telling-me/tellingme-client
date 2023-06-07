@@ -1,12 +1,19 @@
 import React from 'react'
+
+// components
 import styled from 'styled-components'
-import style from 'styles/styled-components/styled'
+
+// assets
 import Icons from 'assets/icons'
+
+// styles
+import { Theme } from 'styles/DefaultTheme'
+import style from 'styles/styled-components/styled'
 
 const NewsLetterCompletePage = () => {
   return (
     <MainWrapper>
-      <Icons.Logo width="136" height="57" />
+      <Icons.Logo width="136" height="57" fill={Theme.colors.logo} />
 
       <TextWrapper>
         <style.TextP typo="h6_b" textColor="gray7">
