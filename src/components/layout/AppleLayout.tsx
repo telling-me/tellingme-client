@@ -2,16 +2,15 @@ import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 // hooks
-import { useSaveToken } from 'hooks'
-import { useCheckIdQuery } from 'hooks/queries'
+import { useAppleQueries, useSaveToken } from 'hooks'
 
-const ApplyLayout = () => {
+const AppleLayout = () => {
   const [idToken] = useState<string>(useLocation().hash.split('#code=')[1].split('&id_token=')[1])
 
   const navigate = useNavigate()
 
   try {
-    const res: any = useCheckIdQuery('apple', '', idToken)
+    const res: any = useAppleQueries({ idToken })[0]
 
     if (res.isError === true) {
       navigate('/signup', {
@@ -29,7 +28,7 @@ const ApplyLayout = () => {
     }
   } catch (err: unknown) {}
 
-  return <></>
+  return <>{idToken}</>
 }
 
-export default ApplyLayout
+export default AppleLayout
