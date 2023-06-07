@@ -9,7 +9,10 @@ import { useGetAnswerRecordCountQuery } from 'hooks/queries/question'
 import { formatStringDate } from 'utils/date'
 
 const ContinuousDate = () => {
-  const { data: { data: answer = null } = {} } = useGetAnswerRecordCountQuery(formatStringDate(new Date()))
+  // 새벽 6시 업데이트
+  const today = new Date(new Date().getTime() - 6 * 60 * 60 * 1000)
+
+  const { data: { data: answer = null } = {} } = useGetAnswerRecordCountQuery(formatStringDate(today))
   return (
     <DateWrapper flex="center" _width="max-content" _padding="10px 12px" _margin="8px 0 0 0">
       {answer?.count > 0 ? (

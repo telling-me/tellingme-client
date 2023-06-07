@@ -1,4 +1,4 @@
-import { API, KAKAO_TOKEN_API, KAKAO_USER_INFO_API } from 'apis/api'
+import { API, KAKAO_TOKEN_API, KAKAO_USER_INFO_API, NO_AUTH_API } from 'apis/api'
 
 type SocialLoginType = 'kakao' | 'apple'
 
@@ -45,19 +45,24 @@ export interface IUserInfoDto {
   purpose: string
 }
 export const userApi = {
-  login: async (loginData: ILoginData) => await API.post('/member/auth/login', loginData),
   signup: async (joinResponseDto: IJoinResponseDto) => {
-    return await API.post(`/api/oauth/join`, joinResponseDto, {
+    return await NO_AUTH_API.post(`/api/oauth/join`, joinResponseDto, {
       headers: { 'Content-Type': 'application/json' }
     })
   },
   test: async () => {
-    const data = await API.get('/')
+    const data = await NO_AUTH_API.get('/')
     return data
   },
   newsLetter: async (newsLetterData: INewsLetterData) => {
-    return await API.post('/api/newsLetter', newsLetterData, {
+    return await NO_AUTH_API.post('/api/newsLetter', newsLetterData, {
       headers: { 'Content-Type': 'application/json' }
+    })
+  },
+  unsubscribeNewsLetter: async (email: string) => {
+    return await API.delete(`/api/newsLetter`, {
+      headers: { 'Content-Type': 'application/json' },
+      data: { email }
     })
   },
   getKakaoToken: async (data: IKakaoTokenData) => {
@@ -81,7 +86,7 @@ export const userApi = {
     )
   },
   checkUserInfo: async (loginType: string, socialId: string, idToken?: string) => {
-    return await API.post(
+    return await NO_AUTH_API.post(
       `/api/oauth/${loginType}`,
       { socialId },
       {
@@ -90,7 +95,7 @@ export const userApi = {
     )
   },
   checkNickname: async (nickname: string) => {
-    return await API.post(
+    return await NO_AUTH_API.post(
       '/api/oauth/nickname',
       { nickname },
       {
@@ -118,7 +123,7 @@ export const userApi = {
   },
   deleteUser: async () => {
     return await API.post(
-      '/api/user/withdraw',
+      '/api/oauth/withdraw',
       {},
       {
         headers: { 'Content-Type': 'application/json' }
@@ -127,7 +132,7 @@ export const userApi = {
   },
   logout: async () => {
     return await API.post(
-      '/api/user/logout',
+      '/api/oauth/logout',
       {},
       {
         headers: { 'Content-Type': 'application/json' }

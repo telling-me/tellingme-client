@@ -50,7 +50,8 @@ const EmotionModal = () => {
               key={idx}
               flex="center"
               onClick={() => {
-                setEmotion(emotion.idx)
+                // TODO: membership 처리필요
+                if (!emotion.membership) setEmotion(emotion.idx)
               }}
             >
               <emotion.icon width={50} stroke={theme.colors.logo} fill={theme.colors.logo} />
