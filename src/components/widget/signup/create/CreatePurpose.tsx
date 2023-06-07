@@ -35,7 +35,7 @@ const CreatePurpose = ({ purpose, setPurpose }: ICreatePurpose) => {
             }}
           >
             {i === 0 ? (
-              <Icons.Pen width="32" height="32" stroke="gradient" />
+              <Icons.Pencil width="32" height="32" stroke="url(#gradient)" />
             ) : i === 1 ? (
               <Icons.Handshake width="32" height="32" stroke="url(#gradient)" />
             ) : i === 2 ? (
