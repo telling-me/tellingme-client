@@ -5,135 +5,20 @@ import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 
 // data
-import { SETTING_PRIVACY_POLICY_DOCS } from 'data/docs'
+import { SETTING_PRIVACY_POLICY_DOCS, SETTING_PRIVACY_POLICY_TEXTP_INFO } from 'data/docs'
 import type { TextSizeType } from 'type/common'
 
 const PrivacyPolicy = () => {
-  const textPInfo = [
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 12px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0 0 32px 0'
-    },
-    {
-      _typo: 'b2_b',
-      _margin: '0 0 16px 0'
-    },
-    {
-      _typo: 'b2',
-      _margin: '0'
-    }
-  ]
-
   return (
     <PrivacyPolicyWrapper>
       {SETTING_PRIVACY_POLICY_DOCS.map((v, i) => {
         return (
           <style.TextP
             key={i}
-            typo={textPInfo[i]._typo as TextSizeType}
+            typo={SETTING_PRIVACY_POLICY_TEXTP_INFO[i]._typo as TextSizeType}
             textColor="black"
             _width="100%"
-            _margin={textPInfo[i]._margin}
+            _margin={SETTING_PRIVACY_POLICY_TEXTP_INFO[i]._margin}
           >
             {v}
           </style.TextP>
