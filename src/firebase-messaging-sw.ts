@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-throw-literal */
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import 'firebase/messaging'
 
 const firebaseConfig = {
@@ -26,25 +26,21 @@ export function requestPermission() {
   void Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
       console.log('Notification permission granted.')
+
+      messaging
+        .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
+        .then((currentToken) => {
+          if (currentToken.length > 0) {
+            console.log('token : ', currentToken)
+          } else {
+            console.log('No registration token available. Request permission to generate one.')
+          }
+        })
+        .catch((err) => {
+          console.log('An error occurred while retrieving token. ', err)
+        })
     } else if (permission === 'denied') {
       console.log('Notification permission denied')
     }
-  })
-
-  messaging
-    .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
-    .then((currentToken) => {
-      if (currentToken.length > 0) {
-        console.log('token : ', currentToken)
-      } else {
-        console.log('No registration token available. Request permission to generate one.')
-      }
-    })
-    .catch((err) => {
-      console.log('An error occurred while retrieving token. ', err)
-    })
-
-  messaging.onMessage((payload) => {
-    console.log('Message received. ', payload)
   })
 }
