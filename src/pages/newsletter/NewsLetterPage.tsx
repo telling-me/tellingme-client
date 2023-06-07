@@ -11,9 +11,12 @@ import {
 } from './style'
 
 // components
-import style from 'styles/styled-components/styled'
 import { Button, CheckBox, Input, Modal, RadioButton, Hr, IconButton } from 'components'
 import { LoadingDots } from 'components/core/loadingdots'
+
+// styles
+import style from 'styles/styled-components/styled'
+import { Theme } from 'styles/DefaultTheme'
 
 // assets
 import Icons from 'assets/icons'
@@ -86,7 +89,8 @@ const NewsLetterPage = () => {
   return (
     <NewsLetterComponent>
       <NewsLetterHeader>
-        <Icons.Logo width="103px" height="43px" />
+        <Icons.Logo width="103" height="43" fill={Theme.colors.logo} />
+
         <style.TextSpan typo="h3_b" textColor="gray7" _margin="28px 0px 24px 0px">
           서비스 출시 알림 신청하기
         </style.TextSpan>

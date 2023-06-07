@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-throw-literal */
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import 'firebase/messaging'
 
 const firebaseConfig = {
@@ -26,45 +26,21 @@ export function requestPermission() {
   void Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
       console.log('Notification permission granted.')
+
+      messaging
+        .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
+        .then((currentToken) => {
+          if (currentToken.length > 0) {
+            console.log('token : ', currentToken)
+          } else {
+            console.log('No registration token available. Request permission to generate one.')
+          }
+        })
+        .catch((err) => {
+          console.log('An error occurred while retrieving token. ', err)
+        })
     } else if (permission === 'denied') {
       console.log('Notification permission denied')
     }
   })
-
-  messaging
-    .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
-    .then((currentToken) => {
-      if (currentToken.length > 0) {
-        console.log('token : ', currentToken)
-        subscribeTokenToTopic(currentToken)
-      } else {
-        console.log('No registration token available. Request permission to generate one.')
-      }
-    })
-    .catch((err) => {
-      console.log('An error occurred while retrieving token. ', err)
-    })
-
-  messaging.onMessage((payload) => {
-    console.log('Message received. ', payload)
-  })
-}
-
-function subscribeTokenToTopic(token: string) {
-  fetch(`https://iid.googleapis.com/iid/v1/${token}/rel/topics/notification`, {
-    method: 'POST',
-    headers: new Headers({
-      Authorization: `Bearer ${process.env.REACT_APP_FIREBASE_SERVER_KEY as string}`
-    })
-  })
-    .then((response) => {
-      if (response.status < 200 || response.status >= 400) {
-        throw response
-      }
-
-      console.log('성공', response)
-    })
-    .catch((error) => {
-      console.error(error)
-    })
 }
