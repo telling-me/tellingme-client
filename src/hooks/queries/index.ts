@@ -1,5 +1,5 @@
 export { useTestQuery } from './test'
-export { useKakaoQueries } from './kakao'
+export { useKakaoQueries, useAppleQueries } from './oauth'
 export { useCheckIdQuery } from './checkId'
 export { useSignUpQuery } from './signup'
 export { useNewsLetterQuery } from './newsletter'
