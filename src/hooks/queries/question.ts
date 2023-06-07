@@ -8,6 +8,13 @@ export const useGetQuestionQuery = <T>(date: string, options?: T) => {
     onError: (err: IError) => {
       console.log(err)
     },
+    onSuccess(data) {
+      // TODO: 날짜에 맞는 질문이 없을 때의 임시 로직
+      if (data?.data?.status === 3000) {
+        window.location.href = '/app/main'
+      }
+      return data
+    },
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options

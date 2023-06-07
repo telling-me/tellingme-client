@@ -1,24 +1,9 @@
 import { apis } from 'apis/apis'
-import type { IUserInfoDto, ILoginData } from 'apis/userApi'
+import type { IUserInfoDto } from 'apis/userApi'
 import useDeleteToken from 'hooks/useDeleteToken'
 import { useMutation } from 'react-query'
-import { useNavigate } from 'react-router-dom'
 import { type IError } from 'type/db'
 import { useFilterling } from '..'
-
-export const useLoginMutation = <T>(persistent: boolean, options?: T) => {
-  const navigate = useNavigate()
-  return useMutation(async (loginData: ILoginData) => await apis.login(loginData), {
-    onSuccess: (data) => {
-      if (persistent) console.log('쿠키에 토큰 저장')
-      navigate('/login', { replace: true })
-    },
-    onError: (err: IError) => {
-      console.log(err)
-    },
-    ...options
-  })
-}
 
 export const usePatchUserInfoMutation = <T>(options?: T) => {
   return useMutation(async (userInfoDto: IUserInfoDto) => await apis.patchUserInfo(userInfoDto), {

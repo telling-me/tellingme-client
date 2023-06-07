@@ -6,7 +6,7 @@ import useQuestionStore from 'stores/useQuestionStore'
 import useAnswerStore from 'stores/useAnswerStore'
 
 // components
-import { Button, EmotionIcon, EmotionModal, Modal, Toggle } from 'components'
+import { Button, EmotionIcon, EmotionModal, Modal } from 'components'
 import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
 // components - style
@@ -57,7 +57,8 @@ const QuestionWriteModal = () => {
 
   const [menu, setMenu] = useState<boolean>(false)
   const [text, setText] = useState<string>(answer?.content ?? '')
-  const [shareToggle, setShareToggle] = useState<boolean>(false)
+  // TODO : 2차 배포 후 toggle on
+  // const [shareToggle, setShareToggle] = useState<boolean>(false)
   const [editable, setEditable] = useState<boolean>(false)
 
   const [alreadyAnswered, setAlreadyAnswered] = useState<boolean>(true)
@@ -184,8 +185,9 @@ const QuestionWriteModal = () => {
                 </TextP>
               </Grid>
               {editable && (
-                <Grid flex="between" _alignItems="start" _padding="10px 0 0 0 ">
-                  <Toggle label={['나혼자 보기', '타인과 공유']} value={shareToggle} setValue={setShareToggle} />
+                <Grid flex="end" _alignItems="start" _padding="10px 0 0 0 ">
+                  {/* TODO: 2차 배포 시 toggle on */}
+                  {/* <Toggle label={['나혼자 보기', '타인과 공유']} value={shareToggle} setValue={setShareToggle} /> */}
                   <Button
                     buttonType="noFilled"
                     text="완료"
@@ -430,6 +432,9 @@ const AnswerTextArea = styled.textarea`
 `
 const FooterWrapper = styled(Grid)`
   margin-bottom: 46px;
+  @media screen and (max-width: 767px) {
+    margin-bottom: 10px;
+  }
 `
 const ButtonWrapper = styled(Grid)`
   width: 90px;

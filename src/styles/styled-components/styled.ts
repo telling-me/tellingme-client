@@ -28,6 +28,7 @@ export interface IText {
   textAlign?: 'start' | 'end' | 'left' | 'right' | 'center' | 'justify' | 'match-parent'
   _margin?: string
   _width?: string
+  ellipsis?: boolean
   wordBreak?: 'break-all' | 'break-word' | 'keep-all' | 'normal'
 }
 
@@ -93,7 +94,8 @@ const TextH1 = styled.h1<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
-  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`};
+  ${({ ellipsis }) => (ellipsis ?? false) && 'text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'}
 `
 
 const TextH2 = styled.h2<IText>`
@@ -121,7 +123,8 @@ const TextH2 = styled.h2<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
-  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`};
+  ${({ ellipsis }) => (ellipsis ?? false) && 'text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'}
 `
 
 const TextH3 = styled.h3<IText>`
@@ -149,7 +152,8 @@ const TextH3 = styled.h3<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
-  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`};
+  ${({ ellipsis }) => (ellipsis ?? false) && 'text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'}
 `
 
 const TextH4 = styled.h4<IText>`
@@ -177,7 +181,8 @@ const TextH4 = styled.h4<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
-  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`};
+  ${({ ellipsis }) => (ellipsis ?? false) && 'text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'}
 `
 
 const TextH5 = styled.h5<IText>`
@@ -205,7 +210,8 @@ const TextH5 = styled.h5<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
-  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`};
+  ${({ ellipsis }) => (ellipsis ?? false) && 'text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'}
 `
 
 const TextP = styled.p<IText>`
@@ -233,7 +239,8 @@ const TextP = styled.p<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
-  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`};
+  ${({ ellipsis }) => (ellipsis ?? false) && 'text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'}
 `
 
 const TextSpan = styled.span<IText>`
@@ -261,7 +268,8 @@ const TextSpan = styled.span<IText>`
       : typo === 'b1_b' || typo === 'b1' || typo === 'b2_b' || typo === 'b2'
       ? theme.typo.body[typo]
       : (typo === 'c_b' || typo === 'c') && theme.typo.caption[typo]};
-  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`}
+  ${({ textColor }) => `color: ${useChangeColor(textColor as ColorType) as string}`};
+  ${({ ellipsis }) => (ellipsis ?? false) && 'text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'}
 `
 
 const settingStyle = {

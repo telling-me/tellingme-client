@@ -1,4 +1,5 @@
 export interface IError {
-  errorDesc: string
-  errorCode: string
+  code: string
+  messsage: string
+  status: number
 }
