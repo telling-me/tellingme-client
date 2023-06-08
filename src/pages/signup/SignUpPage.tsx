@@ -125,7 +125,7 @@ const SignUpPage = () => {
     <SignUpWrapper>
       <SignUpHeader step={step} windowSize={windowSize} handleSkip={handleSkip} />
 
-      {step !== 7 && <ProgressBar percent={`${(99 / 7) * (step + 1)}`} />}
+      {step !== 7 && <ProgressBar percent={`${14 * (step + 1) + 2}`} />}
 
       <SignUpTitle
         step={step}
