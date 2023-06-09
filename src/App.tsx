@@ -10,8 +10,6 @@ import { PageRouter, RouteChangeTracker } from './pages'
 // vercel web analytics
 import { Analytics } from '@vercel/analytics/react'
 
-import './firebase-messaging-sw'
-
 function App() {
   // google analytics 4
   RouteChangeTracker()
