@@ -58,6 +58,7 @@ const SignUpPage = () => {
   const [day, setDay] = useState<string | undefined>(undefined)
   const [mbti, setMbti] = useState<string | undefined>(undefined)
   const [allowNotification, setAllowNotification] = useState<boolean>(false)
+  const [pushToken, setPushToken] = useState<string | undefined>()
 
   // step 이동 버튼 disabled 여부
   const canMove = () => {
@@ -93,7 +94,8 @@ const SignUpPage = () => {
     nickname,
     purpose: `[${purpose.join(',')}]`,
     socialId,
-    socialLoginType
+    socialLoginType,
+    pushToken
   })
   const handleSignUp = () => {
     signupQuery.refetch().catch(() => {})
@@ -123,7 +125,7 @@ const SignUpPage = () => {
 
   return (
     <SignUpWrapper>
-      <SignUpHeader step={step} windowSize={windowSize} handleSkip={handleSkip} />
+      <SignUpHeader step={step} windowSize={windowSize} handleSkip={handleSkip} setPushToken={setPushToken} />
 
       {step !== 7 && <ProgressBar percent={`${(99 / 7) * (step + 1)}`} />}
 
@@ -135,6 +137,7 @@ const SignUpPage = () => {
         canMove={canMove}
         canLastMove={canLastMove}
         handleCheckNickname={handleCheckNickname}
+        setPushToken={setPushToken}
       />
 
       {
@@ -179,6 +182,7 @@ const SignUpPage = () => {
         canMove={canMove}
         canLastMove={canLastMove}
         handleCheckNickname={handleCheckNickname}
+        setPushToken={setPushToken}
       />
     </SignUpWrapper>
   )

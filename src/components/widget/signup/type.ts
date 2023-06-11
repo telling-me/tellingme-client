@@ -6,4 +6,5 @@ export interface ISignUpTitleAndBottomButton {
   canMove: () => boolean
   canLastMove: () => boolean
   handleCheckNickname: () => void
+  setPushToken: React.Dispatch<React.SetStateAction<string | undefined>>
 }

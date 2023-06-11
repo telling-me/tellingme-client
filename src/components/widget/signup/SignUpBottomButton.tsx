@@ -12,6 +12,7 @@ import Icons from 'assets/icons'
 
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
+import { requestPermission } from 'firebase-messaging-sw'
 
 const SignUpBottomButton = ({
   step,
@@ -20,7 +21,8 @@ const SignUpBottomButton = ({
   windowSize,
   canMove,
   canLastMove,
-  handleCheckNickname
+  handleCheckNickname,
+  setPushToken
 }: ISignUpTitleAndBottomButton) => {
   return windowSize < 1024 && step !== 7 ? (
     <MoveButtonWrapper>
@@ -56,6 +58,7 @@ const SignUpBottomButton = ({
           _disabled={canLastMove()}
           _onClick={() => {
             handleNextStep()
+            requestPermission(setPushToken)
           }}
         />
       )}

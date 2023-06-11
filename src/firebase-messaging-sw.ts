@@ -1,6 +1,9 @@
 import { initializeApp } from 'firebase/app'
 import { getMessaging, getToken } from 'firebase/messaging'
 
+// utils
+import { setCookie } from 'utils/cookies'
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -14,9 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const messaging = getMessaging(app)
 
-export function requestPermission() {
-  console.log('Requesting permission...')
-
+export function requestPermission(setPushToken: React.Dispatch<React.SetStateAction<string | undefined>>) {
   void Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
       console.log('Notification permission granted.')
@@ -25,6 +26,9 @@ export function requestPermission() {
         .then((token: string) => {
           if (token.length > 0) {
             console.log(`token: ${token}`)
+
+            setPushToken(token)
+            setCookie('pushToken', token)
           } else {
             // Show permission request UI
             console.log('No registration token available. Request permission to generate one.')

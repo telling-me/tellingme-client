@@ -34,6 +34,7 @@ export interface IJoinResponseDto {
   purpose: string
   socialId: string
   socialLoginType: SocialLoginType
+  pushToken: string | undefined
 }
 export interface IUserInfoDto {
   birthDate?: string

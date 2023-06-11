@@ -12,7 +12,8 @@ export const useSignUpQuery = ({
   nickname,
   purpose,
   socialId,
-  socialLoginType
+  socialLoginType,
+  pushToken
 }: IJoinResponseDto) => {
   return useQuery(
     ['signup'],
@@ -27,7 +28,8 @@ export const useSignUpQuery = ({
         nickname,
         purpose,
         socialId,
-        socialLoginType
+        socialLoginType,
+        pushToken
       }),
     {
       enabled: false,
