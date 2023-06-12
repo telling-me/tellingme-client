@@ -5,7 +5,7 @@ import type { ISignUpTitleAndBottomButton } from './type'
 
 // components
 import styled from 'styled-components'
-import { Button, IconButton } from 'components'
+import { IconButton } from 'components'
 
 // assets
 import Icons from 'assets/icons'
@@ -19,7 +19,6 @@ const SignUpBottomButton = ({
   handleNextStep,
   windowSize,
   canMove,
-  canLastMove,
   handleCheckNickname
 }: ISignUpTitleAndBottomButton) => {
   return windowSize < 1024 && step !== 7 ? (
@@ -28,37 +27,22 @@ const SignUpBottomButton = ({
         <Icons.ArrowLeft width="24" height="24" stroke={useChangeColor('logo')} />
       </IconButton>
 
-      {step !== 6 ? (
-        <IconButton
-          buttonType="secondary"
-          _width="55px"
-          _height="55px"
-          _margin="0px 0px 0px auto"
-          _disabled={canMove()}
-          _onClick={() => {
-            if (step === 1) {
-              handleCheckNickname()
-            } else {
-              handleNextStep()
-            }
-          }}
-        >
-          <Icons.ArrowRight width="24" height="24" stroke={useChangeColor('logo')} />
-        </IconButton>
-      ) : (
-        <Button
-          buttonType="secondary"
-          text="완료"
-          textSize="h6"
-          textColor="logo"
-          _margin="0px 0px 0px auto"
-          _padding="18px 32px"
-          _disabled={canLastMove()}
-          _onClick={() => {
+      <IconButton
+        buttonType="secondary"
+        _width="55px"
+        _height="55px"
+        _margin="0px 0px 0px auto"
+        _disabled={canMove()}
+        _onClick={() => {
+          if (step === 1) {
+            handleCheckNickname()
+          } else {
             handleNextStep()
-          }}
-        />
-      )}
+          }
+        }}
+      >
+        <Icons.ArrowRight width="24" height="24" stroke={useChangeColor('logo')} />
+      </IconButton>
     </MoveButtonWrapper>
   ) : (
     <></>
