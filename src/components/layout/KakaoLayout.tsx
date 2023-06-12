@@ -1,7 +1,11 @@
 import React from 'react'
-import { REDIRECT_URI, REST_API_KEY } from 'configs/kakao'
-import { useKakaoQueries, useSaveToken } from 'hooks/index'
 import { useNavigate } from 'react-router-dom'
+
+// configs
+import { REDIRECT_URI, REST_API_KEY } from 'configs/kakao'
+
+// hooks
+import { useKakaoQueries, useSaveToken } from 'hooks/index'
 
 const KakaoLayout = () => {
   const AUTHORIZATION_CODE: string = new URL(document.location.toString()).searchParams.get('code') as string
@@ -27,7 +31,8 @@ const KakaoLayout = () => {
         accessToken: res.data.data.accessToken,
         refreshToken: res.data.data.refreshToken
       })
-      navigate('/app/main')
+
+      navigate('/oauth/checktoken')
     }
   } catch (err: unknown) {}
 

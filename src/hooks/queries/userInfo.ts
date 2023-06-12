@@ -38,3 +38,15 @@ export const usePostUserNotiQuery = <T>(options?: T) => {
     ...options
   })
 }
+
+export const useGetUserPushToken = <T>(options?: T) => {
+  return useQuery(['getUserPushToken'], async () => await apis.getUserPushToken(), {
+    retry: 0,
+    onError: (err: IError) => {
+      console.log(err)
+    },
+    staleTime: 36000000,
+    cacheTime: Infinity,
+    ...options
+  })
+}

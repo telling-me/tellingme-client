@@ -134,5 +134,17 @@ export const userApi = {
         headers: { 'Content-Type': 'application/json' }
       }
     )
+  },
+  getUserPushToken: async () => {
+    return await API.get('/api/user/pushToken')
+  },
+  updateUserPushToken: async (pushToken: string) => {
+    return await API.post(
+      '/api/user/update/pushToken',
+      { pushToken },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
   }
 }

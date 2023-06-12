@@ -20,27 +20,18 @@ const messaging = getMessaging(app)
 export function requestPermission(setPushToken: React.Dispatch<React.SetStateAction<string | undefined>>) {
   void Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
-      console.log('Notification permission granted.')
-
       getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
         .then((token: string) => {
           if (token.length > 0) {
-            console.log(`token: ${token}`)
-
             setPushToken(token)
             setCookie('pushToken', token)
-          } else {
-            // Show permission request UI
-            console.log('No registration token available. Request permission to generate one.')
-            // ...
           }
         })
         .catch((err) => {
           console.log('An error occurred while retrieving token. ', err)
-          // ...
         })
     } else if (permission === 'denied') {
-      console.log('Notification permission denied')
+      setPushToken('denied')
     }
   })
 }

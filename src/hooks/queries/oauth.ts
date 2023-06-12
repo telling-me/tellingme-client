@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { useQueries } from 'react-query'
-import { apis } from 'apis/apis'
-import { type IKakaoTokenData } from 'apis/userApi'
-import { useCheckIdQuery } from './checkId'
 import { useState } from 'react'
+import { useQueries } from 'react-query'
+
+// apis
+import { apis } from 'apis/apis'
+import type { IKakaoTokenData } from 'apis/userApi'
+
+// hookss
+import { useCheckIdQuery } from './checkId'
 
 export const useKakaoQueries = ({ client_id, redirect_uri, code }: IKakaoTokenData) => {
   const [accessToken, setAccessToken] = useState('')

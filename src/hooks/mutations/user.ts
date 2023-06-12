@@ -1,9 +1,15 @@
+import { useMutation } from 'react-query'
+
+// apis
 import { apis } from 'apis/apis'
 import type { IUserInfoDto } from 'apis/userApi'
+
+// hooks
 import useDeleteToken from 'hooks/useDeleteToken'
-import { useMutation } from 'react-query'
-import { type IError } from 'type/db'
 import { useFilterling } from '..'
+
+// type
+import type { IError } from 'type/db'
 
 export const usePatchUserInfoMutation = <T>(options?: T) => {
   return useMutation(async (userInfoDto: IUserInfoDto) => await apis.patchUserInfo(userInfoDto), {
@@ -78,6 +84,16 @@ export const useCheckNicknameMutation = <T>(
 
 export const useUnsubscribeNewsLetterMutation = <T>(option?: T) => {
   return useMutation(async (data: { email: string }) => await apis.unsubscribeNewsLetter(data.email), {
+    onSuccess() {},
+    onError: (err) => {
+      console.log(err)
+    },
+    ...option
+  })
+}
+
+export const useUpdateUserPushToken = <T>(option?: T) => {
+  return useMutation(async (data: { pushToken: string }) => await apis.updateUserPushToken(data.pushToken), {
     onSuccess() {},
     onError: (err) => {
       console.log(err)
