@@ -11,8 +11,7 @@ import {
 } from './style'
 
 // components
-import { Button, CheckBox, Input, Modal, RadioButton, Hr, IconButton } from 'components'
-import { LoadingDots } from 'components/core/loadingdots'
+import { Button, CheckBox, Input, Modal, RadioButton, Hr, IconButton, Loading } from 'components'
 
 // styles
 import style from 'styles/styled-components/styled'
@@ -183,7 +182,7 @@ const NewsLetterPage = () => {
           }}
         >
           {loading ? (
-            <LoadingDots />
+            <Loading size={48} color="primary700" />
           ) : (
             <style.TextP typo="h6" textColor="primary700">
               신청하기
