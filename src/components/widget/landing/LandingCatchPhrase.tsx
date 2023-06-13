@@ -37,6 +37,7 @@ const LandingCatchPhrase = () => {
             direction="column"
             _gap={mediaQuery(windowSize.width) === 'mobile' ? '8px' : '10px'}
             variants={commonOpacityYAni}
+            viewport={{ once: true }}
             initial="init"
             whileInView="ani"
             custom={1}
@@ -84,6 +85,7 @@ const LandingCatchPhrase = () => {
               _gap="15px"
               _margin={mediaQuery(windowSize.width) === 'desktop' ? '24px 0 0' : '16px 0 0'}
               variants={commonOpacityYAni}
+              viewport={{ once: true }}
               initial="init"
               whileInView="ani"
               custom={2}

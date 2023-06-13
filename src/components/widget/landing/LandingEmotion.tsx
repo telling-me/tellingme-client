@@ -24,6 +24,7 @@ const LandingEmotion = () => {
         _padding={mediaQuery(windowSize.width) === 'desktop' ? '220px 0 0 550px' : '160px 0 0 0'}
         _alignItems={mediaQuery(windowSize.width) === 'mobile' ? 'end' : 'center'}
         variants={commonOpacityYAni}
+        viewport={{ once: true }}
         initial="init"
         whileInView="ani"
         custom={3}
@@ -45,6 +46,7 @@ const LandingEmotion = () => {
           direction="column"
           _gap={mediaQuery(windowSize.width) === 'mobile' ? '8px' : '10px'}
           variants={commonOpacityYAni}
+          viewport={{ once: true }}
           initial="init"
           whileInView="ani"
           custom={1}
@@ -100,6 +102,7 @@ const LandingEmotion = () => {
           _padding="0 6px 0 7px"
           direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
           variants={commonOpacityYAni}
+          viewport={{ once: true }}
           initial="init"
           whileInView="ani"
           custom={2}

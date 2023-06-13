@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 // components
 import Icon from 'assets/icons'
@@ -10,18 +10,28 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
+// slot counter
+import SlotCounter, { type SlotCounterRef } from 'react-slot-counter'
+
 // animation
 import { motion } from 'framer-motion'
 
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
+import { useInView } from 'react-intersection-observer'
 
 // utils
 import { mediaQuery } from 'utils/mediaQuery'
 import { commonOpacityYAni } from 'styles/ani'
 
+const DummyNumber = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
 const LandingQuestionInfo = () => {
+  // hooks
   const windowSize = useWindowSize()
+  const { ref, inView } = useInView({ triggerOnce: true, initialInView: false })
+
+  // slick setting
   const settings = {
     centerMode: true,
     dots: false,
@@ -37,7 +47,20 @@ const LandingQuestionInfo = () => {
     pauseOnFocus: false
   }
 
+  // ref
   const infoRef = useRef<HTMLDivElement>(null)
+  const counterTimeRef = useRef<SlotCounterRef>(null)
+  const counterMin1Ref = useRef<SlotCounterRef>(null)
+  const counterMin2Ref = useRef<SlotCounterRef>(null)
+
+  // counter 보이면 start
+  useEffect(() => {
+    if (inView) {
+      counterTimeRef.current?.startAnimation()
+      counterMin1Ref.current?.startAnimation()
+      counterMin2Ref.current?.startAnimation()
+    }
+  }, [inView])
 
   return (
     <QuestionInfo ref={infoRef}>
@@ -48,6 +71,7 @@ const LandingQuestionInfo = () => {
             direction="column"
             _gap={mediaQuery(windowSize.width) === 'mobile' ? '8px' : '10px'}
             variants={commonOpacityYAni}
+            viewport={{ once: true }}
             initial="init"
             whileInView="ani"
             custom={1}
@@ -103,6 +127,7 @@ const LandingQuestionInfo = () => {
             _padding="0 6px 0 7px"
             direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
             variants={commonOpacityYAni}
+            viewport={{ once: true }}
             initial="init"
             whileInView="ani"
             custom={2}
@@ -117,7 +142,7 @@ const LandingQuestionInfo = () => {
               }
               textColor="gray8"
             >
-              땡땡땡땡한 질문이
+              나를 되돌아보는 질문이
             </TextH2>
             <TextH2
               typo={
@@ -134,17 +159,28 @@ const LandingQuestionInfo = () => {
           </Grid>
         </Grid>
         <TimeChanger
+          ref={ref}
           flex="center"
           _gap="8px"
           _width="fit-content"
           variants={commonOpacityYAni}
+          viewport={{ once: true }}
           initial="init"
           whileInView="ani"
           custom={3}
         >
           <HourWrapper flex="center">
             <TimeText typo="h1_b" textColor="side500">
-              6
+              <SlotCounter
+                ref={counterTimeRef}
+                dummyCharacters={DummyNumber}
+                duration={0.6 + 1.0}
+                dummyCharacterCount={20}
+                value={6}
+                startValue={0}
+                autoAnimationStart={false}
+                hasInfiniteList={true}
+              />
             </TimeText>
           </HourWrapper>
           <TextP typo="h1_b" textColor="side500">
@@ -153,12 +189,30 @@ const LandingQuestionInfo = () => {
 
           <MinuteWrapper flex="center">
             <TimeText typo="h1_b" textColor="side500">
-              0
+              <SlotCounter
+                ref={counterMin1Ref}
+                dummyCharacters={DummyNumber}
+                duration={0.6 + 1.4}
+                dummyCharacterCount={40}
+                value={0}
+                startValue={0}
+                autoAnimationStart={false}
+                hasInfiniteList={true}
+              />
             </TimeText>
           </MinuteWrapper>
           <SecondWrapper flex="center">
             <TimeText typo="h1_b" textColor="side500">
-              0
+              <SlotCounter
+                ref={counterMin2Ref}
+                dummyCharacters={DummyNumber}
+                duration={0.6 + 1.8}
+                dummyCharacterCount={60}
+                value={0}
+                startValue={0}
+                autoAnimationStart={false}
+                hasInfiniteList={true}
+              />
             </TimeText>
           </SecondWrapper>
           <MeridiemWrapper _width="fit-content" flex="center">
@@ -167,7 +221,14 @@ const LandingQuestionInfo = () => {
             </TextP>
           </MeridiemWrapper>
         </TimeChanger>
-        <QuestionChanger flex="center" variants={commonOpacityYAni} initial="init" whileInView="ani" custom={4}>
+        <QuestionChanger
+          flex="center"
+          variants={commonOpacityYAni}
+          viewport={{ once: true }}
+          initial="init"
+          whileInView="ani"
+          custom={12}
+        >
           <QuestionList flex="center">
             <QuestionBubble flex="center">
               <Icon.Bubble

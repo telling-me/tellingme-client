@@ -49,6 +49,7 @@ const LandingAnswer = () => {
             direction="column"
             _gap={mediaQuery(windowSize.width) === 'mobile' ? '8px' : '10px'}
             variants={commonOpacityYAni}
+            viewport={{ once: true }}
             initial="init"
             whileInView="ani"
             custom={1}
@@ -104,6 +105,7 @@ const LandingAnswer = () => {
             _padding="0 6px 0 7px"
             direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
             variants={commonOpacityYAni}
+            viewport={{ once: true }}
             initial="init"
             whileInView="ani"
             custom={2}
@@ -140,6 +142,7 @@ const LandingAnswer = () => {
           direction={mediaQuery(windowSize.width) === 'desktop' ? 'row' : 'column-reverse'}
           _gap="32px"
           variants={commonOpacityYAni}
+          viewport={{ once: true }}
           initial="init"
           whileInView="ani"
           custom={4}
