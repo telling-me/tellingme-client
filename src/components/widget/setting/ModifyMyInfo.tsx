@@ -190,17 +190,30 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
 }
 
 const ModifyMyInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100%;
+`
+
+const ModifyMyInfoContent = styled.div`
   width: 100%;
   max-width: 429px;
+  padding: 0px 2px;
 
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
   }
-`
 
-const ModifyMyInfoContent = styled.div`
-  padding: 0px 2px;
+  @media all and (min-width: 768px) {
+    height: calc(100vh - 164px);
+  }
+
+  @media all and (max-width: 767px) {
+    height: calc(100vh - 108px);
+  }
 `
 
 const ModalTexts = styled.div`
