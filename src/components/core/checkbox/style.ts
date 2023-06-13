@@ -4,7 +4,9 @@ import type { CheckSizeType } from './type'
 export const CheckBoxComponent = styled.div<{
   checkSize: CheckSizeType
   _margin?: string
+  _padding?: string
   _maxWidth?: string
+  isBackground: boolean
   _disabled: boolean
 }>`
   display: flex;
@@ -12,10 +14,11 @@ export const CheckBoxComponent = styled.div<{
 
   width: 100%;
 
-  background-color: ${({ theme, _disabled }) => (_disabled ? theme.colors.gray.gray2 : theme.colors.primary.primary25)};
+  background-color: ${({ theme, _disabled, isBackground }) =>
+    _disabled ? theme.colors.gray.gray2 : isBackground ? theme.colors.primary.primary25 : theme.colors.side.side100};
 
   &:hover {
-    box-shadow: ${(props) => props.theme.shadow.shadow1};
+    ${({ theme, isBackground }) => isBackground && `box-shadow: ${theme.shadow.shadow1};`}
   }
 
   ${({ checkSize }) =>
@@ -31,6 +34,7 @@ export const CheckBoxComponent = styled.div<{
           border-radius: 18px;
         `}
 
+  ${({ _padding }) => _padding != null && `padding: ${_padding};`}
   ${({ _margin }) => _margin != null && `margin: ${_margin};`}
   ${({ _maxWidth }) => _maxWidth != null && `max-width: ${_maxWidth};`}
 `

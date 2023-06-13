@@ -126,6 +126,12 @@ const IconButtonComponent = styled.button<{ buttonType: ButtonType; _width: stri
       background: ${(props) => props.theme.gradient.default_gradient()};
       box-shadow: ${({ theme }) => theme.shadow.shadow2};
     `}
+
+  ${(props) =>
+    props.buttonType === 'noFilled' &&
+    css`
+      padding: 0;
+    `}
 `
 
 export default IconButton
