@@ -11,6 +11,9 @@ import useWindowSize from 'hooks/useWindowSize'
 // utils
 import { mediaQuery } from 'utils/mediaQuery'
 
+// ani
+import { commonOpacityYAni } from 'styles/ani'
+
 const LandingEmotion = () => {
   const windowSize = useWindowSize()
   return (
@@ -20,6 +23,10 @@ const LandingEmotion = () => {
         flex="center"
         _padding={mediaQuery(windowSize.width) === 'desktop' ? '220px 0 0 550px' : '160px 0 0 0'}
         _alignItems={mediaQuery(windowSize.width) === 'mobile' ? 'end' : 'center'}
+        variants={commonOpacityYAni}
+        initial="init"
+        whileInView="ani"
+        custom={3}
       >
         {mediaQuery(windowSize.width) === 'mobile' ? (
           <Icon.LandingEmotionModalMobile width={210} />
@@ -33,7 +40,15 @@ const LandingEmotion = () => {
         _gap="32px"
         _padding={mediaQuery(windowSize.width) === 'mobile' ? '120px 8px 0' : '160px 8px 0'}
       >
-        <Grid flex="center" direction="column" _gap="8px">
+        <Grid
+          flex="center"
+          direction="column"
+          _gap={mediaQuery(windowSize.width) === 'mobile' ? '8px' : '10px'}
+          variants={commonOpacityYAni}
+          initial="init"
+          whileInView="ani"
+          custom={1}
+        >
           <TextH1
             typo={
               mediaQuery(windowSize.width) === 'desktop'
@@ -84,6 +99,10 @@ const LandingEmotion = () => {
           wrap="wrap"
           _padding="0 6px 0 7px"
           direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
+          variants={commonOpacityYAni}
+          initial="init"
+          whileInView="ani"
+          custom={2}
         >
           <TextH2
             typo={
@@ -126,6 +145,7 @@ const { Grid, TextH1, TextH2 } = style
 
 const EmotionInfo = styled.div`
   position: relative;
+  overflow: hidden;
 
   @media all and (min-width: 1200px) {
     height: 976px;

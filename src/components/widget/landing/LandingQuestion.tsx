@@ -18,6 +18,7 @@ import useWindowSize from 'hooks/useWindowSize'
 
 // utils
 import { mediaQuery } from 'utils/mediaQuery'
+import { commonOpacityYAni } from 'styles/ani'
 
 const LandingQuestionInfo = () => {
   const windowSize = useWindowSize()
@@ -29,8 +30,11 @@ const LandingQuestionInfo = () => {
     variableWidth: true,
     autoplay: true,
     autoplaySpeed: 2000,
-    focusOnSelect: true,
-    arrows: false
+    focusOnSelect: false,
+    swipe: false,
+    arrows: false,
+    pauseOnHover: false,
+    pauseOnFocus: false
   }
 
   const infoRef = useRef<HTMLDivElement>(null)
@@ -39,7 +43,15 @@ const LandingQuestionInfo = () => {
     <QuestionInfo ref={infoRef}>
       <Grid>
         <Grid flex="center" direction="column" _gap="32px" _padding="0 8px">
-          <Grid flex="center" direction="column" _gap="8px">
+          <Grid
+            flex="center"
+            direction="column"
+            _gap={mediaQuery(windowSize.width) === 'mobile' ? '8px' : '10px'}
+            variants={commonOpacityYAni}
+            initial="init"
+            whileInView="ani"
+            custom={1}
+          >
             <TextH1
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
@@ -90,6 +102,10 @@ const LandingQuestionInfo = () => {
             wrap="wrap"
             _padding="0 6px 0 7px"
             direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
+            variants={commonOpacityYAni}
+            initial="init"
+            whileInView="ani"
+            custom={2}
           >
             <TextH2
               typo={
@@ -117,7 +133,15 @@ const LandingQuestionInfo = () => {
             </TextH2>
           </Grid>
         </Grid>
-        <TimeChanger flex="center" _gap="8px" _width="fit-content">
+        <TimeChanger
+          flex="center"
+          _gap="8px"
+          _width="fit-content"
+          variants={commonOpacityYAni}
+          initial="init"
+          whileInView="ani"
+          custom={3}
+        >
           <HourWrapper flex="center">
             <TimeText typo="h1_b" textColor="side500">
               6
@@ -143,8 +167,14 @@ const LandingQuestionInfo = () => {
             </TextP>
           </MeridiemWrapper>
         </TimeChanger>
-        <QuestionChanger flex="center">
+        <QuestionChanger flex="center" variants={commonOpacityYAni} initial="init" whileInView="ani" custom={4}>
           <QuestionList flex="center">
+            <QuestionBubble flex="center">
+              <Icon.Bubble
+                width={mediaQuery(windowSize.width) === 'mobile' ? '26px' : '43px'}
+                height={mediaQuery(windowSize.width) === 'mobile' ? '21px' : '35px'}
+              />
+            </QuestionBubble>
             <Icon.LandingQuestionList width={mediaQuery(windowSize.width) === 'mobile' ? '232px' : '375px'} />
           </QuestionList>
           <QuestionSlider>
@@ -248,24 +278,40 @@ const QuestionChanger = styled(Grid)`
   @media all and (max-width: 767px) {
     height: 400px;
   }
-  svg {
-    filter: drop-shadow(${({ theme }) => theme.shadow.shadow1});
-  }
 `
 
 const QuestionList = styled(Grid)`
   position: absolute;
   bottom: 0;
+
+  svg {
+    filter: drop-shadow(${({ theme }) => theme.shadow.shadow1});
+  }
+`
+
+const QuestionBubble = styled(Grid)`
+  position: absolute;
+  bottom: 298px;
+  z-index: 2;
+
+  @media all and (max-width: 767px) {
+    bottom: 184px;
+  }
+
+  svg {
+    filter: drop-shadow(${({ theme }) => theme.shadow.shadow2});
+  }
 `
 
 const QuestionSlider = styled(Grid)`
-  padding-top: 170px;
+  padding-top: 160px;
   @media all and (max-width: 767px) {
-    padding-top: 110px;
+    padding-top: 95px;
   }
+
   .slick-track {
     div div {
-      margin: 0 30px;
+      margin: 0 20px;
     }
   }
 `

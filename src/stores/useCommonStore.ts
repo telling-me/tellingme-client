@@ -7,6 +7,12 @@ import { type ICommonStore } from './type'
 const useCommonStore = create<ICommonStore>()(
   devtools(
     immer((set) => ({
+      headerBackground: false,
+      setHeaderBackground: (value) => {
+        set((state) => {
+          state.headerBackground = value
+        })
+      },
       prevPage: 0,
       setPrevPage: (value) => {
         set((state) => {
