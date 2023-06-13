@@ -20,11 +20,13 @@ const CheckTokenLayout = () => {
       requestPermission(setClientPushToken)
     }
 
-    if (resNoti != null && clientPushToken != null && serverPT != null) {
-      if (resNoti === true && clientPushToken !== 'denied' && clientPushToken !== `${serverPT as string}test`) {
+    if (clientPushToken != null && resNoti != null && serverPT != null) {
+      if (resNoti === true && clientPushToken !== 'denied' && clientPushToken !== serverPT) {
         updateUserPushToken({ pushToken: clientPushToken })
       }
 
+      navigate('/app/main')
+    } else if (clientPushToken === 'denied' && serverPT == null) {
       navigate('/app/main')
     }
   }, [serverPT, resNoti])

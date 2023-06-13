@@ -93,7 +93,7 @@ const SignUpPage = () => {
     purpose: `[${purpose.join(',')}]`,
     socialId,
     socialLoginType,
-    pushToken
+    pushToken: pushToken === 'denied' ? undefined : pushToken
   })
   const handleSignUp = () => {
     signupQuery.refetch().catch(() => {})
