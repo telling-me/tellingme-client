@@ -10,8 +10,10 @@ import { Toggle } from 'components'
 
 import SettingMenuList from './SettingMenuList'
 import ServiceInfo from './ServiceInfo'
-import { useGetUserNotiQuery, usePostUserNotiQuery } from 'hooks/queries/userInfo'
-import { useLogoutMutation } from 'hooks/mutations/user'
+
+// hooks
+import { useGetUserNotiQuery } from 'hooks/queries/userInfo'
+import { useLogoutMutation, usePostUserNotiQuery } from 'hooks/mutations/user'
 
 interface ISettingMenu {
   setPageNumber: Dispatch<SetStateAction<number>>
@@ -24,8 +26,8 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
 
   const [userNoti, setUserNoti] = useState(false)
   const resNoti = useGetUserNotiQuery().data
-  const userNotiQuery = usePostUserNotiQuery()
-  const { mutate } = useLogoutMutation()
+  const { mutate: logout } = useLogoutMutation()
+  const { mutate: postUserNoti } = usePostUserNotiQuery()
 
   useEffect(() => {
     if (resNoti != null) {
@@ -45,7 +47,7 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
           setValue={setUserNoti}
           _margin="0px 0px 0px auto"
           _onClick={() => {
-            userNotiQuery.refetch().catch(() => {})
+            postUserNoti()
           }}
         />
       </PushAlarmWrapper>
@@ -71,7 +73,7 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
         text="로그아웃"
         icon={false}
         _onClick={() => {
-          mutate()
+          logout()
         }}
       />
 

@@ -85,3 +85,13 @@ export const useUnsubscribeNewsLetterMutation = <T>(option?: T) => {
     ...option
   })
 }
+
+export const usePostUserNotiQuery = <T>(option?: T) => {
+  return useMutation(async () => await apis.postUserNoti(), {
+    onSuccess() {},
+    onError: (err) => {
+      console.log(err)
+    },
+    ...option
+  })
+}
