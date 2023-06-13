@@ -8,7 +8,7 @@ import { useFilterling } from '..'
 export const usePatchUserInfoMutation = <T>(options?: T) => {
   return useMutation(async (userInfoDto: IUserInfoDto) => await apis.patchUserInfo(userInfoDto), {
     onSuccess: (res) => {
-      window.location.replace('/setting')
+      window.location.replace('/app/setting')
     },
     onError: (err: IError) => {
       console.log(err)
