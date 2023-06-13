@@ -9,7 +9,7 @@ import { stepTextData } from 'data/user'
 // components
 import style from 'styles/styled-components/styled'
 import styled from 'styled-components'
-import { Button, IconButton } from 'components'
+import { IconButton } from 'components'
 
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
@@ -23,7 +23,6 @@ const SignUpTitle = ({
   handleNextStep,
   windowSize,
   canMove,
-  canLastMove,
   handleCheckNickname
 }: ISignUpTitleAndBottomButton) => {
   return (
@@ -65,37 +64,22 @@ const SignUpTitle = ({
                 {stepTextData[step]}
               </style.TextSpan>
 
-              {step !== 6 ? (
-                <IconButton
-                  buttonType="secondary"
-                  _width="55px"
-                  _height="55px"
-                  _margin="0px 0px 0px auto"
-                  _disabled={canMove()}
-                  _onClick={() => {
-                    if (step === 1) {
-                      handleCheckNickname()
-                    } else {
-                      handleNextStep()
-                    }
-                  }}
-                >
-                  <Icons.ArrowRight width="24" height="24" stroke={useChangeColor('logo')} />
-                </IconButton>
-              ) : (
-                <Button
-                  buttonType="secondary"
-                  text="완료"
-                  textSize="h6"
-                  textColor="logo"
-                  _margin="0px 0px 0px auto"
-                  _padding="18px 32px"
-                  _disabled={canLastMove()}
-                  _onClick={() => {
+              <IconButton
+                buttonType="secondary"
+                _width="55px"
+                _height="55px"
+                _margin="0px 0px 0px auto"
+                _disabled={canMove()}
+                _onClick={() => {
+                  if (step === 1) {
+                    handleCheckNickname()
+                  } else {
                     handleNextStep()
-                  }}
-                />
-              )}
+                  }
+                }}
+              >
+                <Icons.ArrowRight width="24" height="24" stroke={useChangeColor('logo')} />
+              </IconButton>
             </WebMoveButtonWrapper>
           )
         ))}

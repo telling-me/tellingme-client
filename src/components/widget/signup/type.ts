@@ -4,6 +4,5 @@ export interface ISignUpTitleAndBottomButton {
   handleNextStep: () => void
   windowSize: number
   canMove: () => boolean
-  canLastMove: () => boolean
   handleCheckNickname: () => void
 }

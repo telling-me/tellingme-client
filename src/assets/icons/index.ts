@@ -59,6 +59,8 @@ import { ReactComponent as CaretRight } from './CaretRight.svg'
 import { ReactComponent as Insta } from './Insta.svg'
 import { ReactComponent as Error404 } from './Error404.svg'
 import { ReactComponent as Pencil } from './Pencil.svg'
+import { ReactComponent as Kakao } from './Kakao.svg'
+import { ReactComponent as Apple } from './Apple.svg'
 
 interface IIconIndex extends IStringKey {
   NotFound: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -120,6 +122,8 @@ interface IIconIndex extends IStringKey {
   Insta: string | FunctionComponent<any> | ComponentClass<any, any>
   Error404: string | FunctionComponent<any> | ComponentClass<any, any>
   Pencil: string | FunctionComponent<any> | ComponentClass<any, any>
+  Kakao: string | FunctionComponent<any> | ComponentClass<any, any>
+  Apple: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
@@ -181,7 +185,9 @@ const Icon: IIconIndex = {
   CaretRight,
   Insta,
   Error404,
-  Pencil
+  Pencil,
+  Kakao,
+  Apple
 }
 
 export default Icon

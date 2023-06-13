@@ -5,24 +5,15 @@ import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 
 // data
-import { SETTING_TERMS_OF_SERVICE_DOCS, SETTING_TERMS_OF_SERVICE_TEXTP_INFO } from 'data/docs'
-
-// type
-import type { TextSizeType } from 'type/common'
+import { TERMS_OF_SERVICE_DOCS } from 'data/docs'
 
 const TermsOfService = () => {
   return (
     <TermsOfServiceWrapper>
-      {SETTING_TERMS_OF_SERVICE_DOCS.map((v, i) => {
+      {TERMS_OF_SERVICE_DOCS.map((v, i) => {
         return (
-          <style.TextP
-            key={i}
-            typo={SETTING_TERMS_OF_SERVICE_TEXTP_INFO[i]._typo as TextSizeType}
-            textColor="black"
-            _width="100%"
-            _margin={SETTING_TERMS_OF_SERVICE_TEXTP_INFO[i]._margin}
-          >
-            {v}
+          <style.TextP key={i} typo={v._typo} textColor="black" _width="100%" _margin={v._margin}>
+            {v.content}
           </style.TextP>
         )
       })}
@@ -31,7 +22,8 @@ const TermsOfService = () => {
 }
 
 const TermsOfServiceWrapper = styled.div`
-  ${({ theme }) => theme.common.flexCenter}
+  ${({ theme }) => theme.common.flexStart}
+  flex-direction: column;
 
   width: 100%;
   max-width: 425px;
@@ -40,8 +32,11 @@ const TermsOfServiceWrapper = styled.div`
   p {
     white-space: pre-wrap;
     line-height: 24px;
+  }
 
-    // max-width: 425px;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0;
   }
 `
 

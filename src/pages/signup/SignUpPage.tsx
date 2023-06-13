@@ -67,11 +67,9 @@ const SignUpPage = () => {
       (step === 2 && purpose.length === 0) ||
       (step === 3 && (job === undefined || (job === 5 && jobInfo === ''))) ||
       (step === 4 && gender === '') ||
-      (step === 5 && (year === undefined || month === undefined || day === undefined))
+      (step === 5 && (year === undefined || month === undefined || day === undefined)) ||
+      (step === 6 && mbti === undefined)
     )
-  }
-  const canLastMove = () => {
-    return mbti === undefined
   }
 
   // 닉네임 확인
@@ -125,7 +123,7 @@ const SignUpPage = () => {
     <SignUpWrapper>
       <SignUpHeader step={step} windowSize={windowSize} handleSkip={handleSkip} />
 
-      {step !== 7 && <ProgressBar percent={`${(99 / 7) * (step + 1)}`} />}
+      {step !== 7 && <ProgressBar percent={`${14 * (step + 1) + 2}`} />}
 
       <SignUpTitle
         step={step}
@@ -133,7 +131,6 @@ const SignUpPage = () => {
         handleNextStep={handleNextStep}
         windowSize={windowSize}
         canMove={canMove}
-        canLastMove={canLastMove}
         handleCheckNickname={handleCheckNickname}
       />
 
@@ -177,7 +174,6 @@ const SignUpPage = () => {
         handleNextStep={handleNextStep}
         windowSize={windowSize}
         canMove={canMove}
-        canLastMove={canLastMove}
         handleCheckNickname={handleCheckNickname}
       />
     </SignUpWrapper>

@@ -5,22 +5,15 @@ import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 
 // data
-import { SETTING_PRIVACY_POLICY_DOCS, SETTING_PRIVACY_POLICY_TEXTP_INFO } from 'data/docs'
-import type { TextSizeType } from 'type/common'
+import { PRIVACY_POLICY_DOCS } from 'data/docs'
 
 const PrivacyPolicy = () => {
   return (
     <PrivacyPolicyWrapper>
-      {SETTING_PRIVACY_POLICY_DOCS.map((v, i) => {
+      {PRIVACY_POLICY_DOCS.map((v, i) => {
         return (
-          <style.TextP
-            key={i}
-            typo={SETTING_PRIVACY_POLICY_TEXTP_INFO[i]._typo as TextSizeType}
-            textColor="black"
-            _width="100%"
-            _margin={SETTING_PRIVACY_POLICY_TEXTP_INFO[i]._margin}
-          >
-            {v}
+          <style.TextP key={i} typo={v._typo} textColor="black" _width="100%" _margin={v._margin}>
+            {v.content}
           </style.TextP>
         )
       })}
