@@ -130,4 +130,10 @@ export const ButtonComponent = styled.button<{
       background: ${(props) => props.theme.gradient.default_gradient()};
       box-shadow: ${({ theme }) => theme.shadow.shadow2};
     `}
+
+  ${(props) =>
+    props.buttonType === 'noFilled' &&
+    css`
+      padding: 0;
+    `}
 `

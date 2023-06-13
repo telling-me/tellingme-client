@@ -2,7 +2,7 @@ import React from 'react'
 
 // components
 import style from 'styles/styled-components/styled'
-import { Button, IconButton, Modal } from 'components'
+import { IconButton, Modal } from 'components'
 
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
@@ -13,13 +13,14 @@ import Icons from 'assets/icons'
 // configs
 import { KAKAO_AUTH_URL } from 'configs/kakao'
 import { APPLE_AUTH_URL } from 'configs/apple'
+import styled, { css } from 'styled-components'
 
 interface ILoginModal {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const LoginModal = ({ setOpen }: ILoginModal) => {
-  const { Grid, TextH3 } = style
+  const { Grid, TextH3, TextP } = style
 
   return (
     <Modal
@@ -57,28 +58,51 @@ const LoginModal = ({ setOpen }: ILoginModal) => {
         </Grid>
 
         <Grid flex="start" direction="column" _gap="12px">
-          <Button
-            _width="100%"
-            _height="48px"
-            buttonType="fourth"
-            text="카카오 로그인"
-            _onClick={() => {
-              window.location.href = KAKAO_AUTH_URL
-            }}
-          ></Button>
-          <Button
-            _width="100%"
-            _height="48px"
-            buttonType="tertiary"
-            text="애플 로그인"
-            _onClick={() => {
+          <LoginButton
+            loginType="apple"
+            onClick={() => {
               window.location.href = APPLE_AUTH_URL
             }}
-          ></Button>
+          >
+            <Icons.Apple />
+            <TextP typo="b1">Apple로 계속하기</TextP>
+          </LoginButton>
+          <LoginButton
+            loginType="kakao"
+            onClick={() => {
+              window.location.href = KAKAO_AUTH_URL
+            }}
+          >
+            <Icons.Kakao />
+            <TextP typo="b1">카카오로 계속하기</TextP>
+          </LoginButton>
         </Grid>
       </Grid>
     </Modal>
   )
 }
+
+const LoginButton = styled.button<{ loginType: 'kakao' | 'apple' }>`
+  ${({ theme }) => theme.common.flexStart}
+  gap: 44px;
+
+  border-radius: 8px;
+
+  width: 100%;
+  padding: 14px 20px;
+
+  cursor: pointer;
+
+  ${({ loginType }) =>
+    loginType === 'kakao'
+      ? css`
+          background-color: #fee500;
+          color: #000000;
+        `
+      : css`
+          background-color: #000000;
+          color: #ffffff;
+        `}
+`
 
 export default LoginModal

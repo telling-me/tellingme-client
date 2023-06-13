@@ -4,7 +4,6 @@ export interface ISignUpTitleAndBottomButton {
   handleNextStep: () => void
   windowSize: number
   canMove: () => boolean
-  canLastMove: () => boolean
   handleCheckNickname: () => void
   setPushToken: React.Dispatch<React.SetStateAction<string | undefined>>
 }

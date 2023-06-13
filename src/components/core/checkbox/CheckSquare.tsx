@@ -2,9 +2,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import type { CheckSizeType, ICheckSquare } from './type'
 
-const CheckSquare = ({ _checked, setChecked, checkSize = 'large', _disabled = false }: ICheckSquare) => {
+const CheckSquare = ({ _checked, setChecked, customChange, checkSize = 'large', _disabled = false }: ICheckSquare) => {
   const handleChange = (e: { target: { checked: boolean | ((prevState: boolean) => boolean) } }) => {
-    setChecked(e.target.checked)
+    if (setChecked != null) setChecked(e.target.checked)
   }
 
   return (
@@ -13,7 +13,7 @@ const CheckSquare = ({ _checked, setChecked, checkSize = 'large', _disabled = fa
       checkSize={checkSize}
       checked={_checked}
       disabled={_disabled}
-      onChange={handleChange}
+      onChange={customChange != null ? customChange : handleChange}
     />
   )
 }

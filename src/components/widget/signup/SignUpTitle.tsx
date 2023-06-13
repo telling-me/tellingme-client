@@ -9,7 +9,7 @@ import { stepTextData } from 'data/user'
 // components
 import style from 'styles/styled-components/styled'
 import styled from 'styled-components'
-import { Button, IconButton } from 'components'
+import { IconButton } from 'components'
 
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
@@ -24,7 +24,6 @@ const SignUpTitle = ({
   handleNextStep,
   windowSize,
   canMove,
-  canLastMove,
   handleCheckNickname,
   setPushToken
 }: ISignUpTitleAndBottomButton) => {
@@ -95,7 +94,6 @@ const SignUpTitle = ({
                   _disabled={canLastMove()}
                   _onClick={() => {
                     handleNextStep()
-                    requestPermission(setPushToken)
                   }}
                 />
               )}

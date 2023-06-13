@@ -7,17 +7,33 @@ import CheckSquare from './CheckSquare'
 const CheckBox = ({
   _checked,
   setChecked,
+  customChange,
   label,
   buttonText,
   buttonOnClick,
   checkSize = 'large',
   _margin,
+  _padding,
   _maxWidth,
+  isBackground = true,
   _disabled = false
 }: ICheckBox) => {
   return (
-    <CheckBoxComponent checkSize={checkSize} _margin={_margin} _maxWidth={_maxWidth} _disabled={_disabled}>
-      <CheckSquare _checked={_checked} setChecked={setChecked} checkSize={checkSize} _disabled={_disabled} />
+    <CheckBoxComponent
+      checkSize={checkSize}
+      _margin={_margin}
+      _padding={_padding}
+      _maxWidth={_maxWidth}
+      isBackground={isBackground}
+      _disabled={_disabled}
+    >
+      <CheckSquare
+        _checked={_checked}
+        setChecked={setChecked}
+        customChange={customChange}
+        checkSize={checkSize}
+        _disabled={_disabled}
+      />
 
       <style.TextP
         typo={checkSize === 'small' ? 'c' : 'b1'}
