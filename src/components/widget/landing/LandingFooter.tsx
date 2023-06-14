@@ -61,10 +61,10 @@ const LandingFooter = () => {
             </Grid>
           </Grid>
           <Grid flex="end" _gap="16px" _width="fit-content">
-            <InstaButtonWrapper onClick={() => window.open(process.env.REACT_APP_TELLINGME_INSTAGRAM_URL)}>
+            <InstaButtonWrapper onClick={() => window.open(process.env.REACT_APP_TELLINGME_MEDIUM_URL)}>
               <Icon.Medium width={20} />
             </InstaButtonWrapper>
-            <InstaButtonWrapper onClick={() => window.open(process.env.REACT_APP_TELLINGME_MEDIUM_URL)}>
+            <InstaButtonWrapper onClick={() => window.open(process.env.REACT_APP_TELLINGME_INSTAGRAM_URL)}>
               <Icon.Insta width={12} />
             </InstaButtonWrapper>
           </Grid>
