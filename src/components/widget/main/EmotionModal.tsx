@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import styled, { useTheme } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
 import { Button } from 'components/core'
 
@@ -41,20 +41,20 @@ const EmotionModal = () => {
         <Grid flex="center" direction="column" _gap="8px">
           <TextP typo="b1">오늘의 감정을 떠올려 보아요</TextP>
           <TextP typo="b2" textColor="gray5">
-            나는 어떤 마음이었을까?
+            {emotion === null ? '나는 어떤 마음이었을까?' : emotionList[emotion - 1].description}
           </TextP>
         </Grid>
-        <EmotionGridWrapper>
-          {emotionList.map((emotion, idx) => (
+        <EmotionGridWrapper selected={emotion}>
+          {emotionList.map((emotionIcon, idx) => (
             <Emotion
               key={idx}
               flex="center"
               onClick={() => {
                 // TODO: membership 처리필요
-                if (!emotion.membership) setEmotion(emotion.idx)
+                if (!emotionIcon.membership) setEmotion(emotionIcon.idx)
               }}
             >
-              <emotion.icon width={50} stroke={theme.colors.logo} fill={theme.colors.logo} />
+              <emotionIcon.icon width={50} stroke={theme.colors.logo} fill={theme.colors.logo} />
             </Emotion>
           ))}
         </EmotionGridWrapper>
@@ -125,13 +125,25 @@ const Emotion = styled(style.Grid)`
   }
 `
 
-const EmotionGridWrapper = styled(style.Grid)`
+const EmotionGridWrapper = styled(style.Grid)<{ selected: number | null }>`
   max-width: 264px;
   height: 284px;
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
+
+  div {
+    opacity: 0.2;
+  }
+
+  ${({ selected }) =>
+    selected !== null &&
+    css`
+      div:nth-child(${selected}) {
+        opacity: 1;
+      }
+    `}
 `
 
 export default EmotionModal

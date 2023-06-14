@@ -28,7 +28,7 @@ const QuestionWriteModal = () => {
   const location = useLocation()
   const theme = useTheme()
   const date = new URLSearchParams(window.location.search).get('date')
-  const MAX_LENGTH = 500
+  const MAX_LENGTH = 300
   const MIN_LENGTH = 4
 
   // store
@@ -52,6 +52,7 @@ const QuestionWriteModal = () => {
   // modal state
   const [cancel, setCancel] = useState<boolean>(false)
   const [deleteModal, setDeleteModal] = useState<boolean>(false)
+  const [fold, setFold] = useState<boolean>(false)
   const [saveModal, setSaveModal] = useState<boolean>(false)
   const [editModal, setEditModal] = useState<boolean>(false)
 
@@ -75,7 +76,6 @@ const QuestionWriteModal = () => {
     if (!alreadyAnswered) setIsEmotionModal(true)
 
     // 답변이 있으면 감정 아이콘 세팅
-    // TODO: 첫번째 들어갔을 때 안됨
     setEmotion(answer?.emotion ?? null)
 
     setEditable(!alreadyAnswered)
@@ -87,13 +87,16 @@ const QuestionWriteModal = () => {
         <ModalWrapper flex="center" _alignItems="start">
           <ModalInnerWrapper flex="start" direction="column" _height="100%">
             <ModalHeader flex="between">
-              <ButtonWrapper
-                flex="start"
-                onClick={() => {
-                  if (!editable) navigate(backUrl)
-                }}
-              >
-                {!editable && <Icon.ArrowLeft width={20} stroke={theme.colors.gray.gray6} />}
+              <ButtonWrapper flex="start">
+                <Icon.ArrowLeft
+                  onClick={() => {
+                    if (editable) setCancel(true)
+                    else navigate(backUrl)
+                  }}
+                  width={24}
+                  height={24}
+                  stroke={theme.colors.gray.gray6}
+                />
               </ButtonWrapper>
               <Grid
                 flex="center"
@@ -105,25 +108,44 @@ const QuestionWriteModal = () => {
               >
                 <EmotionIcon emotion={emotion} width={36} fill={theme.colors.logo} stroke={theme.colors.logo} />
               </Grid>
-              <ButtonWrapper
-                flex="end"
-                onClick={() => {
-                  if (editable) setCancel(true)
-                  else setMenu(!menu)
-                }}
-              >
+              <ButtonWrapper flex="end">
                 {editable ? (
-                  <Icon.Close width={24} stroke={theme.colors.gray.gray6} />
+                  fold ? (
+                    <Icon.CaretDown
+                      width={24}
+                      height={24}
+                      stroke={theme.colors.gray.gray6}
+                      onClick={() => {
+                        setFold(!fold)
+                      }}
+                    />
+                  ) : (
+                    <Icon.CaretUp
+                      width={24}
+                      height={24}
+                      stroke={theme.colors.gray.gray6}
+                      onClick={() => {
+                        setFold(!fold)
+                      }}
+                    />
+                  )
                 ) : (
                   <>
-                    <Icon.More width={4} stroke={theme.colors.gray.gray6} />
+                    <Icon.More
+                      width={24}
+                      stroke={theme.colors.gray.gray6}
+                      onClick={() => {
+                        setMenu(!menu)
+                      }}
+                    />
                     {menu && (
-                      <DropdownList dropdownSize="small" listLength="104px" direction="down">
+                      <DropdownList dropdownSize="small" listLength="84px" direction="down">
                         <DropdownItem
                           dropdownSize="small"
                           onClick={() => {
                             setEditable(true)
                           }}
+                          style={{ textAlign: 'center' }}
                         >
                           <TextSpan typo="b2" textColor="black">
                             수정
@@ -145,16 +167,25 @@ const QuestionWriteModal = () => {
                 )}
               </ButtonWrapper>
             </ModalHeader>
-            <QuestionWrapper flex="start" direction="column" _gap="18px">
+            <QuestionWrapper
+              flex="start"
+              direction="column"
+              _gap="18px"
+              style={{
+                height: fold ? 0 : 'auto',
+                margin: fold ? 0 : '20px 0 60px',
+                overflow: fold ? 'hidden' : 'visible'
+              }}
+            >
               <Grid flex="start" direction="column" _gap="10px">
-                <Grid>
+                <Grid flex="center" direction="column" _gap="4px">
                   {question?.title?.split('\\n')?.map((line: string) => (
                     <TextP key={line} typo="h6" textColor="logo" textAlign="center" wordBreak="keep-all">
                       {line}
                     </TextP>
                   ))}
                 </Grid>
-                <Grid>
+                <Grid flex="center" direction="column" _gap="4px">
                   {question?.phrase?.split('\\n')?.map((line: string) => (
                     <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
                       {line}
@@ -181,7 +212,7 @@ const QuestionWriteModal = () => {
             <FooterWrapper flex="start" direction="column">
               <Grid flex="end" _height="14px">
                 <TextP typo="c_b" textColor="gray6">
-                  {text?.length} / {MAX_LENGTH}
+                  {text?.replaceAll(' ', '')?.length} / {MAX_LENGTH}
                 </TextP>
               </Grid>
               {editable && (
@@ -192,8 +223,8 @@ const QuestionWriteModal = () => {
                     buttonType="noFilled"
                     text="완료"
                     _height="100%"
-                    textColor={text?.length < MIN_LENGTH ? 'gray6' : 'logo'}
-                    _disabled={text?.length < MIN_LENGTH}
+                    textColor={text?.replaceAll(' ', '').length < MIN_LENGTH ? 'gray6' : 'logo'}
+                    _disabled={text?.replaceAll(' ', '').length < MIN_LENGTH}
                     _onClick={() => {
                       if (!alreadyAnswered) setSaveModal(true)
                       else setEditModal(true)
@@ -403,8 +434,7 @@ const ModalHeader = styled(Grid)`
 `
 
 const QuestionWrapper = styled(Grid)`
-  max-width: 300px;
-  margin: 20px 0 60px 0;
+  transition: 0.3s;
 `
 
 const StrikeThrough = styled.div`

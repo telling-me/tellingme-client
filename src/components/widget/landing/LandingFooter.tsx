@@ -5,14 +5,26 @@ import Icon from 'assets/icons'
 import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
 
+// hooks
+import useWindowSize from 'hooks/useWindowSize'
+
+// utils
+import { mediaQuery } from 'utils/mediaQuery'
+
 const LandingFooter = () => {
   const theme = useTheme()
+  const windowSize = useWindowSize()
   return (
     <FooterWrapper>
       <FooterInnerWrapper flex="between" direction="column" _height="100%">
-        <Grid flex="between">
+        <Grid
+          flex="between"
+          _alignItems={mediaQuery(windowSize.width) === 'mobile' ? 'start' : 'center'}
+          direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
+          _gap="24px"
+        >
           <Icon.Logo width={69} fill={theme.colors.side.side500} />
-          <Grid flex="end" _gap="20px">
+          <Grid flex={mediaQuery(windowSize.width) === 'mobile' ? 'start' : 'end'} _gap="20px">
             <TextP typo="c_b" textColor="side500">
               서비스 소개
             </TextP>
@@ -24,7 +36,12 @@ const LandingFooter = () => {
             </TextP>
           </Grid>
         </Grid>
-        <Grid flex="between">
+        <Grid
+          flex="between"
+          _alignItems={mediaQuery(windowSize.width) === 'mobile' ? 'start' : 'center'}
+          direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
+          _gap="24px"
+        >
           <Grid flex="start" direction="column" _gap="4px">
             <Grid flex="start" _gap="8px">
               <TextP typo="c_b" textColor="side500">
@@ -43,8 +60,11 @@ const LandingFooter = () => {
               </TextP>
             </Grid>
           </Grid>
-          <Grid flex="end" _width="fit-content">
+          <Grid flex="end" _gap="16px" _width="fit-content">
             <InstaButtonWrapper onClick={() => window.open(process.env.REACT_APP_TELLINGME_INSTAGRAM_URL)}>
+              <Icon.Medium width={20} />
+            </InstaButtonWrapper>
+            <InstaButtonWrapper onClick={() => window.open(process.env.REACT_APP_TELLINGME_MEDIUM_URL)}>
               <Icon.Insta width={12} />
             </InstaButtonWrapper>
           </Grid>
@@ -64,6 +84,7 @@ const FooterWrapper = styled.div`
   ${({ theme }) => theme.common.flexCenter}
 
   @media all and (max-width: 767px) {
+    height: 229px;
     padding: 25px;
   }
 `

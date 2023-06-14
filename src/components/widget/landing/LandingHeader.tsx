@@ -2,48 +2,64 @@ import React, { useState } from 'react'
 
 // components
 import styled, { useTheme } from 'styled-components'
-import style from 'styles/styled-components/styled'
 import { Button, LoginModal } from 'components'
 
 // assets
 import Icons from 'assets/icons'
+import useCommonStore from 'stores/useCommonStore'
 
 const LandingHeader = () => {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
 
-  return (
-    <HeaderWrapper>
-      <Icons.Logo width={81} fill={theme.colors.logo} />
+  const { headerBackground } = useCommonStore()
 
-      <Button
-        buttonType="secondary"
-        textSize="h6"
-        textColor="logo"
-        text="시작하기"
-        _padding="18px 36px"
-        _onClick={() => {
-          setOpen(true)
-        }}
-      />
-      {open && <LoginModal setOpen={setOpen} />}
-    </HeaderWrapper>
+  return (
+    <HeaderContainer background={headerBackground}>
+      <HeaderWrapper>
+        <Icons.Logo
+          width={81}
+          fill={theme.colors.logo}
+          onClick={() => {
+            location.href = '/'
+          }}
+        />
+
+        <Button
+          buttonType="secondary"
+          textSize="h6"
+          textColor="logo"
+          text="시작하기"
+          _padding="18px 36px"
+          _onClick={() => {
+            setOpen(true)
+          }}
+        />
+        {open && <LoginModal setOpen={setOpen} />}
+      </HeaderWrapper>
+    </HeaderContainer>
   )
 }
 
-const { Grid } = style
-
-const HeaderWrapper = styled(Grid)`
+const HeaderContainer = styled.header<{ background: boolean }>`
   z-index: 9000;
-  position: absolute;
+  width: 100%;
+  position: sticky;
   top: 0;
+  ${({ background, theme }) =>
+    background ? `background-color: ${theme.colors.side.side100};` : `background-color: transparent;`};
+`
 
+const HeaderWrapper = styled.div`
+  margin: 0 auto;
+
+  svg {
+    cursor: pointer;
+  }
   width: 100%;
   max-width: 1200px;
   ${({ theme }) => theme.common.flexBetween}
   padding: 20px 0 12px 0;
-  position: absolute;
-  background-color: ${({ theme }) => theme.colors.side.side100};
   transition: 0.3s;
 
   @media all and (min-width: 1200px) {

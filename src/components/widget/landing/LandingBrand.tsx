@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 // components
 import Icon from 'assets/icons'
@@ -19,19 +19,28 @@ import {
 
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
+import useIsInViewport from 'hooks/useIsInViewport'
 
 // utils
 import { mediaQuery } from 'utils/mediaQuery'
-import LandingHeader from './LandingHeader'
+
+// store
+import useCommonStore from 'stores/useCommonStore'
 
 const LandingBrand = () => {
   const windowSize = useWindowSize()
   const landingRef = useRef<HTMLDivElement>(null)
+  const isInViewport = useIsInViewport(landingRef)
   const theme = useTheme()
+
+  const { setHeaderBackground } = useCommonStore()
+
+  useEffect(() => {
+    setHeaderBackground(!isInViewport)
+  }, [isInViewport])
 
   return (
     <LandingWrapper ref={landingRef}>
-      <LandingHeader />
       <AbsoluteLogoBubble variants={landingBubbleAni} initial="init" animate="ani">
         <Icon.Bubble />
       </AbsoluteLogoBubble>
@@ -139,6 +148,10 @@ const AbsoluteLogoSmall = styled(motion.div)<{ order: number }>`
   z-index: 5000;
 
   transition: 0.3s;
+
+  svg {
+    filter: drop-shadow(${({ theme }) => theme.shadow.shadow1});
+  }
   ${({ order }) => {
     switch (order) {
       case 1:
@@ -321,7 +334,7 @@ const BorderCircle = styled(motion.div)<{ zIndex: number; order: number }>`
       switch (order) {
         case 1:
           return css`
-            animation: ${rotateAni} 12s linear infinite;
+            animation: ${rotateAni} 12s ease-in-out infinite;
             circle {
               stroke-dasharray: 20 60;
             }
@@ -347,7 +360,7 @@ const BorderCircle = styled(motion.div)<{ zIndex: number; order: number }>`
           `
         case 2:
           return css`
-            animation: ${rotateReverseAni} 16s linear infinite;
+            animation: ${rotateReverseAni} 16s ease-in-out infinite;
             circle {
               stroke-dasharray: 20 50;
             }
@@ -373,7 +386,7 @@ const BorderCircle = styled(motion.div)<{ zIndex: number; order: number }>`
           `
         case 3:
           return css`
-            animation: ${rotateAni} 20s linear infinite;
+            animation: ${rotateAni} 20s ease-in-out infinite;
             circle {
               stroke-dasharray: 10 40;
             }
@@ -399,7 +412,7 @@ const BorderCircle = styled(motion.div)<{ zIndex: number; order: number }>`
           `
         case 4:
           return css`
-            animation: ${rotateReverseAni} 24s linear infinite;
+            animation: ${rotateReverseAni} 24s ease-in-out infinite;
             circle {
               stroke-dasharray: 10 30;
             }

@@ -7,7 +7,8 @@ import {
   LandingEmotion,
   LandingAnswer,
   LandingCatchPhrase,
-  LandingFooter
+  LandingFooter,
+  LandingHeader
 } from 'components'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
@@ -16,6 +17,7 @@ const LandingPage = () => {
   return (
     <>
       <LandingWrapper>
+        <LandingHeader />
         <LandingBrand />
         <LandingInfo>
           <LandingQuestion />

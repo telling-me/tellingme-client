@@ -31,15 +31,12 @@ const TabBar = () => {
     location.pathname.includes('setting')
   )
     return null
-  
+
   return (
     <TabBarWrapper size={window.innerWidth}>
       {/* Desktop 버전에만 필요 */}
       <TabButtonWrapper>
-        <Link
-          to="#"
-          // to="/app/allanswer"
-        >
+        <Link to="/app/allanswer">
           <TabButton
             color={location.pathname.includes('allanswer') ? 'logo' : 'noFilled'}
             onClick={() => {
@@ -68,15 +65,11 @@ const TabBar = () => {
         <TabWrapperLi>
           <ul>
             <TabWrapper>
-              <Link
-                to="#"
-                // to="/app/allanswer"
-              >
+              <Link to="/app/allanswer">
                 <IconButton
                   buttonType={location.pathname.includes('allanswer') ? 'logo' : 'noFilled'}
                   _width="41px"
                   _height="41px"
-                  _disabled={true}
                   _onClick={() => {
                     setCurrPage(-1)
                   }}
@@ -84,7 +77,7 @@ const TabBar = () => {
                   <Icons.Briefcase
                     width="24"
                     height="24"
-                    fill={useChangeColor(location.pathname.includes('allanswer') ? 'side100' : 'gray1')}
+                    fill={useChangeColor(location.pathname.includes('allanswer') ? 'side100' : 'gray3')}
                   />
                 </IconButton>
               </Link>

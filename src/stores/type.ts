@@ -4,6 +4,8 @@ export interface ICommonFilter {
 }
 
 export interface ICommonStore {
+  headerBackground: boolean
+  setHeaderBackground: (value: boolean) => void
   prevPage: number
   setPrevPage: (value: number) => void
   currPage: number
