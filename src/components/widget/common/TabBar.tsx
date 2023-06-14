@@ -77,7 +77,7 @@ const TabBar = () => {
                   <Icons.AllAnswer
                     width="24"
                     height="24"
-                    fill={useChangeColor(location.pathname.includes('allanswer') ? 'side100' : 'gray3')}
+                    stroke={useChangeColor(location.pathname.includes('allanswer') ? 'side100' : 'gray3')}
                   />
                 </IconButton>
               </Link>
@@ -97,7 +97,7 @@ const TabBar = () => {
                   <Icons.Home
                     width="24"
                     height="24"
-                    fill={useChangeColor(location.pathname.includes('main') ? 'side100' : 'gray3')}
+                    stroke={useChangeColor(location.pathname.includes('main') ? 'side100' : 'gray3')}
                   />
                 </IconButton>
               </Link>
