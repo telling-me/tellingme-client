@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 // components
 import Icon from 'assets/icons'
@@ -10,17 +10,28 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
+// slot counter
+import SlotCounter, { type SlotCounterRef } from 'react-slot-counter'
+
 // animation
 import { motion } from 'framer-motion'
 
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
+import { useInView } from 'react-intersection-observer'
 
 // utils
 import { mediaQuery } from 'utils/mediaQuery'
+import { commonOpacityYAni } from 'styles/ani'
+
+const DummyNumber = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 const LandingQuestionInfo = () => {
+  // hooks
   const windowSize = useWindowSize()
+  const { ref, inView } = useInView({ triggerOnce: true, initialInView: false })
+
+  // slick setting
   const settings = {
     centerMode: true,
     dots: false,
@@ -29,17 +40,42 @@ const LandingQuestionInfo = () => {
     variableWidth: true,
     autoplay: true,
     autoplaySpeed: 2000,
-    focusOnSelect: true,
-    arrows: false
+    focusOnSelect: false,
+    swipe: false,
+    arrows: false,
+    pauseOnHover: false,
+    pauseOnFocus: false
   }
 
+  // ref
   const infoRef = useRef<HTMLDivElement>(null)
+  const counterTimeRef = useRef<SlotCounterRef>(null)
+  const counterMin1Ref = useRef<SlotCounterRef>(null)
+  const counterMin2Ref = useRef<SlotCounterRef>(null)
+
+  // counter 보이면 start
+  useEffect(() => {
+    if (inView) {
+      counterTimeRef.current?.startAnimation()
+      counterMin1Ref.current?.startAnimation()
+      counterMin2Ref.current?.startAnimation()
+    }
+  }, [inView])
 
   return (
     <QuestionInfo ref={infoRef}>
       <Grid>
         <Grid flex="center" direction="column" _gap="32px" _padding="0 8px">
-          <Grid flex="center" direction="column" _gap="8px">
+          <Grid
+            flex="center"
+            direction="column"
+            _gap={mediaQuery(windowSize.width) === 'mobile' ? '8px' : '10px'}
+            variants={commonOpacityYAni}
+            viewport={{ once: true }}
+            initial="init"
+            whileInView="ani"
+            custom={1}
+          >
             <TextH1
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
@@ -90,6 +126,11 @@ const LandingQuestionInfo = () => {
             wrap="wrap"
             _padding="0 6px 0 7px"
             direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
+            variants={commonOpacityYAni}
+            viewport={{ once: true }}
+            initial="init"
+            whileInView="ani"
+            custom={2}
           >
             <TextH2
               typo={
@@ -101,7 +142,7 @@ const LandingQuestionInfo = () => {
               }
               textColor="gray8"
             >
-              땡땡땡땡한 질문이
+              나를 되돌아보는 질문이
             </TextH2>
             <TextH2
               typo={
@@ -117,10 +158,29 @@ const LandingQuestionInfo = () => {
             </TextH2>
           </Grid>
         </Grid>
-        <TimeChanger flex="center" _gap="8px" _width="fit-content">
+        <TimeChanger
+          ref={ref}
+          flex="center"
+          _gap="8px"
+          _width="fit-content"
+          variants={commonOpacityYAni}
+          viewport={{ once: true }}
+          initial="init"
+          whileInView="ani"
+          custom={3}
+        >
           <HourWrapper flex="center">
             <TimeText typo="h1_b" textColor="side500">
-              6
+              <SlotCounter
+                ref={counterTimeRef}
+                dummyCharacters={DummyNumber}
+                duration={0.6 + 1.0}
+                dummyCharacterCount={20}
+                value={6}
+                startValue={0}
+                autoAnimationStart={false}
+                hasInfiniteList={true}
+              />
             </TimeText>
           </HourWrapper>
           <TextP typo="h1_b" textColor="side500">
@@ -129,12 +189,30 @@ const LandingQuestionInfo = () => {
 
           <MinuteWrapper flex="center">
             <TimeText typo="h1_b" textColor="side500">
-              0
+              <SlotCounter
+                ref={counterMin1Ref}
+                dummyCharacters={DummyNumber}
+                duration={0.6 + 1.4}
+                dummyCharacterCount={40}
+                value={0}
+                startValue={0}
+                autoAnimationStart={false}
+                hasInfiniteList={true}
+              />
             </TimeText>
           </MinuteWrapper>
           <SecondWrapper flex="center">
             <TimeText typo="h1_b" textColor="side500">
-              0
+              <SlotCounter
+                ref={counterMin2Ref}
+                dummyCharacters={DummyNumber}
+                duration={0.6 + 1.8}
+                dummyCharacterCount={60}
+                value={0}
+                startValue={0}
+                autoAnimationStart={false}
+                hasInfiniteList={true}
+              />
             </TimeText>
           </SecondWrapper>
           <MeridiemWrapper _width="fit-content" flex="center">
@@ -143,8 +221,21 @@ const LandingQuestionInfo = () => {
             </TextP>
           </MeridiemWrapper>
         </TimeChanger>
-        <QuestionChanger flex="center">
+        <QuestionChanger
+          flex="center"
+          variants={commonOpacityYAni}
+          viewport={{ once: true }}
+          initial="init"
+          whileInView="ani"
+          custom={12}
+        >
           <QuestionList flex="center">
+            <QuestionBubble flex="center">
+              <Icon.Bubble
+                width={mediaQuery(windowSize.width) === 'mobile' ? '26px' : '43px'}
+                height={mediaQuery(windowSize.width) === 'mobile' ? '21px' : '35px'}
+              />
+            </QuestionBubble>
             <Icon.LandingQuestionList width={mediaQuery(windowSize.width) === 'mobile' ? '232px' : '375px'} />
           </QuestionList>
           <QuestionSlider>
@@ -248,24 +339,40 @@ const QuestionChanger = styled(Grid)`
   @media all and (max-width: 767px) {
     height: 400px;
   }
-  svg {
-    filter: drop-shadow(${({ theme }) => theme.shadow.shadow1});
-  }
 `
 
 const QuestionList = styled(Grid)`
   position: absolute;
   bottom: 0;
+
+  svg {
+    filter: drop-shadow(${({ theme }) => theme.shadow.shadow1});
+  }
+`
+
+const QuestionBubble = styled(Grid)`
+  position: absolute;
+  bottom: 298px;
+  z-index: 2;
+
+  @media all and (max-width: 767px) {
+    bottom: 184px;
+  }
+
+  svg {
+    filter: drop-shadow(${({ theme }) => theme.shadow.shadow2});
+  }
 `
 
 const QuestionSlider = styled(Grid)`
-  padding-top: 170px;
+  padding-top: 160px;
   @media all and (max-width: 767px) {
-    padding-top: 110px;
+    padding-top: 95px;
   }
+
   .slick-track {
     div div {
-      margin: 0 30px;
+      margin: 0 20px;
     }
   }
 `

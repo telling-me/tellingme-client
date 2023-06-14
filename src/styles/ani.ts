@@ -46,6 +46,21 @@ export const landingCircleAni = {
   })
 }
 
+export const commonOpacityYAni = {
+  init: {
+    opacity: 0,
+    y: 10
+  },
+  ani: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.7
+    }
+  })
+}
+
 export const floatAni = keyframes`
 0%{
 		transform: translatey(0px);

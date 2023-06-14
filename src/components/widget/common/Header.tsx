@@ -21,7 +21,13 @@ const Header = () => {
   }
   return (
     <HeaderWrapper>
-      <Icons.Logo width={81} fill={theme.colors.logo} />
+      <Icons.Logo
+        width={81}
+        fill={theme.colors.logo}
+        onClick={() => {
+          window.location.href = '/app/main'
+        }}
+      />
 
       <IconButton
         buttonType="noFilled"
@@ -47,6 +53,10 @@ const HeaderWrapper = styled.header`
   transition: 0.3s;
 
   z-index: 1;
+
+  svg {
+    cursor: pointer;
+  }
 
   @media all and (min-width: 1200px) {
     max-width: 1200px;

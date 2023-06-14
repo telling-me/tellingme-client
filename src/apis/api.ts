@@ -21,13 +21,20 @@ API.interceptors.request.use(function (config) {
   return config
 })
 
-API.interceptors.response.use(function (response) {
-  const responseStatus = response.status
-  if (responseStatus === 403) {
-    location.href = '/'
+API.interceptors.response.use(
+  function (response) {
+    return response
+  },
+  async function (error) {
+    const errorDataStatus = error.response.status
+    // TODO: 500 에러 처리 status 확인 필요
+    const errorStatus = error.status
+    if (errorDataStatus === 403) {
+      location.href = '/'
+    }
+    if (errorStatus === 500) {
+      location.href = '/'
+    }
+    return await Promise.reject(error)
   }
-  if (responseStatus === 500) {
-    location.href = '/'
-  }
-  return response
-})
+)
