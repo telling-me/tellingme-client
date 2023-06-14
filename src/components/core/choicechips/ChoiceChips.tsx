@@ -43,6 +43,8 @@ const ChoiceChipsComponent = styled.button<{ _margin?: string; _active: boolean 
     &:disabled {
       background-color: ${props.theme.colors.gray.gray1};
       color: ${props.theme.colors.gray.gray4};
+
+      cursor: default;
     }
   `}
 

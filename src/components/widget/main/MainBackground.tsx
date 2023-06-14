@@ -15,8 +15,8 @@ const MainBackground = () => {
       <SmallLogoWrapper>
         <Icon.LogoSmallBubble1 />
         <Icon.LogoSmallBubble2 />
-        <Icon.LogoSmallBubble3 />
         <Icon.LogoSmallBubble4 />
+        <Icon.LogoSmallBubble3 />
       </SmallLogoWrapper>
       <BorderCircle>
         <Icon.LandingCircle />
@@ -37,28 +37,40 @@ const BorderCircle = styled(motion.div)`
   svg {
     stroke: ${({ theme }) => theme.colors.primary.primary400_main};
     transition: 0.3s;
-    animation: ${rotateAni} 16s linear infinite;
-    circle {
-      stroke-dasharray: 20 50;
-    }
     @media all and (min-width: 1200px) {
-      width: 784px;
-      height: 784px;
+      animation: ${rotateAni} 24s linear infinite;
+      circle {
+        stroke-dasharray: 10 30;
+      }
+      width: 1200px;
+      height: 1200px;
     }
 
     @media all and (min-width: 1024px) and (max-width: 1199px) {
-      width: 672px;
-      height: 672px;
+      animation: ${rotateAni} 20s linear infinite;
+      circle {
+        stroke-dasharray: 10 40;
+      }
+      width: 903px;
+      height: 903px;
     }
 
     @media all and (min-width: 768px) and (max-width: 1023px) {
-      width: 560px;
-      height: 560px;
+      animation: ${rotateAni} 16s linear infinite;
+      circle {
+        stroke-dasharray: 20 50;
+      }
+      width: 648px;
+      height: 648px;
     }
 
     @media all and (max-width: 767px) {
-      width: 324px;
-      height: 324px;
+      animation: ${rotateAni} 12s linear infinite;
+      circle {
+        stroke-dasharray: 20 60;
+      }
+      width: 408px;
+      height: 408px;
     }
   }
 `
@@ -67,32 +79,33 @@ const SmallLogoWrapper = styled(style.Grid)`
   height: 100%;
   z-index: 3000;
   svg {
+    filter: drop-shadow(${({ theme }) => theme.shadow.shadow2});
     animation: ${floatAni} 1.5s ease-in-out infinite;
     position: absolute;
     transition: 0.3s;
     :nth-child(1) {
       @media all and (min-width: 1200px) {
         width: 44px;
-        top: calc(50% + 170px);
-        right: calc(50% + 333px);
+        top: calc(50% + 420px);
+        right: calc(50% + 393px);
       }
 
       @media all and (min-width: 1024px) and (max-width: 1199px) {
         width: 44px;
-        top: calc(50% + 120px);
-        right: calc(50% + 283px);
+        top: calc(50% + 300px);
+        right: calc(50% + 305px);
       }
 
       @media all and (min-width: 768px) and (max-width: 1023px) {
         width: 44px;
-        top: calc(50% + 100px);
-        right: calc(50% + 233px);
+        top: calc(50% + 220px);
+        right: calc(50% + 203px);
       }
 
       @media all and (max-width: 767px) {
-        width: 44px;
-        top: calc(50% + 90px);
-        right: calc(50% + 113px);
+        width: 33px;
+        top: calc(50% + 157px);
+        right: calc(50% + 100px);
       }
     }
     :nth-child(2) {
@@ -104,70 +117,70 @@ const SmallLogoWrapper = styled(style.Grid)`
 
       @media all and (min-width: 1024px) and (max-width: 1199px) {
         width: 42px;
-        top: calc(50% + 90px);
-        right: calc(50% - 348px);
+        top: calc(50% + 140px);
+        right: calc(50% - 293px);
       }
 
       @media all and (min-width: 768px) and (max-width: 1023px) {
         width: 42px;
-        top: calc(50% + 80px);
-        right: calc(50% - 293px);
+        top: calc(50% + 140px);
+        right: calc(50% - 253px);
       }
 
       @media all and (max-width: 767px) {
-        width: 42px;
-        top: calc(50% + 90px);
-        right: calc(50% - 153px);
+        width: 35px;
+        top: calc(50% + 130px);
+        right: calc(50% - 115px);
       }
     }
     :nth-child(3) {
       @media all and (min-width: 1200px) {
-        width: 24px;
-        top: calc(50% - 220px);
-        right: calc(50% - 353px);
+        width: 18px;
+        top: calc(50% - 340px);
+        right: calc(50% - 393px);
       }
 
       @media all and (min-width: 1024px) and (max-width: 1199px) {
-        width: 24px;
-        top: calc(50% - 200px);
-        right: calc(50% - 293px);
+        width: 18px;
+        top: calc(50% - 290px);
+        right: calc(50% - 310px);
       }
 
       @media all and (min-width: 768px) and (max-width: 1023px) {
-        width: 24px;
-        top: calc(50% - 160px);
-        right: calc(50% - 250px);
+        width: 18px;
+        top: calc(50% - 280px);
+        right: calc(50% - 270px);
       }
 
       @media all and (max-width: 767px) {
-        width: 24px;
-        top: calc(50% - 120px);
-        right: calc(50% - 123px);
+        width: 15px;
+        top: calc(50% - 130px);
+        right: calc(50% - 170px);
       }
     }
     :nth-child(4) {
       @media all and (min-width: 1200px) {
-        width: 18px;
+        width: 29px;
         top: calc(50% - 245px);
         right: calc(50% + 303px);
       }
 
       @media all and (min-width: 1024px) and (max-width: 1199px) {
-        width: 18px;
+        width: 29px;
         top: calc(50% - 210px);
         right: calc(50% + 270px);
       }
 
       @media all and (min-width: 768px) and (max-width: 1023px) {
-        width: 18px;
-        top: calc(50% - 190px);
-        right: calc(50% + 193px);
+        width: 29px;
+        top: calc(50% - 240px);
+        right: calc(50% + 210px);
       }
 
       @media all and (max-width: 767px) {
-        width: 18px;
-        top: calc(50% - 125px);
-        right: calc(50% + 103px);
+        width: 24px;
+        top: calc(50% - 150px);
+        right: calc(50% + 130px);
       }
     }
   }

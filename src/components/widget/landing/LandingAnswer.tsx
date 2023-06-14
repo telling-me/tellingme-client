@@ -16,18 +16,24 @@ import useWindowSize from 'hooks/useWindowSize'
 // utils
 import { mediaQuery } from 'utils/mediaQuery'
 
+// ani
+import { commonOpacityYAni } from 'styles/ani'
+
 const LandingAnswer = () => {
   const windowSize = useWindowSize()
   const settings = {
-    centerMode: true,
+    centerMode: mediaQuery(windowSize.width) !== 'desktop',
     dots: false,
     infinite: true,
     speed: 500,
     variableWidth: true,
     autoplay: true,
     autoplaySpeed: 2000,
-    focusOnSelect: true,
-    arrows: false
+    focusOnSelect: false,
+    swipe: false,
+    arrows: false,
+    pauseOnHover: false,
+    pauseOnFocus: false
   }
   return (
     <>
@@ -38,7 +44,16 @@ const LandingAnswer = () => {
           _gap="32px"
           _padding={mediaQuery(windowSize.width) === 'mobile' ? '120px 8px 0' : '160px 8px 0'}
         >
-          <Grid flex="center" direction="column" _gap="8px">
+          <Grid
+            flex="center"
+            direction="column"
+            _gap={mediaQuery(windowSize.width) === 'mobile' ? '8px' : '10px'}
+            variants={commonOpacityYAni}
+            viewport={{ once: true }}
+            initial="init"
+            whileInView="ani"
+            custom={1}
+          >
             <TextH1
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
@@ -89,6 +104,11 @@ const LandingAnswer = () => {
             wrap="wrap"
             _padding="0 6px 0 7px"
             direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
+            variants={commonOpacityYAni}
+            viewport={{ once: true }}
+            initial="init"
+            whileInView="ani"
+            custom={2}
           >
             <TextH2
               typo={
@@ -121,6 +141,11 @@ const LandingAnswer = () => {
           _margin={mediaQuery(windowSize.width) === 'mobile' ? '60px 0 0' : '120px 0 0'}
           direction={mediaQuery(windowSize.width) === 'desktop' ? 'row' : 'column-reverse'}
           _gap="32px"
+          variants={commonOpacityYAni}
+          viewport={{ once: true }}
+          initial="init"
+          whileInView="ani"
+          custom={4}
         >
           <QuestionSlide flex="center">
             <Icon.LandingAnswerList width={mediaQuery(windowSize.width) === 'mobile' ? '232px' : '375px'} />
@@ -144,7 +169,7 @@ const { Grid, TextH1, TextH2 } = style
 
 const AnswerWrapper = styled.div`
   position: relative;
-  overflow: auto;
+  overflow: hidden;
 `
 
 const QuestionSlide = styled(Grid)`

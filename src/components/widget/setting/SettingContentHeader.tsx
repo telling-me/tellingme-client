@@ -34,7 +34,7 @@ const SettingContentHeader = ({ pageNumber, setIsMenu, _disabled, _onClick }: IS
           _margin="0 0 0 -4px"
           _onClick={() => {
             if (setIsMenu != null) {
-              setIsMenu(true)
+              window.location.replace('/app/setting')
             }
           }}
         >
@@ -47,7 +47,7 @@ const SettingContentHeader = ({ pageNumber, setIsMenu, _disabled, _onClick }: IS
       </style.TextP>
 
       {pageNumber === 0 && _disabled != null && _onClick != null && (
-        <CompleteButton _disabled={_disabled} onClick={_onClick}>
+        <CompleteButton disabled={_disabled} onClick={_onClick}>
           <style.TextSpan typo="b1_b" textColor={_disabled ? 'gray2' : 'logo'}>
             완료
           </style.TextSpan>
@@ -85,6 +85,12 @@ const HeaderWrapper = styled.div`
 const CompleteButton = styled.button<{ _disabled?: boolean }>`
   position: absolute;
   right: 0;
+
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
 
   ${({ _disabled }) => _disabled != null && !_disabled && 'cursor: pointer;'}
 `

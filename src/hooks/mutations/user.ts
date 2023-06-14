@@ -14,7 +14,7 @@ import type { IError } from 'type/db'
 export const usePatchUserInfoMutation = <T>(options?: T) => {
   return useMutation(async (userInfoDto: IUserInfoDto) => await apis.patchUserInfo(userInfoDto), {
     onSuccess: (res) => {
-      window.location.replace('/setting')
+      window.location.replace('/app/setting')
     },
     onError: (err: IError) => {
       console.log(err)
@@ -84,6 +84,16 @@ export const useCheckNicknameMutation = <T>(
 
 export const useUnsubscribeNewsLetterMutation = <T>(option?: T) => {
   return useMutation(async (data: { email: string }) => await apis.unsubscribeNewsLetter(data.email), {
+    onSuccess() {},
+    onError: (err) => {
+      console.log(err)
+    },
+    ...option
+  })
+}
+
+export const usePostUserNotiQuery = <T>(option?: T) => {
+  return useMutation(async () => await apis.postUserNoti(), {
     onSuccess() {},
     onError: (err) => {
       console.log(err)

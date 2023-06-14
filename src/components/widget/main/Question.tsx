@@ -29,14 +29,14 @@ const Question = () => {
       </QuestionDateWrapper>
       <QuestionWrapper flex="center" _margin="53px 0 36px">
         <QuestionInnerWrapper flex="center" _width="100%" _height="70px" direction="column" _gap="16px">
-          <Grid>
+          <Grid flex="center" direction="column" _gap="4px">
             {question?.title?.split('\\n')?.map((line: string) => (
               <TextP key={line} typo="b1" textColor="logo" textAlign="center" wordBreak="keep-all">
                 {line}
               </TextP>
             ))}
           </Grid>
-          <Grid>
+          <Grid flex="center" direction="column" _gap="4px">
             {question?.phrase?.split('\\n')?.map((line: string) => (
               <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
                 {line}
@@ -87,6 +87,10 @@ const QuestionInnerWrapper = styled(Grid)`
 const EmotionWrapper = styled(Grid)`
   position: absolute;
   top: -17px;
+
+  svg {
+    filter: drop-shadow(${({ theme }) => theme.shadow.shadow2});
+  }
 `
 
 const QuestionButtonWrapper = styled(Grid)`
@@ -95,9 +99,17 @@ const QuestionButtonWrapper = styled(Grid)`
   border-radius: 20px;
   &:hover {
     cursor: pointer;
+    box-shadow: ${({ theme }) => theme.shadow.shadow2};
+    svg {
+      .fill_hover {
+        fill: rgba(131, 222, 217, 1);
+      }
+    }
   }
   svg {
-    stroke: ${({ theme }) => theme.colors.logo};
+    .fill_hover {
+      fill: ${({ theme }) => theme.colors.logo};
+    }
   }
 `
 

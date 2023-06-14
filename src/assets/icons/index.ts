@@ -32,6 +32,7 @@ import { ReactComponent as Check } from './Check.svg'
 import { ReactComponent as ArrowLeft } from './ArrowLeft.svg'
 import { ReactComponent as ArrowRight } from './ArrowRight.svg'
 import { ReactComponent as Male } from './Male.svg'
+import { ReactComponent as Medium } from './Medium.svg'
 import { ReactComponent as Female } from './Female.svg'
 import { ReactComponent as BellRinging } from './BellRinging.svg'
 import { ReactComponent as CaretUp } from './CaretUp.svg'
@@ -73,6 +74,7 @@ interface IIconIndex extends IStringKey {
   ArrowLeft: string | FunctionComponent<any> | ComponentClass<any, any>
   ArrowRight: string | FunctionComponent<any> | ComponentClass<any, any>
   Male: string | FunctionComponent<any> | ComponentClass<any, any>
+  Medium: string | FunctionComponent<any> | ComponentClass<any, any>
   Female: string | FunctionComponent<any> | ComponentClass<any, any>
   BellRinging: string | FunctionComponent<any> | ComponentClass<any, any>
   CaretUp: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -157,6 +159,7 @@ const Icon: IIconIndex = {
   ArrowLeft,
   ArrowRight,
   Male,
+  Medium,
   More,
   Female,
   BellRinging,

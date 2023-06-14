@@ -15,11 +15,24 @@ export const DropdownComponent = styled.div<{ _margin?: string; _maxWidth?: stri
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};
 `
 
-export const DropdownButton = styled.button<{ dropdownSize: DropdownSizeType }>`
+export const DropdownButton = styled.button<{ dropdownSize: DropdownSizeType; _disabled?: boolean }>`
   width: 100%;
   background-color: ${(props) => props.theme.colors.side.side200};
 
   cursor: pointer;
+
+  ${({ _disabled, theme }) =>
+    _disabled != null &&
+    _disabled &&
+    css`
+      background-color: ${theme.colors.gray.gray1};
+
+      cursor: default;
+
+      span {
+        color: ${theme.colors.gray.gray4};
+      }
+    `}
 
   ${({ dropdownSize }) =>
     dropdownSize === 'small'

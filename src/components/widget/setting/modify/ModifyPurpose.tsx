@@ -12,7 +12,7 @@ interface IModifyPurpose {
 
 const ModifyPurpose = ({ purpose, setPurpose }: IModifyPurpose) => {
   const LINE_ONE = ['학업 / 진로', '대인관계', '성격 / 가치관']
-  const LINE_TWO = ['행동 / 습관', '기타']
+  const LINE_TWO = ['행동 / 습관', '건강', '기타']
 
   const handleClick = (index: string) => {
     const purposeIndex = purpose.indexOf(index)
