@@ -12,6 +12,8 @@ export enum PAGE_URL {
   MyAnswer = 'myAnswer',
   AllAnswer = 'Allanswer',
   Setting = 'setting',
+  Error500 = '500',
+  Dev = 'dev',
 
   // NewsLetter
   NewsLetter = 'newsletter',

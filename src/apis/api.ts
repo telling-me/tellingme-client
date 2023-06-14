@@ -27,13 +27,11 @@ API.interceptors.response.use(
   },
   async function (error) {
     const errorDataStatus = error.response.status
-    // TODO: 500 에러 처리 status 확인 필요
-    const errorStatus = error.status
     if (errorDataStatus === 403) {
       location.href = '/'
     }
-    if (errorStatus === 500) {
-      location.href = '/'
+    if (errorDataStatus === 500) {
+      location.href = '/app/500'
     }
     return await Promise.reject(error)
   }

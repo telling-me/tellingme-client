@@ -45,7 +45,7 @@ const Error500Page = () => {
         _margin="24px 0 0 0"
         _padding="18px 32px"
         _onClick={() => {
-          navigate('/')
+          navigate('/app/main')
         }}
       />
     </ErrorWrapper>
