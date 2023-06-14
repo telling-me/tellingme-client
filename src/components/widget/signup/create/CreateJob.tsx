@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ContentWrapper } from './style'
 
 // components
@@ -18,6 +18,12 @@ interface ICreateJob {
 }
 
 const CreateJob = ({ job, setJob, jobInfo, setJobInfo }: ICreateJob) => {
+  useEffect(() => {
+    if (job !== 5 && jobInfo !== '') {
+      setJobInfo('')
+    }
+  }, [job])
+
   return (
     <ContentWrapper type="job">
       {jobData.map((v: string, i: number) => {

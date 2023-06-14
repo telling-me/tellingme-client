@@ -72,6 +72,7 @@ const Dropdown = ({
 
       <DropdownButton
         dropdownSize={dropdownSize}
+        _disabled={_disabled}
         onClick={() => {
           if (_disabled == null || !_disabled) {
             setOpen(!open)

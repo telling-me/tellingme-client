@@ -29,6 +29,7 @@ const ModifyGender = ({ gender, setGender, canChangeGender }: IModifyGender) => 
         <ChoiceChips
           chipText="남성"
           _active={gender === 'male'}
+          _disabled={!canChangeGender && gender !== 'male'}
           _onClick={() => {
             if (canChangeGender) {
               handleClick('male')
@@ -38,6 +39,7 @@ const ModifyGender = ({ gender, setGender, canChangeGender }: IModifyGender) => 
         <ChoiceChips
           chipText="여성"
           _active={gender === 'female'}
+          _disabled={!canChangeGender && gender !== 'female'}
           _onClick={() => {
             if (canChangeGender) {
               handleClick('female')
