@@ -19,7 +19,7 @@ interface ICreateJob {
 
 const CreateJob = ({ job, setJob, jobInfo, setJobInfo }: ICreateJob) => {
   useEffect(() => {
-    if (job !== 5) {
+    if (job !== 5 && jobInfo !== '') {
       setJobInfo('')
     }
   }, [job])
