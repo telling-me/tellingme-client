@@ -212,7 +212,7 @@ const QuestionWriteModal = () => {
             <FooterWrapper flex="start" direction="column">
               <Grid flex="end" _height="14px">
                 <TextP typo="c_b" textColor="gray6">
-                  {text?.length} / {MAX_LENGTH}
+                  {text?.replaceAll(' ', '')?.length} / {MAX_LENGTH}
                 </TextP>
               </Grid>
               {editable && (
@@ -223,8 +223,8 @@ const QuestionWriteModal = () => {
                     buttonType="noFilled"
                     text="완료"
                     _height="100%"
-                    textColor={text?.length < MIN_LENGTH ? 'gray6' : 'logo'}
-                    _disabled={text?.length < MIN_LENGTH}
+                    textColor={text?.replaceAll(' ', '').length < MIN_LENGTH ? 'gray6' : 'logo'}
+                    _disabled={text?.replaceAll(' ', '').length < MIN_LENGTH}
                     _onClick={() => {
                       if (!alreadyAnswered) setSaveModal(true)
                       else setEditModal(true)
