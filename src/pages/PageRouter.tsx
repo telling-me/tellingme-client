@@ -31,7 +31,7 @@ const PageRouter = () => {
             <Route path={PAGE_URL.Login_Apple} element={<Switch.AppleLoginButtonPage />} />
             <Route path={PAGE_URL.Login} element={<Switch.LoginButtonPage />} />
             <Route path={PAGE_URL.SignUp} element={<Switch.SignUpPage />} />
-            <Route path={'*'} element={<Switch.ErrorPage />} />
+            <Route path={'*'} element={<Switch.Error404Page />} />
           </Route>
           {
             // 임시 로그인 라우터
@@ -46,7 +46,9 @@ const PageRouter = () => {
             <Route path={PAGE_URL.AllAnswer} element={<Switch.AllAnswerPage />} />
             <Route path={PAGE_URL.MyAnswer} element={<Switch.MyAnswerPage />} />{' '}
             <Route path={PAGE_URL.Setting} element={<Switch.SettingPage />} />
-            <Route path={'*'} element={<Switch.ErrorPage />} />
+            <Route path={PAGE_URL.Error500} element={<Switch.Error500Page />} />
+            <Route path={PAGE_URL.Dev} element={<Switch.DevPage />} />
+            <Route path={'*'} element={<Switch.Error404Page />} />
           </Route>
           {
             // 뉴스 레터
@@ -60,7 +62,7 @@ const PageRouter = () => {
               element={<Switch.NewsLetterUnsubscribeCompletePage />}
             />
           </Route>
-          <Route path={'*'} element={<Switch.ErrorPage />} />
+          <Route path={'*'} element={<Switch.Error404Page />} />
           {
             // 회원 가입
           }
