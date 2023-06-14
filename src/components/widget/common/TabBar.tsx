@@ -74,10 +74,10 @@ const TabBar = () => {
                     setCurrPage(-1)
                   }}
                 >
-                  <Icons.Briefcase
+                  <Icons.AllAnswer
                     width="24"
                     height="24"
-                    fill={useChangeColor(location.pathname.includes('allanswer') ? 'side100' : 'gray3')}
+                    stroke={useChangeColor(location.pathname.includes('allanswer') ? 'side100' : 'gray3')}
                   />
                 </IconButton>
               </Link>
@@ -94,10 +94,10 @@ const TabBar = () => {
                     setCurrPage(0)
                   }}
                 >
-                  <Icons.Bagpack
+                  <Icons.Home
                     width="24"
                     height="24"
-                    fill={useChangeColor(location.pathname.includes('main') ? 'side100' : 'gray3')}
+                    stroke={useChangeColor(location.pathname.includes('main') ? 'side100' : 'gray3')}
                   />
                 </IconButton>
               </Link>
@@ -114,7 +114,7 @@ const TabBar = () => {
                     setCurrPage(1)
                   }}
                 >
-                  <Icons.Handshake
+                  <Icons.MyAnswer
                     width="24"
                     height="24"
                     stroke={useChangeColor(location.pathname.includes('myanswer') ? 'side100' : 'gray3')}
