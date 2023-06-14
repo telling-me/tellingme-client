@@ -20,7 +20,9 @@ const CheckTokenLayout = () => {
       requestPermission(setClientPushToken)
     }
 
-    if (clientPushToken != null && resNoti != null && serverPT != null) {
+    console.log(clientPushToken, resNoti, serverPT)
+
+    if (clientPushToken != null && resNoti != null) {
       if (resNoti === true && clientPushToken !== 'denied' && clientPushToken !== serverPT) {
         updateUserPushToken({ pushToken: clientPushToken })
       }
