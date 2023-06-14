@@ -108,9 +108,7 @@ const QuestionWriteModal = () => {
               >
                 <EmotionIcon emotion={emotion} width={36} fill={theme.colors.logo} stroke={theme.colors.logo} />
               </Grid>
-              <ButtonWrapper
-                flex="end"
-              >
+              <ButtonWrapper flex="end">
                 {editable ? (
                   fold ? (
                     <Icon.CaretDown
@@ -173,7 +171,11 @@ const QuestionWriteModal = () => {
               flex="start"
               direction="column"
               _gap="18px"
-              style={{ height: fold ? 0 : 'auto', margin: fold ? 0 : '20px 0 60px' }}
+              style={{
+                height: fold ? 0 : 'auto',
+                margin: fold ? 0 : '20px 0 60px',
+                overflow: fold ? 'hidden' : 'visible'
+              }}
             >
               <Grid flex="start" direction="column" _gap="10px">
                 <Grid flex="center" direction="column" _gap="4px">
@@ -433,9 +435,6 @@ const ModalHeader = styled(Grid)`
 
 const QuestionWrapper = styled(Grid)`
   transition: 0.3s;
-  overflow: hidden;
-  max-width: 300px;
-  margin: 20px 0 60px 0;
 `
 
 const StrikeThrough = styled.div`

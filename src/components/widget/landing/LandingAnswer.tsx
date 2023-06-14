@@ -22,7 +22,7 @@ import { commonOpacityYAni } from 'styles/ani'
 const LandingAnswer = () => {
   const windowSize = useWindowSize()
   const settings = {
-    centerMode: false,
+    centerMode: mediaQuery(windowSize.width) !== 'desktop',
     dots: false,
     infinite: true,
     speed: 500,
