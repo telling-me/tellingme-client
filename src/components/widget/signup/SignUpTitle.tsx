@@ -16,7 +16,6 @@ import useChangeColor from 'hooks/useChangeColor'
 
 // assets
 import Icons from 'assets/icons'
-import { requestPermission } from 'firebase-messaging-sw'
 
 const SignUpTitle = ({
   step,
@@ -76,7 +75,6 @@ const SignUpTitle = ({
                   if (step === 1) {
                     handleCheckNickname()
                   } else if (step === 6) {
-                    requestPermission(setPushToken)
                     handleNextStep()
                   } else {
                     handleNextStep()

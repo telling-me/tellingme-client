@@ -9,7 +9,6 @@ import { Button } from 'components'
 
 // assets
 import Icons from 'assets/icons'
-import { requestPermission } from 'firebase-messaging-sw'
 
 interface ISignUpHeader {
   step: number
@@ -33,10 +32,6 @@ const SignUpHeader = ({ step, windowSize, handleSkip, setPushToken }: ISignUpHea
           _margin="0px 0px 0px auto"
           _onClick={() => {
             handleSkip()
-
-            if (step === 6) {
-              requestPermission(setPushToken)
-            }
           }}
         />
       )}
