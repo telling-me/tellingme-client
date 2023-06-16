@@ -3,26 +3,45 @@ import { ToolTipComponent, ToolTipTextWrapper, ToolTipWrapper } from './style'
 import type { IToolTip } from './type'
 import style from 'styles/styled-components/styled'
 import Icon from 'assets/icons'
+import { useTheme } from 'styled-components'
 
-const ToolTip = ({ tooltipType, tooltipText, children }: IToolTip) => {
+const ToolTip = ({ tooltipType, tooltipText, children, childrenWidth, isError = true, _margin }: IToolTip) => {
+  const theme = useTheme()
+
+  const textArr = tooltipText.split('|')
+
   return (
-    <ToolTipComponent>
+    <ToolTipComponent _margin={_margin}>
       {children}
 
-      <ToolTipWrapper tooltipType={tooltipType}>
-        {['topLeft', 'topRight'].includes(tooltipType) && <Icon.ToolTipTriangle transform="rotate(180)" />}
+      <ToolTipWrapper tooltipType={tooltipType} childrenWidth={childrenWidth} _margin={_margin}>
+        {['topLeft', 'topRight'].includes(tooltipType) && (
+          <Icon.ToolTipTriangle
+            transform="rotate(180)"
+            fill={isError ? theme.colors.error.error400 : theme.colors.side.side500}
+          />
+        )}
         {tooltipType === 'left' && <Icon.ToolTipTriangle2 />}
 
-        <ToolTipTextWrapper>
-          <style.TextSpan textColor="gray0" typo="c">
-            {tooltipText}
-          </style.TextSpan>
+        <ToolTipTextWrapper isError={isError}>
+          {textArr.map((text, i) => {
+            return (
+              <style.TextP key={i} textColor={isError ? 'gray0' : 'side100'} typo="c">
+                {text}
+              </style.TextP>
+            )
+          })}
         </ToolTipTextWrapper>
 
         {['bottom', 'bottomLeft', 'bottomRight'].includes(tooltipType) && (
           <Icon.ToolTipTriangle transform="rotate(360)" />
         )}
-        {tooltipType === 'right' && <Icon.ToolTipTriangle2 transform="rotate(180)" />}
+        {tooltipType === 'right' && (
+          <Icon.ToolTipTriangle2
+            transform="rotate(180)"
+            fill={isError ? theme.colors.error.error400 : theme.colors.side.side500}
+          />
+        )}
       </ToolTipWrapper>
     </ToolTipComponent>
   )

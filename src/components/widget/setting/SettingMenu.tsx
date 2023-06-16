@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 
 // component
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Toggle } from 'components'
+import { Toggle, ToolTip } from 'components'
 
 import SettingMenuList from './SettingMenuList'
 import ServiceInfo from './ServiceInfo'
@@ -14,6 +14,9 @@ import ServiceInfo from './ServiceInfo'
 // hooks
 import { useGetUserNotiQuery } from 'hooks/queries/userInfo'
 import { useLogoutMutation, usePostUserNotiQuery } from 'hooks/mutations/user'
+
+// assets
+import Icons from 'assets/icons'
 
 interface ISettingMenu {
   setPageNumber: Dispatch<SetStateAction<number>>
@@ -29,6 +32,8 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   const { mutate: logout } = useLogoutMutation()
   const { mutate: postUserNoti } = usePostUserNotiQuery()
 
+  const theme = useTheme()
+
   useEffect(() => {
     if (resNoti != null) {
       setUserNoti(resNoti.data.allowNotification)
@@ -41,6 +46,16 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
         <style.TextP typo="b1" textColor="gray8">
           푸시 알림 받기
         </style.TextP>
+
+        <ToolTip
+          tooltipType="topLeft"
+          tooltipText="알림이 오지 않는다면 크롬 사이트|설정에서 알림을 허용해주세요"
+          childrenWidth={20}
+          isError={false}
+          _margin="0 0 0 4px"
+        >
+          <Icons.Info width="20" height="20" stroke={theme.colors.gray.gray6} />
+        </ToolTip>
 
         <Toggle
           value={userNoti}

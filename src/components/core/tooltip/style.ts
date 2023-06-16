@@ -1,12 +1,14 @@
 import styled, { css } from 'styled-components'
 import type { ToolTipType } from './type'
 
-export const ToolTipComponent = styled.div`
+export const ToolTipComponent = styled.div<{ _margin?: string }>`
   position: relative;
   display: inline-block;
+
+  ${({ _margin }) => _margin != null && `margin: ${_margin};`};
 `
 
-export const ToolTipWrapper = styled.div<{ tooltipType: ToolTipType }>`
+export const ToolTipWrapper = styled.div<{ tooltipType: ToolTipType; childrenWidth: number; _margin?: string }>`
   visibility: hidden;
 
   display: flex;
@@ -14,7 +16,9 @@ export const ToolTipWrapper = styled.div<{ tooltipType: ToolTipType }>`
   position: absolute;
   z-index: 1;
 
-  ${({ tooltipType }) =>
+  width: max-content;
+
+  ${({ tooltipType, childrenWidth }) =>
     tooltipType === 'right'
       ? css`
           left: 0;
@@ -54,7 +58,7 @@ export const ToolTipWrapper = styled.div<{ tooltipType: ToolTipType }>`
       ? css`
           top: 100%;
           left: 50%;
-          transform: translate(-25%, 0);
+          transform: translate(calc(-13px - ${childrenWidth / 2}px), 0);
 
           flex-direction: column;
           align-items: flex-start;
@@ -67,7 +71,7 @@ export const ToolTipWrapper = styled.div<{ tooltipType: ToolTipType }>`
       ? css`
           top: 100%;
           right: 50%;
-          transform: translate(25%, 0);
+          transform: translate(calc(13px + ${childrenWidth / 2}px), 0);
 
           flex-direction: column;
           align-items: flex-end;
@@ -80,7 +84,7 @@ export const ToolTipWrapper = styled.div<{ tooltipType: ToolTipType }>`
       ? css`
           bottom: 100%;
           left: 50%;
-          transform: translate(-25%, 0);
+          transform: translate(calc(-13px - ${childrenWidth / 2}px), 0);
 
           flex-direction: column;
           align-items: flex-start;
@@ -93,7 +97,7 @@ export const ToolTipWrapper = styled.div<{ tooltipType: ToolTipType }>`
         css`
           bottom: 100%;
           right: 50%;
-          transform: translate(25%, 0);
+          transform: translate(calc(13px + ${childrenWidth / 2}px), 0);
 
           flex-direction: column;
           align-items: flex-end;
@@ -113,10 +117,18 @@ export const ToolTipWrapper = styled.div<{ tooltipType: ToolTipType }>`
   }
 `
 
-export const ToolTipTextWrapper = styled.div`
-  background-color: ${(props) => props.theme.colors.error.error300};
+export const ToolTipTextWrapper = styled.div<{ isError: boolean }>`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  background-color: ${({ isError, theme }) => (isError ? theme.colors.error.error400 : theme.colors.side.side500)};
   border-radius: 8px;
 
-  text-align: center;
   padding: 10px 12px;
+
+  p {
+    height: fit-content !important;
+    white-space: pre-line;
+  }
 `
