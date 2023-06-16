@@ -6,7 +6,7 @@ import { setCookie } from 'utils/cookies'
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-    .register('/firebase-messaging-sw.js')
+    .register('/firebase-messaging-sw.js', { scope: '/' })
     .then(function (registration) {
       console.log('Registration successful, scope is:', registration.scope)
     })
