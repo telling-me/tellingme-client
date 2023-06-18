@@ -5,7 +5,7 @@ export enum PAGE_URL {
   Login_Apple = 'login/apple',
   Kakao = '/oauth/kakao',
   Apple = '/oauth/apple',
-  CheckToken = '/oauth/checktoken',
+  CheckPushToken = '/oauth/checktoken',
 
   // App
   App = 'app',

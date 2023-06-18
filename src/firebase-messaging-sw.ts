@@ -15,15 +15,14 @@ firebase.initializeApp(firebaseConfig)
 
 const messaging = firebase.messaging()
 
-export function requestPermission() {
+export function requestPermission(setPushToken: React.Dispatch<React.SetStateAction<string | undefined>>) {
   void Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
       messaging
         .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
         .then((token: string) => {
           if (token.length > 0) {
-            console.log('푸시 토큰 받아옴')
-            console.log(`---> ${token}`)
+            setPushToken(token)
           } else {
             console.log('푸시 토큰이 유효하지 않음')
           }
@@ -33,7 +32,7 @@ export function requestPermission() {
           console.log(`---> `, err)
         })
     } else if (permission === 'denied') {
-      console.log('푸시 DENIED')
+      setPushToken('denied')
     }
   })
 }
