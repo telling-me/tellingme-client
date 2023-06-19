@@ -34,7 +34,7 @@ const SettingContentHeader = ({ pageNumber, setIsMenu, _disabled, _onClick }: IS
           _margin="0 0 0 -4px"
           _onClick={() => {
             if (setIsMenu != null) {
-              window.location.replace('/app/setting')
+              setIsMenu(true)
             }
           }}
         >

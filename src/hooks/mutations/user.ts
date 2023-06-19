@@ -1,7 +1,7 @@
 import { apis } from 'apis/apis'
 import type { IUserInfoDto } from 'apis/userApi'
 import useDeleteToken from 'hooks/useDeleteToken'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { type IError } from 'type/db'
 import { useFilterling } from '..'
 
@@ -87,8 +87,12 @@ export const useUnsubscribeNewsLetterMutation = <T>(option?: T) => {
 }
 
 export const usePostUserNotiQuery = <T>(option?: T) => {
+  const queryClient = useQueryClient()
+
   return useMutation(async () => await apis.postUserNoti(), {
-    onSuccess() {},
+    onSuccess: async () => {
+      await queryClient.invalidateQueries('getUserNoti')
+    },
     onError: (err) => {
       console.log(err)
     },
