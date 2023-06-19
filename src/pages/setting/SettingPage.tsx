@@ -16,40 +16,28 @@ const SettingPage = () => {
   const windowWidth = useWindowSize().width
 
   return (
-    <>
+    <SettingWrapper>
+      {(windowWidth > 767 || isMenu) && <SettingHeader />}
+
       {windowWidth > 767 ? (
-        <SettingWrapper>
-          <SettingHeader />
-
-          <SettingMain>
-            <SettingMenu setPageNumber={setPageNumber} />
-            <SettingContent pageNumber={pageNumber} />
-          </SettingMain>
-
-          <Footer />
-        </SettingWrapper>
+        <SettingMain>
+          <SettingMenu setPageNumber={setPageNumber} />
+          <SettingContent pageNumber={pageNumber} />
+        </SettingMain>
       ) : isMenu ? (
-        <SettingWrapper>
-          <SettingHeader />
-
-          <SettingMain isMenu={isMenu}>
-            <SettingMenu setPageNumber={setPageNumber} setIsMenu={setIsMenu} />
-          </SettingMain>
-
-          <Footer />
-        </SettingWrapper>
+        <SettingMain isMenu={isMenu}>
+          <SettingMenu setPageNumber={setPageNumber} setIsMenu={setIsMenu} />
+        </SettingMain>
       ) : (
         !isMenu && (
-          <SettingWrapper>
-            <SettingMain>
-              <SettingContent pageNumber={pageNumber} setIsMenu={setIsMenu} />
-            </SettingMain>
-
-            <Footer />
-          </SettingWrapper>
+          <SettingMain>
+            <SettingContent pageNumber={pageNumber} setIsMenu={setIsMenu} />
+          </SettingMain>
         )
       )}
-    </>
+
+      <Footer />
+    </SettingWrapper>
   )
 }
 
