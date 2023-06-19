@@ -8,6 +8,7 @@ import SettingMenu from 'components/widget/setting/SettingMenu'
 
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
+import { Footer } from 'components/widget'
 
 const SettingPage = () => {
   const [isMenu, setIsMenu] = useState(true)
@@ -24,6 +25,8 @@ const SettingPage = () => {
             <SettingMenu setPageNumber={setPageNumber} />
             <SettingContent pageNumber={pageNumber} />
           </SettingMain>
+
+          <Footer />
         </SettingWrapper>
       ) : isMenu ? (
         <SettingWrapper>
@@ -32,6 +35,8 @@ const SettingPage = () => {
           <SettingMain isMenu={isMenu}>
             <SettingMenu setPageNumber={setPageNumber} setIsMenu={setIsMenu} />
           </SettingMain>
+
+          <Footer />
         </SettingWrapper>
       ) : (
         !isMenu && (
@@ -39,6 +44,8 @@ const SettingPage = () => {
             <SettingMain>
               <SettingContent pageNumber={pageNumber} setIsMenu={setIsMenu} />
             </SettingMain>
+
+            <Footer />
           </SettingWrapper>
         )
       )}
@@ -50,9 +57,15 @@ const SettingWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.side.side100};
 
   width: 100%;
+  height: 100vh;
 
   @media all and (max-width: 767px) {
     position: relative;
+  }
+
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0;
   }
 `
 
