@@ -63,7 +63,9 @@ const EmotionModal = () => {
             buttonType="tertiary"
             _width="135px"
             _height="55px"
+            textSize="h6"
             text="취소"
+            textColor="logo"
             _onClick={() => {
               if (answer.code === 'NOT_FOUND_ANSWER') navigate(backUrl)
               setIsEmotionModal(false)
@@ -73,7 +75,9 @@ const EmotionModal = () => {
             buttonType="secondary"
             _width="135px"
             _height="55px"
+            textSize="h6"
             text="확인"
+            textColor={emotion === null ? 'gray4' : 'logo'}
             _onClick={() => {
               setIsEmotionModal(false)
             }}

@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 // hooks
 import { useAppleQueries, useSaveToken } from 'hooks'
+import style from 'styles/styled-components/styled'
+import { Loading } from 'components'
 
 const AppleLayout = () => {
   const [idToken] = useState<string>(useLocation().hash.split('#code=')[1].split('&id_token=')[1])
@@ -28,7 +30,13 @@ const AppleLayout = () => {
     }
   } catch (err: unknown) {}
 
-  return <>{idToken}</>
+  return (
+    <Grid _width="100%" _height="100vh" flex="center">
+      <Loading />
+    </Grid>
+  )
 }
+
+const { Grid } = style
 
 export default AppleLayout

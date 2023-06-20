@@ -22,7 +22,7 @@ const TabBar = () => {
   const { setPrevPage, setCurrPage } = useCommonStore()
 
   useEffect(() => {
-    setPrevPage(location.pathname.includes('allanswer') ? -1 : location.pathname.includes('main') ? 0 : 1)
+    setPrevPage(location.pathname.includes('allanswer') ? 1 : location.pathname.includes('main') ? 0 : -1)
   }, [location])
 
   // 질문 작성 시 TabBar 노출 여부
@@ -36,9 +36,9 @@ const TabBar = () => {
     <TabBarWrapper size={window.innerWidth}>
       {/* Desktop 버전에만 필요 */}
       <TabButtonWrapper>
-        <Link to="/app/allanswer">
+        <Link to="/app/myanswer">
           <TabButton
-            color={location.pathname.includes('allanswer') ? 'logo' : 'noFilled'}
+            color={location.pathname.includes('myanswer') ? 'logo' : 'noFilled'}
             onClick={() => {
               setCurrPage(-1)
             }}
@@ -52,9 +52,9 @@ const TabBar = () => {
             }}
           />
         </Link>
-        <Link to="/app/myanswer">
+        <Link to="/app/allanswer">
           <TabButton
-            color={location.pathname.includes('myanswer') ? 'logo' : 'noFilled'}
+            color={location.pathname.includes('allanswer') ? 'logo' : 'noFilled'}
             onClick={() => {
               setCurrPage(1)
             }}
@@ -65,19 +65,19 @@ const TabBar = () => {
         <TabWrapperLi>
           <ul>
             <TabWrapper>
-              <Link to="/app/allanswer">
+              <Link to="/app/myanswer">
                 <IconButton
-                  buttonType={location.pathname.includes('allanswer') ? 'logo' : 'noFilled'}
+                  buttonType={location.pathname.includes('myanswer') ? 'logo' : 'noFilled'}
                   _width="41px"
                   _height="41px"
                   _onClick={() => {
                     setCurrPage(-1)
                   }}
                 >
-                  <Icons.AllAnswer
+                  <Icons.MyAnswer
                     width="24"
                     height="24"
-                    stroke={useChangeColor(location.pathname.includes('allanswer') ? 'side100' : 'gray3')}
+                    stroke={useChangeColor(location.pathname.includes('myanswer') ? 'side100' : 'gray3')}
                   />
                 </IconButton>
               </Link>
@@ -105,19 +105,19 @@ const TabBar = () => {
           </ul>
           <ul>
             <TabWrapper>
-              <Link to="/app/myanswer">
+              <Link to="/app/allanswer">
                 <IconButton
-                  buttonType={location.pathname.includes('myanswer') ? 'logo' : 'noFilled'}
+                  buttonType={location.pathname.includes('allanswer') ? 'logo' : 'noFilled'}
                   _width="41px"
                   _height="41px"
                   _onClick={() => {
                     setCurrPage(1)
                   }}
                 >
-                  <Icons.MyAnswer
+                  <Icons.AllAnswer
                     width="24"
                     height="24"
-                    stroke={useChangeColor(location.pathname.includes('myanswer') ? 'side100' : 'gray3')}
+                    stroke={useChangeColor(location.pathname.includes('allanswer') ? 'side100' : 'gray3')}
                   />
                 </IconButton>
               </Link>

@@ -44,7 +44,7 @@ const LandingHeader = () => {
 const HeaderContainer = styled.header<{ background: boolean }>`
   z-index: 9000;
   width: 100%;
-  position: sticky;
+  position: absolute;
   top: 0;
   ${({ background, theme }) =>
     background ? `background-color: ${theme.colors.side.side100};` : `background-color: transparent;`};

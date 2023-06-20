@@ -16,22 +16,22 @@ import { motion } from 'framer-motion'
 const LandingPage = () => {
   return (
     <>
+      <LandingHeader />
       <LandingWrapper>
-        <LandingHeader />
         <LandingBrand />
         <LandingInfo>
           <LandingQuestion />
           <LandingEmotion />
           <LandingAnswer />
           <LandingCatchPhrase />
+          <LandingFooter />
         </LandingInfo>
-        <LandingFooter />
       </LandingWrapper>
     </>
   )
 }
 
-const LandingWrapper = styled(motion.div)`
+const LandingWrapper = styled(motion.main)`
   position: relative;
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;

@@ -1,7 +1,10 @@
 import React from 'react'
-import { REDIRECT_URI, REST_API_KEY } from 'configs/kakao'
-import { useKakaoQueries, useSaveToken } from 'hooks/index'
 import { useNavigate } from 'react-router-dom'
+import style from 'styles/styled-components/styled'
+import { REDIRECT_URI, REST_API_KEY } from 'configs/kakao'
+
+import { useKakaoQueries, useSaveToken } from 'hooks'
+import { Loading } from 'components'
 
 const KakaoLayout = () => {
   const AUTHORIZATION_CODE: string = new URL(document.location.toString()).searchParams.get('code') as string
@@ -31,7 +34,13 @@ const KakaoLayout = () => {
     }
   } catch (err: unknown) {}
 
-  return <></>
+  return (
+    <Grid _width="100%" _height="100vh" flex="center">
+      <Loading />
+    </Grid>
+  )
 }
+
+const { Grid } = style
 
 export default KakaoLayout
