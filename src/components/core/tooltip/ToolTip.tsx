@@ -5,7 +5,14 @@ import style from 'styles/styled-components/styled'
 import Icon from 'assets/icons'
 import { useTheme } from 'styled-components'
 
-const ToolTip = ({ tooltipType, tooltipText, children, childrenWidth, isError = true, _margin }: IToolTip) => {
+const ToolTip = ({
+  tooltipType = 'topLeft',
+  tooltipText,
+  children,
+  childrenWidth = 20,
+  isError = true,
+  _margin
+}: IToolTip) => {
   const theme = useTheme()
 
   const textArr = tooltipText.split('|')

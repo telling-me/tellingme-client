@@ -48,9 +48,7 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
         </style.TextP>
 
         <ToolTip
-          tooltipType="topLeft"
           tooltipText="알림이 오지 않는다면 크롬 사이트|설정에서 알림을 허용해주세요"
-          childrenWidth={20}
           isError={false}
           _margin="0 0 0 4px"
         >
