@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
-// component
+// components
+import { ToolTip } from 'components'
+
+// styles
 import style from 'styles/styled-components/styled'
-import Icons from 'assets/icons'
 import { InputComponent, InputInnerFrame, InputOuterFrame2 } from './style'
 
 // type
@@ -10,6 +12,9 @@ import type { IInput } from './type'
 
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
+
+// assets
+import Icons from 'assets/icons'
 
 const Input = ({
   _placeholder,
@@ -63,12 +68,14 @@ const Input = ({
         />
 
         {isError ? (
-          <Icons.Warning
-            width="24"
-            height="24"
-            stroke={useChangeColor('error400')}
-            style={{ margin: '0 30px 0 auto' }}
-          />
+          <ToolTip
+            tooltipType={'topRight'}
+            tooltipText={errorText as string}
+            childrenWidth={24}
+            _margin="0 30px 0 auto"
+          >
+            <Icons.Warning width="24" height="24" stroke={useChangeColor('error400')} />
+          </ToolTip>
         ) : (
           <Icons.XCircle
             width="24"

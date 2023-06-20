@@ -91,10 +91,10 @@ const NewsLetterPage = () => {
         <Icons.Logo width="103" height="43" fill={Theme.colors.logo} />
 
         <style.TextSpan typo="h3_b" textColor="gray7" _margin="28px 0px 24px 0px">
-          서비스 출시 알림 신청하기
+          텔링미 소식 구독 신청하기
         </style.TextSpan>
         <style.TextSpan typo="b1" textColor="gray8">
-          서비스가 출시되면 가장 먼저 알려드릴게요!
+          텔링미의 새로운 이야기를 하나씩 풀어드릴게요!
         </style.TextSpan>
       </NewsLetterHeader>
 

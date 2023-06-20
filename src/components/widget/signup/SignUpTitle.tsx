@@ -8,11 +8,8 @@ import { stepTextData } from 'data/user'
 
 // components
 import style from 'styles/styled-components/styled'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { IconButton } from 'components'
-
-// hooks
-import useChangeColor from 'hooks/useChangeColor'
 
 // assets
 import Icons from 'assets/icons'
@@ -25,6 +22,8 @@ const SignUpTitle = ({
   canMove,
   handleCheckNickname
 }: ISignUpTitleAndBottomButton) => {
+  const theme = useTheme()
+
   return (
     <>
       {step !== 7 &&
@@ -57,7 +56,11 @@ const SignUpTitle = ({
                 _disabled={step === 0}
                 _onClick={handlePrevStep}
               >
-                <Icons.ArrowLeft width="24" height="24" stroke={useChangeColor('logo')} />
+                <Icons.ArrowLeft
+                  width="24"
+                  height="24"
+                  stroke={step === 0 ? theme.colors.gray.gray4 : theme.colors.logo}
+                />
               </IconButton>
 
               <style.TextSpan typo="h4" textColor="black">
@@ -78,7 +81,11 @@ const SignUpTitle = ({
                   }
                 }}
               >
-                <Icons.ArrowRight width="24" height="24" stroke={useChangeColor('logo')} />
+                <Icons.ArrowRight
+                  width="24"
+                  height="24"
+                  stroke={canMove() ? theme.colors.gray.gray4 : theme.colors.logo}
+                />
               </IconButton>
             </WebMoveButtonWrapper>
           )

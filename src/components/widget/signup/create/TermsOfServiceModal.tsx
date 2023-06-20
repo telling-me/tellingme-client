@@ -53,7 +53,13 @@ const TermsOfServiceModal = ({ title, content, setOpen, _checked, setChecked }: 
         label="네, 동의할게요."
         checkSize="small"
         _checked={_checked}
-        setChecked={setChecked}
+        customChange={() => {
+          setChecked(!_checked)
+
+          if (!_checked) {
+            setOpen(false)
+          }
+        }}
         isBackground={false}
         _margin="12px 0 0 0"
         _padding="0"

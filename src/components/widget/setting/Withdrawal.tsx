@@ -113,9 +113,11 @@ const WithdrawalWrapper = styled.div`
 `
 
 const WithdrawalContent = styled.div`
+  ${({ theme }) => theme.common.flexCenter}
+
   width: 100%;
   margin-top: 20px;
-  padding: 16px;
+  padding: 16px 0;
   border-radius: 8px;
 
   background-color: ${({ theme }) => theme.colors.side.side200};
