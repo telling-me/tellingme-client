@@ -64,6 +64,7 @@ import { ReactComponent as Apple } from './Apple.svg'
 import { ReactComponent as Home } from './Home.svg'
 import { ReactComponent as MyAnswer } from './MyAnswer.svg'
 import { ReactComponent as AllAnswer } from './AllAnswer.svg'
+import { ReactComponent as Info } from './Info.svg'
 
 interface IIconIndex extends IStringKey {
   NotFound: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -130,6 +131,7 @@ interface IIconIndex extends IStringKey {
   Home: string | FunctionComponent<any> | ComponentClass<any, any>
   MyAnswer: string | FunctionComponent<any> | ComponentClass<any, any>
   AllAnswer: string | FunctionComponent<any> | ComponentClass<any, any>
+  Info: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
@@ -196,7 +198,8 @@ const Icon: IIconIndex = {
   Apple,
   Home,
   MyAnswer,
-  AllAnswer
+  AllAnswer,
+  Info
 }
 
 export default Icon

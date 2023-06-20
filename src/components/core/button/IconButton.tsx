@@ -57,6 +57,8 @@ const IconButtonComponent = styled.button<{ buttonType: ButtonType; _width: stri
       &:disabled {
         background-color: ${(props) => props.theme.colors.gray.gray2};
         box-shadow: none;
+
+        cursor: default;
       }
     `}
 
@@ -77,6 +79,8 @@ const IconButtonComponent = styled.button<{ buttonType: ButtonType; _width: stri
       &:disabled {
         background-color: ${(props) => props.theme.colors.gray.gray1};
         box-shadow: none;
+
+        cursor: default;
       }
     `}
 
@@ -97,6 +101,8 @@ const IconButtonComponent = styled.button<{ buttonType: ButtonType; _width: stri
       &:disabled {
         background-color: ${(props) => props.theme.colors.gray.gray1};
         box-shadow: none;
+
+        cursor: default;
       }
     `}
 
@@ -117,6 +123,8 @@ const IconButtonComponent = styled.button<{ buttonType: ButtonType; _width: stri
       &:disabled {
         background-color: ${(props) => props.theme.colors.secondary.secondary25};
         box-shadow: none;
+
+        cursor: default;
       }
     `}
 

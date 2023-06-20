@@ -7,7 +7,7 @@ import {
   LandingEmotion,
   LandingAnswer,
   LandingCatchPhrase,
-  LandingFooter,
+  Footer,
   LandingHeader
 } from 'components'
 import styled from 'styled-components'
@@ -18,14 +18,17 @@ const LandingPage = () => {
     <>
       <LandingWrapper>
         <LandingHeader />
+
         <LandingBrand />
+
         <LandingInfo>
           <LandingQuestion />
           <LandingEmotion />
           <LandingAnswer />
           <LandingCatchPhrase />
         </LandingInfo>
-        <LandingFooter />
+
+        <Footer />
       </LandingWrapper>
     </>
   )

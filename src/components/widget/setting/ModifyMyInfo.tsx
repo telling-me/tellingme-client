@@ -42,7 +42,7 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   const [open, setOpen] = useState(false)
 
   const res = useGetUserInfoQuery().data
-  const { mutate: patchUserInfo } = usePatchUserInfoMutation()
+  const { mutate: patchUserInfo } = usePatchUserInfoMutation(setOpen)
   const { mutate: checkNickname } = useCheckNicknameMutation(nickname, setIsError, setErrorText, () => {
     setOpen(true)
   })

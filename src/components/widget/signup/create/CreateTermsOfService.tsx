@@ -34,9 +34,16 @@ const CreateTermsOfService = ({ isAgree, setIsAgree }: ICreateTermsOfService) =>
     }
   }, [agreeTermsOfService, agreePrivacyPolicy])
 
+  useEffect(() => {
+    if (isAgree) {
+      setAgreePrivacyPolicy(true)
+      setAgreeTermsOfService(true)
+    }
+  }, [])
+
   return (
     <CreateTermsOfServiceWrapper>
-      <CheckBox label="네! 모두 동의할게요" _checked={isAgree} customChange={allAgreeChange} _maxWidth="425px" />
+      <CheckBox label="모두 동의할게요" _checked={isAgree} customChange={allAgreeChange} _maxWidth="425px" />
 
       <CheckBox
         label="(필수) 서비스 이용약관 동의"
