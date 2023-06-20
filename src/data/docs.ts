@@ -319,8 +319,35 @@ export const PRIVACY_POLICY_DOCS: Array<{ _typo: TextSizeType; _margin: string; 
 ]
 
 // 세팅
-export const SETTING_WITHDRAWAL_DOCS = `💡 알고 계셨나요?
-  내가 쓴 답변은 탈퇴하지 않아도 수정 및 삭제가 가능해요.
-
-⛔ 계정을 삭제하면
-  내가 쓴 소중한 모든 답변 기록들이 영구적으로 사라져요.`
+export const SETTING_WITHDRAWAL_DOCS: Array<{ _typo: TextSizeType; _margin?: string; content: string }> = [
+  {
+    _typo: 'b2_b',
+    _margin: '0 auto 8px 0',
+    content: `💡 알고 계셨나요?`
+  },
+  {
+    _typo: 'b2',
+    _margin: '0 auto 4px 18px',
+    content: `내가 쓴 답변은 탈퇴하지 않아도 수정 및 삭제가`
+  },
+  {
+    _typo: 'b2',
+    _margin: '0 auto 12px 18px',
+    content: `가능해요.`
+  },
+  {
+    _typo: 'b2_b',
+    _margin: '0 auto 8px 0',
+    content: `⛔ 계정을 삭제하면:`
+  },
+  {
+    _typo: 'b2',
+    _margin: '0 auto 2px 18px',
+    content: `내가 쓴 소중한 모든 답변 기록들이 영구적으로`
+  },
+  {
+    _typo: 'b2',
+    _margin: '0 auto 0 18px',
+    content: `사라져요.`
+  }
+]

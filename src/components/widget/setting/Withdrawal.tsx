@@ -36,9 +36,13 @@ const Withdrawal = () => {
       </style.TextP>
 
       <WithdrawalContent>
-        <style.TextP typo="c" textColor="black">
-          {SETTING_WITHDRAWAL_DOCS}
-        </style.TextP>
+        {SETTING_WITHDRAWAL_DOCS.map((v, i) => {
+          return (
+            <style.TextP key={i} typo={v._typo} textColor="black" _margin={v._margin}>
+              {v.content}
+            </style.TextP>
+          )
+        })}
       </WithdrawalContent>
 
       <CheckWrapper>
@@ -114,13 +118,20 @@ const WithdrawalWrapper = styled.div`
 
 const WithdrawalContent = styled.div`
   ${({ theme }) => theme.common.flexCenter}
+  flex-direction: column;
 
   width: 100%;
   margin-top: 20px;
-  padding: 16px 0;
   border-radius: 8px;
 
   background-color: ${({ theme }) => theme.colors.side.side200};
+
+  @media all and (min-width: 768px) {
+    padding: 16px 66px;  
+  }
+
+  @media all and (max-width: 767px) {
+    padding: 16px;
 `
 
 const CheckWrapper = styled.div`
