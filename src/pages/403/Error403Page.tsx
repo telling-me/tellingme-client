@@ -1,56 +1,55 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
 
 // components
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Button } from 'components'
+import { Button, LoginModal } from 'components'
 
 // assets
 import Icon from 'assets/icons'
 
 const ErrorPage = () => {
-  const navigate = useNavigate()
+  const [open, setOpen] = useState(false)
 
   return (
-    <NoneDataWrapper flex="center" direction="column" _gap="8px">
-      <Icon.NotFound width={140} />
+    <>
+      <NoneDataWrapper flex="center" direction="column" _gap="8px">
+        <Icon.NotFound width={140} />
 
-      <Grid flex="center" direction="column">
-        <TextP typo="h2" textColor="logo" _margin="8px 0 20px">
-          403
-        </TextP>
-
-        <TextP typo="h6_b" textColor="gray8" _margin="0 0 12px 0">
-          원하시는 페이지를 찾을 수 없어요.
-        </TextP>
-
-        <TextP typo="b2" textColor="gray8">
-          주소를 다시 한번 확인 해주세요.
-        </TextP>
-
-        <Grid flex="center" wrap="wrap">
-          <TextP typo="b2" textColor="gray8" _margin="8px 0">
-            방문하시려는 페이지가 잘못 입력되었거나,&nbsp;
+        <Grid flex="center" direction="column">
+          <TextP typo="h2" textColor="logo" _margin="8px 0 20px">
+            403
           </TextP>
-          <TextP typo="b2" textColor="gray8">
-            변경 또는 삭제되어 이용하실 수 없습니다.
+
+          <TextP typo="h6_b" textColor="gray8" _margin="0 0 12px 0">
+            접속 오류가 발생했어요.
           </TextP>
+
+          <Grid flex="center" direction="column" wrap="wrap">
+            <TextP typo="b2" textColor="gray8" _margin="8px 0">
+              오류가 생겨서 페이지 접속이 어려워요.&nbsp;
+            </TextP>
+            <TextP typo="b2" textColor="gray8">
+              다시 로그인해주세요.
+            </TextP>
+          </Grid>
+
+          <Button
+            buttonType="secondary"
+            text="로그인 할게요"
+            _margin="24px 0 0 0"
+            _padding="18px 32px"
+            textSize="h6"
+            textColor="logo"
+            _onClick={() => {
+              setOpen(true)
+            }}
+          />
         </Grid>
+      </NoneDataWrapper>
 
-        <Button
-          buttonType="secondary"
-          text="홈으로 갈래요"
-          _margin="24px 0 0 0"
-          _padding="18px 32px"
-          textSize="h6"
-          textColor="logo"
-          _onClick={() => {
-            navigate('/app/main')
-          }}
-        />
-      </Grid>
-    </NoneDataWrapper>
+      {open && <LoginModal setOpen={setOpen} />}
+    </>
   )
 }
 const { Grid, TextP } = style
