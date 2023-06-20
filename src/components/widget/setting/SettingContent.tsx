@@ -27,7 +27,7 @@ const SettingContent = ({ pageNumber, setIsMenu }: ISettingContent) => {
       ) : pageNumber === 2 ? (
         <PrivacyPolicy />
       ) : (
-        pageNumber === 3 && <Withdrawal />
+        pageNumber === 4 && <Withdrawal />
       )}
     </SettingContentWrapper>
   )
