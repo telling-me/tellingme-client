@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components'
 import type { ToolTipType } from './type'
 
 export const ToolTipComponent = styled.div<{ _margin?: string }>`
+  display: flex !important;
+
   position: relative;
   display: inline-block;
 

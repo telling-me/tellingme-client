@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 
 // component
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 import { Toggle, ToolTip } from 'components'
 
@@ -32,8 +32,6 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   const { mutate: logout } = useLogoutMutation()
   const { mutate: postUserNoti } = usePostUserNotiQuery()
 
-  const theme = useTheme()
-
   useEffect(() => {
     if (resNoti != null) {
       setUserNoti(resNoti.data.allowNotification)
@@ -52,7 +50,7 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
           isError={false}
           _margin="0 0 0 4px"
         >
-          <Icons.Info width="20" height="20" stroke={theme.colors.gray.gray6} />
+          <Icons.Info width="20" height="20" />
         </ToolTip>
 
         <Toggle
