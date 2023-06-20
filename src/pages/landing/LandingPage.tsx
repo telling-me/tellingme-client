@@ -7,7 +7,7 @@ import {
   LandingEmotion,
   LandingAnswer,
   LandingCatchPhrase,
-  Footer,
+  LandingFooter,
   LandingHeader
 } from 'components'
 import styled from 'styled-components'

@@ -25,7 +25,7 @@ const ToolTip = ({
         {['topLeft', 'topRight'].includes(tooltipType) && (
           <Icon.ToolTipTriangle
             transform="rotate(180)"
-            fill={isError ? theme.colors.error.error400 : theme.colors.side.side500}
+            fill={isError === true ? theme.colors.error.error400 : theme.colors.side.side500}
           />
         )}
         {tooltipType === 'left' && <Icon.ToolTipTriangle2 />}
@@ -33,7 +33,7 @@ const ToolTip = ({
         <ToolTipTextWrapper isError={isError}>
           {textArr.map((text, i) => {
             return (
-              <style.TextP key={i} textColor={isError ? 'gray0' : 'side100'} typo="c">
+              <style.TextP key={i} textColor={isError === true ? 'gray0' : 'side100'} typo="c">
                 {text}
               </style.TextP>
             )
@@ -46,7 +46,7 @@ const ToolTip = ({
         {tooltipType === 'right' && (
           <Icon.ToolTipTriangle2
             transform="rotate(180)"
-            fill={isError ? theme.colors.error.error400 : theme.colors.side.side500}
+            fill={isError === true ? theme.colors.error.error400 : theme.colors.side.side500}
           />
         )}
       </ToolTipWrapper>
