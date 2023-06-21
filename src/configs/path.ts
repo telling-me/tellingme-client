@@ -13,6 +13,7 @@ export enum PAGE_URL {
   AllAnswer = 'Allanswer',
   Setting = 'setting',
   Error500 = '500',
+  Error403 = '403',
   Dev = 'dev',
 
   // NewsLetter

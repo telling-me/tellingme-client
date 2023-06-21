@@ -85,7 +85,7 @@ const LandingBrand = () => {
 
 const { Grid, TextSpan } = style
 
-const LandingWrapper = styled(motion.div)`
+const LandingWrapper = styled(motion.section)`
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -325,7 +325,7 @@ const AbsoluteLogoSmall = styled(motion.div)<{ order: number }>`
 const BorderCircle = styled(motion.div)<{ zIndex: number; order: number }>`
   position: absolute;
   z-index: ${({ zIndex }) => zIndex};
-  border-radius: 100%;
+  border-radius: 50%;
 
   svg {
     stroke: ${({ theme }) => theme.colors.primary.primary400_main};

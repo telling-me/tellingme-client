@@ -1,4 +1,5 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow: /app/
-Sitemap: https://tellingme.vercel.app/sitemap.xml
+Disallow: /newsletter/
+Sitemap: https://tellingme.co.kr/sitemap.xml

@@ -156,6 +156,7 @@ const QuestionWriteModal = () => {
                           onClick={() => {
                             setDeleteModal(true)
                           }}
+                          style={{ textAlign: 'center' }}
                         >
                           <TextSpan typo="b2" textColor="black">
                             삭제
@@ -179,14 +180,14 @@ const QuestionWriteModal = () => {
             >
               <Grid flex="start" direction="column" _gap="10px">
                 <Grid flex="center" direction="column" _gap="4px">
-                  {question?.title?.split('\\n')?.map((line: string) => (
-                    <TextP key={line} typo="h6" textColor="logo" textAlign="center" wordBreak="keep-all">
+                  {question?.title?.split('\n')?.map((line: string) => (
+                    <TextP key={line} typo="b1_b" textColor="logo" textAlign="center" wordBreak="keep-all">
                       {line}
                     </TextP>
                   ))}
                 </Grid>
                 <Grid flex="center" direction="column" _gap="4px">
-                  {question?.phrase?.split('\\n')?.map((line: string) => (
+                  {question?.phrase?.split('\n')?.map((line: string) => (
                     <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
                       {line}
                     </TextP>
@@ -212,7 +213,7 @@ const QuestionWriteModal = () => {
             <FooterWrapper flex="start" direction="column">
               <Grid flex="end" _height="14px">
                 <TextP typo="c_b" textColor="gray6">
-                  {text?.replaceAll(' ', '')?.length} / {MAX_LENGTH}
+                  {text?.length} / {MAX_LENGTH}
                 </TextP>
               </Grid>
               {editable && (
@@ -223,8 +224,9 @@ const QuestionWriteModal = () => {
                     buttonType="noFilled"
                     text="완료"
                     _height="100%"
-                    textColor={text?.replaceAll(' ', '').length < MIN_LENGTH ? 'gray6' : 'logo'}
-                    _disabled={text?.replaceAll(' ', '').length < MIN_LENGTH}
+                    textColor={text?.length < MIN_LENGTH ? 'gray6' : 'logo'}
+                    textSize="c_b"
+                    _disabled={text?.length < MIN_LENGTH}
                     _onClick={() => {
                       if (!alreadyAnswered) setSaveModal(true)
                       else setEditModal(true)
@@ -240,7 +242,7 @@ const QuestionWriteModal = () => {
 
       {/* modal */}
       {cancel && (
-        <Modal _width="100%" _maxWidth="325px" _height="174px" _borderRadius="20px" _padding="30px 20px 20px 20px">
+        <Modal _width="100%" _maxWidth="425px" _height="174px" _borderRadius="20px" _padding="30px 20px 20px 20px">
           <Grid flex="between" direction="column" _height="100%">
             <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
               <TextP typo="b1" textColor="black">
@@ -250,12 +252,13 @@ const QuestionWriteModal = () => {
                 작성한 답변은 초기화돼요
               </TextP>
             </Grid>
-            <Grid flex="between">
+            <Grid flex="center" _gap="15px">
               <Button
                 _width="135px"
                 _height="55px"
                 buttonType="tertiary"
                 textColor="logo"
+                textSize="h6"
                 text="아니오"
                 _onClick={() => {
                   setCancel(false)
@@ -266,6 +269,7 @@ const QuestionWriteModal = () => {
                 _height="55px"
                 buttonType="secondary"
                 textColor="logo"
+                textSize="h6"
                 text="나갈래요"
                 _onClick={() => {
                   navigate(backUrl)
@@ -277,19 +281,20 @@ const QuestionWriteModal = () => {
       )}
 
       {deleteModal && (
-        <Modal _width="100%" _maxWidth="325px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
+        <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
           <Grid flex="between" direction="column" _height="100%">
             <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
               <TextP typo="b1" textColor="black">
                 답변을 삭제할까요?
               </TextP>
             </Grid>
-            <Grid flex="between">
+            <Grid flex="center" _gap="15px">
               <Button
                 _width="135px"
                 _height="55px"
                 buttonType="tertiary"
                 textColor="logo"
+                textSize="h6"
                 text="취소"
                 _onClick={() => {
                   setDeleteModal(false)
@@ -300,6 +305,7 @@ const QuestionWriteModal = () => {
                 _height="55px"
                 buttonType="secondary"
                 textColor="logo"
+                textSize="h6"
                 text="삭제하기"
                 _onClick={() => {
                   deleteAnswerMutate(
@@ -321,7 +327,7 @@ const QuestionWriteModal = () => {
         </Modal>
       )}
       {saveModal && (
-        <Modal _width="100%" _maxWidth="325px" _height="174px" _borderRadius="20px" _padding="30px 20px 20px 20px">
+        <Modal _width="100%" _maxWidth="425px" _height="174px" _borderRadius="20px" _padding="30px 20px 20px 20px">
           <Grid flex="between" direction="column" _height="100%">
             <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
               <TextP typo="b1" textColor="black">
@@ -331,12 +337,13 @@ const QuestionWriteModal = () => {
                 글을 등록한 후에는 감정을 바꿀 수 없어요
               </TextP>
             </Grid>
-            <Grid flex="between">
+            <Grid flex="center" _gap="15px">
               <Button
                 _width="135px"
                 _height="55px"
                 buttonType="tertiary"
                 textColor="logo"
+                textSize="h6"
                 text="취소"
                 _onClick={() => {
                   setSaveModal(false)
@@ -347,6 +354,7 @@ const QuestionWriteModal = () => {
                 _height="55px"
                 buttonType="secondary"
                 textColor="logo"
+                textSize="h6"
                 text="저장하기"
                 _onClick={() => {
                   postAnswerMutate(
@@ -368,19 +376,20 @@ const QuestionWriteModal = () => {
         </Modal>
       )}
       {editModal && (
-        <Modal _width="100%" _maxWidth="325px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
+        <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
           <Grid flex="between" direction="column" _height="100%">
             <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
               <TextP typo="b1" textColor="black">
                 답변을 수정할까요?
               </TextP>
             </Grid>
-            <Grid flex="between">
+            <Grid flex="center" _gap="15px">
               <Button
                 _width="135px"
                 _height="55px"
                 buttonType="tertiary"
                 textColor="logo"
+                textSize="h6"
                 text="취소"
                 _onClick={() => {
                   setEditModal(false)
@@ -391,6 +400,7 @@ const QuestionWriteModal = () => {
                 _height="55px"
                 buttonType="secondary"
                 textColor="logo"
+                textSize="h6"
                 text="수정하기"
                 _onClick={() => {
                   editAnswerMutate(

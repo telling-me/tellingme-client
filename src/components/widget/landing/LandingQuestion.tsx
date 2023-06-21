@@ -76,7 +76,7 @@ const LandingQuestionInfo = () => {
             whileInView="ani"
             custom={1}
           >
-            <TextH1
+            <TextH2
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
                   ? 'h1'
@@ -87,14 +87,14 @@ const LandingQuestionInfo = () => {
               textColor="logo"
             >
               하루 한 번,
-            </TextH1>
+            </TextH2>
             <Grid
               flex="center"
               _gap="8px"
               wrap="wrap"
               direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
             >
-              <TextH1
+              <TextH2
                 typo={
                   mediaQuery(windowSize.width) === 'desktop'
                     ? 'h1'
@@ -105,8 +105,8 @@ const LandingQuestionInfo = () => {
                 textColor="logo"
               >
                 질문에 답변하며
-              </TextH1>
-              <TextH1
+              </TextH2>
+              <TextH2
                 typo={
                   mediaQuery(windowSize.width) === 'desktop'
                     ? 'h1_b'
@@ -117,7 +117,7 @@ const LandingQuestionInfo = () => {
                 textColor="logo"
               >
                 나를 깨닫는 시간
-              </TextH1>
+              </TextH2>
             </Grid>
           </Grid>
           <Grid
@@ -132,7 +132,7 @@ const LandingQuestionInfo = () => {
             whileInView="ani"
             custom={2}
           >
-            <TextH2
+            <TextH3
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
                   ? 'h2'
@@ -143,8 +143,8 @@ const LandingQuestionInfo = () => {
               textColor="gray8"
             >
               나를 되돌아보는 질문이
-            </TextH2>
-            <TextH2
+            </TextH3>
+            <TextH3
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
                   ? 'h2'
@@ -155,7 +155,7 @@ const LandingQuestionInfo = () => {
               textColor="gray8"
             >
               매일 오전 6시에 오픈돼요!
-            </TextH2>
+            </TextH3>
           </Grid>
         </Grid>
         <TimeChanger
@@ -254,7 +254,7 @@ const LandingQuestionInfo = () => {
 }
 export default LandingQuestionInfo
 
-const { Grid, TextH1, TextH2, TextP } = style
+const { Grid, TextH2, TextH3, TextP } = style
 
 const QuestionInfo = styled(motion.div)`
   ${({ theme }) => theme.common.flexCenter}

@@ -20,9 +20,9 @@ const Error500Page = () => {
         500
       </style.TextP>
 
-      <style.TextH1 typo="h6_b" textColor="gray8" _margin="20px 0 0 0">
+      <style.TextH2 typo="h6_b" textColor="gray8" _margin="20px 0 0 0">
         예상하지 못한 오류가 발생했어요!
-      </style.TextH1>
+      </style.TextH2>
 
       <style.TextP typo="b2" textColor="gray8" _margin="12px 0 0 0">
         현재 이 서비스가 정상적으로
