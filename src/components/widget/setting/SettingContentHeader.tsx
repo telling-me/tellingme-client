@@ -21,7 +21,7 @@ interface ISettingContentHeader {
 }
 
 const SettingContentHeader = ({ pageNumber, setIsMenu, _disabled, _onClick }: ISettingContentHeader) => {
-  const CONTENT_HEADERS = ['내 정보 수정하기', '이용 약관', '개인정보 처리방침', '회원 탈퇴']
+  const CONTENT_HEADERS = ['내 정보 수정하기', '이용 약관', '개인정보 처리방침', '', '회원 탈퇴']
   const windowWidth = useWindowSize().width
 
   return (
