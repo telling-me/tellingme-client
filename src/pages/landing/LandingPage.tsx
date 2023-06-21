@@ -7,7 +7,7 @@ import {
   LandingEmotion,
   LandingAnswer,
   LandingCatchPhrase,
-  Footer,
+  LandingFooter,
   LandingHeader
 } from 'components'
 import styled from 'styled-components'
@@ -16,9 +16,8 @@ import { motion } from 'framer-motion'
 const LandingPage = () => {
   return (
     <>
+      <LandingHeader />
       <LandingWrapper>
-        <LandingHeader />
-
         <LandingBrand />
 
         <LandingInfo>
@@ -26,15 +25,14 @@ const LandingPage = () => {
           <LandingEmotion />
           <LandingAnswer />
           <LandingCatchPhrase />
+          <LandingFooter />
         </LandingInfo>
-
-        <Footer />
       </LandingWrapper>
     </>
   )
 }
 
-const LandingWrapper = styled(motion.div)`
+const LandingWrapper = styled(motion.main)`
   position: relative;
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;

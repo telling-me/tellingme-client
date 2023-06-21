@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // components
 import Icon from 'assets/icons'
@@ -14,6 +15,7 @@ import { mediaQuery } from 'utils/mediaQuery'
 const LandingFooter = () => {
   const theme = useTheme()
   const windowSize = useWindowSize()
+  const navigate = useNavigate()
   return (
     <FooterWrapper>
       <FooterInnerWrapper flex="between" direction="column" _height="100%">
@@ -24,14 +26,35 @@ const LandingFooter = () => {
           _gap="24px"
         >
           <Icon.Logo width={69} fill={theme.colors.side.side500} />
-          <Grid flex={mediaQuery(windowSize.width) === 'mobile' ? 'start' : 'end'} _gap="20px">
-            <TextP typo="c_b" textColor="side500">
+          <Grid flex={mediaQuery(windowSize.width) === 'mobile' ? 'start' : 'end'} wrap="wrap" _gap="8px 20px">
+            <TextP
+              typo="c_b"
+              textColor="side500"
+              onClick={() => {
+                navigate('/newsletter')
+              }}
+            >
+              텔링미 소식 구독
+            </TextP>
+            <TextP
+              typo="c_b"
+              textColor="side500"
+              onClick={() => window.open(process.env.REACT_APP_TELLINGME_SERVICE_INTRODUCTION)}
+            >
               서비스 소개
             </TextP>
-            <TextP typo="c_b" textColor="side500">
+            <TextP
+              typo="c_b"
+              textColor="side500"
+              onClick={() => window.open(process.env.REACT_APP_TELLINGME_TERMS_OF_USE)}
+            >
               이용약관
             </TextP>
-            <TextP typo="c_b" textColor="side500">
+            <TextP
+              typo="c_b"
+              textColor="side500"
+              onClick={() => window.open(process.env.REACT_APP_TELLINGME_PRIVACY_POLICY)}
+            >
               개인정보처리방침
             </TextP>
           </Grid>
@@ -84,7 +107,7 @@ const FooterWrapper = styled.div`
   ${({ theme }) => theme.common.flexCenter}
 
   @media all and (max-width: 767px) {
-    height: 229px;
+    height: 247px;
     padding: 25px;
   }
 `

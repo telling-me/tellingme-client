@@ -40,7 +40,7 @@ const BorderCircle = styled(motion.div)`
     @media all and (min-width: 1200px) {
       animation: ${rotateAni} 24s linear infinite;
       circle {
-        stroke-dasharray: 10 30;
+        stroke-dasharray: 8 12;
       }
       width: 1200px;
       height: 1200px;
@@ -49,7 +49,7 @@ const BorderCircle = styled(motion.div)`
     @media all and (min-width: 1024px) and (max-width: 1199px) {
       animation: ${rotateAni} 20s linear infinite;
       circle {
-        stroke-dasharray: 10 40;
+        stroke-dasharray: 10 20;
       }
       width: 903px;
       height: 903px;
@@ -58,7 +58,7 @@ const BorderCircle = styled(motion.div)`
     @media all and (min-width: 768px) and (max-width: 1023px) {
       animation: ${rotateAni} 16s linear infinite;
       circle {
-        stroke-dasharray: 20 50;
+        stroke-dasharray: 20 40;
       }
       width: 648px;
       height: 648px;
@@ -67,7 +67,7 @@ const BorderCircle = styled(motion.div)`
     @media all and (max-width: 767px) {
       animation: ${rotateAni} 12s linear infinite;
       circle {
-        stroke-dasharray: 20 60;
+        stroke-dasharray: 20 30;
       }
       width: 408px;
       height: 408px;
@@ -86,8 +86,8 @@ const SmallLogoWrapper = styled(style.Grid)`
     :nth-child(1) {
       @media all and (min-width: 1200px) {
         width: 44px;
-        top: calc(50% + 420px);
-        right: calc(50% + 393px);
+        top: calc(50% + 290px);
+        right: calc(50% + 330px);
       }
 
       @media all and (min-width: 1024px) and (max-width: 1199px) {
@@ -104,8 +104,8 @@ const SmallLogoWrapper = styled(style.Grid)`
 
       @media all and (max-width: 767px) {
         width: 33px;
-        top: calc(50% + 157px);
-        right: calc(50% + 100px);
+        top: calc(50% + 137px);
+        right: calc(50% + 120px);
       }
     }
     :nth-child(2) {
@@ -130,7 +130,7 @@ const SmallLogoWrapper = styled(style.Grid)`
       @media all and (max-width: 767px) {
         width: 35px;
         top: calc(50% + 130px);
-        right: calc(50% - 115px);
+        right: calc(50% - 135px);
       }
     }
     :nth-child(3) {

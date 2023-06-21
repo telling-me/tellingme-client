@@ -28,7 +28,7 @@ API.interceptors.response.use(
   async function (error) {
     const errorDataStatus = error.response.status
     if (errorDataStatus === 403) {
-      location.href = '/'
+      location.href = '/app/403'
     }
     if (errorDataStatus === 500) {
       location.href = '/app/500'
