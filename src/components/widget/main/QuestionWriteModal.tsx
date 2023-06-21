@@ -102,6 +102,7 @@ const QuestionWriteModal = () => {
                 flex="center"
                 _width="44px"
                 _height="44px"
+                style={{ cursor: alreadyAnswered ? 'default' : 'pointer' }}
                 onClick={() => {
                   if (!alreadyAnswered) setIsEmotionModal(true)
                 }}

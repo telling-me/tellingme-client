@@ -10,7 +10,7 @@ export interface IMyAnswerModeButton extends IMyAnswerMode {
 export interface ITableCell {
   emotion: number
   question: string
-  date: string
+  date: string[]
 }
 
 export interface ITable {
