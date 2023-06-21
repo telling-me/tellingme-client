@@ -12,8 +12,10 @@ import EmotionIcon from '../main/EmotionIcon'
 
 const TableCell = ({ emotion, question, date }: ITableCell) => {
   const theme = useTheme()
+  const questionDate = new Date(Number(date[0]), Number(date[1]) - 1, Number(date[2]))
+
   return (
-    <Link to={`?date=${formatStringDate(new Date(date))}`}>
+    <Link to={`?date=${formatStringDate(new Date(questionDate))}`}>
       <CellOuterWrapper>
         <CellInnerWrapper>
           <EmotionWrapper>

@@ -12,7 +12,8 @@ export const LandingLayout = () => {
 
 const ParentWrapper = styled.div`
   width: 100%;
-  overflow: hidden;
+  height: 100%;
+  overflow: auto;
 `
 
 export default LandingLayout

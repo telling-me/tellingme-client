@@ -36,3 +36,8 @@ export interface IOnlyButton {
   _onClick: React.MouseEventHandler<HTMLButtonElement>
   children: React.ReactNode
 }
+
+export interface IFloatButton {
+  size?: 'lg' | 'sm'
+  ref?: React.RefObject<HTMLDivElement>
+}
