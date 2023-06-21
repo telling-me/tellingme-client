@@ -39,6 +39,7 @@ const LandingWrapper = styled(motion.main)`
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: auto;
 
   // TODO : Floating Button

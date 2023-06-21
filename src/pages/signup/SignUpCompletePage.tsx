@@ -67,6 +67,7 @@ const SignUpCompleteWrapper = styled.div`
 
   width: 100%;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   margin: 0 auto;
 
   @media all and (min-width: 1200px) {
@@ -94,6 +95,7 @@ const SignUpCompleteContent = styled.div`
 
   width: 100%;
   height: calc(100vh - 66px);
+  height: calc(var(--vh, 1vh) * 100 - 66px);
 `
 
 const SignUpCompleteButtonWrapper = styled.div`

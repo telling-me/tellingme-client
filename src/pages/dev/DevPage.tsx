@@ -31,6 +31,7 @@ const { Grid } = style
 
 const NoneDataWrapper = styled(Grid)`
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 `
 
 export default DevPage

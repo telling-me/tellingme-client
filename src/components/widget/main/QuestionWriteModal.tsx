@@ -431,6 +431,7 @@ const { Grid, TextP, TextSpan } = style
 const ModalWrapper = styled(Grid)`
   width: 100vw;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   z-index: 9000;
   background-color: ${({ theme }) => theme.colors.side.side100};
 `
@@ -464,11 +465,13 @@ const AnswerTextArea = styled.textarea`
   outline-color: ${({ theme }) => theme.colors.side.side100};
   background-color: inherit;
   line-height: 28px;
+  font-size: 15px;
 
   overflow-y: overlay;
 
   @media screen and (max-width: 767px) {
     line-height: 24px;
+    font-size: 14px;
   }
 `
 const FooterWrapper = styled(Grid)`
