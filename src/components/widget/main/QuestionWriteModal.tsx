@@ -207,7 +207,8 @@ const QuestionWriteModal = () => {
               value={text}
               maxLength={MAX_LENGTH}
               onChange={(e) => {
-                setText(e.target.value)
+                if (e.target.value?.length > MAX_LENGTH) setText(e.target.value.slice(0, MAX_LENGTH))
+                else setText(e.target.value)
               }}
               disabled={!editable}
             />

@@ -18,7 +18,8 @@ export const ButtonWrapper = styled.button<{ isSelected: boolean }>`
 
   &:hover {
     svg {
-      stroke: ${(props) => props.theme.colors.side.side500};
+      // TODO : 2차 배포 후 stroke 색상 변경
+      // stroke: ${(props) => props.theme.colors.side.side500};
     }
   }
 
