@@ -77,7 +77,7 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
                   setIsMenu(false)
                 }
               } else if (i === 3) {
-                window.location.href = 'https://doana.notion.site/f7a045872c3b4b02bce5e9f6d6cfc2d8?pvs=4'
+                window.open('https://doana.notion.site/f7a045872c3b4b02bce5e9f6d6cfc2d8?pvs=4')
               } else if (i === 5) {
                 logout()
               }
