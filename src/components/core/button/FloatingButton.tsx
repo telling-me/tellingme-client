@@ -10,7 +10,6 @@ const FloatingButton = ({ size = 'lg', ref }: IFloatButton) => {
     <FloatingWrapper
       size={size}
       onClick={() => {
-        console.log(ref)
         ref?.current?.scrollIntoView()
       }}
     >

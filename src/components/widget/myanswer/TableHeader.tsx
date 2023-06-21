@@ -54,7 +54,8 @@ const TableHeader = ({ isSelected, _onClick }: IMyAnswerMode) => {
 
       <style.Grid flex="end" _gap="6px" _width="fit-content">
         <NormalListButton isSelected={isSelected} _onClick={_onClick} />
-        <SlideListButton isSelected={!isSelected} _onClick={_onClick} />
+        {/* TODO: 2차 배포 후 SlideListButton 활성화 */}
+        <SlideListButton isSelected={false} _onClick={() => {}} />
       </style.Grid>
     </HeaderWrapper>
   )

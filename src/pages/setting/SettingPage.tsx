@@ -72,8 +72,7 @@ const SettingMain = styled.div<{ isMenu?: boolean }>`
   }
 
   @media all and (max-width: 767px) {
-    height: ${({ isMenu }) =>
-      isMenu != null ? 'calc(var(--vh, 1vh) * 100 - 66px)' : 'calc(var(--vh, 1vh) * 100 - 66px)'};
+    height: ${({ isMenu }) => (isMenu != null ? 'calc(var(--vh, 1vh) * 100 - 66px)' : 'calc(var(--vh, 1vh) * 100)')};
   }
 `
 
