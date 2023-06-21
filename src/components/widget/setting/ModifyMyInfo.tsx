@@ -209,10 +209,12 @@ const ModifyMyInfoContent = styled.div`
 
   @media all and (min-width: 768px) {
     height: calc(100vh - 164px);
+    height: calc(var(--vh, 1vh) * 100 - 164px);
   }
 
   @media all and (max-width: 767px) {
     height: calc(100vh - 108px);
+    height: calc(var(--vh, 1vh) * 100 - 108px);
   }
 `
 

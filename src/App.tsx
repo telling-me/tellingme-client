@@ -13,6 +13,13 @@ import { Analytics } from '@vercel/analytics/react'
 function App() {
   // google analytics 4
   RouteChangeTracker()
+
+  window.addEventListener('resize', () => {
+    // We execute the same script as before
+    const vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+  })
+
   return (
     <>
       <PageRouter />

@@ -186,6 +186,7 @@ const SignUpWrapper = styled.div`
   align-items: center;
 
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;

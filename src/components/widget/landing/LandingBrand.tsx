@@ -88,6 +88,7 @@ const { Grid, TextSpan } = style
 const LandingWrapper = styled(motion.section)`
   display: flex;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   justify-content: center;
   align-items: center;
   position: relative;
