@@ -463,10 +463,14 @@ const AnswerTextArea = styled.textarea`
   height: 100%;
   border: none;
   resize: none;
-  outline-color: ${({ theme }) => theme.colors.side.side100};
+  outline: none;
   background-color: inherit;
   line-height: 28px;
   font-size: 15px;
+  color: ${({ theme }) => theme.colors.gray.black};
+  :disabled {
+    -webkit-text-fill-color: ${({ theme }) => theme.colors.gray.black};
+  }
 
   overflow-y: overlay;
 
