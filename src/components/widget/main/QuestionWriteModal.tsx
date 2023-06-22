@@ -207,7 +207,8 @@ const QuestionWriteModal = () => {
               value={text}
               maxLength={MAX_LENGTH}
               onChange={(e) => {
-                setText(e.target.value)
+                if (e.target.value?.length > MAX_LENGTH) setText(e.target.value.slice(0, MAX_LENGTH))
+                else setText(e.target.value)
               }}
               disabled={!editable}
             />
@@ -431,6 +432,7 @@ const { Grid, TextP, TextSpan } = style
 const ModalWrapper = styled(Grid)`
   width: 100vw;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   z-index: 9000;
   background-color: ${({ theme }) => theme.colors.side.side100};
 `
@@ -461,14 +463,20 @@ const AnswerTextArea = styled.textarea`
   height: 100%;
   border: none;
   resize: none;
-  outline-color: ${({ theme }) => theme.colors.side.side100};
+  outline: none;
   background-color: inherit;
   line-height: 28px;
+  font-size: 15px;
+  color: ${({ theme }) => theme.colors.gray.black};
+  :disabled {
+    -webkit-text-fill-color: ${({ theme }) => theme.colors.gray.black};
+  }
 
   overflow-y: overlay;
 
   @media screen and (max-width: 767px) {
     line-height: 24px;
+    font-size: 14px;
   }
 `
 const FooterWrapper = styled(Grid)`

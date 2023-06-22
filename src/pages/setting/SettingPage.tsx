@@ -46,6 +46,7 @@ const SettingWrapper = styled.div`
 
   width: 100%;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 
   @media all and (max-width: 767px) {
     position: relative;
@@ -67,10 +68,11 @@ const SettingMain = styled.div<{ isMenu?: boolean }>`
 
   @media all and (min-width: 768px) {
     height: calc(100vh - 66px);
+    height: calc(var(--vh, 1vh) * 100 - 66px);
   }
 
   @media all and (max-width: 767px) {
-    height: ${({ isMenu }) => (isMenu != null ? 'calc(100vh - 66px)' : '100vh')};
+    height: ${({ isMenu }) => (isMenu != null ? 'calc(var(--vh, 1vh) * 100 - 66px)' : 'calc(var(--vh, 1vh) * 100)')};
   }
 `
 

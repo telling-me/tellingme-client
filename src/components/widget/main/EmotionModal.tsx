@@ -95,6 +95,7 @@ const ModalWrapper = styled(style.Grid)`
   position: absolute;
   width: 100vw;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   z-index: 9500;
   background-color: rgba(24, 24, 24, 0.28);
   backdrop-filter: blur(6px);
