@@ -8,12 +8,12 @@ import { birthDateData } from 'data/user'
 import { Dropdown } from 'components'
 
 interface ICreateBirthDate {
-  year: string | undefined
-  setYear: React.Dispatch<React.SetStateAction<string | undefined>>
-  month: string | undefined
-  setMonth: React.Dispatch<React.SetStateAction<string | undefined>>
-  day: string | undefined
-  setDay: React.Dispatch<React.SetStateAction<string | undefined>>
+  year: string | null
+  setYear: React.Dispatch<React.SetStateAction<string | null>>
+  month: string | null
+  setMonth: React.Dispatch<React.SetStateAction<string | null>>
+  day: string | null
+  setDay: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 const CreateBirthDate = ({ year, setYear, month, setMonth, day, setDay }: ICreateBirthDate) => {

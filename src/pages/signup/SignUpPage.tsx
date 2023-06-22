@@ -52,11 +52,11 @@ const SignUpPage = () => {
   const [purpose, setPurpose] = useState<string[]>([])
   const [job, setJob] = useState<number>(-1)
   const [jobInfo, setJobInfo] = useState('')
-  const [gender, setGender] = useState('')
-  const [year, setYear] = useState<string | undefined>(undefined)
-  const [month, setMonth] = useState<string | undefined>(undefined)
-  const [day, setDay] = useState<string | undefined>(undefined)
-  const [mbti, setMbti] = useState<string | undefined>(undefined)
+  const [gender, setGender] = useState<string | null>(null)
+  const [year, setYear] = useState<string | null>(null)
+  const [month, setMonth] = useState<string | null>(null)
+  const [day, setDay] = useState<string | null>(null)
+  const [mbti, setMbti] = useState<string | null>(null)
   const [allowNotification, setAllowNotification] = useState<boolean>(false)
 
   // step 이동 버튼 disabled 여부
@@ -65,10 +65,10 @@ const SignUpPage = () => {
       (step === 0 && !isAgree) ||
       (step === 1 && nickname === '') ||
       (step === 2 && purpose.length === 0) ||
-      (step === 3 && (job === undefined || (job === 5 && jobInfo === ''))) ||
-      (step === 4 && gender === '') ||
-      (step === 5 && (year === undefined || month === undefined || day === undefined)) ||
-      (step === 6 && mbti === undefined)
+      (step === 3 && (job == null || (job === 5 && jobInfo === ''))) ||
+      (step === 4 && gender == null) ||
+      (step === 5 && (year == null || month == null || day == null)) ||
+      (step === 6 && mbti == null)
     )
   }
 
@@ -81,13 +81,13 @@ const SignUpPage = () => {
   const signupQuery = useSignUpQuery({
     allowNotification,
     birthDate:
-      year !== undefined && month !== undefined && day !== undefined
+      year != null && month != null && day != null
         ? `${year}-${month.length === 1 ? `0${month}` : month}-${day.length === 1 ? `0${day}` : day}`
-        : ``,
+        : null,
     gender,
     job,
     jobInfo: job === 5 ? jobInfo : '',
-    mbti: mbti !== undefined ? mbti : '',
+    mbti,
     nickname,
     purpose: `[${purpose.join(',')}]`,
     socialId,
@@ -101,13 +101,13 @@ const SignUpPage = () => {
   // 건너뛰기
   const handleSkip = () => {
     if (step === 4) {
-      setGender('')
+      setGender(null)
     } else if (step === 5) {
-      setYear(undefined)
-      setMonth(undefined)
-      setDay(undefined)
+      setYear(null)
+      setMonth(null)
+      setDay(null)
     } else if (step === 6) {
-      setMbti('')
+      setMbti(null)
     }
 
     handleNextStep()

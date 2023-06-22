@@ -7,8 +7,8 @@ import { Dropdown } from 'components'
 import { mbtiData } from 'data/mbti'
 
 interface ICreateMbti {
-  mbti: string | undefined
-  setMbti: React.Dispatch<React.SetStateAction<string | undefined>>
+  mbti: string | null
+  setMbti: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 const CreateMbti = ({ mbti, setMbti }: ICreateMbti) => {

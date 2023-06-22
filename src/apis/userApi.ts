@@ -25,22 +25,22 @@ export interface IKakaoTokenData {
 }
 export interface IJoinResponseDto {
   allowNotification: boolean
-  birthDate?: string
-  gender?: string
+  birthDate: string | null
+  gender: string | null
   job: number
   jobInfo: string
-  mbti?: string
+  mbti: string | null
   nickname: string
   purpose: string
   socialId: string
   socialLoginType: SocialLoginType
 }
 export interface IUserInfoDto {
-  birthDate?: string
-  gender?: string
+  birthDate: string | null
+  gender: string | null
   job: number
   jobInfo: string
-  mbti?: string
+  mbti: string | null
   nickname: string
   purpose: string
 }
