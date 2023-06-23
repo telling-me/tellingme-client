@@ -14,8 +14,8 @@ import { ColButton } from 'components'
 import useChangeColor from 'hooks/useChangeColor'
 
 interface ICreateGender {
-  gender: string
-  setGender: React.Dispatch<React.SetStateAction<string>>
+  gender: string | null
+  setGender: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 const CreateGender = ({ gender, setGender }: ICreateGender) => {

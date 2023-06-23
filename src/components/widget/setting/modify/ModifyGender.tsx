@@ -6,8 +6,8 @@ import { ChoiceChips } from 'components'
 import { SelectInnerWrapper } from './style'
 
 interface IModifyGender {
-  gender: string
-  setGender: React.Dispatch<React.SetStateAction<string>>
+  gender: string | null
+  setGender: React.Dispatch<React.SetStateAction<string | null>>
   canChangeGender: boolean
 }
 

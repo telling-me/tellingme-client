@@ -27,13 +27,13 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   const [purpose, setPurpose] = useState<string[]>([])
   const [job, setJob] = useState('')
   const [jobInfo, setJobInfo] = useState('')
-  const [gender, setGender] = useState('')
+  const [gender, setGender] = useState<string | null>(null)
   const [canChangeGender, setCanChangeGender] = useState(false)
-  const [year, setYear] = useState<string | undefined>(undefined)
-  const [month, setMonth] = useState<string | undefined>(undefined)
-  const [day, setDay] = useState<string | undefined>(undefined)
+  const [year, setYear] = useState<string | null>(null)
+  const [month, setMonth] = useState<string | null>(null)
+  const [day, setDay] = useState<string | null>(null)
   const [canChangeBirthDate, setCanChangeBirthDate] = useState(false)
-  const [mbti, setMbti] = useState<string | undefined>(undefined)
+  const [mbti, setMbti] = useState<string | null>(null)
 
   const [_disabled, setDisabled] = useState(false)
   const [isError, setIsError] = useState(false)
@@ -49,13 +49,13 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   const _onClick = () => {
     patchUserInfo({
       birthDate:
-        year !== undefined && month !== undefined && day !== undefined
+        year != null && month != null && day != null
           ? `${year}-${month.length === 1 ? `0${month}` : month}-${day.length === 1 ? `0${day}` : day}`
-          : ``,
+          : null,
       gender,
       job: parseInt(job),
       jobInfo: job === '5' ? jobInfo : '',
-      mbti: mbti !== undefined ? mbti : '',
+      mbti,
       nickname,
       purpose: `[${purpose.join(',')}]`
     })
@@ -70,6 +70,14 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   }, [nickname, purpose, job, jobInfo])
 
   useEffect(() => {
+    if ((year === null && month === null && day === null) || (year !== null && month !== null && day !== null)) {
+      setDisabled(false)
+    } else {
+      setDisabled(true)
+    }
+  }, [year, month, day])
+
+  useEffect(() => {
     if (res != null) {
       setNickname(res.data.nickname)
       setOriginalNn(res.data.nickname)
@@ -79,7 +87,7 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
       setGender(res.data.gender)
       setMbti(res.data.mbti === '' ? undefined : res.data.mbti)
 
-      if (res.data.gender === '') {
+      if (res.data.gender == null) {
         setCanChangeGender(true)
       }
 

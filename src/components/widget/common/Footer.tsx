@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // components
 import Icon from 'assets/icons'
@@ -10,10 +11,12 @@ import useWindowSize from 'hooks/useWindowSize'
 
 // utils
 import { mediaQuery } from 'utils/mediaQuery'
+import { Button } from 'components/core'
 
 const Footer = () => {
   const theme = useTheme()
   const windowSize = useWindowSize()
+  const navigate = useNavigate()
   return (
     <FooterWrapper>
       <FooterInnerWrapper flex="between" direction="column" _height="100%">
@@ -24,16 +27,43 @@ const Footer = () => {
           _gap="24px"
         >
           <Icon.Logo width={69} fill={theme.colors.side.side500} />
-          <Grid flex={mediaQuery(windowSize.width) === 'mobile' ? 'start' : 'end'} _gap="20px">
-            <TextP typo="c_b" textColor="side500">
-              서비스 소개
-            </TextP>
-            <TextP typo="c_b" textColor="side500">
-              이용약관
-            </TextP>
-            <TextP typo="c_b" textColor="side500">
-              개인정보처리방침
-            </TextP>
+          <Grid flex={mediaQuery(windowSize.width) === 'mobile' ? 'start' : 'end'} wrap="wrap" _gap="8px 20px">
+            <Button
+              buttonType="noFilled"
+              text="텔링미 소식 구독"
+              textSize="c_b"
+              textColor="side500"
+              _onClick={() => {
+                navigate('/newsletter')
+              }}
+            />
+            <Button
+              buttonType="noFilled"
+              text="서비스 소개"
+              textSize="c_b"
+              textColor="side500"
+              _onClick={() => {
+                window.open(process.env.REACT_APP_TELLINGME_SERVICE_INTRODUCTION)
+              }}
+            />
+            <Button
+              buttonType="noFilled"
+              text="이용약관"
+              textSize="c_b"
+              textColor="side500"
+              _onClick={() => {
+                window.open(process.env.REACT_APP_TELLINGME_TERMS_OF_USE)
+              }}
+            />
+            <Button
+              buttonType="noFilled"
+              text="개인정보처리방침"
+              textSize="c_b"
+              textColor="side500"
+              _onClick={() => {
+                window.open(process.env.REACT_APP_TELLINGME_PRIVACY_POLICY)
+              }}
+            />
           </Grid>
         </Grid>
         <Grid
@@ -84,7 +114,7 @@ const FooterWrapper = styled.div`
   ${({ theme }) => theme.common.flexCenter}
 
   @media all and (max-width: 767px) {
-    height: 229px;
+    height: 247px;
     padding: 25px;
   }
 `

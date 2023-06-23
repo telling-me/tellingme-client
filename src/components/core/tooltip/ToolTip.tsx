@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { ToolTipComponent, ToolTipTextWrapper, ToolTipWrapper } from './style'
 import type { IToolTip } from './type'
@@ -23,12 +24,11 @@ const ToolTip = ({
 
       <ToolTipWrapper tooltipType={tooltipType} childrenWidth={childrenWidth} _margin={_margin}>
         {['topLeft', 'topRight'].includes(tooltipType) && (
-          <Icon.ToolTipTriangle
-            transform="rotate(180)"
-            fill={isError ? theme.colors.error.error400 : theme.colors.side.side500}
-          />
+          <Icon.TooltipTop fill={isError ? theme.colors.error.error400 : theme.colors.side.side500} />
         )}
-        {tooltipType === 'left' && <Icon.ToolTipTriangle2 />}
+        {tooltipType === 'left' && (
+          <Icon.TooltipLeft fill={isError ? theme.colors.error.error400 : theme.colors.side.side500} />
+        )}
 
         <ToolTipTextWrapper isError={isError}>
           {textArr.map((text, i) => {
@@ -41,13 +41,10 @@ const ToolTip = ({
         </ToolTipTextWrapper>
 
         {['bottom', 'bottomLeft', 'bottomRight'].includes(tooltipType) && (
-          <Icon.ToolTipTriangle transform="rotate(360)" />
+          <Icon.TooltipBottom fill={isError ? theme.colors.error.error400 : theme.colors.side.side500} />
         )}
         {tooltipType === 'right' && (
-          <Icon.ToolTipTriangle2
-            transform="rotate(180)"
-            fill={isError ? theme.colors.error.error400 : theme.colors.side.side500}
-          />
+          <Icon.TooltipRight fill={isError ? theme.colors.error.error400 : theme.colors.side.side500} />
         )}
       </ToolTipWrapper>
     </ToolTipComponent>

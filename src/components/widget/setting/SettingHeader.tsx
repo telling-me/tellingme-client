@@ -58,7 +58,7 @@ const SettingHeaderWrapper = styled.div`
   }
 
   p {
-    position: absolute;
+    position: sticky;
     left: 50%;
     transform: translateX(-50%);
   }

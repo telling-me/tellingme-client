@@ -24,8 +24,8 @@ import useChangeColor from 'hooks/useChangeColor'
  * @param {DropdownSizeType} dropdownSize - (필수) dropdown 사이즈
  * @param {string} defaultText - (필수) 아무것도 선택되지 않았을 때 보여지는 문구
  * @param {string[]|number[]} data - (필수) dropdown 리스트에 보여질 데이터들
- * @param {string|undefined} _selected (필수) 현재 선택된 데이터
- * @param {Dispatch<SetStateAction<string | undefined>>} _setSelected (필수) 선택된 데이터 저장
+ * @param {string|null} _selected (필수) 현재 선택된 데이터
+ * @param {Dispatch<SetStateAction<string | null>>} _setSelected (필수) 선택된 데이터 저장
  * @param {'up' | 'down'} direction (선택) 드랍다운 리스트 방향 -> default='down'
  * @param {string} unit (선택) 단위 -> 뒤에 단위가 필요할 때
  * @param {string} label (선택) 라벨
@@ -83,9 +83,9 @@ const Dropdown = ({
           <DropdownSelectedField>
             <style.TextSpan
               typo={dropdownSize === 'small' ? 'b2' : 'b1'}
-              textColor={_selected === undefined ? 'gray4' : 'black'}
+              textColor={_selected == null ? 'gray4' : 'black'}
             >
-              {_selected === undefined ? defaultText : _selected}
+              {_selected == null ? defaultText : _selected}
               {unit ?? unit}
             </style.TextSpan>
           </DropdownSelectedField>

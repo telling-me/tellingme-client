@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 
 // component
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 import { Toggle, ToolTip } from 'components'
 
@@ -23,15 +23,13 @@ interface ISettingMenu {
 }
 
 const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
-  const MENU_LIST_ITEMS_TEXTS = ['내 정보 수정하기', '이용 약관', '개인정보 처리방침', '회원 탈퇴']
-  const MENU_LIST_ITEMS_ICONS = [true, true, true, true, false]
+  const MENU_LIST_ITEMS_TEXTS = ['내 정보 수정하기', '이용 약관', '개인정보 처리방침', 'FAQ', '회원 탈퇴', '로그아웃']
+  const MENU_LIST_ITEMS_ICON = [true, true, true, true, true, false]
 
   const [userNoti, setUserNoti] = useState(false)
   const resNoti = useGetUserNotiQuery().data
   const { mutate: logout } = useLogoutMutation()
   const { mutate: postUserNoti } = usePostUserNotiQuery()
-
-  const theme = useTheme()
 
   useEffect(() => {
     if (resNoti != null) {
@@ -51,7 +49,7 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
           isError={false}
           _margin="0 0 0 4px"
         >
-          <Icons.Info width="20" height="20" stroke={theme.colors.gray.gray6} />
+          <Icons.Info width="20" height="20" />
         </ToolTip>
 
         <Toggle
@@ -69,25 +67,23 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
           <SettingMenuList
             key={i}
             text={text}
-            icon={MENU_LIST_ITEMS_ICONS[i]}
+            icon={MENU_LIST_ITEMS_ICON[i]}
             _onClick={() => {
-              setPageNumber(i)
+              if ([0, 1, 2, 4].includes(i)) {
+                setPageNumber(i)
 
-              if (setIsMenu != null) {
-                setIsMenu(false)
+                if (setIsMenu != null) {
+                  setIsMenu(false)
+                }
+              } else if (i === 3) {
+                window.open('https://doana.notion.site/f7a045872c3b4b02bce5e9f6d6cfc2d8?pvs=4')
+              } else if (i === 5) {
+                logout()
               }
             }}
           />
         )
       })}
-
-      <SettingMenuList
-        text="로그아웃"
-        icon={false}
-        _onClick={() => {
-          logout()
-        }}
-      />
 
       <ServiceInfo />
     </SettingMenuWrapper>

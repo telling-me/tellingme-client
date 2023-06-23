@@ -6,8 +6,8 @@ export interface IDropdown {
   dropdownSize: DropdownSizeType
   defaultText: string
   data: string[] | number[]
-  _selected: string | undefined
-  _setSelected: Dispatch<SetStateAction<string | undefined>>
+  _selected: string | null
+  _setSelected: Dispatch<SetStateAction<string | null>>
   direction?: 'up' | 'down'
   label?: string
   unit?: string

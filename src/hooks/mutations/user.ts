@@ -3,20 +3,16 @@ import { useMutation, useQueryClient } from 'react-query'
 // apis
 import { apis } from 'apis/apis'
 import type { IUserInfoDto } from 'apis/userApi'
-
 // hooks
-import useDeleteToken from 'hooks/useDeleteToken'
-import { useFilterling } from '..'
+import { useDeleteToken, useFilterling } from 'hooks'
 
 // type
 import { type IError } from 'type/db'
 
 export const usePatchUserInfoMutation = <T>(setOpen: React.Dispatch<React.SetStateAction<boolean>>, options?: T) => {
-  const queryClient = useQueryClient()
-
   return useMutation(async (userInfoDto: IUserInfoDto) => await apis.patchUserInfo(userInfoDto), {
     onSuccess: async () => {
-      await queryClient.invalidateQueries('getUserInfo')
+      window.location.replace('/app/setting')
       setOpen(false)
     },
     onError: (err: IError) => {
