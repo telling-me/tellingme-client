@@ -8,8 +8,8 @@ import { Dropdown } from 'components'
 import { mbtiData } from 'data/mbti'
 
 interface IModifyMbti {
-  mbti: string | undefined
-  setMbti: React.Dispatch<React.SetStateAction<string | undefined>>
+  mbti: string | null
+  setMbti: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 const ModifyMbti = ({ mbti, setMbti }: IModifyMbti) => {

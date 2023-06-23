@@ -6,12 +6,12 @@ import { Dropdown } from 'components'
 import { SelectInnerWrapper } from './style'
 
 interface IModifyBirth {
-  year: string | undefined
-  setYear: React.Dispatch<React.SetStateAction<string | undefined>>
-  month: string | undefined
-  setMonth: React.Dispatch<React.SetStateAction<string | undefined>>
-  day: string | undefined
-  setDay: React.Dispatch<React.SetStateAction<string | undefined>>
+  year: string | null
+  setYear: React.Dispatch<React.SetStateAction<string | null>>
+  month: string | null
+  setMonth: React.Dispatch<React.SetStateAction<string | null>>
+  day: string | null
+  setDay: React.Dispatch<React.SetStateAction<string | null>>
   canChangeBirthDate: boolean
 }
 
@@ -19,8 +19,8 @@ const ModifyBirth = ({ year, setYear, month, setMonth, day, setDay, canChangeBir
   const birthDateData: Array<{
     defaultText: string
     data: string[] | number[]
-    _selected: string | undefined
-    _setSelected: React.Dispatch<React.SetStateAction<string | undefined>>
+    _selected: string | null
+    _setSelected: React.Dispatch<React.SetStateAction<string | null>>
   }> = [
     {
       defaultText: '년\u00a0\u00a0\u00a0',

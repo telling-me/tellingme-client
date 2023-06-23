@@ -35,11 +35,17 @@ const Withdrawal = () => {
         회원 탈퇴 전 반드시 확인해주세요!
       </style.TextP>
 
-      <WithdrawalContent>
-        <style.TextP typo="c" textColor="black">
-          {SETTING_WITHDRAWAL_DOCS}
-        </style.TextP>
-      </WithdrawalContent>
+      <WithdrawalContentBox>
+        <WithdrawalContent>
+          {SETTING_WITHDRAWAL_DOCS.map((v, i) => {
+            return (
+              <style.TextP key={i} typo={v._typo} textColor="black" _margin={v._margin}>
+                {v.content}
+              </style.TextP>
+            )
+          })}
+        </WithdrawalContent>
+      </WithdrawalContentBox>
 
       <CheckWrapper>
         <CheckSquare checkSize="small" _checked={agree} setChecked={setAgree} />
@@ -112,7 +118,7 @@ const WithdrawalWrapper = styled.div`
   }
 `
 
-const WithdrawalContent = styled.div`
+const WithdrawalContentBox = styled.div`
   ${({ theme }) => theme.common.flexCenter}
 
   width: 100%;
@@ -121,6 +127,11 @@ const WithdrawalContent = styled.div`
   border-radius: 8px;
 
   background-color: ${({ theme }) => theme.colors.side.side200};
+`
+
+const WithdrawalContent = styled.div`
+  ${({ theme }) => theme.common.flexStart}
+  flex-direction: column;
 `
 
 const CheckWrapper = styled.div`

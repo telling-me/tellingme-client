@@ -21,8 +21,8 @@ const TableHeader = ({ isSelected, _onClick }: IMyAnswerMode) => {
 
   const { setMyAnswerMonth, setMyAnswerYear } = useAnswerStore()
 
-  const [year, setYear] = useState<string | undefined>(nowYear.toString())
-  const [month, setMonth] = useState<string | undefined>(nowMonth.toString())
+  const [year, setYear] = useState<string | null>(nowYear.toString())
+  const [month, setMonth] = useState<string | null>(nowMonth.toString())
 
   useEffect(() => {
     setMyAnswerMonth(month as string)

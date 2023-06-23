@@ -48,7 +48,7 @@ export const emotionList: IEmotion[] = [
   {
     idx: 7,
     description: '설레요',
-    icon: Icon.ToolTipTriangle2,
+    icon: Icon.TooltipBottom,
     membership: true
   },
   {
