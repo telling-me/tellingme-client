@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { TableHeader, Table, NoneData, Ready, Loading } from 'components'
 
 // hooks
-import { useGetMyAnswerListQuery } from 'hooks/queries/answer'
+import { useGetMyAnswerListQuery } from 'hooks'
 
 // stores
 import useAnswerStore from 'stores/useAnswerStore'

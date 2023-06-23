@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 // hooks
-import { useCheckNicknameMutation } from 'hooks/mutations/user'
-import { useSignUpQuery } from 'hooks/queries'
-import useWindowSize from 'hooks/useWindowSize'
+import { useCheckNicknameMutation, useSignUpQuery, useWindowSize } from 'hooks'
 
 // component
 import styled from 'styled-components'

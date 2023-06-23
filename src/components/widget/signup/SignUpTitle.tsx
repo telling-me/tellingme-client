@@ -81,7 +81,6 @@ const SignUpTitle = ({
                   } else if (step === 6) {
                     handleNextStep()
                     requestPermission(setPushToken)
-                    console.log(555)
                   } else {
                     handleNextStep()
                   }

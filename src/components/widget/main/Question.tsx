@@ -6,7 +6,7 @@ import style from 'styles/styled-components/styled'
 import Icon from 'assets/icons'
 
 // hooks
-import { useGetAnswerQuery, useGetQuestionQuery } from 'hooks/queries'
+import { useGetAnswerQuery, useGetQuestionQuery } from 'hooks'
 
 // utils
 import { formatStringDate } from 'utils/date'

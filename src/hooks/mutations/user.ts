@@ -108,3 +108,13 @@ export const usePostUserNotiQuery = <T>(option?: T) => {
     ...option
   })
 }
+
+export const useUpdateUserPushToken = <T>(option?: T) => {
+  return useMutation(async (data: { pushToken: string }) => await apis.updateUserPushToken(data.pushToken), {
+    onSuccess() {},
+    onError: (err) => {
+      console.log(err)
+    },
+    ...option
+  })
+}

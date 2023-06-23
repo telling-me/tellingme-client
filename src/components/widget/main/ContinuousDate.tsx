@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 
 // hooks
-import { useGetAnswerRecordCountQuery } from 'hooks/queries/question'
+import { useGetAnswerRecordCountQuery } from 'hooks'
 
 // utils
 import { formatStringDate } from 'utils/date'

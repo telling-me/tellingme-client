@@ -3,8 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { requestPermission } from 'firebase-messaging-sw'
 
 // hooks
-import { useGetUserNotiQuery, useGetUserPushToken } from 'hooks/queries/userInfo'
-import { useUpdateUserPushToken } from 'hooks/mutations/user'
+import { useUpdateUserPushToken, useGetUserNotiQuery, useGetUserPushToken } from 'hooks'
+
+// components
+import { Loading } from 'components'
+
+// styles
+import style from 'styles/styled-components/styled'
 
 const CheckPushTokenLayout = () => {
   const [nowToken, setNowToken] = useState<string | undefined>()
@@ -35,7 +40,13 @@ const CheckPushTokenLayout = () => {
     }
   }, [serverToken, allowNotification])
 
-  return <></>
+  return (
+    <Grid _width="100%" _height="100vh" flex="center">
+      <Loading />
+    </Grid>
+  )
 }
+
+const { Grid } = style
 
 export default CheckPushTokenLayout

@@ -9,7 +9,7 @@ import { Button, CheckSquare, Modal } from 'components'
 import { SETTING_WITHDRAWAL_DOCS } from 'data/docs'
 
 // hooks
-import { useDeleteUser } from 'hooks/mutations/user'
+import { useDeleteUser } from 'hooks'
 
 const Withdrawal = () => {
   const [agree, setAgree] = useState(false)
