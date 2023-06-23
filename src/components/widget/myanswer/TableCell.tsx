@@ -12,8 +12,10 @@ import EmotionIcon from '../main/EmotionIcon'
 
 const TableCell = ({ emotion, question, date }: ITableCell) => {
   const theme = useTheme()
+  const questionDate = new Date(Number(date[0]), Number(date[1]) - 1, Number(date[2]))
+
   return (
-    <Link to={`?date=${formatStringDate(new Date(date))}`}>
+    <Link to={`?date=${formatStringDate(new Date(questionDate))}`}>
       <CellOuterWrapper>
         <CellInnerWrapper>
           <EmotionWrapper>
@@ -22,7 +24,7 @@ const TableCell = ({ emotion, question, date }: ITableCell) => {
 
           <QuestionDateWrapper>
             <TextP typo="b2" textColor="black" ellipsis={true} _width="100%">
-              {question.replace(/\\n/gm, ' ')}
+              {question.replace(/\n/gm, ' ')}
             </TextP>
             <TextP typo="c" textColor="side500">
               {`${date?.[0]}년 ${date?.[1]}월 ${date?.[2]}일`}

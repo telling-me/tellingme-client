@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 // components
-import { TableHeader, Table, NoneData, Ready } from 'components'
+import { TableHeader, Table, NoneData, Ready, Loading } from 'components'
 
 // hooks
 import { useGetMyAnswerListQuery } from 'hooks/queries/answer'
@@ -14,7 +14,10 @@ const MyAnswerPage = () => {
   const [isVertical, setIsVertical] = useState(true)
   const { myAnswerFilter } = useAnswerStore()
 
-  const { data: { data: myAnswer = null } = {} } = useGetMyAnswerListQuery(myAnswerFilter.month, myAnswerFilter.year)
+  const { data: { data: myAnswer = null } = {}, isLoading } = useGetMyAnswerListQuery(
+    myAnswerFilter.month,
+    myAnswerFilter.year
+  )
 
   const handleChangeMode = () => {
     setIsVertical(!isVertical)
@@ -23,7 +26,9 @@ const MyAnswerPage = () => {
   return (
     <MyAnswerWrapper>
       <TableHeader isSelected={isVertical} _onClick={handleChangeMode} />
-      {myAnswer === null || myAnswer === undefined || myAnswer?.length === 0 ? (
+      {isLoading ? (
+        <Loading />
+      ) : myAnswer === null || myAnswer === undefined || myAnswer?.length === 0 ? (
         <NoneData />
       ) : isVertical ? (
         <Table data={myAnswer} />
@@ -41,6 +46,7 @@ const MyAnswerWrapper = styled.div`
 
   width: 100%;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 
   transition: 2s;
 `

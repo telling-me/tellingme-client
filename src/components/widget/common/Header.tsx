@@ -49,7 +49,7 @@ const HeaderWrapper = styled.header`
   ${({ theme }) => theme.common.flexBetween}
   padding: 20px 0 12px 0;
   position: absolute;
-  background-color: ${({ theme }) => theme.colors.side.side100};
+  background-color: transparent;
   transition: 0.3s;
 
   z-index: 1;

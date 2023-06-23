@@ -42,7 +42,7 @@ const LandingCatchPhrase = () => {
             whileInView="ani"
             custom={1}
           >
-            <TextH1
+            <TextH2
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
                   ? 'h1'
@@ -53,9 +53,9 @@ const LandingCatchPhrase = () => {
               textColor="gray6"
             >
               나를 위한 시간,
-            </TextH1>
+            </TextH2>
             <Grid flex="center" _gap="8px" wrap="wrap">
-              <TextH1
+              <TextH2
                 typo={
                   mediaQuery(windowSize.width) === 'desktop'
                     ? 'h1'
@@ -66,8 +66,8 @@ const LandingCatchPhrase = () => {
                 textColor="gray6"
               >
                 텔링미를
-              </TextH1>
-              <TextH1
+              </TextH2>
+              <TextH2
                 typo={
                   mediaQuery(windowSize.width) === 'desktop'
                     ? 'h1_b'
@@ -78,7 +78,7 @@ const LandingCatchPhrase = () => {
                 textColor="gray6"
               >
                 이 순간부터 느껴봐요!
-              </TextH1>
+              </TextH2>
             </Grid>
             <Grid
               flex="center"
@@ -119,7 +119,7 @@ const LandingCatchPhrase = () => {
   )
 }
 
-const { Grid, TextH1 } = style
+const { Grid, TextH2 } = style
 
 const CatchPhraseWrapper = styled.div`
   position: relative;

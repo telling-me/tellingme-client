@@ -15,6 +15,7 @@ import './firebase-messaging-sw.ts'
 function App() {
   // google analytics 4
   RouteChangeTracker()
+
   return (
     <>
       <PageRouter />

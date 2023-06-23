@@ -42,7 +42,7 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   const [open, setOpen] = useState(false)
 
   const res = useGetUserInfoQuery().data
-  const { mutate: patchUserInfo } = usePatchUserInfoMutation()
+  const { mutate: patchUserInfo } = usePatchUserInfoMutation(setOpen)
   const { mutate: checkNickname } = useCheckNicknameMutation(nickname, setIsError, setErrorText, () => {
     setOpen(true)
   })
@@ -209,10 +209,12 @@ const ModifyMyInfoContent = styled.div`
 
   @media all and (min-width: 768px) {
     height: calc(100vh - 164px);
+    height: calc(var(--vh, 1vh) * 100 - 164px);
   }
 
   @media all and (max-width: 767px) {
     height: calc(100vh - 108px);
+    height: calc(var(--vh, 1vh) * 100 - 108px);
   }
 `
 

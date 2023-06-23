@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 
 // apis
 import { apis } from 'apis/apis'
@@ -9,12 +9,15 @@ import useDeleteToken from 'hooks/useDeleteToken'
 import { useFilterling } from '..'
 
 // type
-import type { IError } from 'type/db'
+import { type IError } from 'type/db'
 
-export const usePatchUserInfoMutation = <T>(options?: T) => {
+export const usePatchUserInfoMutation = <T>(setOpen: React.Dispatch<React.SetStateAction<boolean>>, options?: T) => {
+  const queryClient = useQueryClient()
+
   return useMutation(async (userInfoDto: IUserInfoDto) => await apis.patchUserInfo(userInfoDto), {
-    onSuccess: (res) => {
-      window.location.replace('/app/setting')
+    onSuccess: async () => {
+      await queryClient.invalidateQueries('getUserInfo')
+      setOpen(false)
     },
     onError: (err: IError) => {
       console.log(err)
@@ -93,18 +96,12 @@ export const useUnsubscribeNewsLetterMutation = <T>(option?: T) => {
 }
 
 export const usePostUserNotiQuery = <T>(option?: T) => {
-  return useMutation(async () => await apis.postUserNoti(), {
-    onSuccess() {},
-    onError: (err) => {
-      console.log(err)
-    },
-    ...option
-  })
-}
+  const queryClient = useQueryClient()
 
-export const useUpdateUserPushToken = <T>(option?: T) => {
-  return useMutation(async (data: { pushToken: string }) => await apis.updateUserPushToken(data.pushToken), {
-    onSuccess() {},
+  return useMutation(async () => await apis.postUserNoti(), {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries('getUserNoti')
+    },
     onError: (err) => {
       console.log(err)
     },

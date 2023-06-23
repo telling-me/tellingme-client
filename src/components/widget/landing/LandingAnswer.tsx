@@ -54,7 +54,7 @@ const LandingAnswer = () => {
             whileInView="ani"
             custom={1}
           >
-            <TextH1
+            <TextH2
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
                   ? 'h1'
@@ -65,14 +65,14 @@ const LandingAnswer = () => {
               textColor="logo"
             >
               매일 매일,
-            </TextH1>
+            </TextH2>
             <Grid
               flex="center"
               _gap="8px"
               wrap="wrap"
               direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
             >
-              <TextH1
+              <TextH2
                 typo={
                   mediaQuery(windowSize.width) === 'desktop'
                     ? 'h1'
@@ -83,8 +83,8 @@ const LandingAnswer = () => {
                 textColor="logo"
               >
                 기록한 답변을 보며
-              </TextH1>
-              <TextH1
+              </TextH2>
+              <TextH2
                 typo={
                   mediaQuery(windowSize.width) === 'desktop'
                     ? 'h1_b'
@@ -95,7 +95,7 @@ const LandingAnswer = () => {
                 textColor="logo"
               >
                 나를 되돌아봐요
-              </TextH1>
+              </TextH2>
             </Grid>
           </Grid>
           <Grid
@@ -110,7 +110,7 @@ const LandingAnswer = () => {
             whileInView="ani"
             custom={2}
           >
-            <TextH2
+            <TextH3
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
                   ? 'h2'
@@ -121,8 +121,8 @@ const LandingAnswer = () => {
               textColor="gray8"
             >
               꾸준히 기록은 나에 대해
-            </TextH2>
-            <TextH2
+            </TextH3>
+            <TextH3
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
                   ? 'h2'
@@ -133,7 +133,7 @@ const LandingAnswer = () => {
               textColor="gray8"
             >
               더 많은 걸 알게 해줘요!
-            </TextH2>
+            </TextH3>
           </Grid>
         </Grid>
         <Grid
@@ -165,7 +165,7 @@ const LandingAnswer = () => {
   )
 }
 
-const { Grid, TextH1, TextH2 } = style
+const { Grid, TextH2, TextH3 } = style
 
 const AnswerWrapper = styled.div`
   position: relative;

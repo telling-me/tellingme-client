@@ -8,8 +8,8 @@ export { default as LandingBrand } from './landing/LandingBrand'
 export { default as LandingQuestion } from './landing/LandingQuestion'
 export { default as LandingEmotion } from './landing/LandingEmotion'
 export { default as LandingAnswer } from './landing/LandingAnswer'
-export { default as LandingCatchPhrase } from './landing/LandingCatchPhrase'
 export { default as LandingFooter } from './landing/LandingFooter'
+export { default as LandingCatchPhrase } from './landing/LandingCatchPhrase'
 
 // main
 export { default as Question } from './main/Question'

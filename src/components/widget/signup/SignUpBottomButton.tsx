@@ -5,14 +5,11 @@ import { requestPermission } from '../../../firebase-messaging-sw'
 import type { ISignUpTitleAndBottomButton } from './type'
 
 // components
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { IconButton } from 'components'
 
 // assets
 import Icons from 'assets/icons'
-
-// hooks
-import useChangeColor from 'hooks/useChangeColor'
 
 const SignUpBottomButton = ({
   step,
@@ -23,10 +20,12 @@ const SignUpBottomButton = ({
   handleCheckNickname,
   setPushToken
 }: ISignUpTitleAndBottomButton) => {
+  const theme = useTheme()
+
   return windowSize < 1024 && step !== 7 ? (
     <MoveButtonWrapper>
       <IconButton buttonType="secondary" _width="55px" _height="55px" _disabled={step === 0} _onClick={handlePrevStep}>
-        <Icons.ArrowLeft width="24" height="24" stroke={useChangeColor('logo')} />
+        <Icons.ArrowLeft width="24" height="24" stroke={step === 0 ? theme.colors.gray.gray4 : theme.colors.logo} />
       </IconButton>
 
       <IconButton
@@ -46,7 +45,7 @@ const SignUpBottomButton = ({
           }
         }}
       >
-        <Icons.ArrowRight width="24" height="24" stroke={useChangeColor('logo')} />
+        <Icons.ArrowRight width="24" height="24" stroke={canMove() ? theme.colors.gray.gray4 : theme.colors.logo} />
       </IconButton>
     </MoveButtonWrapper>
   ) : (

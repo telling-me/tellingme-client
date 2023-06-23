@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 // components
 import {
@@ -14,29 +14,40 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 const LandingPage = () => {
+  const scrollRef = useRef<HTMLDivElement>(null)
+
   return (
     <>
-      <LandingWrapper>
-        <LandingHeader />
+      <LandingHeader />
+      <LandingWrapper ref={scrollRef}>
         <LandingBrand />
+
         <LandingInfo>
           <LandingQuestion />
           <LandingEmotion />
           <LandingAnswer />
           <LandingCatchPhrase />
+          <LandingFooter />
         </LandingInfo>
-        <LandingFooter />
       </LandingWrapper>
     </>
   )
 }
 
-const LandingWrapper = styled(motion.div)`
+const LandingWrapper = styled(motion.main)`
   position: relative;
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: auto;
+
+  // TODO : Floating Button
+  > button {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+  }
 `
 
 const LandingInfo = styled.section`

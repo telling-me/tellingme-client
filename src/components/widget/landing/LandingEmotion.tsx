@@ -51,7 +51,7 @@ const LandingEmotion = () => {
           whileInView="ani"
           custom={1}
         >
-          <TextH1
+          <TextH2
             typo={
               mediaQuery(windowSize.width) === 'desktop'
                 ? 'h1'
@@ -62,14 +62,14 @@ const LandingEmotion = () => {
             textColor="logo"
           >
             오늘 하루,
-          </TextH1>
+          </TextH2>
           <Grid
             flex="center"
             _gap="8px"
             wrap="wrap"
             direction={mediaQuery(windowSize.width) === 'mobile' ? 'column' : 'row'}
           >
-            <TextH1
+            <TextH2
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
                   ? 'h1'
@@ -80,8 +80,8 @@ const LandingEmotion = () => {
               textColor="logo"
             >
               느꼈던 마음을
-            </TextH1>
-            <TextH1
+            </TextH2>
+            <TextH2
               typo={
                 mediaQuery(windowSize.width) === 'desktop'
                   ? 'h1_b'
@@ -91,8 +91,8 @@ const LandingEmotion = () => {
               }
               textColor="logo"
             >
-              뱁새티콘으로 표현해요
-            </TextH1>
+              듀이티콘으로 표현해요
+            </TextH2>
           </Grid>
         </Grid>
         <Grid
@@ -107,7 +107,7 @@ const LandingEmotion = () => {
           whileInView="ani"
           custom={2}
         >
-          <TextH2
+          <TextH3
             typo={
               mediaQuery(windowSize.width) === 'desktop'
                 ? 'h2'
@@ -117,9 +117,9 @@ const LandingEmotion = () => {
             }
             textColor="gray8"
           >
-            총 6가지 뱁새 감정티콘으로
-          </TextH2>
-          <TextH2
+            총 6가지 듀이티콘으로
+          </TextH3>
+          <TextH3
             typo={
               mediaQuery(windowSize.width) === 'desktop'
                 ? 'h2'
@@ -130,7 +130,7 @@ const LandingEmotion = () => {
             textColor="gray8"
           >
             하루 감정을 정리해보세요
-          </TextH2>
+          </TextH3>
         </Grid>
       </EmotionInfoWrapper>
       <EmotionBackground _width="100%">
@@ -144,7 +144,7 @@ const LandingEmotion = () => {
   )
 }
 
-const { Grid, TextH1, TextH2 } = style
+const { Grid, TextH2, TextH3 } = style
 
 const EmotionInfo = styled.div`
   position: relative;
@@ -178,7 +178,11 @@ const EmotionBackground = styled(Grid)`
   position: absolute;
   bottom: 0;
   right: 0;
-  padding-left: 60px;
+  padding-left: 360px;
+
+  @media all and (min-width: 768px) and (max-width: 1199px) {
+    padding-left: 60px;
+  }
 
   @media all and (max-width: 767px) {
     padding-left: 0;
