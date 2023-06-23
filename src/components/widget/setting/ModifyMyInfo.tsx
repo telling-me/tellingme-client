@@ -71,6 +71,14 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   }, [nickname, purpose, job, jobInfo])
 
   useEffect(() => {
+    if ((year === null && month === null && day === null) || (year !== null && month !== null && day !== null)) {
+      setDisabled(false)
+    } else {
+      setDisabled(true)
+    }
+  }, [year, month, day])
+
+  useEffect(() => {
     if (res != null) {
       setNickname(res.data.nickname)
       setOriginalNn(res.data.nickname)
