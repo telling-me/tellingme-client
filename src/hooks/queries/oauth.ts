@@ -37,5 +37,5 @@ export const useKakaoQueries = ({ client_id, redirect_uri, code }: IKakaoTokenDa
 }
 
 export const useAppleQueries = ({ idToken }: { idToken: string }) => {
-  return useQueries([useCheckIdQuery('apple', '', idToken)])
+  return useQueries([useCheckIdQuery('apple', null, idToken)])
 }
