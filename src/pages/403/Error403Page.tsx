@@ -6,15 +6,19 @@ import style from 'styles/styled-components/styled'
 import { Button, LoginModal } from 'components'
 
 // assets
-import Icon from 'assets/icons'
+import Icons from 'assets/icons'
+
+// hooks
+import { useWindowSize } from 'hooks'
 
 const ErrorPage = () => {
   const [open, setOpen] = useState(false)
+  const windowWidth = useWindowSize().width
 
   return (
     <>
       <NoneDataWrapper flex="center" direction="column" _gap="8px">
-        <Icon.NotFound width={140} />
+        <Icons.OverHaulDuei width={windowWidth < 768 ? '120' : '190'} height={windowWidth < 768 ? '120' : '190'} />
 
         <Grid flex="center" direction="column">
           <TextP typo="h2" textColor="logo" _margin="8px 0 20px">

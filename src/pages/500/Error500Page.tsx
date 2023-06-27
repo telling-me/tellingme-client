@@ -9,12 +9,16 @@ import { Button } from 'components'
 // assets
 import Icons from 'assets/icons'
 
+// hooks
+import { useWindowSize } from 'hooks'
+
 const Error500Page = () => {
+  const windowWidth = useWindowSize().width
   const navigate = useNavigate()
 
   return (
     <ErrorWrapper>
-      <Icons.Error404 width="120" height="120" />
+      <Icons.OverHaulDuei width={windowWidth < 768 ? '120' : '190'} height={windowWidth < 768 ? '120' : '190'} />
 
       <style.TextP typo="h2_b" textColor="logo">
         500
