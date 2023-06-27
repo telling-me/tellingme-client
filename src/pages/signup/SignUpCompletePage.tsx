@@ -28,9 +28,7 @@ const SignUpCompletePage = () => {
           회원 가입이 완료되었어요!
         </style.TextP>
 
-        {
-          // 후에 캐릭터 추가
-        }
+        <Icons.SignUpSuccessDuei />
 
         <SignUpCompleteButtonWrapper>
           <Button

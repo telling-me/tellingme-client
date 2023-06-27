@@ -67,6 +67,7 @@ import { ReactComponent as TooltipRight } from './TooltipRight.svg'
 import { ReactComponent as TooltipLeft } from './TooltipLeft.svg'
 import { ReactComponent as TooltipBottom } from './TooltipBottom.svg'
 import { ReactComponent as TooltipTop } from './TooltipTop.svg'
+import { ReactComponent as SignUpSuccessDuei } from './SignUpSuccessDuei.svg'
 
 interface IIconIndex extends IStringKey {
   NotFound: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -136,6 +137,7 @@ interface IIconIndex extends IStringKey {
   TooltipLeft: string | FunctionComponent<any> | ComponentClass<any, any>
   TooltipBottom: string | FunctionComponent<any> | ComponentClass<any, any>
   TooltipTop: string | FunctionComponent<any> | ComponentClass<any, any>
+  SignUpSuccessDuei: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
@@ -205,7 +207,8 @@ const Icon: IIconIndex = {
   TooltipRight,
   TooltipLeft,
   TooltipBottom,
-  TooltipTop
+  TooltipTop,
+  SignUpSuccessDuei
 }
 
 export default Icon
