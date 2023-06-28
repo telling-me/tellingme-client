@@ -13,11 +13,11 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
-const messaging = firebase.messaging()
+const messaging = firebase.messaging.isSupported() ? firebase.messaging() : null
 
 export function requestPermission(setPushToken: React.Dispatch<React.SetStateAction<string | undefined>>) {
   void Notification.requestPermission().then((permission) => {
-    if (permission === 'granted') {
+    if (permission === 'granted' && messaging != null) {
       messaging
         .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
         .then((token: string) => {
