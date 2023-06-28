@@ -26,13 +26,13 @@ const CheckPushTokenLayout = () => {
 
   useEffect(() => {
     if (allowNotification != null && !allowNotification) {
-      console.log('백엔드 알림 허용 거부')
+      // console.log('백엔드 알림 허용 거부')
       navigate('/app/main')
     } else if (nowToken != null && nowToken === 'denied') {
-      console.log('브라우저 알림 허용 거부')
+      // console.log('브라우저 알림 허용 거부')
       navigate('/app/main')
     } else if (serverToken === nowToken) {
-      console.log('토큰 일치')
+      // console.log('토큰 일치')
       navigate('/app/main')
     } else if (nowToken != null) {
       updateUserPushToken({ pushToken: nowToken })
