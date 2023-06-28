@@ -11,6 +11,9 @@ import { SETTING_WITHDRAWAL_DOCS } from 'data/docs'
 // hooks
 import { useDeleteUser } from 'hooks'
 
+// assets
+import Icons from 'assets/icons'
+
 const Withdrawal = () => {
   const [agree, setAgree] = useState(false)
   const [open, setOpen] = useState(false)
@@ -31,9 +34,11 @@ const Withdrawal = () => {
 
   return (
     <WithdrawalWrapper>
-      <style.TextP typo="b1_b" textColor="gray7">
+      <style.TextP typo="b1_b" textColor="gray7" _margin="0 0 20px 0">
         회원 탈퇴 전 반드시 확인해주세요!
       </style.TextP>
+
+      <Icons.SadDuei />
 
       <WithdrawalContentBox>
         <WithdrawalContent>

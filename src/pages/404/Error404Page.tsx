@@ -9,12 +9,16 @@ import { Button } from 'components'
 // assets
 import Icon from 'assets/icons'
 
+// hooks
+import { useWindowSize } from 'hooks'
+
 const ErrorPage = () => {
+  const windowWidth = useWindowSize().width
   const navigate = useNavigate()
 
   return (
     <NoneDataWrapper flex="center" direction="column" _gap="8px">
-      <Icon.NotFound width={140} />
+      <Icon.ResearchDuei width={windowWidth < 768 ? '120' : '190'} height={windowWidth < 768 ? '120' : '190'} />
 
       <Grid flex="center" direction="column">
         <TextP typo="h2" textColor="logo" _margin="8px 0 20px">

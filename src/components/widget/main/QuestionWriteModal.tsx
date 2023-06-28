@@ -112,7 +112,7 @@ const QuestionWriteModal = () => {
                   if (!alreadyAnswered) setIsEmotionModal(true)
                 }}
               >
-                <EmotionIcon emotion={emotion} width={36} />
+                <EmotionIcon emotion={emotion} width={44} />
               </Grid>
               <ButtonWrapper flex="end">
                 {editable ? (
@@ -180,7 +180,7 @@ const QuestionWriteModal = () => {
               _gap="18px"
               style={{
                 height: fold ? 0 : 'auto',
-                margin: fold ? 0 : '20px 0 60px',
+                margin: fold ? 0 : '20px 0 24px',
                 overflow: fold ? 'hidden' : 'visible'
               }}
             >
