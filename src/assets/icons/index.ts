@@ -19,10 +19,23 @@ import { ReactComponent as LandingQuestion3 } from './LandingQuestion3.svg'
 import { ReactComponent as LandingQuestion4 } from './LandingQuestion4.svg'
 import { ReactComponent as LandingQuestion5 } from './LandingQuestion5.svg'
 import { ReactComponent as LandingCircle } from './LandingCircle.svg'
+import { ReactComponent as Lock } from './Lock.svg'
 import { ReactComponent as LogoSmallBubble1 } from './LogoSmallBubble1.svg'
 import { ReactComponent as LogoSmallBubble2 } from './LogoSmallBubble2.svg'
 import { ReactComponent as LogoSmallBubble3 } from './LogoSmallBubble3.svg'
 import { ReactComponent as LogoSmallBubble4 } from './LogoSmallBubble4.svg'
+import { ReactComponent as EmotionAngry } from './EmotionAngry.svg'
+import { ReactComponent as EmotionComplicated } from './EmotionComplicated.svg'
+import { ReactComponent as EmotionExcited } from './EmotionExcited.svg'
+import { ReactComponent as EmotionHappy } from './EmotionHappy.svg'
+import { ReactComponent as EmotionLethargic } from './EmotionLethargic.svg'
+import { ReactComponent as EmotionLonely } from './EmotionLonely.svg'
+import { ReactComponent as EmotionMeh } from './EmotionMeh.svg'
+import { ReactComponent as EmotionProud } from './EmotionProud.svg'
+import { ReactComponent as EmotionRelaxed } from './EmotionRelaxed.svg'
+import { ReactComponent as EmotionSad } from './EmotionSad.svg'
+import { ReactComponent as EmotionThrilled } from './EmotionThrilled.svg'
+import { ReactComponent as EmotionTired } from './EmotionTired.svg'
 import { ReactComponent as Bubble } from './bubble.svg'
 import { ReactComponent as Setting } from './Setting.svg'
 import { ReactComponent as Warning } from './Warning.svg'
@@ -102,6 +115,7 @@ interface IIconIndex extends IStringKey {
   Cookpot: string | FunctionComponent<any> | ComponentClass<any, any>
   ScrollDown: string | FunctionComponent<any> | ComponentClass<any, any>
   Smiley: string | FunctionComponent<any> | ComponentClass<any, any>
+  Lock: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingEmotionBg: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingEmotionLine: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingEmotionModal: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -124,6 +138,18 @@ interface IIconIndex extends IStringKey {
   LogoSmallBubble2: string | FunctionComponent<any> | ComponentClass<any, any>
   LogoSmallBubble3: string | FunctionComponent<any> | ComponentClass<any, any>
   LogoSmallBubble4: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionAngry: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionComplicated: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionExcited: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionHappy: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionLethargic: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionLonely: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionMeh: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionProud: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionRelaxed: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionSad: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionThrilled: string | FunctionComponent<any> | ComponentClass<any, any>
+  EmotionTired: string | FunctionComponent<any> | ComponentClass<any, any>
   Close: string | FunctionComponent<any> | ComponentClass<any, any>
   Rows: string | FunctionComponent<any> | ComponentClass<any, any>
   Columns: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -168,10 +194,23 @@ const Icon: IIconIndex = {
   LandingAnswer3,
   LandingAnswer4,
   LandingCircle,
+  Lock,
   LogoSmallBubble1,
   LogoSmallBubble2,
   LogoSmallBubble3,
   LogoSmallBubble4,
+  EmotionAngry,
+  EmotionComplicated,
+  EmotionExcited,
+  EmotionHappy,
+  EmotionLethargic,
+  EmotionLonely,
+  EmotionMeh,
+  EmotionProud,
+  EmotionRelaxed,
+  EmotionSad,
+  EmotionThrilled,
+  EmotionTired,
   Bubble,
   Setting,
   Warning,

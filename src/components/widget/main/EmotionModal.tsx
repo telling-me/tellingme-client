@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import styled, { css, useTheme } from 'styled-components'
+import styled, { css } from 'styled-components'
 import style from 'styles/styled-components/styled'
 import { Button } from 'components/core'
 
@@ -17,9 +17,9 @@ import { useGetAnswerQuery } from 'hooks'
 import { formatStringDate } from 'utils/date'
 import { emotionList } from 'data/emotion'
 import useAnswerStore from 'stores/useAnswerStore'
+import Icon from 'assets/icons'
 
 const EmotionModal = () => {
-  const theme = useTheme()
   const date = new URLSearchParams(window.location.search).get('date')
   const backUrl = location.hash.split('?date')[1]
 
@@ -46,16 +46,21 @@ const EmotionModal = () => {
         </Grid>
         <EmotionGridWrapper selected={emotion}>
           {emotionList.map((emotionIcon, idx) => (
-            <Emotion
-              key={idx}
-              flex="center"
-              onClick={() => {
-                // TODO: membership 처리필요
-                if (!emotionIcon.membership) setEmotion(emotionIcon.idx)
-              }}
-            >
-              <emotionIcon.icon width={50} stroke={theme.colors.logo} fill={theme.colors.logo} />
-            </Emotion>
+            <>
+              <Emotion
+                key={idx}
+                flex="center"
+                onClick={() => {
+                  // TODO: membership 처리필요
+                  if (!emotionIcon.membership) setEmotion(emotionIcon.idx)
+                }}
+              >
+                <emotionIcon.icon width={56} />
+                <LockEmotion display={!emotionIcon.membership ? 'none' : 'block'}>
+                  <Icon.Lock width={24} />
+                </LockEmotion>
+              </Emotion>
+            </>
           ))}
         </EmotionGridWrapper>
         <Grid flex="center" _gap="15px">
@@ -122,6 +127,7 @@ const ModalInnerWrapper = styled(style.Grid)`
 `
 
 const Emotion = styled(style.Grid)`
+  position: relative;
   width: 56px;
   height: 56px;
 
@@ -138,17 +144,22 @@ const EmotionGridWrapper = styled(style.Grid)<{ selected: number | null }>`
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
 
-  div {
-    opacity: 0.2;
+  > div > svg:nth-child(1) {
+    opacity: 0.5;
   }
 
   ${({ selected }) =>
     selected !== null &&
     css`
-      div:nth-child(${selected}) {
+      > div:nth-child(${selected}) > svg:nth-child(1) {
         opacity: 1;
       }
     `}
+`
+
+const LockEmotion = styled.div<{ display: string }>`
+  display: ${({ display }) => display};
+  position: absolute;
 `
 
 export default EmotionModal
