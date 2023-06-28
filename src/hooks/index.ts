@@ -1,6 +1,10 @@
 export * from './queries'
 export * from './mutations'
 
+export { default as useChangeColor } from './useChangeColor'
+export { default as useChangeTextSize } from './useChangeTextSize'
+export { default as useDeleteToken } from './useDeleteToken'
+export { default as useFilterling } from './useFilterling'
+export { default as useIsInViewport } from './useIsInViewport'
 export { default as useWindowSize } from './useWindowSize'
 export { default as useSaveToken } from './useSaveToken'
-export { default as useFilterling } from './useFilterling'

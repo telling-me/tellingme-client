@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 // hooks
-import { useCheckNicknameMutation } from 'hooks/mutations/user'
-import { useSignUpQuery } from 'hooks/queries'
-import useWindowSize from 'hooks/useWindowSize'
+import { useCheckNicknameMutation, useSignUpQuery, useWindowSize } from 'hooks'
 
 // component
 import styled from 'styled-components'
@@ -58,6 +56,7 @@ const SignUpPage = () => {
   const [day, setDay] = useState<string | null>(null)
   const [mbti, setMbti] = useState<string | null>(null)
   const [allowNotification, setAllowNotification] = useState<boolean>(false)
+  const [pushToken, setPushToken] = useState<string | undefined>()
 
   // step 이동 버튼 disabled 여부
   const canMove = () => {
@@ -91,7 +90,8 @@ const SignUpPage = () => {
     nickname,
     purpose: `[${purpose.join(',')}]`,
     socialId,
-    socialLoginType
+    socialLoginType,
+    pushToken: pushToken === 'denied' ? undefined : pushToken
   })
   const handleSignUp = () => {
     signupQuery.refetch().catch(() => {})
@@ -121,7 +121,7 @@ const SignUpPage = () => {
 
   return (
     <SignUpWrapper>
-      <SignUpHeader step={step} windowSize={windowSize} handleSkip={handleSkip} />
+      <SignUpHeader step={step} windowSize={windowSize} handleSkip={handleSkip} setPushToken={setPushToken} />
 
       {step !== 7 && <ProgressBar percent={`${14 * (step + 1) + 2}`} />}
 
@@ -132,6 +132,7 @@ const SignUpPage = () => {
         windowSize={windowSize}
         canMove={canMove}
         handleCheckNickname={handleCheckNickname}
+        setPushToken={setPushToken}
       />
 
       {
@@ -175,6 +176,7 @@ const SignUpPage = () => {
         windowSize={windowSize}
         canMove={canMove}
         handleCheckNickname={handleCheckNickname}
+        setPushToken={setPushToken}
       />
     </SignUpWrapper>
   )

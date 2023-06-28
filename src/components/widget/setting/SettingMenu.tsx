@@ -12,8 +12,7 @@ import SettingMenuList from './SettingMenuList'
 import ServiceInfo from './ServiceInfo'
 
 // hooks
-import { useGetUserNotiQuery } from 'hooks/queries/userInfo'
-import { useLogoutMutation, usePostUserNotiQuery } from 'hooks/mutations/user'
+import { useLogoutMutation, usePostUserNotiQuery, useGetUserNotiQuery } from 'hooks'
 
 // assets
 import Icons from 'assets/icons'

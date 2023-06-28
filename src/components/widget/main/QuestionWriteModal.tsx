@@ -14,8 +14,13 @@ import { DropdownItem, DropdownList } from 'components/core/dropdown/style'
 
 // hooks
 import { useQueryClient } from 'react-query'
-import { useGetAnswerQuery, useGetQuestionQuery } from 'hooks/queries'
-import { useUpdateAnswerMutation, usePostAnswerMutation, useDeleteAnswerMutation } from 'hooks/mutations'
+import {
+  useUpdateAnswerMutation,
+  usePostAnswerMutation,
+  useDeleteAnswerMutation,
+  useGetAnswerQuery,
+  useGetQuestionQuery
+} from 'hooks'
 
 // utils
 import { formatStringDate } from 'utils/date'

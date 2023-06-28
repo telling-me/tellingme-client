@@ -15,8 +15,7 @@ import ModifyMbti from './modify/ModifyMbti'
 import SettingContentHeader from './SettingContentHeader'
 
 // hooks
-import { useGetUserInfoQuery } from 'hooks/queries/userInfo'
-import { useCheckNicknameMutation, usePatchUserInfoMutation } from 'hooks/mutations/user'
+import { useCheckNicknameMutation, usePatchUserInfoMutation, useGetUserInfoQuery } from 'hooks'
 
 interface IModifyMyInfo {
   setIsMenu?: Dispatch<SetStateAction<boolean>>

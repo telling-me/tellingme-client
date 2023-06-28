@@ -1,9 +1,25 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { useQueries } from 'react-query'
-import { apis } from 'apis/apis'
-import { type IKakaoTokenData } from 'apis/userApi'
-import { useCheckIdQuery } from './checkId'
 import { useState } from 'react'
+import { useQueries, useQuery } from 'react-query'
+
+// apis
+import { apis } from 'apis/apis'
+import type { IJoinResponseDto, IKakaoTokenData } from 'apis/userApi'
+
+export const useCheckIdQuery = (loginType: string, socialId: string | null, idToken?: string) => {
+  return {
+    queryKey: ['userToken'],
+    queryFn: async () => await apis.checkUserInfo(loginType, socialId, idToken),
+    onSuccess: (res: any) => {
+      return res
+    },
+    onError: (err: any) => {
+      return err
+    },
+    enabled: (socialId != null && socialId.length > 0) || (idToken !== undefined && idToken?.length > 0),
+    retry: 0
+  }
+}
 
 export const useKakaoQueries = ({ client_id, redirect_uri, code }: IKakaoTokenData) => {
   const [accessToken, setAccessToken] = useState('')
@@ -38,4 +54,40 @@ export const useKakaoQueries = ({ client_id, redirect_uri, code }: IKakaoTokenDa
 
 export const useAppleQueries = ({ idToken }: { idToken: string }) => {
   return useQueries([useCheckIdQuery('apple', null, idToken)])
+}
+
+export const useSignUpQuery = ({
+  allowNotification,
+  birthDate,
+  gender,
+  job,
+  jobInfo,
+  mbti,
+  nickname,
+  purpose,
+  socialId,
+  socialLoginType,
+  pushToken
+}: IJoinResponseDto) => {
+  return useQuery(
+    ['signup'],
+    async () =>
+      await apis.signup({
+        allowNotification,
+        birthDate,
+        gender,
+        job,
+        jobInfo,
+        mbti,
+        nickname,
+        purpose,
+        socialId,
+        socialLoginType,
+        pushToken
+      }),
+    {
+      enabled: false,
+      retry: 0
+    }
+  )
 }

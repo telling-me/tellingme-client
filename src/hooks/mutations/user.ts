@@ -3,13 +3,11 @@ import { useMutation, useQueryClient } from 'react-query'
 // apis
 import { apis } from 'apis/apis'
 import type { IUserInfoDto } from 'apis/userApi'
+// hooks
+import { useDeleteToken, useFilterling } from 'hooks'
 
 // type
-import type { IError } from 'type/db'
-
-// hooks
-import { useFilterling } from '..'
-import useDeleteToken from 'hooks/useDeleteToken'
+import { type IError } from 'type/db'
 
 export const usePatchUserInfoMutation = <T>(setOpen: React.Dispatch<React.SetStateAction<boolean>>, options?: T) => {
   return useMutation(async (userInfoDto: IUserInfoDto) => await apis.patchUserInfo(userInfoDto), {
@@ -100,6 +98,16 @@ export const usePostUserNotiQuery = <T>(option?: T) => {
     onSuccess: async () => {
       await queryClient.invalidateQueries('getUserNoti')
     },
+    onError: (err) => {
+      console.log(err)
+    },
+    ...option
+  })
+}
+
+export const useUpdateUserPushToken = <T>(option?: T) => {
+  return useMutation(async (data: { pushToken: string }) => await apis.updateUserPushToken(data.pushToken), {
+    onSuccess() {},
     onError: (err) => {
       console.log(err)
     },

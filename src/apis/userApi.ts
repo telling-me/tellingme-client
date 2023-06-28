@@ -34,6 +34,7 @@ export interface IJoinResponseDto {
   purpose: string
   socialId: string
   socialLoginType: SocialLoginType
+  pushToken: string | undefined
 }
 export interface IUserInfoDto {
   birthDate: string | null
@@ -129,6 +130,18 @@ export const userApi = {
     return await API.post(
       '/api/oauth/logout',
       {},
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
+  },
+  getUserPushToken: async () => {
+    return await API.get('/api/user/pushToken')
+  },
+  updateUserPushToken: async (pushToken: string) => {
+    return await API.post(
+      '/api/user/update/pushToken',
+      { pushToken },
       {
         headers: { 'Content-Type': 'application/json' }
       }

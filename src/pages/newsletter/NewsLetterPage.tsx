@@ -21,9 +21,7 @@ import { Theme } from 'styles/DefaultTheme'
 import Icons from 'assets/icons'
 
 // hooks
-import { useNewsLetterQuery } from 'hooks/queries'
-import useWindowSize from 'hooks/useWindowSize'
-import useChangeColor from 'hooks/useChangeColor'
+import { useNewsLetterQuery, useWindowSize, useChangeColor } from 'hooks'
 
 // utils
 import { emailCheck } from 'utils/signRegex'

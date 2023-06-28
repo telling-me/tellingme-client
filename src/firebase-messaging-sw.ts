@@ -1,5 +1,5 @@
-import { initializeApp } from 'firebase/app'
-import { getMessaging, getToken } from 'firebase/messaging'
+import firebase from 'firebase/app'
+import 'firebase/messaging'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -11,32 +11,28 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 }
 
-const app = initializeApp(firebaseConfig)
-const messaging = getMessaging(app)
+firebase.initializeApp(firebaseConfig)
 
-export function requestPermission() {
-  console.log('Requesting permission...')
+const messaging = firebase.messaging()
 
+export function requestPermission(setPushToken: React.Dispatch<React.SetStateAction<string | undefined>>) {
   void Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
-      console.log('Notification permission granted.')
-
-      getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
+      messaging
+        .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
         .then((token: string) => {
           if (token.length > 0) {
-            console.log(`token: ${token}`)
+            setPushToken(token)
           } else {
-            // Show permission request UI
-            console.log('No registration token available. Request permission to generate one.')
-            // ...
+            console.log('푸시 토큰이 유효하지 않음')
           }
         })
         .catch((err) => {
-          console.log('An error occurred while retrieving token. ', err)
-          // ...
+          console.log('푸시 토큰 가져오는 중 에러남')
+          console.log(`---> `, err)
         })
     } else if (permission === 'denied') {
-      console.log('Notification permission denied')
+      setPushToken('denied')
     }
   })
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 // hooks
-import { useUnsubscribeNewsLetterMutation } from 'hooks/mutations/user'
+import { useUnsubscribeNewsLetterMutation } from 'hooks'
 
 // assets
 import Icons from 'assets/icons'
