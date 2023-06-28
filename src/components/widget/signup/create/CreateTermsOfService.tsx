@@ -60,7 +60,7 @@ const CreateTermsOfService = ({ isAgree, setIsAgree }: ICreateTermsOfService) =>
         isBackground={false}
       />
       <CheckBox
-        label="(필수) 개인정보 처리방침 동의"
+        label="(필수) 개인정보 수집 및 이용 동의"
         checkSize="small"
         buttonText="자세히"
         buttonOnClick={() => {
@@ -75,7 +75,7 @@ const CreateTermsOfService = ({ isAgree, setIsAgree }: ICreateTermsOfService) =>
 
       {openTermsOfService && (
         <TermsOfServiceModal
-          title="서비스 이용약관"
+          title="서비스 이용약관 동의"
           content={TERMS_OF_SERVICE_DOCS}
           setOpen={setOpenTermsOfService}
           _checked={agreeTermsOfService}
@@ -84,7 +84,7 @@ const CreateTermsOfService = ({ isAgree, setIsAgree }: ICreateTermsOfService) =>
       )}
       {openPrivacyPolicy && (
         <TermsOfServiceModal
-          title="개인정보 처리방침"
+          title="개인정보 수집 및 이용 동의"
           content={PRIVACY_POLICY_DOCS}
           setOpen={setOpenPrivacyPolicy}
           _checked={agreePrivacyPolicy}

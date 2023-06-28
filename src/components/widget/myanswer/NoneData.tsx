@@ -7,8 +7,8 @@ import style from 'styles/styled-components/styled'
 
 const NoneData = () => {
   return (
-    <NoneDataWrapper flex="center" direction="column" _gap="8px">
-      <Icon.NotFound width={100} />
+    <NoneDataWrapper flex="center" direction="column" _gap="24px">
+      <Icon.EmptyDuei />
       <TextP typo="b1_b" textColor="gray5">
         이 달에 작성한 답변이 없어요!
       </TextP>
