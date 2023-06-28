@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 
 // type
@@ -11,7 +11,6 @@ import { formatStringDate } from 'utils/date'
 import EmotionIcon from '../main/EmotionIcon'
 
 const TableCell = ({ emotion, question, date }: ITableCell) => {
-  const theme = useTheme()
   const questionDate = new Date(Number(date[0]), Number(date[1]) - 1, Number(date[2]))
 
   return (
@@ -19,7 +18,7 @@ const TableCell = ({ emotion, question, date }: ITableCell) => {
       <CellOuterWrapper>
         <CellInnerWrapper>
           <EmotionWrapper>
-            <EmotionIcon emotion={emotion} width={30} fill={theme.colors.logo} stroke={theme.colors.logo} />
+            <EmotionIcon emotion={emotion} width={30} />
           </EmotionWrapper>
 
           <QuestionDateWrapper>

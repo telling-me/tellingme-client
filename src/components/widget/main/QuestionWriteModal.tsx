@@ -112,7 +112,7 @@ const QuestionWriteModal = () => {
                   if (!alreadyAnswered) setIsEmotionModal(true)
                 }}
               >
-                <EmotionIcon emotion={emotion} width={36} fill={theme.colors.logo} stroke={theme.colors.logo} />
+                <EmotionIcon emotion={emotion} width={36} />
               </Grid>
               <ButtonWrapper flex="end">
                 {editable ? (

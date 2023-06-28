@@ -12,73 +12,73 @@ export const emotionList: IEmotion[] = [
   {
     idx: 1,
     description: '행복해요',
-    icon: Icon.Pen,
+    icon: Icon.EmotionHappy,
     membership: false
   },
   {
     idx: 2,
     description: '뿌듯해요',
-    icon: Icon.ArrowLeft,
+    icon: Icon.EmotionProud,
     membership: false
   },
   {
     idx: 3,
     description: '그저 그래요',
-    icon: Icon.ArrowRight,
+    icon: Icon.EmotionMeh,
     membership: false
   },
   {
     idx: 4,
     description: '피곤해요',
-    icon: Icon.Bagpack,
+    icon: Icon.EmotionTired,
     membership: false
   },
   {
     idx: 5,
     description: '슬퍼요',
-    icon: Icon.Briefcase,
+    icon: Icon.EmotionSad,
     membership: false
   },
   {
     idx: 6,
     description: '화나요',
-    icon: Icon.CaretDown,
+    icon: Icon.EmotionAngry,
     membership: false
   },
   {
     idx: 7,
     description: '설레요',
-    icon: Icon.TooltipBottom,
+    icon: Icon.EmotionExcited,
     membership: true
   },
   {
     idx: 8,
     description: '신나요',
-    icon: Icon.Menu,
+    icon: Icon.EmotionThrilled,
     membership: true
   },
   {
     idx: 9,
-    description: '',
-    icon: Icon.Columns,
+    description: '편안해요',
+    icon: Icon.EmotionRelaxed,
     membership: true
   },
   {
     idx: 10,
     description: '무기력해요',
-    icon: Icon.Columns,
+    icon: Icon.EmotionLethargic,
     membership: true
   },
   {
     idx: 11,
     description: '외로워요',
-    icon: Icon.Columns,
+    icon: Icon.EmotionLonely,
     membership: true
   },
   {
     idx: 12,
     description: '복잡해요',
-    icon: Icon.Columns,
+    icon: Icon.EmotionComplicated,
     membership: true
   }
 ]

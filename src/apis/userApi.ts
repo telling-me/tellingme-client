@@ -81,7 +81,7 @@ export const userApi = {
       }
     )
   },
-  checkUserInfo: async (loginType: string, socialId: string, idToken?: string) => {
+  checkUserInfo: async (loginType: string, socialId: string | null, idToken?: string) => {
     return await NO_AUTH_API.post(
       `/api/oauth/${loginType}`,
       { socialId },
