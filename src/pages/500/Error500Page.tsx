@@ -18,7 +18,7 @@ const Error500Page = () => {
 
   return (
     <ErrorWrapper>
-      <Icons.OverHaulDuei width={windowWidth < 768 ? '120' : '190'} height={windowWidth < 768 ? '120' : '190'} />
+      <Icons.OverhaulDuei width={windowWidth < 768 ? '120' : '190'} height={windowWidth < 768 ? '120' : '190'} />
 
       <style.TextP typo="h2_b" textColor="logo">
         500
