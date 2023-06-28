@@ -13,26 +13,28 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
-const messaging = firebase.messaging()
+const messaging = firebase.messaging.isSupported() ? firebase.messaging() : null
 
 export function requestPermission(setPushToken: React.Dispatch<React.SetStateAction<string | undefined>>) {
-  void Notification.requestPermission().then((permission) => {
-    if (permission === 'granted') {
-      messaging
-        .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
-        .then((token: string) => {
-          if (token.length > 0) {
-            setPushToken(token)
-          } else {
-            console.log('푸시 토큰이 유효하지 않음')
-          }
-        })
-        .catch((err) => {
-          console.log('푸시 토큰 가져오는 중 에러남')
-          console.log(`---> `, err)
-        })
-    } else if (permission === 'denied') {
-      setPushToken('denied')
-    }
-  })
+  if (messaging != null) {
+    void Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        messaging
+          .getToken({ vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
+          .then((token: string) => {
+            if (token.length > 0) {
+              setPushToken(token)
+            } else {
+              console.log('푸시 토큰이 유효하지 않음')
+            }
+          })
+          .catch((err) => {
+            console.log('푸시 토큰 가져오는 중 에러남')
+            console.log(`---> `, err)
+          })
+      } else if (permission === 'denied') {
+        setPushToken('denied')
+      }
+    })
+  }
 }
