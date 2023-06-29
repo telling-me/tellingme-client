@@ -120,7 +120,7 @@ const LandingAnswer = () => {
               }
               textColor="gray8"
             >
-              꾸준히 기록은 나에 대해
+              꾸준한 기록은 나에 대해
             </TextH3>
             <TextH3
               typo={
