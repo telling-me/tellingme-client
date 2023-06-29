@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 import { Dropdown } from 'components'
 import NormalListButton from './NormalListButton'
-import SlideListButton from './SlideListButton'
+// import SlideListButton from './SlideListButton'
 
 // type
 import type { IMyAnswerMode } from './type'
@@ -55,7 +55,7 @@ const TableHeader = ({ isSelected, _onClick }: IMyAnswerMode) => {
       <style.Grid flex="end" _gap="6px" _width="fit-content">
         <NormalListButton isSelected={isSelected} _onClick={_onClick} />
         {/* TODO: 2차 배포 후 SlideListButton 활성화 */}
-        <SlideListButton isSelected={false} _onClick={() => {}} />
+        {/* <SlideListButton isSelected={false} _onClick={() => {}} /> */}
       </style.Grid>
     </HeaderWrapper>
   )
