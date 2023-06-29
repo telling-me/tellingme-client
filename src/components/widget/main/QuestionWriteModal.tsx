@@ -19,7 +19,8 @@ import {
   usePostAnswerMutation,
   useDeleteAnswerMutation,
   useGetAnswerQuery,
-  useGetQuestionQuery
+  useGetQuestionQuery,
+  useWindowSize
 } from 'hooks'
 
 // utils
@@ -33,6 +34,7 @@ const QuestionWriteModal = () => {
   const location = useLocation()
   const theme = useTheme()
   const date = new URLSearchParams(window.location.search).get('date')
+  const windowWidth = useWindowSize().width
   const MAX_LENGTH = 300
   const MIN_LENGTH = 4
 
@@ -232,7 +234,7 @@ const QuestionWriteModal = () => {
                     text="완료"
                     _height="100%"
                     textColor={text?.length < MIN_LENGTH ? 'gray6' : 'logo'}
-                    textSize="c_b"
+                    textSize={windowWidth < 768 ? 'b1_b' : 'h6_b'}
                     _disabled={text?.length < MIN_LENGTH}
                     _onClick={() => {
                       if (!alreadyAnswered) setSaveModal(true)

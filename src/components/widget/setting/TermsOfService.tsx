@@ -36,6 +36,7 @@ const TermsOfServiceWrapper = styled.div`
 
   overflow: auto;
   ::-webkit-scrollbar {
+    display: none;
     width: 0;
   }
 `
