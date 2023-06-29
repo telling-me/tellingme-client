@@ -30,7 +30,7 @@ const LandingEmotion = () => {
         custom={3}
       >
         {mediaQuery(windowSize.width) === 'mobile' ? (
-          <Icon.LandingEmotionModalMobile width={210} />
+          <Icon.LandingEmotionModalMobile width={200} />
         ) : (
           <Icon.LandingEmotionModal width={425} />
         )}
