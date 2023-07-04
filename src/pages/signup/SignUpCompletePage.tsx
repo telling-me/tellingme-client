@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -41,7 +42,9 @@ const SignUpCompletePage = () => {
               navigate('/')
             }}
           />
-          <Button
+
+          {/* (2차 배포 준비로 인해 주석 처리) */}
+          {/* <Button
             buttonType="secondary"
             text="로그인할래요"
             textSize="h6"
@@ -50,11 +53,11 @@ const SignUpCompletePage = () => {
             _onClick={() => {
               setOpen(true)
             }}
-          />
+          /> */}
         </SignUpCompleteButtonWrapper>
       </SignUpCompleteContent>
 
-      {open && <LoginModal setOpen={setOpen} />}
+      {/* {open && <LoginModal setOpen={setOpen} />} */}
     </SignUpCompleteWrapper>
   )
 }
