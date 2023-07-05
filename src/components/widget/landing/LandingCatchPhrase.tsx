@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -100,7 +101,7 @@ const LandingCatchPhrase = () => {
                   navigate('/newsletter')
                 }}
               />
-              <Button
+              {/* <Button
                 _padding="18px 32px"
                 buttonType="secondary"
                 text="시작하기"
@@ -109,12 +110,12 @@ const LandingCatchPhrase = () => {
                 _onClick={() => {
                   setOpen(true)
                 }}
-              />
+              /> */}
             </Grid>
           </Grid>
         </CatchPhraseText>
       </CatchPhraseWrapper>
-      {open && <LoginModal setOpen={setOpen} />}
+      {/* {open && <LoginModal setOpen={setOpen} />} */}
     </>
   )
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 
 // components
@@ -25,7 +26,8 @@ const LandingHeader = () => {
           }}
         />
 
-        <Button
+        {/* (2차 배포 준비로 인해 주석 처리) */}
+        {/* <Button
           buttonType="secondary"
           textSize="h6"
           textColor="logo"
@@ -35,7 +37,7 @@ const LandingHeader = () => {
             setOpen(true)
           }}
         />
-        {open && <LoginModal setOpen={setOpen} />}
+        {open && <LoginModal setOpen={setOpen} />} */}
       </HeaderWrapper>
     </HeaderContainer>
   )

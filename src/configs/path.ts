@@ -1,8 +1,6 @@
 export enum PAGE_URL {
   // Landing
   Home = '/',
-  Login = 'login',
-  Login_Apple = 'login/apple',
   Kakao = '/oauth/kakao',
   Apple = '/oauth/apple',
   CheckPushToken = '/oauth/checktoken',
