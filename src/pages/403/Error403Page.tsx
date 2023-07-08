@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 
 // components
@@ -38,8 +37,8 @@ const ErrorPage = () => {
               다시 로그인해주세요.
             </TextP>
           </Grid>
-          {/* (2차 배포 준비로 인해 주석 처리) */}
-          {/* <Button
+
+          <Button
             buttonType="secondary"
             text="로그인 할게요"
             _margin="24px 0 0 0"
@@ -49,11 +48,11 @@ const ErrorPage = () => {
             _onClick={() => {
               setOpen(true)
             }}
-          /> */}
+          />
         </Grid>
       </NoneDataWrapper>
 
-      {/* {open && <LoginModal setOpen={setOpen} />} */}
+      {open && <LoginModal setOpen={setOpen} />}
     </>
   )
 }
