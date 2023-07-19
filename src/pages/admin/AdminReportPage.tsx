@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 // hooks
 import { useGetReportList, useExpireReport } from 'hooks'
+
 // utils
 import { getCookie } from 'utils/cookies'
 
@@ -9,6 +10,9 @@ import { getCookie } from 'utils/cookies'
 import { Button, Hr, Loading } from 'components'
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
+
+// assets
+import Icons from 'assets/icons'
 
 const AdminReportPage = () => {
   const [nowCheck, setNowCheck] = useState<any>()
@@ -35,7 +39,18 @@ const AdminReportPage = () => {
   }, [reportList])
 
   return !isLogin ? (
-    <>로그인을 다시 해주세요 !</>
+    <ReportListWrapper style={{ flexDirection: 'column', gap: '10px' }}>
+      <Icons.OverhaulDuei width="120" height="120" />
+      <Button
+        buttonType="secondary"
+        text="로그인 하러 가기"
+        textSize="b1_b"
+        textColor="logo"
+        _onClick={() => {
+          window.location.href = '/admin'
+        }}
+      />
+    </ReportListWrapper>
   ) : nowCheck == null ? (
     <ReportListWrapper>
       <Loading />

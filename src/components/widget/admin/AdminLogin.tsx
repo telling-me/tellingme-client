@@ -11,7 +11,7 @@ interface IAdminLogin {
 const AdminLogin = ({ pw, setPw, _onClick }: IAdminLogin) => {
   return (
     <AdminLoginWrapper>
-      <Input _placeholder="비밀번호를 입력해주세요" _value={pw} setValue={setPw} _maxWidth="425px" />
+      <Input _placeholder="비밀번호를 입력해주세요" _type="password" _value={pw} setValue={setPw} _maxWidth="425px" />
       <Button
         buttonType="secondary"
         text="로그인"
