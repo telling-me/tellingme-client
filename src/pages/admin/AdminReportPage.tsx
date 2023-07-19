@@ -28,13 +28,17 @@ const AdminReportPage = () => {
 
   useEffect(() => {
     if (reportList != null) {
-      setNowCheck({
-        answerId: reportList[0].answerId,
-        blindEndedAt: reportList[0].blindEndedAt,
-        blindStartedAt: reportList[0].blindStartedAt,
-        content: reportList[0].content,
-        nickname: reportList[0].nickname
-      })
+      if (reportList.length > 0) {
+        setNowCheck({
+          answerId: reportList[0].answerId,
+          blindEndedAt: reportList[0].blindEndedAt,
+          blindStartedAt: reportList[0].blindStartedAt,
+          content: reportList[0].content,
+          nickname: reportList[0].nickname
+        })
+      } else {
+        setNowCheck({})
+      }
     }
   }, [reportList])
 
@@ -55,7 +59,7 @@ const AdminReportPage = () => {
     <ReportListWrapper>
       <Loading />
     </ReportListWrapper>
-  ) : (
+  ) : Object.keys(nowCheck).length > 0 ? (
     <ReportListWrapper>
       <ReportListLeft>
         <style.TextP typo="h6_b">신고 목록</style.TextP>
@@ -111,6 +115,8 @@ const AdminReportPage = () => {
         </ReportListContentWrapper>
       </ReportListRight>
     </ReportListWrapper>
+  ) : (
+    <ReportListWrapper>신고 내역 없음</ReportListWrapper>
   )
 }
 
