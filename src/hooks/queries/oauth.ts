@@ -57,33 +57,27 @@ export const useAppleQueries = ({ idToken }: { idToken: string }) => {
 }
 
 export const useSignUpQuery = ({
-  allowNotification,
   birthDate,
   gender,
   job,
   jobInfo,
-  mbti,
   nickname,
   purpose,
   socialId,
-  socialLoginType,
-  pushToken
+  socialLoginType
 }: IJoinResponseDto) => {
   return useQuery(
     ['signup'],
     async () =>
       await apis.signup({
-        allowNotification,
         birthDate,
         gender,
         job,
         jobInfo,
-        mbti,
         nickname,
         purpose,
         socialId,
-        socialLoginType,
-        pushToken
+        socialLoginType
       }),
     {
       enabled: false,

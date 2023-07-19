@@ -9,21 +9,19 @@ import { Button } from 'components'
 
 // assets
 import Icons from 'assets/icons'
-import { requestPermission } from 'firebase-messaging-sw'
 
 interface ISignUpHeader {
   step: number
   windowSize: number
   handleSkip: () => void
-  setPushToken: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
-const SignUpHeader = ({ step, windowSize, handleSkip, setPushToken }: ISignUpHeader) => {
+const SignUpHeader = ({ step, windowSize, handleSkip }: ISignUpHeader) => {
   return (
     <SignUpHeaderWrapper>
       <Icons.Logo width="81" height="34" fill={useChangeColor('logo')} _margin="12px 0px 12px 0px" />
 
-      {[4, 5, 6].includes(step) && (
+      {step === 2 && (
         <Button
           buttonType="noFilled"
           text="건너뛰기"
@@ -33,10 +31,6 @@ const SignUpHeader = ({ step, windowSize, handleSkip, setPushToken }: ISignUpHea
           _margin="0px 0px 0px auto"
           _onClick={() => {
             handleSkip()
-
-            if (step === 6) {
-              requestPermission(setPushToken)
-            }
           }}
         />
       )}

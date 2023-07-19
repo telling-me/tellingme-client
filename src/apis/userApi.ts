@@ -24,17 +24,14 @@ export interface IKakaoTokenData {
   code: string
 }
 export interface IJoinResponseDto {
-  allowNotification: boolean
   birthDate: string | null
   gender: string | null
   job: number
   jobInfo: string
-  mbti: string | null
   nickname: string
   purpose: string
   socialId: string
   socialLoginType: SocialLoginType
-  pushToken: string | undefined
 }
 export interface IUserInfoDto {
   birthDate: string | null

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 // hooks
@@ -7,12 +7,9 @@ import { useCheckNicknameMutation, useSignUpQuery, useWindowSize } from 'hooks'
 // component
 import styled from 'styled-components'
 import {
-  CreateBirthDate,
   CreateGender,
   CreateJob,
-  CreateMbti,
   CreateNickname,
-  CreateNotification,
   CreatePurpose,
   CreateTermsOfService,
   ProgressBar,
@@ -51,23 +48,16 @@ const SignUpPage = () => {
   const [job, setJob] = useState<number>(-1)
   const [jobInfo, setJobInfo] = useState('')
   const [gender, setGender] = useState<string | null>(null)
-  const [year, setYear] = useState<string | null>(null)
-  const [month, setMonth] = useState<string | null>(null)
-  const [day, setDay] = useState<string | null>(null)
-  const [mbti, setMbti] = useState<string | null>(null)
-  const [allowNotification, setAllowNotification] = useState<boolean>(false)
-  const [pushToken, setPushToken] = useState<string | undefined>()
+  const [year, setYear] = useState<string>('')
 
   // step 이동 버튼 disabled 여부
   const canMove = () => {
     return (
       (step === 0 && !isAgree) ||
       (step === 1 && nickname === '') ||
-      (step === 2 && purpose.length === 0) ||
-      (step === 3 && (job == null || (job === 5 && jobInfo === ''))) ||
-      (step === 4 && gender == null) ||
-      (step === 5 && (year == null || month == null || day == null)) ||
-      (step === 6 && mbti == null)
+      (step === 2 && gender == null && year === '') ||
+      (step === 3 && (job === -1 || (job === 5 && jobInfo === ''))) ||
+      (step === 4 && purpose.length === 0)
     )
   }
 
@@ -78,21 +68,16 @@ const SignUpPage = () => {
 
   // 회원가입
   const signupQuery = useSignUpQuery({
-    allowNotification,
-    birthDate:
-      year != null && month != null && day != null
-        ? `${year}-${month.length === 1 ? `0${month}` : month}-${day.length === 1 ? `0${day}` : day}`
-        : null,
+    birthDate: year === '' ? null : year,
     gender,
     job,
     jobInfo: job === 5 ? jobInfo : '',
-    mbti,
     nickname,
     purpose: `[${purpose.join(',')}]`,
     socialId,
-    socialLoginType,
-    pushToken: pushToken === 'denied' ? undefined : pushToken
+    socialLoginType
   })
+
   const handleSignUp = () => {
     signupQuery.refetch().catch(() => {})
     navigate('/signup/complete')
@@ -100,28 +85,17 @@ const SignUpPage = () => {
 
   // 건너뛰기
   const handleSkip = () => {
-    if (step === 4) {
+    if (step === 2) {
       setGender(null)
-    } else if (step === 5) {
-      setYear(null)
-      setMonth(null)
-      setDay(null)
-    } else if (step === 6) {
-      setMbti(null)
+      setYear('')
     }
 
     handleNextStep()
   }
 
-  useEffect(() => {
-    if (allowNotification) {
-      handleSignUp()
-    }
-  }, [allowNotification])
-
   return (
     <SignUpWrapper>
-      <SignUpHeader step={step} windowSize={windowSize} handleSkip={handleSkip} setPushToken={setPushToken} />
+      <SignUpHeader step={step} windowSize={windowSize} handleSkip={handleSkip} />
 
       {step !== 7 && <ProgressBar percent={`${14 * (step + 1) + 2}`} />}
 
@@ -132,11 +106,11 @@ const SignUpPage = () => {
         windowSize={windowSize}
         canMove={canMove}
         handleCheckNickname={handleCheckNickname}
-        setPushToken={setPushToken}
+        handleSignUp={handleSignUp}
       />
 
       {
-        // 서비스 이용 약관 (추후에 디자인 나오면 약관 모달 달아야 함)
+        // 서비스 이용 약관
         step === 0 ? (
           <CreateTermsOfService isAgree={isAgree} setIsAgree={setIsAgree} />
         ) : // 닉네임
@@ -148,24 +122,15 @@ const SignUpPage = () => {
             nickname={nickname}
             setNickname={setNickname}
           />
-        ) : // 고민
+        ) : // 성별
         step === 2 ? (
-          <CreatePurpose purpose={purpose} setPurpose={setPurpose} />
+          <CreateGender gender={gender} setGender={setGender} year={year} setYear={setYear} />
         ) : // 직업
         step === 3 ? (
           <CreateJob job={job} setJob={setJob} jobInfo={jobInfo} setJobInfo={setJobInfo} />
-        ) : // 성별
-        step === 4 ? (
-          <CreateGender gender={gender} setGender={setGender} />
-        ) : // 생년월일
-        step === 5 ? (
-          <CreateBirthDate year={year} setYear={setYear} month={month} setMonth={setMonth} day={day} setDay={setDay} />
-        ) : // mbti
-        step === 6 ? (
-          <CreateMbti mbti={mbti} setMbti={setMbti} />
         ) : (
-          // 알람
-          step === 7 && <CreateNotification setAllowNotification={setAllowNotification} _onClick={handleSignUp} />
+          // 고민
+          step === 4 && <CreatePurpose purpose={purpose} setPurpose={setPurpose} />
         )
       }
 
@@ -176,7 +141,7 @@ const SignUpPage = () => {
         windowSize={windowSize}
         canMove={canMove}
         handleCheckNickname={handleCheckNickname}
-        setPushToken={setPushToken}
+        handleSignUp={handleSignUp}
       />
     </SignUpWrapper>
   )
