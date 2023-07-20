@@ -49,6 +49,8 @@ const SignUpPage = () => {
   const [jobInfo, setJobInfo] = useState('')
   const [gender, setGender] = useState<string | null>(null)
   const [year, setYear] = useState<string>('')
+  const [isYearError, setIsYearError] = useState<boolean>(false)
+  const [yearErrorText, setYearErrorText] = useState<string>('')
 
   // step 이동 버튼 disabled 여부
   const canMove = () => {
@@ -65,6 +67,25 @@ const SignUpPage = () => {
   const { mutate: handleCheckNickname } = useCheckNicknameMutation(nickname, setIsError, setErrorText, () => {
     setStep(2)
   })
+
+  // 출생연도 확인
+  const handleCheckBirthYear = () => {
+    const nowYear = new Date().getFullYear()
+
+    if (parseInt(year) < nowYear - 100) {
+      setIsYearError(true)
+      setYearErrorText(`${nowYear - 100}년 이상부터 입력이 가능합니다.`)
+    } else if (parseInt(year) > nowYear) {
+      setIsYearError(true)
+      setYearErrorText(`${nowYear}년 이하부터 입력이 가능합니다.`)
+    } else if (nowYear - 100 <= parseInt(year) && parseInt(year) <= nowYear) {
+      setIsYearError(true)
+      handleNextStep()
+    } else {
+      setIsYearError(true)
+      setYearErrorText('형식이 맞지 않습니다. 다시 입력해주세요.')
+    }
+  }
 
   // 회원가입
   const signupQuery = useSignUpQuery({
@@ -98,7 +119,6 @@ const SignUpPage = () => {
       <SignUpHeader step={step} windowSize={windowSize} handleSkip={handleSkip} />
 
       {step !== 7 && <ProgressBar percent={`${14 * (step + 1) + 2}`} />}
-
       <SignUpTitle
         step={step}
         handlePrevStep={handlePrevStep}
@@ -106,9 +126,9 @@ const SignUpPage = () => {
         windowSize={windowSize}
         canMove={canMove}
         handleCheckNickname={handleCheckNickname}
+        handleCheckBirthYear={handleCheckBirthYear}
         handleSignUp={handleSignUp}
       />
-
       {
         // 서비스 이용 약관
         step === 0 ? (
@@ -122,9 +142,17 @@ const SignUpPage = () => {
             nickname={nickname}
             setNickname={setNickname}
           />
-        ) : // 성별
+        ) : // 성별 & 출생연도
         step === 2 ? (
-          <CreateGender gender={gender} setGender={setGender} year={year} setYear={setYear} />
+          <CreateGender
+            gender={gender}
+            setGender={setGender}
+            year={year}
+            setYear={setYear}
+            yearErrorText={yearErrorText}
+            isYearError={isYearError}
+            setIsYearError={setIsYearError}
+          />
         ) : // 직업
         step === 3 ? (
           <CreateJob job={job} setJob={setJob} jobInfo={jobInfo} setJobInfo={setJobInfo} />
@@ -141,6 +169,7 @@ const SignUpPage = () => {
         windowSize={windowSize}
         canMove={canMove}
         handleCheckNickname={handleCheckNickname}
+        handleCheckBirthYear={handleCheckBirthYear}
         handleSignUp={handleSignUp}
       />
     </SignUpWrapper>

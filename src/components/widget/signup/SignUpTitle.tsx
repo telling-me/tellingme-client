@@ -21,6 +21,7 @@ const SignUpTitle = ({
   windowSize,
   canMove,
   handleCheckNickname,
+  handleCheckBirthYear,
   handleSignUp
 }: ISignUpTitleAndBottomButton) => {
   const theme = useTheme()
@@ -79,6 +80,8 @@ const SignUpTitle = ({
                 _onClick={() => {
                   if (step === 1) {
                     handleCheckNickname()
+                  } else if (step === 2) {
+                    handleCheckBirthYear()
                   } else if (step === 4) {
                     handleSignUp()
                   } else {
