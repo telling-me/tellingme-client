@@ -49,7 +49,7 @@ const Input = ({
         </style.TextSpan>
       )}
 
-      <InputOuterFrame2 isVisible={isVisible} _value={_value}>
+      <InputOuterFrame2 isVisible={isVisible} _value={_value} _disabled={_disabled}>
         <InputInnerFrame
           placeholder={_placeholder}
           value={_value}

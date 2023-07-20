@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -74,7 +75,6 @@ const QuestionWriteModal = () => {
   const [alreadyAnswered, setAlreadyAnswered] = useState<boolean>(true)
 
   const [diffDays, setDiffDays] = useState<number>()
-  console.log(question?.date, diffDays)
 
   const handleSubmit = () => {
     postAnswerMutate(
