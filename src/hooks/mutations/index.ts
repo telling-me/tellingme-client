@@ -5,7 +5,6 @@ export { usePostAnswerMutation } from './question'
 export { useDeleteAnswerMutation, useUpdateAnswerMutation } from './answer'
 
 // user
-
 export {
   usePatchUserInfoMutation,
   useDeleteUser,
@@ -15,3 +14,6 @@ export {
   usePostUserNotiQuery,
   useUpdateUserPushToken
 } from './user'
+
+// admin
+export { useExpireReport } from './admin'

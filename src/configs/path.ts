@@ -4,6 +4,8 @@ export enum PAGE_URL {
   Kakao = '/oauth/kakao',
   Apple = '/oauth/apple',
   CheckPushToken = '/oauth/checktoken',
+  Admin = 'admin',
+  AdminReport = 'admin/report',
 
   // App
   App = 'app',

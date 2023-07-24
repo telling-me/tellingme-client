@@ -3,13 +3,14 @@ import styled from 'styled-components'
 
 interface IHr {
   _margin?: string
+  _maxWidth?: string
 }
 
-const Hr = ({ _margin }: IHr) => {
-  return <HrComponent _margin={_margin} />
+const Hr = ({ _margin, _maxWidth }: IHr) => {
+  return <HrComponent _margin={_margin} _maxWidth={_maxWidth} />
 }
 
-const HrComponent = styled.div<{ _margin?: string }>`
+const HrComponent = styled.div<{ _margin?: string; _maxWidth?: string }>`
   width: 100%;
   max-width: 425px;
   height: 0px;
@@ -18,6 +19,7 @@ const HrComponent = styled.div<{ _margin?: string }>`
   border-radius: 8px;
 
   ${({ _margin }) => _margin != null && `margin: ${_margin};`}
+  ${({ _maxWidth }) => _maxWidth != null && `max-width: ${_maxWidth};`}
 `
 
 export default Hr

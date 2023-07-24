@@ -15,6 +15,7 @@ import Icons from 'assets/icons'
 
 const Input = ({
   _placeholder,
+  _type,
   _value,
   setValue,
   label,
@@ -51,6 +52,7 @@ const Input = ({
 
       <InputOuterFrame2 isVisible={isVisible} _value={_value} _disabled={_disabled}>
         <InputInnerFrame
+          type={_type}
           placeholder={_placeholder}
           value={_value}
           onChange={handleChange}

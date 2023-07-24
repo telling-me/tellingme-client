@@ -13,4 +13,7 @@ export { useKakaoQueries, useAppleQueries, useCheckIdQuery, useSignUpQuery } fro
 // user
 export { useGetUserInfoQuery, useGetUserNotiQuery, useGetUserPushToken } from './user'
 
+// admin
+export { useGetReportList } from './admin'
+
 export { useTestQuery } from './test'

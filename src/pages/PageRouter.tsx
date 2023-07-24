@@ -28,6 +28,8 @@ const PageRouter = () => {
           }
           <Route path={PAGE_URL.Home} element={<LandingLayout />}>
             <Route index element={<Switch.LandingPage />} />
+            <Route path={PAGE_URL.Admin} element={<Switch.AdminPage />} />
+            <Route path={PAGE_URL.AdminReport} element={<Switch.AdminReportPage />} />
             <Route path={'*'} element={<Switch.Error404Page />} />
           </Route>
           {
