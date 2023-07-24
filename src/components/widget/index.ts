@@ -45,3 +45,6 @@ export { default as CreateTermsOfService } from './signup/create/CreateTermsOfSe
 
 // loginModal
 export { default as LoginModal } from './LoginModal'
+
+// admin
+export { default as AdminLogin } from './admin/AdminLogin'
