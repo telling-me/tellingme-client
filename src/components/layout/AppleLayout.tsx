@@ -26,7 +26,7 @@ const AppleLayout = () => {
         accessToken: res.data.data.accessToken,
         refreshToken: res.data.data.refreshToken
       })
-      navigate('/oauth/checktoken')
+      navigate('/app/main')
     }
   } catch (err: unknown) {}
 
