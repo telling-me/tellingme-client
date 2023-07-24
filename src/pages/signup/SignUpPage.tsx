@@ -7,7 +7,7 @@ import { useCheckNicknameMutation, useSignUpQuery, useWindowSize } from 'hooks'
 // component
 import styled from 'styled-components'
 import {
-  CreateGender,
+  CreateGenderBirthYear,
   CreateJob,
   CreateNickname,
   CreatePurpose,
@@ -57,7 +57,7 @@ const SignUpPage = () => {
     return (
       (step === 0 && !isAgree) ||
       (step === 1 && nickname === '') ||
-      (step === 2 && gender == null && year === '') ||
+      (step === 2 && (gender == null || year === '')) ||
       (step === 3 && (job === -1 || (job === 5 && jobInfo === ''))) ||
       (step === 4 && purpose.length === 0)
     )
@@ -78,12 +78,9 @@ const SignUpPage = () => {
     } else if (parseInt(year) > nowYear) {
       setIsYearError(true)
       setYearErrorText(`${nowYear}년 이하부터 입력이 가능합니다.`)
-    } else if (nowYear - 100 <= parseInt(year) && parseInt(year) <= nowYear) {
-      setIsYearError(true)
-      handleNextStep()
     } else {
       setIsYearError(true)
-      setYearErrorText('형식이 맞지 않습니다. 다시 입력해주세요.')
+      handleNextStep()
     }
   }
 
@@ -144,7 +141,7 @@ const SignUpPage = () => {
           />
         ) : // 성별 & 출생연도
         step === 2 ? (
-          <CreateGender
+          <CreateGenderBirthYear
             gender={gender}
             setGender={setGender}
             year={year}

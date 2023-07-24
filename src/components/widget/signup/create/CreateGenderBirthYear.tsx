@@ -14,7 +14,7 @@ import style from 'styles/styled-components/styled'
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
 
-interface ICreateGender {
+interface ICreateGenderBirthYear {
   gender: string | null
   setGender: React.Dispatch<React.SetStateAction<string | null>>
   year: string
@@ -24,7 +24,7 @@ interface ICreateGender {
   setIsYearError: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CreateGender = ({
+const CreateGenderBirthYear = ({
   gender,
   setGender,
   year,
@@ -32,7 +32,7 @@ const CreateGender = ({
   yearErrorText,
   isYearError,
   setIsYearError
-}: ICreateGender) => {
+}: ICreateGenderBirthYear) => {
   return (
     <>
       <ContentWrapper type="gender">
@@ -62,6 +62,7 @@ const CreateGender = ({
 
       <Input
         _placeholder="ex. 1990"
+        _type="number"
         errorText={yearErrorText}
         isError={isYearError}
         setIsError={setIsYearError}
@@ -74,4 +75,4 @@ const CreateGender = ({
   )
 }
 
-export default CreateGender
+export default CreateGenderBirthYear
