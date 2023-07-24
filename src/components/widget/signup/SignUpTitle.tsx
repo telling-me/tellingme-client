@@ -1,5 +1,4 @@
 import React from 'react'
-import { requestPermission } from 'firebase-messaging-sw'
 
 // type
 import type { ISignUpTitleAndBottomButton } from './type'
@@ -78,9 +77,6 @@ const SignUpTitle = ({
                 _onClick={() => {
                   if (step === 1) {
                     handleCheckNickname()
-                  } else if (step === 6) {
-                    handleNextStep()
-                    requestPermission(setPushToken)
                   } else {
                     handleNextStep()
                   }
