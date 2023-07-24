@@ -12,7 +12,6 @@ import KakaoLayout from 'components/layout/KakaoLayout'
 import AppleLayout from 'components/layout/AppleLayout'
 import NewsLetterLayout from 'components/layout/NewsLetterLayout'
 import SignUpLayout from 'components/layout/SignUpLayout'
-import CheckPushTokenLayout from 'components/layout/CheckPushTokenLayout'
 
 // configs
 import { PAGE_URL } from 'configs/path'
@@ -38,7 +37,6 @@ const PageRouter = () => {
           }
           <Route path={PAGE_URL.Kakao} element={<KakaoLayout />} />
           <Route path={PAGE_URL.Apple} element={<AppleLayout />} />
-          <Route path={PAGE_URL.CheckPushToken} element={<CheckPushTokenLayout />} />
           {
             // 앱
           }
