@@ -95,6 +95,7 @@ const QuestionWriteModal = () => {
     if (isSuccess) {
       setAlreadyAnswered(Boolean(answer?.content))
       setText(answer?.content ?? '')
+      setShareToggle(answer?.isPublic ?? false)
       setDiffDays(useCalculateDiff(question?.date))
     }
   }, [isSuccess])
