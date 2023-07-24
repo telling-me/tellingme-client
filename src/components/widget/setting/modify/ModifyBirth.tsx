@@ -9,20 +9,39 @@ interface IModifyBirth {
   year: string
   setYear: React.Dispatch<React.SetStateAction<string>>
   canChangeBirthDate: boolean
+  yearErrorText: string
+  isYearError: boolean
+  setIsYearError: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ModifyBirth = ({ year, setYear, canChangeBirthDate }: IModifyBirth) => {
+const ModifyBirth = ({
+  year,
+  setYear,
+  canChangeBirthDate,
+  yearErrorText,
+  isYearError,
+  setIsYearError
+}: IModifyBirth) => {
   return (
     <>
       <style.TextP typo="h6" textColor="black" _margin="0px 0px 0px 10px">
-        출생연도
+        출생 연도
       </style.TextP>
       <style.TextP typo="c" textColor="gray7" _margin="4px 0px 16px 10px">
         설정 후 변경 불가능
       </style.TextP>
 
       <SelectInnerWrapper>
-        <Input _placeholder="ex. 1990" _value={year} setValue={setYear} _disabled={!canChangeBirthDate} />
+        <Input
+          _placeholder="ex. 1990"
+          _type="number"
+          errorText={yearErrorText}
+          isError={isYearError}
+          setIsError={setIsYearError}
+          _value={year}
+          setValue={setYear}
+          _disabled={!canChangeBirthDate}
+        />
       </SelectInnerWrapper>
     </>
   )

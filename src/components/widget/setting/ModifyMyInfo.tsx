@@ -37,6 +37,28 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   const [isError, setIsError] = useState(false)
   const [errorText, setErrorText] = useState('')
   const [open, setOpen] = useState(false)
+  const [isYearError, setIsYearError] = useState<boolean>(false)
+  const [yearErrorText, setYearErrorText] = useState<string>('')
+
+  const handleCheckBirthYear = () => {
+    const nowYear = new Date().getFullYear()
+
+    if (parseInt(year) < nowYear - 100) {
+      setIsYearError(true)
+      setYearErrorText(`${nowYear - 100}년 이상부터 입력이 가능합니다.`)
+    } else if (parseInt(year) > nowYear) {
+      setIsYearError(true)
+      setYearErrorText(`${nowYear}년 이하부터 입력이 가능합니다.`)
+    } else {
+      setIsYearError(false)
+
+      if (nickname !== originalNn) {
+        checkNickname()
+      } else {
+        setOpen(true)
+      }
+    }
+  }
 
   const res = useGetUserInfoQuery().data
   const { mutate: patchUserInfo } = usePatchUserInfoMutation(setOpen)
@@ -93,8 +115,8 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
         setIsMenu={setIsMenu}
         _disabled={_disabled}
         _onClick={() => {
-          if (nickname !== originalNn) {
-            checkNickname()
+          if (canChangeBirthDate && year !== '') {
+            handleCheckBirthYear()
           } else {
             setOpen(true)
           }
@@ -125,7 +147,14 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
         <Hr _margin="24px 0px" />
 
         {/* 출생연도 */}
-        <ModifyBirth year={year} setYear={setYear} canChangeBirthDate={canChangeBirthDate} />
+        <ModifyBirth
+          year={year}
+          setYear={setYear}
+          canChangeBirthDate={canChangeBirthDate}
+          yearErrorText={yearErrorText}
+          isYearError={isYearError}
+          setIsYearError={setIsYearError}
+        />
         <Hr _margin="24px 0px" />
 
         {/* mbti */}
