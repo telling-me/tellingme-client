@@ -23,7 +23,7 @@ const KakaoLayout = () => {
       client_id: REST_API_KEY,
       redirect_uri: REDIRECT_URI,
       code: AUTHORIZATION_CODE
-    })[2]
+    })[1]
 
     if (res.isError === true) {
       navigate('/signup', {
