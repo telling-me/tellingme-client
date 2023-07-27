@@ -6,24 +6,23 @@ import { useQueries, useQuery } from 'react-query'
 import { apis } from 'apis/apis'
 import type { IJoinResponseDto, IKakaoTokenData } from 'apis/userApi'
 
-export const useCheckIdQuery = (loginType: string, socialId: string | null, idToken?: string) => {
+export const useCheckIdQuery = (loginType: string, oauthToken: string | null, idToken?: string) => {
   return {
     queryKey: ['userToken'],
-    queryFn: async () => await apis.checkUserInfo(loginType, socialId, idToken),
+    queryFn: async () => await apis.checkUserInfo(loginType, oauthToken, idToken),
     onSuccess: (res: any) => {
       return res
     },
     onError: (err: any) => {
       return err
     },
-    enabled: (socialId != null && socialId.length > 0) || (idToken !== undefined && idToken?.length > 0),
+    enabled: (oauthToken != null && oauthToken.length > 0) || (idToken !== undefined && idToken?.length > 0),
     retry: 0
   }
 }
 
 export const useKakaoQueries = ({ client_id, redirect_uri, code }: IKakaoTokenData) => {
   const [accessToken, setAccessToken] = useState('')
-  const [socialId, setSocialId] = useState('')
 
   return useQueries([
     {
@@ -39,16 +38,7 @@ export const useKakaoQueries = ({ client_id, redirect_uri, code }: IKakaoTokenDa
       },
       retry: 0
     },
-    {
-      queryKey: ['getKakaoUserInfo'],
-      queryFn: async () => await apis.getKakaoUserInfo(accessToken),
-      enabled: accessToken.length > 0,
-      onSuccess: (res: any) => {
-        setSocialId(res.data.id.toString())
-      },
-      retry: 0
-    },
-    useCheckIdQuery('kakao', socialId)
+    useCheckIdQuery('kakao', accessToken)
   ])
 }
 
@@ -57,33 +47,27 @@ export const useAppleQueries = ({ idToken }: { idToken: string }) => {
 }
 
 export const useSignUpQuery = ({
-  allowNotification,
   birthDate,
   gender,
   job,
   jobInfo,
-  mbti,
   nickname,
   purpose,
   socialId,
-  socialLoginType,
-  pushToken
+  socialLoginType
 }: IJoinResponseDto) => {
   return useQuery(
     ['signup'],
     async () =>
       await apis.signup({
-        allowNotification,
         birthDate,
         gender,
         job,
         jobInfo,
-        mbti,
         nickname,
         purpose,
         socialId,
-        socialLoginType,
-        pushToken
+        socialLoginType
       }),
     {
       enabled: false,

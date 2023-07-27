@@ -23,7 +23,7 @@ const KakaoLayout = () => {
       client_id: REST_API_KEY,
       redirect_uri: REDIRECT_URI,
       code: AUTHORIZATION_CODE
-    })[2]
+    })[1]
 
     if (res.isError === true) {
       navigate('/signup', {
@@ -37,7 +37,7 @@ const KakaoLayout = () => {
         accessToken: res.data.data.accessToken,
         refreshToken: res.data.data.refreshToken
       })
-      navigate('/oauth/checktoken')
+      navigate('/app/main')
     }
   } catch (err: unknown) {}
 

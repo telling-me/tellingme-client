@@ -21,7 +21,8 @@ const SignUpTitle = ({
   windowSize,
   canMove,
   handleCheckNickname,
-  setPushToken
+  handleCheckBirthYear,
+  handleSignUp
 }: ISignUpTitleAndBottomButton) => {
   const theme = useTheme()
 
@@ -33,7 +34,13 @@ const SignUpTitle = ({
             typo="h4"
             textColor="black"
             _margin={
-              [0, 1, 5, 6].includes(step) ? '60px 0px 110px 0px' : step === 2 ? '60px 0px 8px 0px' : '60px 0px 80px 0px'
+              [0, 1].includes(step)
+                ? '60px 0 110px 0'
+                : step === 2
+                ? '60px 0 52px 0'
+                : step === 3
+                ? '60px 0 30px 0'
+                : '60px 0 8px 0'
             }
           >
             {stepTextData[step]}
@@ -42,18 +49,14 @@ const SignUpTitle = ({
           windowSize >= 1024 && (
             <WebMoveButtonWrapper
               _margin={
-                [0, 1, 5, 6].includes(step)
-                  ? '60px 0px 110px 0px'
-                  : step === 2
-                  ? '60px 0px 8px 0px'
-                  : '60px 0px 80px 0px'
+                [0, 1].includes(step) ? '60px 0 110px 0' : [2, 3].includes(step) ? '60px 0 70px 0' : '60px 0 8px 0'
               }
             >
               <IconButton
                 buttonType="secondary"
                 _width="55px"
                 _height="55px"
-                _margin="0px auto 0px 0px"
+                _margin="0 auto 0 0"
                 _disabled={step === 0}
                 _onClick={handlePrevStep}
               >
@@ -72,11 +75,15 @@ const SignUpTitle = ({
                 buttonType="secondary"
                 _width="55px"
                 _height="55px"
-                _margin="0px 0px 0px auto"
+                _margin="0 0 0 auto"
                 _disabled={canMove()}
                 _onClick={() => {
                   if (step === 1) {
                     handleCheckNickname()
+                  } else if (step === 2) {
+                    handleCheckBirthYear()
+                  } else if (step === 4) {
+                    handleSignUp()
                   } else {
                     handleNextStep()
                   }
@@ -92,8 +99,8 @@ const SignUpTitle = ({
           )
         ))}
 
-      {step === 2 && (
-        <style.TextSpan typo="b2" textColor="gray6" _margin="0px 0px 60px 0px">
+      {step === 4 && (
+        <style.TextSpan typo="b2" textColor="gray6" _margin={windowSize < 1024 ? '0 0 40px 0' : '0 0 60px 0'}>
           최대 2가지 선택 가능
         </style.TextSpan>
       )}

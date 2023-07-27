@@ -24,17 +24,14 @@ export interface IKakaoTokenData {
   code: string
 }
 export interface IJoinResponseDto {
-  allowNotification: boolean
   birthDate: string | null
   gender: string | null
   job: number
   jobInfo: string
-  mbti: string | null
   nickname: string
   purpose: string
   socialId: string
   socialLoginType: SocialLoginType
-  pushToken: string | undefined
 }
 export interface IUserInfoDto {
   birthDate: string | null
@@ -81,12 +78,12 @@ export const userApi = {
       }
     )
   },
-  checkUserInfo: async (loginType: string, socialId: string | null, idToken?: string) => {
+  checkUserInfo: async (loginType: string, oauthToken: string | null, idToken?: string) => {
     return await NO_AUTH_API.post(
-      `/api/oauth/${loginType}`,
-      { socialId },
+      `/api/oauth/${loginType}/manual`,
+      {},
       {
-        headers: { 'Content-Type': 'application/json', idToken: idToken ?? '' }
+        headers: { 'Content-Type': 'application/json', idToken: idToken ?? '', oauthToken }
       }
     )
   },

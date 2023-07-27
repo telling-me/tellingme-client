@@ -3,7 +3,6 @@ export enum PAGE_URL {
   Home = '/',
   Kakao = '/oauth/kakao',
   Apple = '/oauth/apple',
-  CheckPushToken = '/oauth/checktoken',
   Admin = 'admin',
   AdminReport = 'admin/report',
 

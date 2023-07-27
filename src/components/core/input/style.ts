@@ -12,7 +12,7 @@ export const InputComponent = styled.div<{ _margin?: string; _width: string; _ma
   ${({ _margin }) => _margin != null && `margin: ${_margin};`}
 `
 
-export const InputOuterFrame2 = styled.div<{ isVisible: boolean; _value: string }>`
+export const InputOuterFrame2 = styled.div<{ isVisible: boolean; _value: string; _disabled: boolean }>`
   display: flex;
   align-items: center;
 
@@ -39,7 +39,7 @@ export const InputOuterFrame2 = styled.div<{ isVisible: boolean; _value: string 
 
   &:hover {
     svg {
-      ${({ _value }) => _value.length > 0 && `visibility: visible;`}
+      ${({ _value, _disabled }) => _value.length > 0 && !_disabled && `visibility: visible;`}
       cursor: pointer;
     }
   }

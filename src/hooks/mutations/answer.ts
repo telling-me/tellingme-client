@@ -13,7 +13,8 @@ export const useDeleteAnswerMutation = <T>(option?: T) => {
 
 export const useUpdateAnswerMutation = <T>(option?: T) => {
   return useMutation(
-    async (data: { date: string; content: string }) => await apis.updateAnswer(data.date, data.content),
+    async (data: { date: string; content: string; isPublic: boolean }) =>
+      await apis.updateAnswer(data.date, data.content, data.isPublic),
     {
       onSuccess() {},
       onError: (err) => {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -6,7 +7,7 @@ import useQuestionStore from 'stores/useQuestionStore'
 import useAnswerStore from 'stores/useAnswerStore'
 
 // components
-import { Button, EmotionIcon, EmotionModal, Modal } from 'components'
+import { Button, EmotionIcon, EmotionModal, Modal, Toggle } from 'components'
 import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
 // components - style
@@ -20,7 +21,9 @@ import {
   useDeleteAnswerMutation,
   useGetAnswerQuery,
   useGetQuestionQuery,
-  useWindowSize
+  useWindowSize,
+  useCalculateDiff
+  // useCalculateDiff
 } from 'hooks'
 
 // utils
@@ -28,6 +31,8 @@ import { formatStringDate } from 'utils/date'
 
 // assets
 import Icon from 'assets/icons'
+import EmotionText from './EmotionText'
+import { emotionList } from 'data/emotion'
 
 const QuestionWriteModal = () => {
   const navigate = useNavigate()
@@ -60,39 +65,61 @@ const QuestionWriteModal = () => {
   const [cancel, setCancel] = useState<boolean>(false)
   const [deleteModal, setDeleteModal] = useState<boolean>(false)
   const [fold, setFold] = useState<boolean>(false)
-  const [saveModal, setSaveModal] = useState<boolean>(false)
   const [editModal, setEditModal] = useState<boolean>(false)
 
   const [menu, setMenu] = useState<boolean>(false)
   const [text, setText] = useState<string>(answer?.content ?? '')
-  // TODO : 2차 배포 후 toggle on
-  // const [shareToggle, setShareToggle] = useState<boolean>(false)
+  const [shareToggle, setShareToggle] = useState<boolean>(false)
   const [editable, setEditable] = useState<boolean>(false)
 
   const [alreadyAnswered, setAlreadyAnswered] = useState<boolean>(true)
+
+  const [diffDays, setDiffDays] = useState<number>()
+
+  const handleSubmit = () => {
+    postAnswerMutate(
+      { date: date as string, content: text, emotion: emotion as number, isPublic: shareToggle },
+      {
+        onSuccess: async () => {
+          await queryClient.invalidateQueries('answer')
+          navigate(backUrl)
+        },
+        onError: (error) => {
+          console.log(error)
+        }
+      }
+    )
+  }
 
   useEffect(() => {
     if (isSuccess) {
       setAlreadyAnswered(Boolean(answer?.content))
       setText(answer?.content ?? '')
+      setShareToggle(answer?.isPublic ?? false)
+      setDiffDays(useCalculateDiff(question?.date))
     }
   }, [isSuccess])
 
   useEffect(() => {
-    // 감정 선택 모달 열리기
-    if (!alreadyAnswered) setIsEmotionModal(true)
-
     // 답변이 있으면 감정 아이콘 세팅
-    setEmotion(answer?.emotion ?? null)
+    if (answer?.emotion === true) {
+      setEmotion(answer?.emotion)
+    }
 
     setEditable(!alreadyAnswered)
   }, [alreadyAnswered])
+
+  useEffect(() => {
+    setEmotion(answer?.emotion ?? null)
+    setShareToggle(answer?.isPublic ?? false)
+  }, [answer])
 
   return (
     <>
       <Modal>
         <ModalWrapper flex="center" _alignItems="start">
           <ModalInnerWrapper flex="start" direction="column" _height="100%">
+            {/* 헤더 */}
             <ModalHeader flex="between">
               <ButtonWrapper flex="start">
                 <Icon.ArrowLeft
@@ -107,14 +134,14 @@ const QuestionWriteModal = () => {
               </ButtonWrapper>
               <Grid
                 flex="center"
-                _width="44px"
-                _height="44px"
+                _gap="4px"
                 style={{ cursor: alreadyAnswered ? 'default' : 'pointer' }}
                 onClick={() => {
                   if (!alreadyAnswered) setIsEmotionModal(true)
                 }}
               >
                 <EmotionIcon emotion={emotion} width={44} />
+                {emotion != null && <EmotionText text={emotionList[emotion - 1].description} />}
               </Grid>
               <ButtonWrapper flex="end">
                 {editable ? (
@@ -147,24 +174,25 @@ const QuestionWriteModal = () => {
                       }}
                     />
                     {menu && (
-                      <DropdownList dropdownSize="small" listLength="84px" direction="down">
+                      <DropdownList dropdownSize="small" listLength="80" direction="down">
                         <DropdownItem
                           dropdownSize="small"
                           onClick={() => {
                             setEditable(true)
                           }}
-                          style={{ textAlign: 'center' }}
+                          style={{ textAlign: 'center', padding: '12px 20px' }}
                         >
                           <TextSpan typo="b2" textColor="black">
                             수정
                           </TextSpan>
                         </DropdownItem>
+
                         <DropdownItem
                           dropdownSize="small"
                           onClick={() => {
                             setDeleteModal(true)
                           }}
-                          style={{ textAlign: 'center' }}
+                          style={{ textAlign: 'center', padding: '12px 20px' }}
                         >
                           <TextSpan typo="b2" textColor="black">
                             삭제
@@ -176,13 +204,15 @@ const QuestionWriteModal = () => {
                 )}
               </ButtonWrapper>
             </ModalHeader>
+
+            {/* 질문 */}
             <QuestionWrapper
               flex="start"
               direction="column"
               _gap="18px"
               style={{
                 height: fold ? 0 : 'auto',
-                margin: fold ? 0 : '20px 0 24px',
+                margin: fold ? 0 : '21px 0 24px',
                 overflow: fold ? 'hidden' : 'visible'
               }}
             >
@@ -208,7 +238,10 @@ const QuestionWriteModal = () => {
                 }일`}
               </TextP>
             </QuestionWrapper>
+
             <StrikeThrough />
+
+            {/* 기록 */}
             <AnswerTextArea
               placeholder="여기에 기록해주세요!"
               value={text}
@@ -219,6 +252,8 @@ const QuestionWriteModal = () => {
               }}
               disabled={!editable}
             />
+
+            {/* 푸터 */}
             <FooterWrapper flex="start" direction="column">
               <Grid flex="end" _height="14px">
                 <TextP typo="c_b" textColor="gray6">
@@ -226,9 +261,8 @@ const QuestionWriteModal = () => {
                 </TextP>
               </Grid>
               {editable && (
-                <Grid flex="end" _alignItems="start" _padding="10px 0 0 0 ">
-                  {/* TODO: 2차 배포 시 toggle on */}
-                  {/* <Toggle label={['나혼자 보기', '타인과 공유']} value={shareToggle} setValue={setShareToggle} /> */}
+                <Grid flex="between" _alignItems="start" _padding="10px 0 0 0 ">
+                  <Toggle label="공개" value={shareToggle} setValue={setShareToggle} />
                   <Button
                     buttonType="noFilled"
                     text="완료"
@@ -237,7 +271,7 @@ const QuestionWriteModal = () => {
                     textSize={windowWidth < 768 ? 'b1_b' : 'h6_b'}
                     _disabled={text?.length < MIN_LENGTH}
                     _onClick={() => {
-                      if (!alreadyAnswered) setSaveModal(true)
+                      if (!alreadyAnswered) setIsEmotionModal(true)
                       else setEditModal(true)
                     }}
                   />
@@ -246,7 +280,7 @@ const QuestionWriteModal = () => {
             </FooterWrapper>
           </ModalInnerWrapper>
         </ModalWrapper>
-        {Boolean(isEmotionModalOn) && <EmotionModal />}
+        {Boolean(isEmotionModalOn) && <EmotionModal handleSubmit={handleSubmit} />}
       </Modal>
 
       {/* modal */}
@@ -288,7 +322,6 @@ const QuestionWriteModal = () => {
           </Grid>
         </Modal>
       )}
-
       {deleteModal && (
         <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
           <Grid flex="between" direction="column" _height="100%">
@@ -335,55 +368,6 @@ const QuestionWriteModal = () => {
           </Grid>
         </Modal>
       )}
-      {saveModal && (
-        <Modal _width="100%" _maxWidth="425px" _height="174px" _borderRadius="20px" _padding="30px 20px 20px 20px">
-          <Grid flex="between" direction="column" _height="100%">
-            <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
-              <TextP typo="b1" textColor="black">
-                답변을 등록할까요?
-              </TextP>
-              <TextP typo="b2" textColor="gray7">
-                글을 등록한 후에는 감정을 바꿀 수 없어요
-              </TextP>
-            </Grid>
-            <Grid flex="center" _gap="15px">
-              <Button
-                _width="135px"
-                _height="55px"
-                buttonType="tertiary"
-                textColor="logo"
-                textSize="h6"
-                text="취소"
-                _onClick={() => {
-                  setSaveModal(false)
-                }}
-              ></Button>
-              <Button
-                _width="135px"
-                _height="55px"
-                buttonType="secondary"
-                textColor="logo"
-                textSize="h6"
-                text="저장하기"
-                _onClick={() => {
-                  postAnswerMutate(
-                    { date: date as string, content: text, emotion: emotion as number },
-                    {
-                      onSuccess: async () => {
-                        await queryClient.invalidateQueries('answer')
-                        navigate(backUrl)
-                      },
-                      onError: (error) => {
-                        console.log(error)
-                      }
-                    }
-                  )
-                }}
-              ></Button>
-            </Grid>
-          </Grid>
-        </Modal>
-      )}
       {editModal && (
         <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
           <Grid flex="between" direction="column" _height="100%">
@@ -413,7 +397,7 @@ const QuestionWriteModal = () => {
                 text="수정하기"
                 _onClick={() => {
                   editAnswerMutate(
-                    { date: date as string, content: text },
+                    { date: date as string, content: text, isPublic: shareToggle },
                     {
                       onSuccess: async () => {
                         await queryClient.invalidateQueries('answer')
@@ -449,7 +433,7 @@ const ModalInnerWrapper = styled(Grid)`
 `
 
 const ModalHeader = styled(Grid)`
-  margin: 20px 0;
+  margin: 21px 0 12px;
   align-items: flex-start;
 `
 
