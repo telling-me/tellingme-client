@@ -24,3 +24,10 @@ export interface IAnswerStore {
   emotion: number | null
   setEmotion: (value: number) => void
 }
+
+export interface ICommunicationStore {
+  questionDate: { year: number; month: number; day: number }
+  setQuestionDateYear: (value: number) => void
+  setQuestionDateMonth: (value: number) => void
+  setQuestionDateDay: (value: number) => void
+}

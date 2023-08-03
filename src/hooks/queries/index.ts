@@ -1,5 +1,10 @@
 // question
-export { useGetAnswerQuery, useGetQuestionQuery, useGetAnswerRecordCountQuery } from './question'
+export {
+  useGetAnswerQuery,
+  useGetQuestionQuery,
+  useGetAnswerRecordCountQuery,
+  useGetCommunicationQuestionsQuery
+} from './question'
 
 // answer
 export { useGetMyAnswerListQuery } from './answer'

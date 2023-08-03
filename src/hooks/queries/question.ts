@@ -44,3 +44,15 @@ export const useGetAnswerRecordCountQuery = <T>(date: string, options?: T) => {
     ...options
   })
 }
+
+export const useGetCommunicationQuestionsQuery = <T>(date: string, options?: T) => {
+  return useQuery(['communicationQuestions'], async () => await apis.getCommunicationQuestions(date), {
+    retry: 0,
+    onError: (err: IError) => {
+      console.log(err)
+    },
+    staleTime: 36000000,
+    cacheTime: Infinity,
+    ...options
+  })
+}
