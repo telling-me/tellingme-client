@@ -21,7 +21,7 @@ const ContinuousDate = () => {
         </style.TextP>
       ) : (
         <style.TextP typo="c_b" textColor="gray5">
-          오늘도 <span>하루</span>를 돌아봐요
+          오늘도 <span>진정한 나</span>를 만나봐요!
         </style.TextP>
       )}
     </DateWrapper>

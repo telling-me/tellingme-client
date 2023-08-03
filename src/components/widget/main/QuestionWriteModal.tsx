@@ -174,13 +174,13 @@ const QuestionWriteModal = () => {
                       }}
                     />
                     {menu && (
-                      <DropdownList dropdownSize="small" listLength="80" direction="down">
+                      <DropdownList dropdownSize="small" listLength="80" direction="down" style={{ width: 'auto' }}>
                         <DropdownItem
                           dropdownSize="small"
                           onClick={() => {
                             setEditable(true)
                           }}
-                          style={{ textAlign: 'center', padding: '12px 20px' }}
+                          style={{ textAlign: 'center', padding: '12px 20px', width: '66px' }}
                         >
                           <TextSpan typo="b2" textColor="black">
                             수정
@@ -192,7 +192,7 @@ const QuestionWriteModal = () => {
                           onClick={() => {
                             setDeleteModal(true)
                           }}
-                          style={{ textAlign: 'center', padding: '12px 20px' }}
+                          style={{ textAlign: 'center', padding: '12px 20px', width: '66px' }}
                         >
                           <TextSpan typo="b2" textColor="black">
                             삭제
