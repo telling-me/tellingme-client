@@ -86,6 +86,7 @@ import { ReactComponent as EmptyDuei } from './EmptyDuei.svg'
 import { ReactComponent as ResearchDuei } from './ResearchDuei.svg'
 import { ReactComponent as OverhaulDuei } from './OverhaulDuei.svg'
 import { ReactComponent as ChatTearDrop } from './ChatTearDrop.svg'
+import { ReactComponent as CaretLeft } from './CaretLeft.svg'
 
 interface IIconIndex extends IStringKey {
   NotFound: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -174,6 +175,7 @@ interface IIconIndex extends IStringKey {
   ResearchDuei: string | FunctionComponent<any> | ComponentClass<any, any>
   OverhaulDuei: string | FunctionComponent<any> | ComponentClass<any, any>
   ChatTearDrop: string | FunctionComponent<any> | ComponentClass<any, any>
+  CaretLeft: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
@@ -262,7 +264,8 @@ const Icon: IIconIndex = {
   EmptyDuei,
   ResearchDuei,
   OverhaulDuei,
-  ChatTearDrop
+  ChatTearDrop,
+  CaretLeft
 }
 
 export default Icon

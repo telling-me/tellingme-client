@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query'
 import { apis } from 'apis/apis'
 import { type IError } from 'type/db'
+import type { IQuestion } from 'stores/type'
 
 export const useGetQuestionQuery = <T>(date: string, options?: T) => {
   return useQuery(['question', date], async () => await apis.getQuestion(date), {
@@ -45,8 +46,8 @@ export const useGetAnswerRecordCountQuery = <T>(date: string, options?: T) => {
   })
 }
 
-export const useGetCommunicationQuestionsQuery = <T>(date: string, options?: T) => {
-  return useQuery(['communicationQuestions'], async () => await apis.getCommunicationQuestions(date), {
+export const useGetCommunicationQuestionsQuery = <T>(date: string, questions: IQuestion[], options?: T) => {
+  return useQuery(['communicationQuestions', date, questions], async () => await apis.getCommunicationQuestions(date), {
     retry: 0,
     onError: (err: IError) => {
       console.log(err)

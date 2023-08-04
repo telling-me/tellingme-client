@@ -5,25 +5,25 @@ import { devtools } from 'zustand/middleware'
 // type
 import type { ICommunicationStore } from './type'
 
-const nowDate = new Date()
-
 const useCommunicationStore = create<ICommunicationStore>()(
   devtools(
     immer((set) => ({
-      questionDate: { year: nowDate.getFullYear(), month: nowDate.getMonth() + 1, day: nowDate.getDate() },
-      setQuestionDateYear: (value) => {
+      questionIdx: 0,
+      questions: [],
+      sortIdx: 2,
+      setQuestionIdx: (value) => {
         set((state) => {
-          state.questionDate.year = value
+          state.questionIdx = value
         })
       },
-      setQuestionDateMonth: (value) => {
+      setQuestions: (value) => {
         set((state) => {
-          state.questionDate.month = value
+          state.questions = value
         })
       },
-      setQuestionDateDay: (value) => {
+      setSortIdx: (value) => {
         set((state) => {
-          state.questionDate.day = value
+          state.sortIdx = value
         })
       }
     }))

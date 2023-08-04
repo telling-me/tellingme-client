@@ -25,9 +25,18 @@ export interface IAnswerStore {
   setEmotion: (value: number) => void
 }
 
+export interface IQuestion {
+  title: string
+  phrase: string
+  date: number[]
+  answerCount: number
+}
+
 export interface ICommunicationStore {
-  questionDate: { year: number; month: number; day: number }
-  setQuestionDateYear: (value: number) => void
-  setQuestionDateMonth: (value: number) => void
-  setQuestionDateDay: (value: number) => void
+  questionIdx: number
+  questions: IQuestion[]
+  sortIdx: number
+  setQuestionIdx: (value: number) => void
+  setQuestions: (value: IQuestion[]) => void
+  setSortIdx: (value: number) => void
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 // styles
 import { Theme } from 'styles/DefaultTheme'
@@ -13,8 +14,9 @@ import Icons from 'assets/icons'
 
 // hooks
 import { useGetCommunicationQuestionsQuery, useFormatDateArrToStr } from 'hooks'
+
+// stores
 import useCommunicationStore from 'stores/useCommunicationStore'
-import { useNavigate } from 'react-router-dom'
 
 interface ICommunicationQuestion {
   title: string
@@ -25,20 +27,20 @@ interface ICommunicationQuestion {
 
 const AllAnswerPage = () => {
   // store
-  const { setQuestionDateYear, setQuestionDateMonth, setQuestionDateDay } = useCommunicationStore()
+  const { questions, setQuestionIdx, setQuestions } = useCommunicationStore()
 
   const today = new Date(new Date().getTime() - 6 * 60 * 60 * 1000)
   const { data: { data: communicationQuestions = null } = {} } = useGetCommunicationQuestionsQuery(
-    formatStringDate(today)
+    formatStringDate(today),
+    questions
   )
 
   const navigate = useNavigate()
 
   // onClick
-  const _onClick = (date: number[]) => {
-    setQuestionDateYear(date[0])
-    setQuestionDateMonth(date[1])
-    setQuestionDateDay(date[2])
+  const _onClick = (index: number) => {
+    setQuestionIdx(index)
+    setQuestions(communicationQuestions)
     navigate('/app/allanswer/allanswerlist')
   }
 
@@ -74,7 +76,8 @@ const AllAnswerPage = () => {
                 </style.TextP>
                 <CirCleButton
                   onClick={() => {
-                    _onClick(v.date)
+                    _onClick(i)
+                    console.log(i)
                   }}
                 >
                   <Icons.ArrowRight width="24" height="24" stroke={Theme.colors.side.side100} />

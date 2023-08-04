@@ -20,5 +20,8 @@ export const answerApi = {
   deleteAnswer: async (date: string) => await API.delete('/api/answer/delete', { data: { date } }),
 
   updateAnswer: async (date: string, content: string, isPublic: boolean) =>
-    await API.patch('/api/answer/update', { date, content, isPublic })
+    await API.patch('/api/answer/update', { date, content, isPublic }),
+
+  getAllAnswerList: async (date: string, page: number, size: number, sort: '최신순' | '공감순' | '관련순') =>
+    await API.get('/api/communication/list', { params: { date, page, size, sort } })
 }

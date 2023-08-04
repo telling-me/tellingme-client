@@ -8,6 +8,7 @@ export {
 
 // answer
 export { useGetMyAnswerListQuery } from './answer'
+export { useGetAllAnswerListQuery } from './answer'
 
 // newsletter
 export { useNewsLetterQuery } from './newsletter'

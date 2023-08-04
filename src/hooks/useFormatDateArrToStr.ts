@@ -12,6 +12,10 @@ const useFormatDateArrToStr = (date: number[], delimiter: string = '.') => {
     newArr.push(date[2].toString())
   }
 
+  if (delimiter === 'ymd') {
+    return `${newArr[0]}년 ${newArr[1]}월 ${newArr[2]}일`
+  }
+
   return newArr.join(delimiter)
 }
 

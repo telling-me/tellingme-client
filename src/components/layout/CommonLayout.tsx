@@ -48,7 +48,7 @@ const CommonLayout = () => {
           <Inner initial="init" animate="ani" exit="exit" variants={AppAni}>
             <Outlet />
           </Inner>
-          <TabBar />
+          {!PAGE_URL.includes('allanswerlist') && <TabBar />}
         </InnerWrapper>
       </ParentWrapper>
       {params.get('date') != null && <QuestionWriteModal />}
