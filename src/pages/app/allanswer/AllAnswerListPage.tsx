@@ -1,13 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react'
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
 
 // stores
-import styled from 'styled-components'
+import useCommunicationStore from 'stores/useCommunicationStore'
 
 // components
 import { ListHeader, ListAnswers, ListSorts, ListFooter } from 'components'
 
 const AllAnswerListPage = () => {
+  const { setSortIdx } = useCommunicationStore()
+
+  useEffect(() => {
+    setSortIdx(2)
+  }, [])
+
   return (
     <AllAnswerListWrapper>
       <ListHeader />

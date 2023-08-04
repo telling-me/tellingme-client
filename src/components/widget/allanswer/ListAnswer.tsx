@@ -14,13 +14,15 @@ import { Theme } from 'styles/DefaultTheme'
 // assets
 import Icons from 'assets/icons'
 
-interface IListAnswer {
-  emotion: number
-  content: string
-  likeCount: number
-}
+// type
+import type { IAnswer } from './type'
 
-const ListAnswer = ({ emotion, content, likeCount }: IListAnswer) => {
+// hooks
+import { usePostLikesMutation } from 'hooks'
+
+const ListAnswer = ({ answerId, emotion, content, likeCount }: IAnswer) => {
+  const { mutate: postLikesMutate } = usePostLikesMutation()
+
   return (
     <ListAnswerWrapper>
       <EmotionWrapper>
@@ -48,7 +50,7 @@ const ListAnswer = ({ emotion, content, likeCount }: IListAnswer) => {
           _width="24px"
           _height="32px"
           _onClick={() => {
-            console.log('aa')
+            postLikesMutate({ answerId })
           }}
         >
           <Icons.Heart width="20" height="20" stroke={Theme.colors.gray.gray6} />

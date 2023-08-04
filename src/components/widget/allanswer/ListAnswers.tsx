@@ -8,11 +8,8 @@ import { ListAnswer } from 'components'
 import { useFormatDateArrToStr, useGetAllAnswerListQuery } from 'hooks'
 import useCommunicationStore from 'stores/useCommunicationStore'
 
-interface IAnswer {
-  emotion: number
-  content: string
-  likeCount: number
-}
+// type
+import type { IAnswer } from './type'
 
 const ListAnswers = () => {
   const { questionIdx, questions, sortIdx } = useCommunicationStore()
@@ -26,7 +23,9 @@ const ListAnswers = () => {
   return (
     <ListAnswersWrapper>
       {allAnswerList?.content.map((v: IAnswer, i: number) => {
-        return <ListAnswer key={i} emotion={v.emotion} content={v.content} likeCount={v.likeCount} />
+        return (
+          <ListAnswer key={i} answerId={v.answerId} emotion={v.emotion} content={v.content} likeCount={v.likeCount} />
+        )
       })}
       {allAnswerList?.length % 2 !== 0 && <EmptyWrapper></EmptyWrapper>}
     </ListAnswersWrapper>

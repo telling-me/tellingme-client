@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
@@ -27,12 +27,11 @@ interface ICommunicationQuestion {
 
 const AllAnswerPage = () => {
   // store
-  const { questions, setQuestionIdx, setQuestions } = useCommunicationStore()
+  const { setQuestionIdx, setQuestions } = useCommunicationStore()
 
   const today = new Date(new Date().getTime() - 6 * 60 * 60 * 1000)
-  const { data: { data: communicationQuestions = null } = {} } = useGetCommunicationQuestionsQuery(
-    formatStringDate(today),
-    questions
+  const { data: { data: communicationQuestions = null } = {}, refetch } = useGetCommunicationQuestionsQuery(
+    formatStringDate(today)
   )
 
   const navigate = useNavigate()
@@ -43,6 +42,10 @@ const AllAnswerPage = () => {
     setQuestions(communicationQuestions)
     navigate('/app/allanswer/allanswerlist')
   }
+
+  useEffect(() => {
+    void refetch()
+  }, [])
 
   return (
     <AllAnswerWrapper>

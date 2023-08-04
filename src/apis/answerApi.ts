@@ -23,5 +23,15 @@ export const answerApi = {
     await API.patch('/api/answer/update', { date, content, isPublic }),
 
   getAllAnswerList: async (date: string, page: number, size: number, sort: '최신순' | '공감순' | '관련순') =>
-    await API.get('/api/communication/list', { params: { date, page, size, sort } })
+    await API.get('/api/communication/list', { params: { date, page, size, sort } }),
+
+  postLikes: async (answerId: number) => {
+    return await API.post(
+      '/api/likes',
+      { answerId },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
+  }
 }
