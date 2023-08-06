@@ -20,7 +20,7 @@ import type { IAnswer } from './type'
 // hooks
 import { usePostLikesMutation } from 'hooks'
 
-const ListAnswer = ({ answerId, emotion, content, likeCount }: IAnswer) => {
+const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked }: IAnswer) => {
   const { mutate: postLikesMutate } = usePostLikesMutation()
 
   return (
@@ -53,7 +53,11 @@ const ListAnswer = ({ answerId, emotion, content, likeCount }: IAnswer) => {
             postLikesMutate({ answerId })
           }}
         >
-          <Icons.Heart width="20" height="20" stroke={Theme.colors.gray.gray6} />
+          {isLiked ? (
+            <Icons.Heart width="20" height="20" fill={Theme.colors.error.error300} />
+          ) : (
+            <Icons.Heart width="20" height="20" stroke={Theme.colors.gray.gray6} />
+          )}
         </IconButton>
 
         {likeCount !== 0 && (

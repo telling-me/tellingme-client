@@ -24,7 +24,14 @@ const ListAnswers = () => {
     <ListAnswersWrapper>
       {allAnswerList?.content.map((v: IAnswer, i: number) => {
         return (
-          <ListAnswer key={i} answerId={v.answerId} emotion={v.emotion} content={v.content} likeCount={v.likeCount} />
+          <ListAnswer
+            key={i}
+            answerId={v.answerId}
+            emotion={v.emotion}
+            content={v.content}
+            likeCount={v.likeCount}
+            isLiked={v.isLiked}
+          />
         )
       })}
       {allAnswerList?.length % 2 !== 0 && <EmptyWrapper></EmptyWrapper>}
