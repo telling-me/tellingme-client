@@ -23,7 +23,6 @@ import {
   useGetQuestionQuery,
   useWindowSize,
   useCalculateDiff
-  // useCalculateDiff
 } from 'hooks'
 
 // utils
@@ -49,10 +48,12 @@ const QuestionWriteModal = () => {
 
   // query
   const queryClient = useQueryClient()
-  const { data: { data: answer = null } = {}, isSuccess } = useGetAnswerQuery(
+  const { data: { data: answer = null } = {}, isSuccess: answerSuccess } = useGetAnswerQuery(
     formatStringDate(new Date(date as string))
   )
-  const { data: { data: question = null } = {} } = useGetQuestionQuery(formatStringDate(new Date(date as string)))
+  const { data: { data: question = null } = {}, isSuccess: questionSuccess } = useGetQuestionQuery(
+    formatStringDate(new Date(date as string))
+  )
 
   // mutation
   const { mutate: postAnswerMutate } = usePostAnswerMutation()
@@ -66,6 +67,7 @@ const QuestionWriteModal = () => {
   const [deleteModal, setDeleteModal] = useState<boolean>(false)
   const [fold, setFold] = useState<boolean>(false)
   const [editModal, setEditModal] = useState<boolean>(false)
+  const [toggleModal, setToggleModal] = useState<boolean>(false)
 
   const [menu, setMenu] = useState<boolean>(false)
   const [text, setText] = useState<string>(answer?.content ?? '')
@@ -92,13 +94,18 @@ const QuestionWriteModal = () => {
   }
 
   useEffect(() => {
-    if (isSuccess) {
+    if (answerSuccess) {
       setAlreadyAnswered(Boolean(answer?.content))
       setText(answer?.content ?? '')
       setShareToggle(answer?.isPublic ?? false)
+    }
+  }, [answerSuccess])
+
+  useEffect(() => {
+    if (questionSuccess) {
       setDiffDays(useCalculateDiff(question?.date))
     }
-  }, [isSuccess])
+  }, [questionSuccess])
 
   useEffect(() => {
     // 답변이 있으면 감정 아이콘 세팅
@@ -262,7 +269,15 @@ const QuestionWriteModal = () => {
               </Grid>
               {editable && (
                 <Grid flex="between" _alignItems="start" _padding="10px 0 0 0 ">
-                  <Toggle label="공개" value={shareToggle} setValue={setShareToggle} />
+                  <Toggle
+                    label="공개"
+                    value={shareToggle}
+                    setValue={setShareToggle}
+                    _disabled={diffDays != null && diffDays > 3}
+                    _onClick={() => {
+                      setToggleModal(true)
+                    }}
+                  />
                   <Button
                     buttonType="noFilled"
                     text="완료"
@@ -412,6 +427,23 @@ const QuestionWriteModal = () => {
               ></Button>
             </Grid>
           </Grid>
+        </Modal>
+      )}
+      {toggleModal && (
+        <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
+          <style.TextP typo="b1">3일 이상 지난 답변은 바꿀 수 없어요.</style.TextP>
+          <Button
+            buttonType="secondary"
+            text="확인"
+            textSize="h6"
+            textColor="logo"
+            _width="100%"
+            _height="55px"
+            _margin="auto 0 0 0"
+            _onClick={() => {
+              setToggleModal(false)
+            }}
+          />
         </Modal>
       )}
     </>

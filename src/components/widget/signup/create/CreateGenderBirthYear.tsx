@@ -35,6 +35,22 @@ const CreateGenderBirthYear = ({
 }: ICreateGenderBirthYear) => {
   return (
     <>
+      <Input
+        _placeholder="ex. 1990"
+        _type="number"
+        errorText={yearErrorText}
+        isError={isYearError}
+        setIsError={setIsYearError}
+        _value={year}
+        setValue={setYear}
+        _maxWidth="425px"
+        _margin="0 0 70px 0"
+      />
+
+      <style.TextP typo="h4" textColor="black" _margin="0 0 52px 0">
+        성별을 알려주세요
+      </style.TextP>
+
       <ContentWrapper type="gender">
         {genderData.map((v: string, i: number) => {
           return (
@@ -55,22 +71,6 @@ const CreateGenderBirthYear = ({
           )
         })}
       </ContentWrapper>
-
-      <style.TextP typo="h4" textColor="black" _margin="32px 0 52px 0">
-        출생 연도를 알려주세요
-      </style.TextP>
-
-      <Input
-        _placeholder="ex. 1990"
-        _type="number"
-        errorText={yearErrorText}
-        isError={isYearError}
-        setIsError={setIsYearError}
-        _value={year}
-        setValue={setYear}
-        _maxWidth="425px"
-        _margin="0 0 70px 0"
-      />
     </>
   )
 }

@@ -1,8 +1,14 @@
 // question
-export { useGetAnswerQuery, useGetQuestionQuery, useGetAnswerRecordCountQuery } from './question'
+export {
+  useGetAnswerQuery,
+  useGetQuestionQuery,
+  useGetAnswerRecordCountQuery,
+  useGetCommunicationQuestionsQuery
+} from './question'
 
 // answer
 export { useGetMyAnswerListQuery } from './answer'
+export { useGetAllAnswerListQuery } from './answer'
 
 // newsletter
 export { useNewsLetterQuery } from './newsletter'

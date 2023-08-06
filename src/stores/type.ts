@@ -24,3 +24,19 @@ export interface IAnswerStore {
   emotion: number | null
   setEmotion: (value: number) => void
 }
+
+export interface IQuestion {
+  title: string
+  phrase: string
+  date: number[]
+  answerCount: number
+}
+
+export interface ICommunicationStore {
+  questionIdx: number
+  questions: IQuestion[]
+  sortIdx: number
+  setQuestionIdx: (value: number) => void
+  setQuestions: (value: IQuestion[]) => void
+  setSortIdx: (value: number) => void
+}

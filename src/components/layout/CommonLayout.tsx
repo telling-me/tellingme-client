@@ -20,6 +20,8 @@ const CommonLayout = () => {
   const windowSize = useWindowSize()
   const { prevPage, currPage } = useCommonStore()
 
+  const PAGE_URL = window.location.href
+
   const AppAni = {
     init: {
       x: window.innerWidth < 1024 ? (prevPage < currPage ? '150%' : '-150%') : 0,
@@ -42,11 +44,11 @@ const CommonLayout = () => {
     <>
       <ParentWrapper>
         <InnerWrapper>
-          <Header />
+          {!PAGE_URL.includes('allanswer') && <Header />}
           <Inner initial="init" animate="ani" exit="exit" variants={AppAni}>
             <Outlet />
           </Inner>
-          <TabBar />
+          {!PAGE_URL.includes('allanswerlist') && <TabBar />}
         </InnerWrapper>
       </ParentWrapper>
       {params.get('date') != null && <QuestionWriteModal />}

@@ -80,4 +80,14 @@ export const InputInnerFrame = styled.input<{ isError?: boolean }>`
         outline: none;
       }
     `}
+
+  // number 화살표 없애기
+  &[type='number']::-webkit-inner-spin-button,
+    &[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
 `
