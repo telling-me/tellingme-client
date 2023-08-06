@@ -38,3 +38,16 @@ export const usePostLikesMutation = <T>(option?: T) => {
     ...option
   })
 }
+
+export const usePostAccuseMutation = <T>(option?: T) => {
+  return useMutation(
+    async (data: { answerId: number; reason: number }) => await apis.postAccuse(data.answerId, data.reason),
+    {
+      onSuccess: async () => {},
+      onError: (err) => {
+        console.log(err)
+      },
+      ...option
+    }
+  )
+}

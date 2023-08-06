@@ -62,6 +62,7 @@ import { ReactComponent as Briefcase } from './Briefcase.svg'
 import { ReactComponent as Cookpot } from './Cookpot.svg'
 import { ReactComponent as ScrollDown } from './ScrollDown.svg'
 import { ReactComponent as Smiley } from './Smiley.svg'
+import { ReactComponent as Siren } from './Siren.svg'
 import { ReactComponent as Logo } from './Logo.svg'
 import { ReactComponent as Close } from './Close.svg'
 import { ReactComponent as Rows } from './Rows.svg'
@@ -117,6 +118,7 @@ interface IIconIndex extends IStringKey {
   Cookpot: string | FunctionComponent<any> | ComponentClass<any, any>
   ScrollDown: string | FunctionComponent<any> | ComponentClass<any, any>
   Smiley: string | FunctionComponent<any> | ComponentClass<any, any>
+  Siren: string | FunctionComponent<any> | ComponentClass<any, any>
   Lock: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingEmotionBg: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingEmotionLine: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -241,6 +243,7 @@ const Icon: IIconIndex = {
   Cookpot,
   ScrollDown,
   Smiley,
+  Siren,
   Logo,
   Close,
   Rows,

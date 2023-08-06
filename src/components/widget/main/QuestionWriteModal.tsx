@@ -19,7 +19,7 @@ import {
   useUpdateAnswerMutation,
   usePostAnswerMutation,
   useDeleteAnswerMutation,
-  useGetAnswerQuery,
+  useGetMyAnswerQuery,
   useGetQuestionQuery,
   useWindowSize,
   useCalculateDiff
@@ -48,7 +48,7 @@ const QuestionWriteModal = () => {
 
   // query
   const queryClient = useQueryClient()
-  const { data: { data: answer = null } = {}, isSuccess: answerSuccess } = useGetAnswerQuery(
+  const { data: { data: answer = null } = {}, isSuccess: answerSuccess } = useGetMyAnswerQuery(
     formatStringDate(new Date(date as string))
   )
   const { data: { data: question = null } = {}, isSuccess: questionSuccess } = useGetQuestionQuery(

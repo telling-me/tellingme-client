@@ -1,14 +1,13 @@
 // question
 export {
-  useGetAnswerQuery,
+  useGetMyAnswerQuery,
   useGetQuestionQuery,
   useGetAnswerRecordCountQuery,
   useGetCommunicationQuestionsQuery
 } from './question'
 
 // answer
-export { useGetMyAnswerListQuery } from './answer'
-export { useGetAllAnswerListQuery } from './answer'
+export { useGetMyAnswerListQuery, useGetAllAnswerListQuery, useGetAnswerQuery } from './answer'
 
 // newsletter
 export { useNewsLetterQuery } from './newsletter'

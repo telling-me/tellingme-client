@@ -10,7 +10,7 @@ import useQuestionStore from 'stores/useQuestionStore'
 import { modalAni } from 'styles/ani'
 
 // hooks
-import { useGetAnswerQuery } from 'hooks'
+import { useGetMyAnswerQuery } from 'hooks'
 
 // utils
 import { formatStringDate } from 'utils/date'
@@ -26,7 +26,7 @@ const EmotionModal = ({ handleSubmit }: IEmotionModal) => {
   const date = new URLSearchParams(window.location.search).get('date')
 
   // query
-  const { data: { data: answer = null } = {} } = useGetAnswerQuery(formatStringDate(new Date(date as string)))
+  const { data: { data: answer = null } = {} } = useGetMyAnswerQuery(formatStringDate(new Date(date as string)))
 
   const { setIsEmotionModal } = useQuestionStore()
   const { emotion, setEmotion } = useAnswerStore()
