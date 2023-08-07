@@ -55,7 +55,8 @@ const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked }: IAnswer)
           buttonType="noFilled"
           _width="24px"
           _height="32px"
-          _onClick={() => {
+          _onClick={(e) => {
+            e.stopPropagation()
             postLikesMutate({ answerId })
           }}
         >
