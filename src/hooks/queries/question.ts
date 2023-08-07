@@ -21,8 +21,8 @@ export const useGetQuestionQuery = <T>(date: string, options?: T) => {
   })
 }
 
-export const useGetAnswerQuery = <T>(date: string, options?: T) => {
-  return useQuery(['answer', date], async () => await apis.getAnswer(date), {
+export const useGetMyAnswerQuery = <T>(date: string, options?: T) => {
+  return useQuery(['answer', date], async () => await apis.getMyAnswer(date), {
     retry: 0,
     onError: (err: IError) => {
       console.log(err)

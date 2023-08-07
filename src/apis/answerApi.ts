@@ -1,7 +1,9 @@
 import { API } from './api'
 
 export const answerApi = {
-  getAnswer: async (date: string) => await API.get('/api/answer', { params: { date } }),
+  getMyAnswer: async (date: string) => await API.get('/api/answer', { params: { date } }),
+
+  getAnswer: async (answerId: string) => await API.get('/api/answer/completed', { params: { answerId } }),
 
   getAnswerRecordCount: async (date: string) => await API.get('/api/answer/record', { params: { date } }),
 
@@ -29,6 +31,16 @@ export const answerApi = {
     return await API.post(
       '/api/likes',
       { answerId },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
+  },
+
+  postAccuse: async (answerId: number, reason: number) => {
+    return await API.post(
+      '/api/report',
+      { answerId, reason },
       {
         headers: { 'Content-Type': 'application/json' }
       }

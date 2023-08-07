@@ -1,5 +1,7 @@
 export const APPLE_LOGIN_CLIENT_ID = process.env.REACT_APP_APPLE_LOGIN_CLIENT_ID as string
-export const APPLE_LOGIN_REDIRECT_URL = process.env.REACT_APP_APPLE_LOGIN_REDIRECT_URL as string
+export const APPLE_LOGIN_REDIRECT_URL = `${window.location.host}${
+  process.env.REACT_APP_APPLE_LOGIN_REDIRECT_URL as string
+}`
 
 const config = {
   client_id: APPLE_LOGIN_CLIENT_ID, // This is the service ID we created.

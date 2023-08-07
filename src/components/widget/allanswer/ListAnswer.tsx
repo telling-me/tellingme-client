@@ -19,12 +19,18 @@ import type { IAnswer } from './type'
 
 // hooks
 import { usePostLikesMutation } from 'hooks'
+import { useNavigate } from 'react-router-dom'
 
 const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked }: IAnswer) => {
   const { mutate: postLikesMutate } = usePostLikesMutation()
+  const navigate = useNavigate()
 
   return (
-    <ListAnswerWrapper>
+    <ListAnswerWrapper
+      onClick={() => {
+        navigate({ search: `?answerId=${answerId}` })
+      }}
+    >
       <EmotionWrapper>
         <EmotionIcon emotion={emotion} width={24} />
         <EmotionText text={emotionList[emotion - 1].description} _backgroundColor="side100" />
@@ -81,6 +87,7 @@ const ListAnswerWrapper = styled.div`
 
   background-color: ${({ theme }) => theme.colors.side.side200};
   border-radius: 12px;
+  cursor: pointer;
 
   @media all and (min-width: 768px) {
     width: 48%;
