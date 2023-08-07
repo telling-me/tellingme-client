@@ -17,6 +17,7 @@ export { default as MainBackground } from './main/MainBackground'
 
 // Modal - Question
 export { default as QuestionWriteModal } from './main/QuestionWriteModal'
+export { default as AnswerModal } from './main/AnswerModal'
 export { default as EmotionModal } from './main/EmotionModal'
 export { default as EmotionIcon } from './main/EmotionIcon'
 export { default as EmotionText } from './main/EmotionText'

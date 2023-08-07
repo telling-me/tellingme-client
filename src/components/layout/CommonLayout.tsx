@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 
 // components
 import styled from 'styled-components'
-import { Header, QuestionWriteModal, TabBar } from 'components'
+import { Header, QuestionWriteModal, TabBar, AnswerModal } from 'components'
 
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
@@ -52,6 +52,7 @@ const CommonLayout = () => {
         </InnerWrapper>
       </ParentWrapper>
       {params.get('date') != null && <QuestionWriteModal />}
+      {params.get('answerId') != null && <AnswerModal />}
     </>
   )
 }

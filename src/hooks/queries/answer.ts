@@ -14,6 +14,18 @@ export const useGetMyAnswerListQuery = <T>(month: string, year: string, options?
   })
 }
 
+export const useGetAnswerQuery = <T>(answerId: string, options?: T) => {
+  return useQuery(['answer', 'completed', answerId], async () => await apis.getAnswer(answerId), {
+    retry: 0,
+    onError: (err: IError) => {
+      console.log(err)
+    },
+    staleTime: 36000000,
+    cacheTime: Infinity,
+    ...options
+  })
+}
+
 export const useGetAllAnswerListQuery = <T>(
   date: string,
   page: number,

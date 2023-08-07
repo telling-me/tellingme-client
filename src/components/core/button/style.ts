@@ -44,6 +44,7 @@ export const ButtonComponent = styled.button<{
   ${({ _margin }) => _margin !== undefined && `margin: ${_margin};`}
   ${({ _padding }) => _padding !== undefined && `padding: ${_padding};`}
 
+
   ${(props) =>
     props.buttonType === 'primary' &&
     css`
@@ -136,4 +137,7 @@ export const ButtonComponent = styled.button<{
     css`
       padding: 0;
     `}
+
+  // TODO : 색상 정의 재필요
+  background-color: ${({ _active, theme }) => _active === true && theme.colors.side.side300};
 `
