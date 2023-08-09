@@ -66,7 +66,13 @@ const AllAnswerPage = () => {
       <AllAnswerQuestions>
         {communicationQuestions?.map((v: ICommunicationQuestion, i: number) => {
           return (
-            <AllAnswerQuestion key={i}>
+            <AllAnswerQuestion
+              key={i}
+              onClick={() => {
+                _onClick(i)
+                console.log(i)
+              }}
+            >
               <style.TextP typo="b2" style={{ whiteSpace: 'pre-wrap', lineHeight: '20px' }}>{`${v.title}`}</style.TextP>
               <style.TextP typo="c" textColor="side500" _margin="8px 0 12px">
                 {useFormatDateArrToStr(v.date)}
@@ -77,12 +83,7 @@ const AllAnswerPage = () => {
                 <style.TextP typo="c_b" textColor="gray7" _margin="0 0 0 4px">
                   {v.answerCount > 999 ? `999+` : v.answerCount}
                 </style.TextP>
-                <CirCleButton
-                  onClick={() => {
-                    _onClick(i)
-                    console.log(i)
-                  }}
-                >
+                <CirCleButton>
                   <Icons.ArrowRight width="24" height="24" stroke={Theme.colors.side.side100} />
                 </CirCleButton>
               </QuestionFooter>
@@ -164,8 +165,9 @@ const AllAnswerQuestion = styled.div`
   height: 142px;
   padding: 20px 20px 16px;
 
+  cursor: pointer;
+  background-color: ${({ theme }) => theme.colors.side.side200};
   border-radius: 20px;
-  box-shadow: ${({ theme }) => theme.shadow.shadow1};
 `
 
 const QuestionFooter = styled.div`
@@ -186,7 +188,7 @@ const CirCleButton = styled.button`
   height: 36px;
   margin-left: auto;
 
-  background-color: ${({ theme }) => theme.colors.logo};
+  background-color: ${({ theme }) => theme.colors.side.side500};
   border-radius: 100px;
 `
 
