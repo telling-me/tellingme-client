@@ -11,6 +11,12 @@ import useCommunicationStore from 'stores/useCommunicationStore'
 // type
 import type { IAnswer } from './type'
 
+// assets
+import Icons from 'assets/icons'
+
+// styles
+import style from 'styles/styled-components/styled'
+
 const ListAnswers = () => {
   const { questionIdx, questions, sortIdx } = useCommunicationStore()
   const { data: { data: allAnswerList = null } = {} } = useGetAllAnswerListQuery(
@@ -19,8 +25,8 @@ const ListAnswers = () => {
     10,
     sortIdx === 0 ? '공감순' : sortIdx === 1 ? '관련순' : '최신순'
   )
-
-  return (
+  console.log(allAnswerList)
+  return allAnswerList?.empty === false ? (
     <ListAnswersWrapper>
       {allAnswerList?.content.map((v: IAnswer, i: number) => {
         return (
@@ -34,8 +40,16 @@ const ListAnswers = () => {
           />
         )
       })}
-      {allAnswerList?.length % 2 !== 0 && <EmptyWrapper></EmptyWrapper>}
+      {allAnswerList?.length % 2 !== 0 && <ListAnswerEmpty />}
     </ListAnswersWrapper>
+  ) : (
+    <EmptyWrapper>
+      <Icons.EmptyDuei width="100" height="100" />
+
+      <style.TextP typo="b1_b" textColor="gray5">
+        아직 올라온 글이 없어요!
+      </style.TextP>
+    </EmptyWrapper>
   )
 }
 
@@ -52,7 +66,17 @@ const ListAnswersWrapper = styled.div`
     width: 0;
   }
 `
+
 const EmptyWrapper = styled.div`
+  ${({ theme }) => theme.common.flexCenter}
+  flex-direction: column;
+  gap: 24px;
+
+  width: 100%;
+  height: 100%;
+`
+
+const ListAnswerEmpty = styled.div`
   flex-grow: 1;
 
   @media all and (min-width: 768px) {
