@@ -41,6 +41,7 @@ const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked }: IAnswer)
         style={{
           lineHeight: '20px',
           overflow: 'hidden',
+          wordBreak: 'break-word',
           textOverflow: 'ellipsis',
           display: '-webkit-box',
           WebkitLineClamp: 3,

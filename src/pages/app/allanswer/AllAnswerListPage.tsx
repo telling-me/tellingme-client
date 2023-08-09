@@ -35,7 +35,7 @@ const AllAnswerListWrapper = styled.div`
     max-width: 1200px;
   }
 
-  @media all and (min-width: 768px) and (max-width: 1999px) {
+  @media all and (min-width: 767px) and (max-width: 1199px) {
     padding: 0 60px;
   }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 // components
-import { ListAnswer } from 'components'
+import { ListAnswer, Loading } from 'components'
 
 // hooks
 import { useFormatDateArrToStr, useGetAllAnswerListQuery } from 'hooks'
@@ -25,8 +25,10 @@ const ListAnswers = () => {
     10,
     sortIdx === 0 ? '공감순' : sortIdx === 1 ? '관련순' : '최신순'
   )
-  console.log(allAnswerList)
-  return allAnswerList?.empty === false ? (
+
+  return allAnswerList == null ? (
+    <Loading />
+  ) : allAnswerList.empty === false ? (
     <ListAnswersWrapper>
       {allAnswerList?.content.map((v: IAnswer, i: number) => {
         return (
