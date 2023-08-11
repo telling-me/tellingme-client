@@ -36,7 +36,9 @@ export interface ICommunicationStore {
   questionIdx: number
   questions: IQuestion[]
   sortIdx: number
+  page: number
   setQuestionIdx: (value: number) => void
   setQuestions: (value: IQuestion[]) => void
   setSortIdx: (value: number) => void
+  setPage: (value: number) => void
 }

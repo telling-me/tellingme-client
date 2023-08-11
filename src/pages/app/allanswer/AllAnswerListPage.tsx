@@ -8,10 +8,11 @@ import useCommunicationStore from 'stores/useCommunicationStore'
 import { ListHeader, ListAnswers, ListSorts, ListFooter } from 'components'
 
 const AllAnswerListPage = () => {
-  const { setSortIdx } = useCommunicationStore()
+  const { setSortIdx, setPage } = useCommunicationStore()
 
   useEffect(() => {
     setSortIdx(2)
+    setPage(0)
   }, [])
 
   return (

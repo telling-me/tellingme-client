@@ -34,7 +34,7 @@ export const useGetAllAnswerListQuery = <T>(
   options?: T
 ) => {
   return useQuery(
-    ['answer', 'allAnswerList', date, sort],
+    ['answer', 'allAnswerList', date, sort, page],
     async () => await apis.getAllAnswerList(date, page, size, sort),
     {
       retry: 0,
@@ -42,7 +42,7 @@ export const useGetAllAnswerListQuery = <T>(
         console.log(err)
       },
       staleTime: 36000000,
-      cacheTime: Infinity,
+      cacheTime: 0,
       ...options
     }
   )

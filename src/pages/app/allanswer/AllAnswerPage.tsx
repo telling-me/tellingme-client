@@ -70,7 +70,6 @@ const AllAnswerPage = () => {
               key={i}
               onClick={() => {
                 _onClick(i)
-                console.log(i)
               }}
             >
               <style.TextP typo="b2" style={{ whiteSpace: 'pre-wrap', lineHeight: '20px' }}>{`${v.title}`}</style.TextP>

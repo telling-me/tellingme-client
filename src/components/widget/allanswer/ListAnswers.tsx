@@ -1,5 +1,7 @@
-import React from 'react'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { useInView } from 'react-intersection-observer'
 
 // components
 import { ListAnswer, Loading } from 'components'
@@ -18,19 +20,67 @@ import Icons from 'assets/icons'
 import style from 'styles/styled-components/styled'
 
 const ListAnswers = () => {
-  const { questionIdx, questions, sortIdx } = useCommunicationStore()
+  const [hasNextPage, setHasNextPage] = useState<boolean>(true)
+  const [answers, setAnswers] = useState<any[] | null>(null)
+  const [ref, inView] = useInView()
+
+  const ANSWER_SIZE = 10
+
+  const { questionIdx, questions, sortIdx, page, setPage } = useCommunicationStore()
   const { data: { data: allAnswerList = null } = {} } = useGetAllAnswerListQuery(
     useFormatDateArrToStr(questions[questionIdx].date, '-'),
-    0,
-    10,
+    page,
+    ANSWER_SIZE,
     sortIdx === 0 ? '공감순' : sortIdx === 1 ? '관련순' : '최신순'
   )
 
-  return allAnswerList == null ? (
-    <Loading />
-  ) : allAnswerList.empty === false ? (
+  console.log(inView, hasNextPage)
+
+  // 정렬 방법 바뀔 때 초기화 시켜주기
+  useEffect(() => {
+    setAnswers(null)
+    setHasNextPage(true)
+  }, [sortIdx])
+
+  // 질문 바뀔 때 초기화 시켜주기
+  useEffect(() => {
+    setAnswers(null)
+    setHasNextPage(true)
+  }, [questionIdx])
+
+  // 다음 페이지가 있고, 맨 끝에 닿았을 때 page 늘리기 -> query 실행
+  useEffect(() => {
+    if (inView && hasNextPage && answers != null) {
+      setPage(+page + 1)
+    }
+  }, [hasNextPage, inView])
+
+  useEffect(() => {
+    if (allAnswerList != null) {
+      // 이번에 들어온 데이터의 개수가 size 보다 작으면, 다음 페이지가 없다고 명시
+      if (allAnswerList.content.length < ANSWER_SIZE) {
+        setHasNextPage(false)
+      }
+
+      // answers에 데이터 쌓기
+      if (answers == null) {
+        setAnswers(allAnswerList.content)
+      } else if (
+        allAnswerList.content.length !== 0 &&
+        allAnswerList.content[0] !== answers[answers.length - ANSWER_SIZE]
+      ) {
+        setAnswers([...answers, ...allAnswerList.content])
+      }
+    }
+  }, [allAnswerList])
+
+  return answers == null ? (
+    <SingleWrapper>
+      <Loading />
+    </SingleWrapper>
+  ) : answers != null ? (
     <ListAnswersWrapper>
-      {allAnswerList?.content.map((v: IAnswer, i: number) => {
+      {answers.map((v: IAnswer, i: number) => {
         return (
           <ListAnswer
             key={i}
@@ -42,16 +92,23 @@ const ListAnswers = () => {
           />
         )
       })}
-      {allAnswerList?.length % 2 !== 0 && <ListAnswerEmpty />}
+      {answers.length % 2 !== 0 && <ListAnswerEmpty />}
+
+      {hasNextPage && (
+        <LoadingWrapper ref={ref}>
+          <Loading />
+        </LoadingWrapper>
+      )}
+      <div ref={ref} />
     </ListAnswersWrapper>
   ) : (
-    <EmptyWrapper>
+    <SingleWrapper>
       <Icons.EmptyDuei width="100" height="100" />
 
       <style.TextP typo="b1_b" textColor="gray5">
         아직 올라온 글이 없어요!
       </style.TextP>
-    </EmptyWrapper>
+    </SingleWrapper>
   )
 }
 
@@ -69,7 +126,7 @@ const ListAnswersWrapper = styled.div`
   }
 `
 
-const EmptyWrapper = styled.div`
+const SingleWrapper = styled.div`
   ${({ theme }) => theme.common.flexCenter}
   flex-direction: column;
   gap: 24px;
@@ -89,5 +146,7 @@ const ListAnswerEmpty = styled.div`
     width: 100%;
   }
 `
+
+const LoadingWrapper = styled.div``
 
 export default ListAnswers
