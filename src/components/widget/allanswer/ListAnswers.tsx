@@ -31,10 +31,8 @@ const ListAnswers = () => {
     useFormatDateArrToStr(questions[questionIdx].date, '-'),
     page,
     ANSWER_SIZE,
-    sortIdx === 0 ? '공감순' : sortIdx === 1 ? '관련순' : '최신순'
+    sortIdx === 0 ? '최신순' : sortIdx === 1 ? '관련순' : '공감순'
   )
-
-  console.log(inView, hasNextPage)
 
   // 정렬 방법 바뀔 때 초기화 시켜주기
   useEffect(() => {

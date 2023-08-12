@@ -6,7 +6,7 @@ import { ChoiceChips } from 'components'
 import useCommunicationStore from 'stores/useCommunicationStore'
 
 const ListSorts = () => {
-  const BUTTON_TEXTS = ['인기순', '관련순', '최신순']
+  const BUTTON_TEXTS = ['최신순', '관련순', '공감순']
 
   const { sortIdx, setSortIdx, setPage } = useCommunicationStore()
 

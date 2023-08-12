@@ -10,7 +10,7 @@ const useCommunicationStore = create<ICommunicationStore>()(
     immer((set) => ({
       questionIdx: 0,
       questions: [],
-      sortIdx: 2,
+      sortIdx: 0,
       page: 0,
       setQuestionIdx: (value) => {
         set((state) => {

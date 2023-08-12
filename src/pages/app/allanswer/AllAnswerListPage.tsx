@@ -11,7 +11,7 @@ const AllAnswerListPage = () => {
   const { setSortIdx, setPage } = useCommunicationStore()
 
   useEffect(() => {
-    setSortIdx(2)
+    setSortIdx(0)
     setPage(0)
   }, [])
 
