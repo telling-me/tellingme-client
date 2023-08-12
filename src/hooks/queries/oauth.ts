@@ -6,17 +6,17 @@ import { useQueries, useQuery } from 'react-query'
 import { apis } from 'apis/apis'
 import type { IJoinResponseDto, IKakaoTokenData } from 'apis/userApi'
 
-export const useCheckIdQuery = (loginType: string, oauthToken: string | null, idToken?: string) => {
+export const useCheckIdQuery = (loginType: string, oauthToken: string | null) => {
   return {
     queryKey: ['userToken'],
-    queryFn: async () => await apis.checkUserInfo(loginType, oauthToken, idToken),
+    queryFn: async () => await apis.checkUserInfo(loginType, oauthToken),
     onSuccess: (res: any) => {
       return res
     },
     onError: (err: any) => {
       return err
     },
-    enabled: (oauthToken != null && oauthToken.length > 0) || (idToken !== undefined && idToken?.length > 0),
+    enabled: oauthToken != null && oauthToken.length > 0,
     retry: 0
   }
 }
@@ -43,7 +43,7 @@ export const useKakaoQueries = ({ client_id, redirect_uri, code }: IKakaoTokenDa
 }
 
 export const useAppleQueries = ({ idToken }: { idToken: string }) => {
-  return useQueries([useCheckIdQuery('apple', null, idToken)])
+  return useQueries([useCheckIdQuery('apple', idToken)])
 }
 
 export const useSignUpQuery = ({
