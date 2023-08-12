@@ -15,7 +15,7 @@ import Icons from 'assets/icons'
 const SlideListButton = ({ isSelected, _onClick }: IMyAnswerMode) => {
   return (
     <ListViewButton isSelected={isSelected} _onClick={_onClick}>
-      <Icons.Columns width="24" height="24" stroke={useChangeColor(isSelected ? 'side500' : 'gray2')} />
+      <Icons.Columns width="20" height="20" stroke={useChangeColor(isSelected ? 'side500' : 'gray2')} />
     </ListViewButton>
   )
 }

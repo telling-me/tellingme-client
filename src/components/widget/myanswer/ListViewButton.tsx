@@ -11,15 +11,17 @@ const ListViewButton = ({ isSelected, children, _onClick }: IMyAnswerModeButton)
 }
 
 export const ButtonWrapper = styled.button<{ isSelected: boolean }>`
-  padding: 6px;
+  ${({ theme }) => theme.common.flexCenter}
+
+  width: 32px;
+  height: 32px;
 
   background-color: ${({ theme, isSelected }) => (isSelected ? theme.colors.side.side200 : 'none')};
   border-radius: 8px;
 
   &:hover {
     svg {
-      // TODO : 2차 배포 후 stroke 색상 변경
-      // stroke: ${(props) => props.theme.colors.side.side500};
+      stroke: ${(props) => props.theme.colors.side.side500};
     }
   }
 
