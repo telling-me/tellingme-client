@@ -78,12 +78,12 @@ export const userApi = {
       }
     )
   },
-  checkUserInfo: async (loginType: string, oauthToken: string | null, idToken?: string) => {
+  checkUserInfo: async (loginType: string, oauthToken: string | null) => {
     return await NO_AUTH_API.post(
       `/api/oauth/${loginType}/manual`,
       {},
       {
-        headers: { 'Content-Type': 'application/json', idToken: idToken ?? '', oauthToken }
+        headers: { 'Content-Type': 'application/json', oauthToken }
       }
     )
   },
