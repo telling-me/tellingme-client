@@ -55,7 +55,7 @@ const Question = () => {
       </Link>
       {answer !== null && answer?.code !== 'NOT_FOUND_ANSWER' && (
         <TextP typo="c_b" textColor="logo" _margin="18px 0 0 0">
-          답변 완료!
+          기록 완료!
         </TextP>
       )}
     </Grid>
