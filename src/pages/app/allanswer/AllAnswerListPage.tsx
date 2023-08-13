@@ -30,7 +30,7 @@ const AllAnswerListWrapper = styled.div`
   flex-direction: column;
 
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 
   max-width: 1200px;
   margin: 0 60px;

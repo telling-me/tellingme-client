@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -19,6 +19,8 @@ const ListHeader = () => {
   const navigate = useNavigate()
 
   const { questionIdx, questions } = useCommunicationStore()
+
+  if (questions.length === 0) window.location.href = '/app/allanswer'
 
   return (
     <ListHeaderWrapper>
