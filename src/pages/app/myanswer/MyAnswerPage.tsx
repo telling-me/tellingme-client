@@ -11,7 +11,7 @@ import { useGetMyAnswerListQuery } from 'hooks'
 import useAnswerStore from 'stores/useAnswerStore'
 
 const MyAnswerPage = () => {
-  const [isVertical, setIsVertical] = useState(true)
+  const [isVertical, setIsVertical] = useState(false)
   const { myAnswerFilter } = useAnswerStore()
 
   const { data: { data: myAnswer = null } = {}, isLoading } = useGetMyAnswerListQuery(

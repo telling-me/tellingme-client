@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Button } from 'components/core'
+import { Button, ToolTip } from 'components/core'
 
 // store
 import useQuestionStore from 'stores/useQuestionStore'
@@ -59,7 +59,13 @@ const EmotionModal = ({ handleSubmit }: IEmotionModal) => {
               >
                 <emotionIcon.icon width={56} />
                 <LockEmotion display={!emotionIcon.membership ? 'none' : 'block'}>
-                  <Icon.Lock width={24} />
+                  <ToolTip
+                    tooltipType={idx % 3 === 0 ? 'bottomLeft' : idx % 3 === 1 ? 'bottom' : 'bottomRight'}
+                    tooltipText="추후 프리미엄 모드에서 만나볼 수 있어요!"
+                    isError={false}
+                  >
+                    <Icon.Lock width={24} />
+                  </ToolTip>
                 </LockEmotion>
               </Emotion>
             </>

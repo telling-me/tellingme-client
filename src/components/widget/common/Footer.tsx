@@ -75,13 +75,18 @@ const Footer = () => {
           <Grid flex="start" direction="column" _gap="4px">
             <Grid flex="start" _gap="8px">
               <TextP typo="c_b" textColor="side500">
-                주소 06974, 동작구 흑석로 84 221호
+                사업자등록번호 187-26-01892
               </TextP>
               <TextP typo="c_b" textColor="side500">
                 |
               </TextP>
               <TextP typo="c_b" textColor="side500">
                 대표 박소현
+              </TextP>
+            </Grid>
+            <Grid>
+              <TextP typo="c_b" textColor="side500">
+                주소 06974, 동작구 흑석로 84 221호
               </TextP>
             </Grid>
             <Grid>
