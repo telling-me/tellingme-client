@@ -21,7 +21,7 @@ import type { IAnswer } from './type'
 import { usePostLikesMutation } from 'hooks'
 import { useNavigate } from 'react-router-dom'
 
-const ListAnswer = ({ answerId, emotion, content, likeCount }: IAnswer) => {
+const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked, changeLikeCount }: IAnswer) => {
   const { mutate: postLikesMutate } = usePostLikesMutation()
   const navigate = useNavigate()
 
@@ -41,6 +41,7 @@ const ListAnswer = ({ answerId, emotion, content, likeCount }: IAnswer) => {
         style={{
           lineHeight: '20px',
           overflow: 'hidden',
+          wordBreak: 'break-word',
           textOverflow: 'ellipsis',
           display: '-webkit-box',
           WebkitLineClamp: 3,
@@ -55,11 +56,17 @@ const ListAnswer = ({ answerId, emotion, content, likeCount }: IAnswer) => {
           buttonType="noFilled"
           _width="24px"
           _height="32px"
-          _onClick={() => {
+          _onClick={(e) => {
+            e.stopPropagation()
             postLikesMutate({ answerId })
+            changeLikeCount(answerId)
           }}
         >
-          <Icons.Heart width="20" height="20" stroke={Theme.colors.gray.gray6} />
+          {isLiked ? (
+            <Icons.Heart width="20" height="20" fill={Theme.colors.error.error300} />
+          ) : (
+            <Icons.Heart width="20" height="20" stroke={Theme.colors.gray.gray6} />
+          )}
         </IconButton>
 
         {likeCount !== 0 && (

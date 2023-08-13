@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation } from 'react-query'
 import { apis } from 'apis/apis'
 
 export const useDeleteAnswerMutation = <T>(option?: T) => {
@@ -26,12 +26,8 @@ export const useUpdateAnswerMutation = <T>(option?: T) => {
 }
 
 export const usePostLikesMutation = <T>(option?: T) => {
-  const queryClient = useQueryClient()
-
   return useMutation(async (data: { answerId: number }) => await apis.postLikes(data.answerId), {
-    onSuccess: async () => {
-      await queryClient.invalidateQueries(['answer', 'allAnswerList'])
-    },
+    onSuccess: async () => {},
     onError: (err) => {
       console.log(err)
     },

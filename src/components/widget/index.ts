@@ -30,7 +30,8 @@ export { default as TableHeader } from './myanswer/TableHeader'
 export { default as TableCell } from './myanswer/TableCell'
 export { default as Table } from './myanswer/Table'
 export { default as NoneData } from './myanswer/NoneData'
-export { default as Ready } from './myanswer/Ready'
+export { default as CardView } from './myanswer/CardView'
+export { default as CardViewCard } from './myanswer/CardViewCard'
 
 // signup
 export { default as SignUpHeader } from './signup/SignUpHeader'

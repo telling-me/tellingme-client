@@ -3,4 +3,6 @@ export interface IAnswer {
   emotion: number
   content: string
   likeCount: number
+  isLiked: boolean
+  changeLikeCount: (answerId: number) => void
 }

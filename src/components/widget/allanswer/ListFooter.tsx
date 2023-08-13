@@ -10,14 +10,18 @@ import style from 'styles/styled-components/styled'
 import useCommunicationStore from 'stores/useCommunicationStore'
 
 const ListFooter = () => {
-  const { questionIdx, setQuestionIdx } = useCommunicationStore()
+  const { questionIdx, setQuestionIdx, setPage, setSortIdx } = useCommunicationStore()
 
   const handlePrev = () => {
     setQuestionIdx(+questionIdx - 1)
+    setSortIdx(0)
+    setPage(0)
   }
 
   const handleNext = () => {
     setQuestionIdx(+questionIdx + 1)
+    setSortIdx(0)
+    setPage(0)
   }
 
   return (

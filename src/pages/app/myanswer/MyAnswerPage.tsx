@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 // components
-import { TableHeader, Table, NoneData, Ready, Loading } from 'components'
+import { TableHeader, Table, NoneData, CardView, Loading } from 'components'
 
 // hooks
 import { useGetMyAnswerListQuery } from 'hooks'
@@ -33,7 +33,7 @@ const MyAnswerPage = () => {
       ) : isVertical ? (
         <Table data={myAnswer} />
       ) : (
-        <Ready />
+        <CardView data={myAnswer} />
       )}
     </MyAnswerWrapper>
   )
