@@ -15,9 +15,11 @@ import { useDeleteUser, useGetUserInfoQuery } from 'hooks'
 import Icons from 'assets/icons'
 
 // configs
-import { APPLE_WITHDRAW_URL } from 'configs/apple'
+// import { APPLE_WITHDRAW_URL } from 'configs/apple'
+import { useNavigate } from 'react-router-dom'
 
 const Withdrawal = () => {
+  const navigate = useNavigate()
   const [agree, setAgree] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -33,7 +35,8 @@ const Withdrawal = () => {
   }
 
   const _onClick = () => {
-    info?.socialLoginType === 'apple' ? (window.location.href = APPLE_WITHDRAW_URL) : mutate({ oauthtoken: '' })
+    // info?.socialLoginType === 'apple' ? (window.location.href = APPLE_WITHDRAW_URL) : mutate({ code: '' })
+    info?.socialLoginType === 'apple' ? navigate('/') : mutate({ code: '' })
   }
 
   return (
