@@ -126,7 +126,7 @@ const CardViewWrapper = styled.div`
 
   @media all and (min-width: 1200px) {
     padding: 0 20px;
-    height: calc(100vh - 126px);
+    height: calc(calc(var(--vh, 1vh) * 100) - 126px);
   }
 
   @media all and (min-width: 767px) and (max-width: 1199px) {
@@ -134,16 +134,16 @@ const CardViewWrapper = styled.div`
   }
 
   @media all and (min-width: 1023px) and (max-width: 1200px) {
-    height: calc(100vh - 126px);
+    height: calc(calc(var(--vh, 1vh) * 100) - 126px);
   }
 
   @media all and (min-width: 767px) and (max-width: 1023px) {
-    height: calc(100vh - 223px);
+    height: calc(calc(var(--vh, 1vh) * 100) - 239px);
   }
 
   @media all and (max-width: 767px) {
     padding: 0 5px;
-    height: calc(100vh - 203px);
+    height: calc(calc(var(--vh, 1vh) * 100) - 203px);
   }
 `
 

@@ -45,7 +45,7 @@ const MyAnswerWrapper = styled.div`
   align-items: center;
 
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   height: calc(var(--vh, 1vh) * 100);
 
   transition: 2s;
