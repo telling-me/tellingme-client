@@ -65,8 +65,8 @@ const HeaderWrapper = styled.header`
   ${({ theme }) => theme.common.flexBetween}
 
   width: 100%;
-  max-width: 1200px;
-  padding: 20px 0 12px 0;
+  max-width: 1320px;
+  padding: 20px 60px 12px;
   position: absolute;
   background-color: transparent;
   transition: 0.3s;
@@ -75,10 +75,6 @@ const HeaderWrapper = styled.header`
 
   svg {
     cursor: pointer;
-  }
-
-  @media all and (min-width: 1200px) {
-    max-width: 1200px;
   }
 
   @media all and (min-width: 768px) and (max-width: 1199px) {

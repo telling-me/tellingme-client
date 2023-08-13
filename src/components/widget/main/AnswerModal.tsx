@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import styled, { useTheme } from 'styled-components'
 
 // components
-import { EmotionIcon, Modal } from 'components'
+import { EmotionIcon, IconButton, Modal } from 'components'
 import EmotionText from './EmotionText'
 import AccuseModal from './AccuseModal'
 
@@ -68,33 +68,39 @@ const AnswerModal = () => {
             <ModalInnerWrapper flex="start" direction="column" _height="100%">
               {/* 헤더 */}
               <ModalHeader flex="between">
-                <ButtonWrapper flex="start">
-                  <Icon.ArrowLeft
-                    onClick={() => {
-                      navigate(-1)
-                    }}
-                    width={24}
-                    height={24}
-                    stroke={theme.colors.gray.gray6}
-                  />
-                </ButtonWrapper>
-                <Grid flex="center" _gap="4px">
-                  <EmotionIcon emotion={answers[index].emotion} width={44} />
-                  {answers[index].emotion != null && (
-                    <EmotionText text={emotionList[answers[index].emotion - 1].description} />
-                  )}
+                <IconButton
+                  buttonType="noFilled"
+                  _width="32px"
+                  _height="32px"
+                  _margin="20px auto 12px 0"
+                  _onClick={() => {
+                    navigate(-1)
+                  }}
+                >
+                  <Icon.ArrowLeft width="24" height="24" stroke={theme.colors.gray.gray6} />
+                </IconButton>
+                <Grid flex="center" _height="100%" _alignItems="end">
+                  <Grid flex="center" _gap="4px">
+                    <EmotionIcon emotion={answers[index].emotion} width={44} />
+                    {answers[index].emotion != null && (
+                      <EmotionText text={emotionList[answers[index].emotion - 1].description} />
+                    )}
+                  </Grid>
                 </Grid>
-                <ButtonWrapper flex="end">
+
+                <IconButton
+                  buttonType="noFilled"
+                  _width="32px"
+                  _height="32px"
+                  _margin="20px auto 12px 0"
+                  _onClick={() => {
+                    setAccuse(true)
+                  }}
+                >
                   <>
-                    <Icon.Siren
-                      width={24}
-                      stroke={theme.colors.gray.gray6}
-                      onClick={() => {
-                        setAccuse(true)
-                      }}
-                    />
+                    <Icon.Siren width={24} stroke={theme.colors.gray.gray6} />
                   </>
-                </ButtonWrapper>
+                </IconButton>
               </ModalHeader>
 
               {/* 질문 */}
@@ -197,7 +203,11 @@ const ModalInnerWrapper = styled(Grid)`
   }
 `
 
-const ModalHeader = styled(Grid)``
+const ModalHeader = styled(Grid)`
+  button {
+    position: relative;
+  }
+`
 
 const QuestionWrapper = styled(Grid)`
   transition: 0.3s;
@@ -236,13 +246,6 @@ const FooterWrapper = styled(Grid)`
   margin-bottom: 46px;
   @media screen and (max-width: 767px) {
     margin-bottom: 10px;
-  }
-`
-const ButtonWrapper = styled(Grid)`
-  width: 90px;
-  position: relative;
-  svg {
-    cursor: pointer;
   }
 `
 

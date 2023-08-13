@@ -32,16 +32,13 @@ const AllAnswerListWrapper = styled.div`
   width: 100%;
   height: 100vh;
 
-  @media all and (min-width: 1200px) {
-    max-width: 1200px;
-  }
+  max-width: 1200px;
+  margin: 0 60px;
 
-  @media all and (min-width: 767px) and (max-width: 1199px) {
-    padding: 0 60px;
-  }
+  transition: 2s;
 
   @media all and (max-width: 767px) {
-    padding: 0 25px;
+    margin: 0 25px;
   }
 `
 
