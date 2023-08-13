@@ -23,7 +23,7 @@ export const usePatchUserInfoMutation = <T>(setOpen: React.Dispatch<React.SetSta
 }
 
 export const useDeleteUser = <T>(options?: T) => {
-  return useMutation(async () => await apis.deleteUser(), {
+  return useMutation(async (data: { oauthtoken: string }) => await apis.deleteUser(data.oauthtoken), {
     onSuccess: (res) => {
       useDeleteToken()
       window.location.href = '/'

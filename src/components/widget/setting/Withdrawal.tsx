@@ -9,15 +9,19 @@ import { Button, CheckSquare, Modal } from 'components'
 import { SETTING_WITHDRAWAL_DOCS } from 'data/docs'
 
 // hooks
-import { useDeleteUser } from 'hooks'
+import { useDeleteUser, useGetUserInfoQuery } from 'hooks'
 
 // assets
 import Icons from 'assets/icons'
+
+// configs
+import { APPLE_WITHDRAW_URL } from 'configs/apple'
 
 const Withdrawal = () => {
   const [agree, setAgree] = useState(false)
   const [open, setOpen] = useState(false)
 
+  const { data: { data: info = null } = {} } = useGetUserInfoQuery()
   const { mutate } = useDeleteUser()
 
   const handleOpen = () => {
@@ -29,7 +33,7 @@ const Withdrawal = () => {
   }
 
   const _onClick = () => {
-    mutate()
+    info?.socialLoginType === 'apple' ? (window.location.href = APPLE_WITHDRAW_URL) : mutate({ oauthtoken: '' })
   }
 
   return (
