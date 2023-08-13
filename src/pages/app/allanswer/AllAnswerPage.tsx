@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
 // styles
-import { Theme } from 'styles/DefaultTheme'
 import style from 'styles/styled-components/styled'
 
 // utils
@@ -17,6 +16,7 @@ import { useGetCommunicationQuestionsQuery, useFormatDateArrToStr } from 'hooks'
 
 // stores
 import useCommunicationStore from 'stores/useCommunicationStore'
+import { IconButton } from 'components/core'
 
 interface ICommunicationQuestion {
   title: string
@@ -82,9 +82,9 @@ const AllAnswerPage = () => {
                 <style.TextP typo="c_b" textColor="gray7" _margin="0 0 0 4px">
                   {v.answerCount > 999 ? `999+` : v.answerCount}
                 </style.TextP>
-                <CirCleButton>
-                  <Icons.ArrowRight width="24" height="24" stroke={Theme.colors.side.side100} />
-                </CirCleButton>
+                <IconButton buttonType="noFilled" _width="36" _height="36" _margin="0 0 0 auto" _onClick={() => {}}>
+                  <Icons.Entrance />
+                </IconButton>
               </QuestionFooter>
             </AllAnswerQuestion>
           )
@@ -178,17 +178,6 @@ const QuestionFooter = styled.div`
   p {
     white-space: pre-wrap;
   }
-`
-
-const CirCleButton = styled.button`
-  cursor: pointer;
-
-  width: 36px;
-  height: 36px;
-  margin-left: auto;
-
-  background-color: ${({ theme }) => theme.colors.side.side500};
-  border-radius: 100px;
 `
 
 export default AllAnswerPage
