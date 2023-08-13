@@ -31,6 +31,7 @@ export const useDeleteUser = <T>(options?: T) => {
     onError: (err: IError) => {
       console.log(err)
     },
+    retry: false,
     ...options
   })
 }
