@@ -7,7 +7,7 @@ import useQuestionStore from 'stores/useQuestionStore'
 import useAnswerStore from 'stores/useAnswerStore'
 
 // components
-import { Button, EmotionIcon, EmotionModal, Modal, Toggle } from 'components'
+import { Button, EmotionIcon, EmotionModal, IconButton, Modal, Toggle } from 'components'
 import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
 // components - style
@@ -67,31 +67,39 @@ const AnswerModal = () => {
           <ModalInnerWrapper flex="start" direction="column" _height="100%">
             {/* 헤더 */}
             <ModalHeader flex="between">
-              <ButtonWrapper flex="start">
-                <Icon.ArrowLeft
-                  onClick={() => {
-                    navigate(-1)
-                  }}
-                  width={24}
-                  height={24}
-                  stroke={theme.colors.gray.gray6}
-                />
-              </ButtonWrapper>
-              <Grid flex="center" _gap="4px">
+              <IconButton
+                buttonType="noFilled"
+                _width="32px"
+                _height="32px"
+                _margin="20px auto 12px 0"
+                _onClick={() => {
+                  navigate(-1)
+                }}
+              >
+                <Icon.ArrowLeft width="24" height="24" stroke={theme.colors.gray.gray6} />
+              </IconButton>
+              <Grid flex="center" _gap="4px" _height="100%">
                 <EmotionIcon emotion={answer?.emotion} width={44} />
                 {answer?.emotion != null && <EmotionText text={emotionList[answer?.emotion - 1].description} />}
               </Grid>
-              <ButtonWrapper flex="end">
-                <>
-                  <Icon.Siren
-                    width={24}
-                    stroke={theme.colors.gray.gray6}
-                    onClick={() => {
-                      setAccuse(true)
-                    }}
-                  />
-                </>
-              </ButtonWrapper>
+
+              <IconButton
+                buttonType="noFilled"
+                _width="32px"
+                _height="32px"
+                _margin="20px auto 12px 0"
+                _onClick={() => {
+                  setAccuse(true)
+                }}
+              >
+                <Icon.Siren
+                  width={24}
+                  stroke={theme.colors.gray.gray6}
+                  onClick={() => {
+                    setAccuse(true)
+                  }}
+                />
+              </IconButton>
             </ModalHeader>
 
             {/* 질문 */}
@@ -186,13 +194,14 @@ const ModalWrapper = styled(Grid)`
 `
 const ModalInnerWrapper = styled(Grid)`
   max-width: 1200px;
-  margin: 0 20px;
+  margin: 0 60px;
+
+  @media all and (max-width: 767px) {
+    margin: 0 25px;
+  }
 `
 
-const ModalHeader = styled(Grid)`
-  margin: 21px 0 12px;
-  align-items: flex-start;
-`
+const ModalHeader = styled(Grid)``
 
 const QuestionWrapper = styled(Grid)`
   transition: 0.3s;
