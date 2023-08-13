@@ -8,11 +8,9 @@ import { Button, Modal } from 'components/core'
 
 // ani
 import { modalAni } from 'styles/ani'
-import { usePostAccuseMutation } from 'hooks/mutations/answer'
 
 // hooks
-
-// utils
+import { usePostAccuseMutation } from 'hooks/mutations/answer'
 
 const accuseReason = ['욕설', '음란물', '광고', '개인정보 침해', '낚시성 콘텐츠', '기타']
 
@@ -24,8 +22,8 @@ const AccuseModal = ({ handleCancel }: IAccuseModal) => {
   const [reason, setReason] = useState<number | null>(null)
   const answerId = new URLSearchParams(window.location.search).get('answerId')
 
-  const [success, setSuccess] = useState<boolean>(false)
-  const [existed, setExisted] = useState<boolean>(false)
+  const [modal, setModal] = useState<boolean>(false)
+  const [text, setText] = useState<string>('')
 
   const { mutate: postAccuseMutate } = usePostAccuseMutation()
 
@@ -81,14 +79,33 @@ const AccuseModal = ({ handleCancel }: IAccuseModal) => {
             textColor={reason === null ? 'gray4' : 'logo'}
             _onClick={() => {
               postAccuseMutate(
-                { answerId: Number(answerId), reason: reason as number },
+                { answerId: Number(answerId), reason: (reason as number) + 1 },
                 {
                   onSuccess: (res) => {
-                    if (res.data?.status === 5000) setExisted(true)
-                    if (res.data?.status === 200) setSuccess(true)
+                    if (res.data?.status === 5000) {
+                      setModal(true)
+                      setText('이미 신고된 답변입니다.')
+                    } else if (res.data?.status === 4003) {
+                      setModal(true)
+                      setText('해당 답변을 찾을 수 없습니다.')
+                    } else if (res.data?.status === 5001) {
+                      setModal(true)
+                      setText('올바르지 않은 신고 사유입니다.')
+                    } else if (res.data?.status === 5002) {
+                      setModal(true)
+                      setText('자신의 답변은 신고할 수 없습니다.')
+                    } else if (res.data?.status === 5003) {
+                      setModal(true)
+                      setText('공개 처리되어있는 답변만 신고할 수 있습니다.')
+                    } else {
+                      setModal(true)
+                      setText('신고가 접수되었습니다.')
+                    }
                   },
                   onError: (error) => {
                     console.log(error)
+                    setModal(true)
+                    setText('오류가 발생했습니다.')
                   }
                 }
               )
@@ -98,9 +115,9 @@ const AccuseModal = ({ handleCancel }: IAccuseModal) => {
         </Grid>
       </ModalInnerWrapper>
       {/* modal */}
-      {success && (
+      {modal && (
         <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
-          <style.TextP typo="b1">신고가 접수되었어요!</style.TextP>
+          <style.TextP typo="b1">{text}</style.TextP>
           <Button
             buttonType="secondary"
             text="확인"
@@ -110,24 +127,8 @@ const AccuseModal = ({ handleCancel }: IAccuseModal) => {
             _height="55px"
             _margin="auto 0 0 0"
             _onClick={() => {
-              setSuccess(false)
-            }}
-          />
-        </Modal>
-      )}
-      {existed && (
-        <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
-          <style.TextP typo="b1">이미 신고된 답변입니다.</style.TextP>
-          <Button
-            buttonType="secondary"
-            text="확인"
-            textSize="h6"
-            textColor="logo"
-            _width="100%"
-            _height="55px"
-            _margin="auto 0 0 0"
-            _onClick={() => {
-              setExisted(false)
+              setModal(false)
+              handleCancel?.()
             }}
           />
         </Modal>
@@ -143,7 +144,7 @@ const ModalWrapper = styled(style.Grid)`
   width: 100vw;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
-  z-index: 9500;
+  z-index: 9000;
   background-color: rgba(24, 24, 24, 0.28);
   backdrop-filter: blur(6px);
 

@@ -461,7 +461,11 @@ const ModalWrapper = styled(Grid)`
 `
 const ModalInnerWrapper = styled(Grid)`
   max-width: 1200px;
-  margin: 0 20px;
+  margin: 0 60px;
+
+  @media all and (max-width: 767px) {
+    margin: 0 25px;
+  }
 `
 
 const ModalHeader = styled(Grid)`
