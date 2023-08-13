@@ -1,9 +1,9 @@
 import { API } from './api'
 
 export const answerApi = {
-  getMyAnswer: async (date: string) => await API.get('/api/answer', { params: { date } }),
+  getMyAnswer: async (date: string) => await API.get('/api/answer/date', { params: { date } }),
 
-  getAnswer: async (answerId: string) => await API.get('/api/answer/completed', { params: { answerId } }),
+  getAnswer: async (answerId: string) => await API.get('/api/answer/id', { params: { answerId } }),
 
   getAnswerRecordCount: async (date: string) => await API.get('/api/answer/record', { params: { date } }),
 

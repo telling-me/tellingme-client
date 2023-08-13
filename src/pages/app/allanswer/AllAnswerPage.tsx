@@ -99,7 +99,8 @@ const AllAnswerWrapper = styled.div`
   flex-direction: column;
 
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
+  height: calc(var(--vh, 1vh) * 100);
 
   overflow: auto;
   ::-webkit-scrollbar {
