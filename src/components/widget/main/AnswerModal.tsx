@@ -190,13 +190,14 @@ const ModalWrapper = styled(Grid)`
 `
 const ModalInnerWrapper = styled(Grid)`
   max-width: 1200px;
-  margin: 0 20px;
+  margin: 0 60px;
+
+  @media all and (max-width: 767px) {
+    margin: 0 25px;
+  }
 `
 
-const ModalHeader = styled(Grid)`
-  margin: 21px 0 12px;
-  align-items: flex-start;
-`
+const ModalHeader = styled(Grid)``
 
 const QuestionWrapper = styled(Grid)`
   transition: 0.3s;
