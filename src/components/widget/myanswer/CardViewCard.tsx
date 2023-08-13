@@ -53,7 +53,8 @@ const CardViewCardWrapper = styled.button<{ isMargin: boolean }>`
 
   width: 302px;
   min-width: 302px;
-  height: 478px;
+  height: 100vmin;
+  max-height: 478px;
   padding: 32px 28px;
 
   background-color: ${({ theme }) => theme.colors.side.side100};
@@ -79,10 +80,6 @@ const CardViewCardWrapper = styled.button<{ isMargin: boolean }>`
 
   @media all and (min-width: 767px) {
     ${({ isMargin }) => isMargin && `margin-bottom: 72px;`}
-  }
-
-  @media all and (max-height: 721px) {
-    height: 100%;
   }
 `
 

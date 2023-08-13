@@ -147,6 +147,10 @@ const ListAnswerEmpty = styled.div`
   }
 `
 
-const LoadingWrapper = styled.div``
+const LoadingWrapper = styled.div`
+  ${({ theme }) => theme.common.flexCenter}
+
+  width: 100%;
+`
 
 export default ListAnswers

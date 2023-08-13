@@ -10,9 +10,6 @@ import type { IData, IMyAnswer } from './type'
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
 
-// styles
-import { Theme } from 'styles/DefaultTheme'
-
 // assets
 import Icons from 'assets/icons'
 
@@ -90,7 +87,7 @@ const CardView = ({ data }: IMyAnswer) => {
         })}
       </CardViewScrollWrapper>
 
-      {windowWidth > 767 && (
+      {windowWidth > 1200 && (
         <CardViewArrows>
           <IconButton
             buttonType="noFilled"
@@ -100,7 +97,7 @@ const CardView = ({ data }: IMyAnswer) => {
             _width="36px"
             _height="36px"
           >
-            <Icons.CaretLeft width="24" height="24" stroke={Theme.colors.gray.gray6} />
+            <Icons.SliderLeft />
           </IconButton>
           <IconButton
             buttonType="noFilled"
@@ -110,7 +107,7 @@ const CardView = ({ data }: IMyAnswer) => {
             _width="36px"
             _height="36px"
           >
-            <Icons.CaretRight width="24" height="24" stroke={Theme.colors.gray.gray6} />
+            <Icons.SliderRight />
           </IconButton>
         </CardViewArrows>
       )}
@@ -122,22 +119,31 @@ const CardViewWrapper = styled.div`
   ${({ theme }) => theme.common.flexCenter}
   flex-direction: column;
 
-  position: relative;
+  position: fixed;
+  top: 126px;
 
   width: 100%;
-  height: calc(100% - 203px);
-  margin: auto 0 77px 0;
 
   @media all and (min-width: 1200px) {
     padding: 0 20px;
+    height: calc(100vh - 126px);
   }
 
   @media all and (min-width: 767px) and (max-width: 1199px) {
     padding: 0 60px;
   }
 
+  @media all and (min-width: 1024px) and (max-width: 1200px) {
+    height: calc(100vh - 126px);
+  }
+
+  @media all and (min-width: 767px) and (max-width: 1024px) {
+    height: calc(100vh - 223px);
+  }
+
   @media all and (max-width: 767px) {
     padding: 0 5px;
+    height: calc(100vh - 203px);
   }
 `
 
@@ -156,8 +162,7 @@ const CardViewScrollWrapper = styled.div<{ _padding?: number }>`
     width: 0;
   }
 
-  ${({ _padding }) =>
-    _padding != null && `padding: 20px ${_padding}px 20px ${_padding}px;`}// @media all and (min-width: 767px) {
+  ${({ _padding }) => _padding != null && `padding: 20px ${_padding}px 20px ${_padding}px;`}
 `
 
 const CardViewArrows = styled.div`
