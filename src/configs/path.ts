@@ -16,6 +16,7 @@ export enum PAGE_URL {
   Error500 = '500',
   Error403 = '403',
   Dev = 'dev',
+  WithdrawApple = 'withdraw/apple',
 
   // NewsLetter
   NewsLetter = 'newsletter',
