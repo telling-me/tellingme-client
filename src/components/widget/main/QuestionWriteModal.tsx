@@ -118,7 +118,7 @@ const QuestionWriteModal = () => {
 
   useEffect(() => {
     setEmotion(answer?.emotion ?? null)
-    setShareToggle(answer?.isPublic ?? false)
+    setShareToggle(answer?.isPublic ?? true)
   }, [answer])
 
   return (
