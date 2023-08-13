@@ -15,7 +15,7 @@ import { useDeleteUser, useGetUserInfoQuery } from 'hooks'
 import Icons from 'assets/icons'
 
 // configs
-import { APPLE_WITHDRAW_REDIRECT_URL } from 'configs/apple'
+import { APPLE_WITHDRAW_URL } from 'configs/apple'
 
 const Withdrawal = () => {
   const [agree, setAgree] = useState(false)
@@ -33,9 +33,7 @@ const Withdrawal = () => {
   }
 
   const _onClick = () => {
-    info?.socialLoginType === 'apple'
-      ? (window.location.href = APPLE_WITHDRAW_REDIRECT_URL)
-      : mutate({ oauthtoken: '' })
+    info?.socialLoginType === 'apple' ? (window.location.href = APPLE_WITHDRAW_URL) : mutate({ oauthtoken: '' })
   }
 
   return (
