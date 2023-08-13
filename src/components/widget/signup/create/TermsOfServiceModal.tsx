@@ -83,6 +83,7 @@ const TermsOfServiceContent = styled.div`
 
   p {
     line-height: 18px;
+    white-space: pre-wrap;
   }
 `
 
