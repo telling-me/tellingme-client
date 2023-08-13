@@ -34,10 +34,7 @@ const AccuseModal = ({ handleCancel }: IAccuseModal) => {
         <Grid flex="center" direction="column" _gap="8px">
           <TextP typo="b1">답변 신고 사유를 선택해주세요</TextP>
           <TextP typo="b2" textColor="gray5">
-            허위 신고 시 서비스 이용 제한을
-          </TextP>
-          <TextP typo="b2" textColor="gray5">
-            받을 수 있어요
+            허위 신고 시 서비스 이용이 제한 될 수 있어요.
           </TextP>
         </Grid>
         <ReasonWrapper selected={reason}>
@@ -151,7 +148,7 @@ const ModalWrapper = styled(style.Grid)`
 
 const ModalInnerWrapper = styled(style.Grid)`
   width: 425px;
-  height: 407px;
+  height: 387px;
   background-color: ${({ theme }) => theme.colors.side.side100};
   border-radius: 20px;
   padding: 30px 20px 20px 20px;
@@ -159,8 +156,8 @@ const ModalInnerWrapper = styled(style.Grid)`
 
   @media all and (max-width: 767px) {
     width: 100%;
-    height: 427px;
-    padding: 42px 20px 32px 20px;
+    height: 403px;
+    padding: 42px 20px 20px 20px;
     border-radius: 20px 20px 0 0;
   }
 `

@@ -23,7 +23,7 @@ const ListAnswers = () => {
   const [hasNextPage, setHasNextPage] = useState<boolean>(true)
   const [ref, inView] = useInView()
 
-  const ANSWER_SIZE = 10
+  const ANSWER_SIZE = 20
 
   const { questionIdx, questions, sortIdx, page, setPage, answers, setAnswers } = useCommunicationStore()
   const { data: { data: allAnswerList = null } = {} } = useGetAllAnswerListQuery(
@@ -71,11 +71,21 @@ const ListAnswers = () => {
     }
   }, [allAnswerList])
 
+  console.log('asdfas', answers)
+
   return answers == null ? (
     <SingleWrapper>
       <Loading />
     </SingleWrapper>
-  ) : answers != null ? (
+  ) : answers.length === 0 ? (
+    <SingleWrapper>
+      <Icons.EmptyDuei width="100" height="100" />
+
+      <style.TextP typo="b1_b" textColor="gray5">
+        아직 올라온 글이 없어요!
+      </style.TextP>
+    </SingleWrapper>
+  ) : (
     <ListAnswersWrapper>
       {answers.map((v: IAnswer, i: number) => {
         return (
@@ -99,14 +109,6 @@ const ListAnswers = () => {
       )}
       <div ref={ref} />
     </ListAnswersWrapper>
-  ) : (
-    <SingleWrapper>
-      <Icons.EmptyDuei width="100" height="100" />
-
-      <style.TextP typo="b1_b" textColor="gray5">
-        아직 올라온 글이 없어요!
-      </style.TextP>
-    </SingleWrapper>
   )
 }
 
@@ -145,6 +147,10 @@ const ListAnswerEmpty = styled.div`
   }
 `
 
-const LoadingWrapper = styled.div``
+const LoadingWrapper = styled.div`
+  ${({ theme }) => theme.common.flexCenter}
+
+  width: 100%;
+`
 
 export default ListAnswers

@@ -117,6 +117,8 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
         _onClick={() => {
           if (canChangeBirthDate && year !== '') {
             handleCheckBirthYear()
+          } else if (nickname !== originalNn) {
+            checkNickname()
           } else {
             setOpen(true)
           }
