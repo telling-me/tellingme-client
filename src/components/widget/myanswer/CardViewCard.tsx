@@ -33,7 +33,7 @@ const CardViewCard = ({ data, isMargin = false, _onClick }: ICardViewCard) => {
           {data.phrase}
         </TextP>
 
-        <TextP typo="c" _margin="36px 0 72px">
+        <TextP typo="c" textColor="black" _margin="36px 0 72px">
           {data.content}
         </TextP>
 
@@ -60,6 +60,10 @@ const CardViewCardWrapper = styled.button<{ isMargin: boolean }>`
   background-color: ${({ theme }) => theme.colors.side.side100};
   border-radius: 24px;
   ${({ theme }) => `box-shadow: ${theme.shadow.shadow1}`};
+
+  a {
+    color: ${({ theme }) => theme.colors.gray.black};
+  }
 
   cursor: pointer;
   p:nth-child(3) {

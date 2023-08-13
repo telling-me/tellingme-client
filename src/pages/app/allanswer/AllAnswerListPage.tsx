@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 // stores
@@ -8,20 +8,30 @@ import useCommunicationStore from 'stores/useCommunicationStore'
 import { ListHeader, ListAnswers, ListSorts, ListFooter } from 'components'
 
 const AllAnswerListPage = () => {
-  const { setSortIdx, setPage } = useCommunicationStore()
+  const { setSortIdx, setPage, questions } = useCommunicationStore()
+  const [isError, setIsError] = useState<boolean>(true)
 
   useEffect(() => {
     setSortIdx(0)
     setPage(0)
   }, [])
 
-  return (
+  useEffect(() => {
+    if (isError) {
+      if (questions.length === 0) window.location.href = '/app/allanswer'
+      else setIsError(false)
+    }
+  }, [questions])
+
+  return !isError ? (
     <AllAnswerListWrapper>
       <ListHeader />
       <ListSorts />
       <ListAnswers />
       <ListFooter />
     </AllAnswerListWrapper>
+  ) : (
+    <></>
   )
 }
 
@@ -30,7 +40,7 @@ const AllAnswerListWrapper = styled.div`
   flex-direction: column;
 
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 
   max-width: 1200px;
   margin: 0 60px;
