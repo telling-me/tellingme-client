@@ -20,8 +20,6 @@ const ListHeader = () => {
 
   const { questionIdx, questions } = useCommunicationStore()
 
-  if (questions.length === 0) window.location.href = '/app/allanswer'
-
   return (
     <ListHeaderWrapper>
       <IconButton
