@@ -53,8 +53,8 @@ const TableHeader = ({ isSelected, _onClick }: IMyAnswerMode) => {
       </style.Grid>
 
       <style.Grid flex="end" _gap="6px" _width="fit-content">
-        <NormalListButton isSelected={isSelected} _onClick={_onClick} />
         <SlideListButton isSelected={!isSelected} _onClick={_onClick} />
+        <NormalListButton isSelected={isSelected} _onClick={_onClick} />
       </style.Grid>
     </HeaderWrapper>
   )
