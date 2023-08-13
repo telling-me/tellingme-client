@@ -23,7 +23,7 @@ const ToolTip = ({
       {children}
 
       <ToolTipWrapper tooltipType={tooltipType} childrenWidth={childrenWidth} _margin={_margin}>
-        {['topLeft', 'topRight'].includes(tooltipType) && (
+        {['topLeft', 'topRight', 'top'].includes(tooltipType) && (
           <Icon.TooltipTop fill={isError ? theme.colors.error.error400 : theme.colors.side.side500} />
         )}
         {tooltipType === 'left' && (

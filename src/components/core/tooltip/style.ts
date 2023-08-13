@@ -56,6 +56,15 @@ export const ToolTipWrapper = styled.div<{ tooltipType: ToolTipType; childrenWid
           flex-direction: column;
           align-items: center;
         `
+      : tooltipType === 'top'
+      ? css`
+          top: 100%;
+          left: 50%;
+          transform: translate(-50%, 0);
+
+          flex-direction: column;
+          align-items: center;
+        `
       : tooltipType === 'topLeft'
       ? css`
           top: 100%;
