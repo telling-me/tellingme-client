@@ -85,22 +85,25 @@ export const ButtonComponent = styled.button<{
       }
     `}
 
-  ${(props) =>
-    props.buttonType === 'tertiary' &&
+  ${({ buttonType, _active, theme }) =>
+    buttonType === 'tertiary' &&
     css`
-      background-color: ${(props) => props.theme.colors.side.side200};
+      background-color: ${theme.colors.side.side200};
 
+      ${(_active === false || _active == null) &&
+      `
       &:hover {
-        background-color: ${(props) => props.theme.colors.side.side200};
-        box-shadow: ${(props) => props.theme.shadow.shadow1};
+        background-color: ${theme.colors.side.side200};
+        box-shadow: ${theme.shadow.shadow1};
       }
+      `}
 
       &:active {
-        background-color: ${(props) => props.theme.colors.secondary.secondary300};
+        background-color: ${theme.colors.side.side300};
       }
 
       &:disabled {
-        background-color: ${(props) => props.theme.colors.gray.gray1};
+        background-color: ${theme.colors.gray.gray1};
         box-shadow: none;
       }
     `}
