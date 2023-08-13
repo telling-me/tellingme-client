@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 // components
 import { EmotionIcon, EmotionText, IconButton } from 'components'
@@ -19,27 +20,34 @@ import type { IAnswer } from './type'
 
 // hooks
 import { usePostLikesMutation } from 'hooks'
-import { useNavigate } from 'react-router-dom'
+import useCommunicationStore from 'stores/useCommunicationStore'
 
-const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked, changeLikeCount }: IAnswer) => {
+const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked, index }: IAnswer) => {
+  const { answers, setAnswers } = useCommunicationStore()
   const { mutate: postLikesMutate } = usePostLikesMutation()
   const navigate = useNavigate()
+
+  const changeLikeCount = () => {
+    if (answers != null) {
+      const updatedAnswers = [...answers]
+
+      updatedAnswers[index] = {
+        ...updatedAnswers[index],
+        likeCount:
+          updatedAnswers[index].isLiked === true
+            ? +updatedAnswers[index].likeCount - 1
+            : +updatedAnswers[index].likeCount + 1,
+        isLiked: updatedAnswers[index].isLiked !== true
+      }
+
+      setAnswers(updatedAnswers)
+    }
+  }
 
   return (
     <ListAnswerWrapper
       onClick={() => {
-        navigate(
-          { search: `?answerId=${answerId}` },
-          {
-            state: {
-              answerId,
-              emotion,
-              content,
-              likeCount,
-              isLiked
-            }
-          }
-        )
+        navigate({ search: `?answerId=${answerId}` }, { state: { index } })
       }}
     >
       <EmotionWrapper>
@@ -70,7 +78,7 @@ const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked, changeLike
           _onClick={(e) => {
             e.stopPropagation()
             postLikesMutate({ answerId })
-            changeLikeCount(answerId)
+            changeLikeCount()
           }}
         >
           {isLiked ? (

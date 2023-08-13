@@ -12,6 +12,7 @@ const useCommunicationStore = create<ICommunicationStore>()(
       questions: [],
       sortIdx: 0,
       page: 0,
+      answers: [],
       setQuestionIdx: (value) => {
         set((state) => {
           state.questionIdx = value
@@ -30,6 +31,11 @@ const useCommunicationStore = create<ICommunicationStore>()(
       setPage: (value) => {
         set((state) => {
           state.page = value
+        })
+      },
+      setAnswers: (value) => {
+        set((state) => {
+          state.answers = value
         })
       }
     }))
