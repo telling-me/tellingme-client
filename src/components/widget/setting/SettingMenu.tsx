@@ -69,12 +69,16 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
             text={text}
             icon={MENU_LIST_ITEMS_ICON[i]}
             _onClick={() => {
-              if ([0, 1, 2, 4].includes(i)) {
+              if ([0, 4].includes(i)) {
                 setPageNumber(i)
 
                 if (setIsMenu != null) {
                   setIsMenu(false)
                 }
+              } else if (i === 1) {
+                window.open('https://doana.notion.site/f42ec05972a545ce95231f8144705eae?pvs=4')
+              } else if (i === 2) {
+                window.open('https://doana.notion.site/7cdab221ee6d436781f930442040d556?pvs=4')
               } else if (i === 3) {
                 window.open('https://doana.notion.site/f7a045872c3b4b02bce5e9f6d6cfc2d8?pvs=4')
               } else if (i === 5) {

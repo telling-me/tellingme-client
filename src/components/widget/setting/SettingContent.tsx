@@ -4,11 +4,9 @@ import type { Dispatch, SetStateAction } from 'react'
 // component
 import styled from 'styled-components'
 
-import TermsOfService from './TermsOfService'
 import ModifyMyInfo from './ModifyMyInfo'
 import Withdrawal from './Withdrawal'
 import SettingContentHeader from './SettingContentHeader'
-import PrivacyPolicy from './PrivacyPolicy'
 
 interface ISettingContent {
   pageNumber: number
@@ -20,15 +18,7 @@ const SettingContent = ({ pageNumber, setIsMenu }: ISettingContent) => {
     <SettingContentWrapper>
       {pageNumber !== 0 && <SettingContentHeader pageNumber={pageNumber} setIsMenu={setIsMenu} />}
 
-      {pageNumber === 0 ? (
-        <ModifyMyInfo setIsMenu={setIsMenu} />
-      ) : pageNumber === 1 ? (
-        <TermsOfService />
-      ) : pageNumber === 2 ? (
-        <PrivacyPolicy />
-      ) : (
-        pageNumber === 4 && <Withdrawal />
-      )}
+      {pageNumber === 0 ? <ModifyMyInfo setIsMenu={setIsMenu} /> : pageNumber === 4 && <Withdrawal />}
     </SettingContentWrapper>
   )
 }
