@@ -23,7 +23,7 @@ const ListAnswers = () => {
   const [hasNextPage, setHasNextPage] = useState<boolean>(true)
   const [ref, inView] = useInView()
 
-  const ANSWER_SIZE = 10
+  const ANSWER_SIZE = 20
 
   const { questionIdx, questions, sortIdx, page, setPage, answers, setAnswers } = useCommunicationStore()
   const { data: { data: allAnswerList = null } = {} } = useGetAllAnswerListQuery(

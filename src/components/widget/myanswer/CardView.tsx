@@ -133,11 +133,11 @@ const CardViewWrapper = styled.div`
     padding: 0 60px;
   }
 
-  @media all and (min-width: 1024px) and (max-width: 1200px) {
+  @media all and (min-width: 1023px) and (max-width: 1200px) {
     height: calc(100vh - 126px);
   }
 
-  @media all and (min-width: 767px) and (max-width: 1024px) {
+  @media all and (min-width: 767px) and (max-width: 1023px) {
     height: calc(100vh - 223px);
   }
 
