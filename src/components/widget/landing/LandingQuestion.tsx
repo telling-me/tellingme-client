@@ -142,7 +142,7 @@ const LandingQuestionInfo = () => {
               }
               textColor="gray8"
             >
-              나를 되돌아보는 질문이
+              오직 나를 위한 질문이
             </TextH3>
             <TextH3
               typo={
@@ -154,7 +154,7 @@ const LandingQuestionInfo = () => {
               }
               textColor="gray8"
             >
-              매일 오전 6시에 오픈돼요!
+              매일 오전 6시에 배달돼요!
             </TextH3>
           </Grid>
         </Grid>

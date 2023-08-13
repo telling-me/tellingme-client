@@ -75,18 +75,6 @@ const LandingAnswer = () => {
               <TextH2
                 typo={
                   mediaQuery(windowSize.width) === 'desktop'
-                    ? 'h1'
-                    : mediaQuery(windowSize.width)?.includes('tablet') === true
-                    ? 'h2'
-                    : 'h4'
-                }
-                textColor="logo"
-              >
-                기록한 답변을 보며
-              </TextH2>
-              <TextH2
-                typo={
-                  mediaQuery(windowSize.width) === 'desktop'
                     ? 'h1_b'
                     : mediaQuery(windowSize.width)?.includes('tablet') === true
                     ? 'h2_b'
@@ -94,7 +82,19 @@ const LandingAnswer = () => {
                 }
                 textColor="logo"
               >
-                나를 되돌아봐요
+                나의 진솔한 생각이
+              </TextH2>
+              <TextH2
+                typo={
+                  mediaQuery(windowSize.width) === 'desktop'
+                    ? 'h1'
+                    : mediaQuery(windowSize.width)?.includes('tablet') === true
+                    ? 'h2'
+                    : 'h4'
+                }
+                textColor="logo"
+              >
+                쌓여가요
               </TextH2>
             </Grid>
           </Grid>
