@@ -114,12 +114,12 @@ export const userApi = {
   patchUserInfo: async (userInfoDto: IUserInfoDto) => {
     return await API.patch('/api/user/update', userInfoDto)
   },
-  deleteUser: async (oauthtoken: string) => {
+  deleteUser: async (code: string) => {
     // kakao일때는 ''로 보내야함
     return await API.post(
       '/api/oauth/withdraw',
       {
-        authorizationCode: oauthtoken
+        authorizationCode: code
       },
       {
         headers: { 'Content-Type': 'application/json' }

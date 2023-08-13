@@ -33,7 +33,7 @@ const Withdrawal = () => {
   }
 
   const _onClick = () => {
-    info?.socialLoginType === 'apple' ? (window.location.href = APPLE_WITHDRAW_URL) : mutate({ oauthtoken: '' })
+    info?.socialLoginType === 'apple' ? (window.location.href = APPLE_WITHDRAW_URL) : mutate({ code: '' })
   }
 
   return (
