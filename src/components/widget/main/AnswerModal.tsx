@@ -1,184 +1,180 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-
-// store
-import useQuestionStore from 'stores/useQuestionStore'
-import useAnswerStore from 'stores/useAnswerStore'
+import styled, { useTheme } from 'styled-components'
 
 // components
-import { Button, EmotionIcon, EmotionModal, IconButton, Modal, Toggle } from 'components'
-import styled, { useTheme } from 'styled-components'
+import { EmotionIcon, Modal } from 'components'
+import EmotionText from './EmotionText'
+import AccuseModal from './AccuseModal'
+
+// styles
 import style from 'styles/styled-components/styled'
-// components - style
-import { DropdownItem, DropdownList } from 'components/core/dropdown/style'
 
 // hooks
-import { useQueryClient } from 'react-query'
-import {
-  useGetAnswerQuery,
-  useGetQuestionQuery,
-  useWindowSize,
-  useCalculateDiff,
-  useFormatDateArrToStr,
-  usePostLikesMutation
-} from 'hooks'
-
-// utils
-import { formatStringDate } from 'utils/date'
+import { usePostLikesMutation } from 'hooks'
 
 // assets
 import Icon from 'assets/icons'
-import EmotionText from './EmotionText'
+
+// data
 import { emotionList } from 'data/emotion'
+
+// stores
 import useCommunicationStore from 'stores/useCommunicationStore'
-import AccuseModal from './AccuseModal'
 
 const AnswerModal = () => {
   const navigate = useNavigate()
-  const location = useLocation()
   const theme = useTheme()
   const answerId = new URLSearchParams(window.location.search).get('answerId')
 
+  const location = useLocation()
+  const index = location.state.index
+
   // store
-  const { questionIdx, questions } = useCommunicationStore()
-
-  // query
-  const queryClient = useQueryClient()
-
-  const { data: { data: answer = null } = {} } = useGetAnswerQuery(answerId as string)
-  const { data: { data: question = null } = {}, isSuccess: questionSuccess } = useGetQuestionQuery(
-    useFormatDateArrToStr(questions[questionIdx].date, '-')
-  )
+  const { questionIdx, questions, answers, setAnswers } = useCommunicationStore()
 
   const [accuse, setAccuse] = useState<boolean>(false)
-  const [text, setText] = useState<string>(answer?.content ?? '')
+  const [text, setText] = useState<string>(answers?.[index].content ?? '')
 
   useEffect(() => {
-    setText(answer?.content ?? '')
-  }, [answer])
+    setText(answers?.[index].content ?? '')
+  }, [answers])
 
   const { mutate: postLikesMutate } = usePostLikesMutation()
 
+  const changeLikeCount = () => {
+    if (answers != null) {
+      const updatedAnswers = [...answers]
+
+      updatedAnswers[index] = {
+        ...updatedAnswers[index],
+        likeCount:
+          updatedAnswers[index].isLiked === true
+            ? +updatedAnswers[index].likeCount - 1
+            : +updatedAnswers[index].likeCount + 1,
+        isLiked: updatedAnswers[index].isLiked !== true
+      }
+
+      setAnswers(updatedAnswers)
+    }
+  }
+
   return (
     <>
-      <Modal>
-        <ModalWrapper flex="center" _alignItems="start">
-          <ModalInnerWrapper flex="start" direction="column" _height="100%">
-            {/* 헤더 */}
-            <ModalHeader flex="between">
-              <IconButton
-                buttonType="noFilled"
-                _width="32px"
-                _height="32px"
-                _margin="20px auto 12px 0"
-                _onClick={() => {
-                  navigate(-1)
+      {answers != null && (
+        <Modal>
+          <ModalWrapper flex="center" _alignItems="start">
+            <ModalInnerWrapper flex="start" direction="column" _height="100%">
+              {/* 헤더 */}
+              <ModalHeader flex="between">
+                <ButtonWrapper flex="start">
+                  <Icon.ArrowLeft
+                    onClick={() => {
+                      navigate(-1)
+                    }}
+                    width={24}
+                    height={24}
+                    stroke={theme.colors.gray.gray6}
+                  />
+                </ButtonWrapper>
+                <Grid flex="center" _gap="4px">
+                  <EmotionIcon emotion={answers[index].emotion} width={44} />
+                  {answers[index].emotion != null && (
+                    <EmotionText text={emotionList[answers[index].emotion - 1].description} />
+                  )}
+                </Grid>
+                <ButtonWrapper flex="end">
+                  <>
+                    <Icon.Siren
+                      width={24}
+                      stroke={theme.colors.gray.gray6}
+                      onClick={() => {
+                        setAccuse(true)
+                      }}
+                    />
+                  </>
+                </ButtonWrapper>
+              </ModalHeader>
+
+              {/* 질문 */}
+              <QuestionWrapper
+                flex="start"
+                direction="column"
+                _gap="18px"
+                style={{
+                  height: 'auto',
+                  margin: '21px 0 24px',
+                  overflow: 'visible'
                 }}
               >
-                <Icon.ArrowLeft width="24" height="24" stroke={theme.colors.gray.gray6} />
-              </IconButton>
-              <Grid flex="center" _gap="4px" _height="100%">
-                <EmotionIcon emotion={answer?.emotion} width={44} />
-                {answer?.emotion != null && <EmotionText text={emotionList[answer?.emotion - 1].description} />}
-              </Grid>
-
-              <IconButton
-                buttonType="noFilled"
-                _width="32px"
-                _height="32px"
-                _margin="20px auto 12px 0"
-                _onClick={() => {
-                  setAccuse(true)
-                }}
-              >
-                <Icon.Siren
-                  width={24}
-                  stroke={theme.colors.gray.gray6}
-                  onClick={() => {
-                    setAccuse(true)
-                  }}
-                />
-              </IconButton>
-            </ModalHeader>
-
-            {/* 질문 */}
-            <QuestionWrapper
-              flex="start"
-              direction="column"
-              _gap="18px"
-              style={{
-                height: 'auto',
-                margin: '21px 0 24px',
-                overflow: 'visible'
-              }}
-            >
-              <Grid flex="start" direction="column" _gap="10px">
-                <Grid flex="center" direction="column" _gap="4px">
-                  {question?.title?.split('\n')?.map((line: string) => (
-                    <TextP key={line} typo="b1_b" textColor="logo" textAlign="center" wordBreak="keep-all">
-                      {line}
-                    </TextP>
-                  ))}
+                <Grid flex="start" direction="column" _gap="10px">
+                  <Grid flex="center" direction="column" _gap="4px">
+                    {questions[questionIdx].title?.split('\n')?.map((line: string) => (
+                      <TextP key={line} typo="b1_b" textColor="logo" textAlign="center" wordBreak="keep-all">
+                        {line}
+                      </TextP>
+                    ))}
+                  </Grid>
+                  <Grid flex="center" direction="column" _gap="4px">
+                    {questions[questionIdx].phrase?.split('\n')?.map((line: string) => (
+                      <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
+                        {line}
+                      </TextP>
+                    ))}
+                  </Grid>
                 </Grid>
-                <Grid flex="center" direction="column" _gap="4px">
-                  {question?.phrase?.split('\n')?.map((line: string) => (
-                    <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
-                      {line}
-                    </TextP>
-                  ))}
-                </Grid>
-              </Grid>
-              <TextP typo="c" textColor="side500" textAlign="center">
-                {`${question?.date?.[0] as string}년 ${question?.date?.[1] as string}월 ${
-                  question?.date?.[2] as string
-                }일`}
-              </TextP>
-            </QuestionWrapper>
-
-            <StrikeThrough />
-
-            {/* 기록 */}
-            <AnswerTextArea placeholder="여기에 기록해주세요!" value={text} disabled={true} />
-
-            {/* 푸터 */}
-            <FooterWrapper flex="start" direction="column">
-              <Grid flex="end" _height="14px" _gap="2px">
-                <Icon.Heart
-                  width={24}
-                  height={24}
-                  style={{ cursor: 'pointer' }}
-                  stroke={(answer?.isLiked as boolean) ? null : theme.colors.gray.gray6}
-                  fill={(answer?.isLiked as boolean) ? theme.colors.error.error300 : 'transparent'}
-                  onClick={async () => {
-                    postLikesMutate(
-                      { answerId: Number(answerId) },
-                      {
-                        onSuccess: async () => {
-                          await queryClient.invalidateQueries('answer')
-                        },
-                        onError: (error) => {
-                          console.log(error)
-                        }
-                      }
-                    )
-                  }}
-                />
-                <TextP typo="c_b" textColor="gray6">
-                  {answer?.likeCount}
+                <TextP typo="c" textColor="side500" textAlign="center">
+                  {`${questions[questionIdx].date?.[0].toString()}년 ${questions[
+                    questionIdx
+                  ].date?.[1].toString()}월 ${questions[questionIdx].date?.[2].toString()}일`}
                 </TextP>
-              </Grid>
-            </FooterWrapper>
-          </ModalInnerWrapper>
-        </ModalWrapper>
-        {Boolean(accuse) && (
-          <AccuseModal
-            handleCancel={() => {
-              setAccuse(false)
-            }}
-          />
-        )}
-      </Modal>
+              </QuestionWrapper>
+
+              <StrikeThrough />
+
+              {/* 기록 */}
+              <AnswerTextArea placeholder="여기에 기록해주세요!" value={text} disabled={true} />
+
+              {/* 푸터 */}
+              <FooterWrapper flex="start" direction="column">
+                <Grid flex="end" _height="14px" _gap="2px">
+                  <Icon.Heart
+                    width={24}
+                    height={24}
+                    style={{ cursor: 'pointer' }}
+                    stroke={(answers[index].isLiked as boolean) ? null : theme.colors.gray.gray6}
+                    fill={(answers[index].isLiked as boolean) ? theme.colors.error.error300 : 'transparent'}
+                    onClick={async () => {
+                      postLikesMutate(
+                        { answerId: Number(answerId) },
+                        {
+                          onSuccess: async () => {
+                            changeLikeCount()
+                          },
+                          onError: (error) => {
+                            console.log(error)
+                          }
+                        }
+                      )
+                    }}
+                  />
+                  <TextP typo="c_b" textColor="gray6">
+                    {answers[index].likeCount}
+                  </TextP>
+                </Grid>
+              </FooterWrapper>
+            </ModalInnerWrapper>
+          </ModalWrapper>
+          {Boolean(accuse) && (
+            <AccuseModal
+              handleCancel={() => {
+                setAccuse(false)
+              }}
+            />
+          )}
+        </Modal>
+      )}
     </>
   )
 }
