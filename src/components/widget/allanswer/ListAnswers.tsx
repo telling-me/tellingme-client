@@ -34,6 +34,25 @@ const ListAnswers = () => {
     sortIdx === 0 ? '최신순' : sortIdx === 1 ? '관련순' : '공감순'
   )
 
+  // 임시 로직 (효율 안 좋음 ..)
+  const changeLikeCount = (answerId: number) => {
+    if (answers != null) {
+      const updatedAnswers: any[] = answers.map((answer) => {
+        if (answer.answerId === answerId) {
+          return {
+            ...answer,
+            likeCount: answer.isLiked === true ? +answer.likeCount - 1 : +answer.likeCount + 1,
+            isLiked: answer.isLiked !== true
+          }
+        }
+
+        return answer
+      })
+
+      setAnswers(updatedAnswers)
+    }
+  }
+
   // 정렬 방법 바뀔 때 초기화 시켜주기
   useEffect(() => {
     setAnswers(null)
@@ -87,6 +106,7 @@ const ListAnswers = () => {
             content={v.content}
             likeCount={v.likeCount}
             isLiked={v.isLiked}
+            changeLikeCount={changeLikeCount}
           />
         )
       })}

@@ -4,4 +4,5 @@ export interface IAnswer {
   content: string
   likeCount: number
   isLiked: boolean
+  changeLikeCount: (answerId: number) => void
 }

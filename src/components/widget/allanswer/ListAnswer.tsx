@@ -21,7 +21,7 @@ import type { IAnswer } from './type'
 import { usePostLikesMutation } from 'hooks'
 import { useNavigate } from 'react-router-dom'
 
-const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked }: IAnswer) => {
+const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked, changeLikeCount }: IAnswer) => {
   const { mutate: postLikesMutate } = usePostLikesMutation()
   const navigate = useNavigate()
 
@@ -59,6 +59,7 @@ const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked }: IAnswer)
           _onClick={(e) => {
             e.stopPropagation()
             postLikesMutate({ answerId })
+            changeLikeCount(answerId)
           }}
         >
           {isLiked ? (
