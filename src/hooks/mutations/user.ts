@@ -23,17 +23,20 @@ export const usePatchUserInfoMutation = <T>(setOpen: React.Dispatch<React.SetSta
 }
 
 export const useDeleteUser = <T>(options?: T) => {
-  return useMutation(async (data: { code: string }) => await apis.deleteUser(data.code), {
-    onSuccess: (res) => {
-      useDeleteToken()
-      window.location.href = '/'
-    },
-    onError: (err: IError) => {
-      console.log(err)
-    },
-    retry: false,
-    ...options
-  })
+  return useMutation(
+    async (data: { code: string; socialType: string }) => await apis.deleteUser(data.code, data.socialType),
+    {
+      onSuccess: (res) => {
+        useDeleteToken()
+        window.location.href = '/'
+      },
+      onError: (err: IError) => {
+        console.log(err)
+      },
+      retry: false,
+      ...options
+    }
+  )
 }
 
 export const useLogoutMutation = <T>(options?: T) => {

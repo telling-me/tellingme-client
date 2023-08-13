@@ -125,8 +125,8 @@ const ModalInnerWrapper = styled(style.Grid)`
 
   @media all and (max-width: 767px) {
     width: 100%;
-    height: 494px;
-    padding: 42px 20px 8px 20px;
+    height: 518px;
+    padding: 42px 20px 32px 20px;
     border-radius: 20px 20px 0 0;
   }
 `

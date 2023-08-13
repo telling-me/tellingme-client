@@ -7,7 +7,7 @@ import useQuestionStore from 'stores/useQuestionStore'
 import useAnswerStore from 'stores/useAnswerStore'
 
 // components
-import { Button, EmotionIcon, EmotionModal, Modal, Toggle } from 'components'
+import { Button, EmotionIcon, EmotionModal, Modal, Toggle, IconButton } from 'components'
 import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
 // components - style
@@ -128,58 +128,50 @@ const QuestionWriteModal = () => {
           <ModalInnerWrapper flex="start" direction="column" _height="100%">
             {/* 헤더 */}
             <ModalHeader flex="between">
-              <ButtonWrapper flex="start">
-                <Icon.ArrowLeft
-                  onClick={() => {
-                    if (editable) setCancel(true)
-                    else navigate(backUrl)
-                  }}
-                  width={24}
-                  height={24}
-                  stroke={theme.colors.gray.gray6}
-                />
-              </ButtonWrapper>
+              <IconButton
+                buttonType="noFilled"
+                _width="32px"
+                _height="32px"
+                _margin="20px auto 12px 0"
+                _onClick={() => {
+                  if (editable) setCancel(true)
+                  else navigate(backUrl)
+                }}
+              >
+                <Icon.ArrowLeft width={24} height={24} stroke={theme.colors.gray.gray6} />
+              </IconButton>
               <Grid
                 flex="center"
-                _gap="4px"
+                _height="100%"
+                _alignItems="end"
                 style={{ cursor: alreadyAnswered ? 'default' : 'pointer' }}
                 onClick={() => {
                   if (!alreadyAnswered) setIsEmotionModal(true)
                 }}
               >
-                <EmotionIcon emotion={emotion} width={44} />
-                {emotion != null && <EmotionText text={emotionList[emotion - 1].description} />}
+                <Grid flex="center" _gap="4px">
+                  <EmotionIcon emotion={emotion} width={44} />
+                  {emotion != null && <EmotionText text={emotionList[emotion - 1].description} />}
+                </Grid>
               </Grid>
-              <ButtonWrapper flex="end">
+              <IconButton
+                buttonType="noFilled"
+                _width="32px"
+                _height="32px"
+                _margin="20px auto 12px 0"
+                _onClick={() => {
+                  editable ? setFold(!fold) : setMenu(!menu)
+                }}
+              >
                 {editable ? (
                   fold ? (
-                    <Icon.CaretDown
-                      width={24}
-                      height={24}
-                      stroke={theme.colors.gray.gray6}
-                      onClick={() => {
-                        setFold(!fold)
-                      }}
-                    />
+                    <Icon.CaretDown width={24} height={24} stroke={theme.colors.gray.gray6} />
                   ) : (
-                    <Icon.CaretUp
-                      width={24}
-                      height={24}
-                      stroke={theme.colors.gray.gray6}
-                      onClick={() => {
-                        setFold(!fold)
-                      }}
-                    />
+                    <Icon.CaretUp width={24} height={24} stroke={theme.colors.gray.gray6} />
                   )
                 ) : (
                   <>
-                    <Icon.More
-                      width={24}
-                      stroke={theme.colors.gray.gray6}
-                      onClick={() => {
-                        setMenu(!menu)
-                      }}
-                    />
+                    <Icon.More width={24} stroke={theme.colors.gray.gray6} />
                     {menu && (
                       <DropdownList dropdownSize="small" listLength="80" direction="down" style={{ width: 'auto' }}>
                         <DropdownItem
@@ -209,7 +201,7 @@ const QuestionWriteModal = () => {
                     )}
                   </>
                 )}
-              </ButtonWrapper>
+              </IconButton>
             </ModalHeader>
 
             {/* 질문 */}
@@ -469,8 +461,9 @@ const ModalInnerWrapper = styled(Grid)`
 `
 
 const ModalHeader = styled(Grid)`
-  margin: 21px 0 12px;
-  align-items: flex-start;
+  button {
+    position: relative;
+  }
 `
 
 const QuestionWrapper = styled(Grid)`
@@ -510,13 +503,6 @@ const FooterWrapper = styled(Grid)`
   margin-bottom: 46px;
   @media screen and (max-width: 767px) {
     margin-bottom: 10px;
-  }
-`
-const ButtonWrapper = styled(Grid)`
-  width: 90px;
-  position: relative;
-  svg {
-    cursor: pointer;
   }
 `
 

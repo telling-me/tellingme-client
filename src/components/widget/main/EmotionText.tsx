@@ -25,6 +25,7 @@ const EmotionTextComponent = styled.div<{ _backgroundColor: string }>`
   background-color: ${({ _backgroundColor }) => _backgroundColor};
   border-radius: 4px;
   padding: 4px;
+  height: fit-content;
 `
 
 export default EmotionText
