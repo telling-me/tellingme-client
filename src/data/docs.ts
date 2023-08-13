@@ -591,5 +591,15 @@ export const SETTING_WITHDRAWAL_DOCS: Array<{ _typo: TextSizeType; _margin?: str
     _typo: 'b2',
     _margin: '0 auto 0 18px',
     content: `사라져요.`
+  },
+  {
+    _typo: 'b2',
+    _margin: '0 auto 2px 18px',
+    content: `모두의 공간에 공유된 답변은 자동으로 삭제되지 `
+  },
+  {
+    _typo: 'b2',
+    _margin: '0 auto 0 18px',
+    content: `않으니 미리 확인해 주세요.`
   }
 ]
