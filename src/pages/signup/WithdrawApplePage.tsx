@@ -10,16 +10,21 @@ const WithdrawApplePage = () => {
   const [code] = useState<string>(useLocation().hash.split('#code=')[1].split('&id_token')[0])
 
   const { mutate } = useDeleteUser()
+  console.log(useLocation().hash)
+  console.log(code)
 
-  try {
-    mutate({ code })
-  } catch (error: unknown) {
-    console.log(error)
+  const handleSample = () => {
+    try {
+      mutate({ code })
+    } catch (error: unknown) {
+      console.log(error)
+    }
   }
 
   return (
     <Grid _width="100%" _height="100vh" flex="center">
       <Loading />
+      <button onClick={handleSample}>sample</button>
     </Grid>
   )
 }
