@@ -28,7 +28,18 @@ const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked, changeLike
   return (
     <ListAnswerWrapper
       onClick={() => {
-        navigate({ search: `?answerId=${answerId}` })
+        navigate(
+          { search: `?answerId=${answerId}` },
+          {
+            state: {
+              answerId,
+              emotion,
+              content,
+              likeCount,
+              isLiked
+            }
+          }
+        )
       }}
     >
       <EmotionWrapper>

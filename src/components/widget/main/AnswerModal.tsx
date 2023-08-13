@@ -1,62 +1,49 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-
-// store
-import useQuestionStore from 'stores/useQuestionStore'
-import useAnswerStore from 'stores/useAnswerStore'
+import styled, { useTheme } from 'styled-components'
 
 // components
-import { Button, EmotionIcon, EmotionModal, Modal, Toggle } from 'components'
-import styled, { useTheme } from 'styled-components'
+import { EmotionIcon, Modal, EmotionText } from 'components'
+import AccuseModal from './AccuseModal'
+
+// styles
 import style from 'styles/styled-components/styled'
-// components - style
-import { DropdownItem, DropdownList } from 'components/core/dropdown/style'
 
 // hooks
-import { useQueryClient } from 'react-query'
-import {
-  useGetAnswerQuery,
-  useGetQuestionQuery,
-  useWindowSize,
-  useCalculateDiff,
-  useFormatDateArrToStr,
-  usePostLikesMutation
-} from 'hooks'
-
-// utils
-import { formatStringDate } from 'utils/date'
+import { usePostLikesMutation } from 'hooks'
 
 // assets
 import Icon from 'assets/icons'
-import EmotionText from './EmotionText'
+
+// data
 import { emotionList } from 'data/emotion'
+
+// stores
 import useCommunicationStore from 'stores/useCommunicationStore'
-import AccuseModal from './AccuseModal'
 
 const AnswerModal = () => {
   const navigate = useNavigate()
-  const location = useLocation()
   const theme = useTheme()
   const answerId = new URLSearchParams(window.location.search).get('answerId')
+
+  const location = useLocation()
+  const data = {
+    answerId: location.state.answerId,
+    emotion: location.state.emotion,
+    content: location.state.content,
+    likeCount: location.state.likeCount,
+    isLiked: location.state.likeCount
+  }
 
   // store
   const { questionIdx, questions } = useCommunicationStore()
 
-  // query
-  const queryClient = useQueryClient()
-
-  const { data: { data: answer = null } = {} } = useGetAnswerQuery(answerId as string)
-  const { data: { data: question = null } = {}, isSuccess: questionSuccess } = useGetQuestionQuery(
-    useFormatDateArrToStr(questions[questionIdx].date, '-')
-  )
-
   const [accuse, setAccuse] = useState<boolean>(false)
-  const [text, setText] = useState<string>(answer?.content ?? '')
+  const [text, setText] = useState<string>(data.content ?? '')
 
   useEffect(() => {
-    setText(answer?.content ?? '')
-  }, [answer])
+    setText(data.content ?? '')
+  }, [data])
 
   const { mutate: postLikesMutate } = usePostLikesMutation()
 
@@ -78,8 +65,8 @@ const AnswerModal = () => {
                 />
               </ButtonWrapper>
               <Grid flex="center" _gap="4px">
-                <EmotionIcon emotion={answer?.emotion} width={44} />
-                {answer?.emotion != null && <EmotionText text={emotionList[answer?.emotion - 1].description} />}
+                <EmotionIcon emotion={data.emotion} width={44} />
+                {data.emotion != null && <EmotionText text={emotionList[data.emotion - 1].description} />}
               </Grid>
               <ButtonWrapper flex="end">
                 <>
@@ -107,14 +94,14 @@ const AnswerModal = () => {
             >
               <Grid flex="start" direction="column" _gap="10px">
                 <Grid flex="center" direction="column" _gap="4px">
-                  {question?.title?.split('\n')?.map((line: string) => (
+                  {questions[questionIdx]?.title?.split('\n')?.map((line: string) => (
                     <TextP key={line} typo="b1_b" textColor="logo" textAlign="center" wordBreak="keep-all">
                       {line}
                     </TextP>
                   ))}
                 </Grid>
                 <Grid flex="center" direction="column" _gap="4px">
-                  {question?.phrase?.split('\n')?.map((line: string) => (
+                  {questions[questionIdx]?.phrase?.split('\n')?.map((line: string) => (
                     <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
                       {line}
                     </TextP>
@@ -122,9 +109,9 @@ const AnswerModal = () => {
                 </Grid>
               </Grid>
               <TextP typo="c" textColor="side500" textAlign="center">
-                {`${question?.date?.[0] as string}년 ${question?.date?.[1] as string}월 ${
-                  question?.date?.[2] as string
-                }일`}
+                {`${questions[questionIdx]?.date[0].toString()}년 ${questions[
+                  questionIdx
+                ]?.date[1].toString()}월 ${questions[questionIdx]?.date[2].toString()}일`}
               </TextP>
             </QuestionWrapper>
 
@@ -140,14 +127,14 @@ const AnswerModal = () => {
                   width={24}
                   height={24}
                   style={{ cursor: 'pointer' }}
-                  stroke={(answer?.isLiked as boolean) ? null : theme.colors.gray.gray6}
-                  fill={(answer?.isLiked as boolean) ? theme.colors.error.error300 : 'transparent'}
+                  stroke={(data.isLiked as boolean) ? null : theme.colors.gray.gray6}
+                  fill={(data.isLiked as boolean) ? theme.colors.error.error300 : 'transparent'}
                   onClick={async () => {
                     postLikesMutate(
                       { answerId: Number(answerId) },
                       {
                         onSuccess: async () => {
-                          await queryClient.invalidateQueries('answer')
+                          // await queryClient.invalidateQueries('answer')
                         },
                         onError: (error) => {
                           console.log(error)
@@ -157,7 +144,7 @@ const AnswerModal = () => {
                   }}
                 />
                 <TextP typo="c_b" textColor="gray6">
-                  {answer?.likeCount}
+                  {data.likeCount}
                 </TextP>
               </Grid>
             </FooterWrapper>
@@ -175,7 +162,7 @@ const AnswerModal = () => {
   )
 }
 
-const { Grid, TextP, TextSpan } = style
+const { Grid, TextP } = style
 
 const ModalWrapper = styled(Grid)`
   width: 100vw;
