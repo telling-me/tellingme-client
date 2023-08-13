@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import style from 'styles/styled-components/styled'
 import { Button, Modal } from 'components/core'
-
-// store
 
 // ani
 import { modalAni } from 'styles/ani'
@@ -19,11 +17,14 @@ interface IAccuseModal {
 }
 
 const AccuseModal = ({ handleCancel }: IAccuseModal) => {
-  const [reason, setReason] = useState<number | null>(null)
   const answerId = new URLSearchParams(window.location.search).get('answerId')
 
+  const [reason, setReason] = useState<number | null>(null)
   const [modal, setModal] = useState<boolean>(false)
   const [text, setText] = useState<string>('')
+  const [status, setStatus] = useState<number>(200)
+
+  const navigate = useNavigate()
 
   const { mutate: postAccuseMutate } = usePostAccuseMutation()
 
@@ -82,30 +83,24 @@ const AccuseModal = ({ handleCancel }: IAccuseModal) => {
                 { answerId: Number(answerId), reason: (reason as number) + 1 },
                 {
                   onSuccess: (res) => {
+                    setModal(true)
+                    setStatus(res.data?.status ?? 200)
                     if (res.data?.status === 5000) {
-                      setModal(true)
-                      setText('이미 신고된 답변입니다.')
-                    } else if (res.data?.status === 4003) {
-                      setModal(true)
-                      setText('해당 답변을 찾을 수 없습니다.')
+                      setText('이미 신고된 글이에요.')
+                    } else if (res.data?.status === 4003 || res.data?.status === 5003) {
+                      setText('존재하지 않은 글이에요.')
                     } else if (res.data?.status === 5001) {
-                      setModal(true)
-                      setText('올바르지 않은 신고 사유입니다.')
+                      setText('올바르지 않은 신고 사유예요.')
                     } else if (res.data?.status === 5002) {
-                      setModal(true)
-                      setText('자신의 답변은 신고할 수 없습니다.')
-                    } else if (res.data?.status === 5003) {
-                      setModal(true)
-                      setText('공개 처리되어있는 답변만 신고할 수 있습니다.')
+                      setText('자신의 글은 신고할 수 없어요.')
                     } else {
-                      setModal(true)
-                      setText('신고가 접수되었습니다.')
+                      setText('신고가 접수되었어요.')
                     }
                   },
                   onError: (error) => {
                     console.log(error)
                     setModal(true)
-                    setText('오류가 발생했습니다.')
+                    setText('오류가 발생했어요.')
                   }
                 }
               )
@@ -129,6 +124,7 @@ const AccuseModal = ({ handleCancel }: IAccuseModal) => {
             _onClick={() => {
               setModal(false)
               handleCancel?.()
+              if (status === 4003 || status === 5003) navigate(-1)
             }}
           />
         </Modal>
@@ -163,8 +159,8 @@ const ModalInnerWrapper = styled(style.Grid)`
 
   @media all and (max-width: 767px) {
     width: 100%;
-    height: 403px;
-    padding: 42px 20px 8px 20px;
+    height: 427px;
+    padding: 42px 20px 32px 20px;
     border-radius: 20px 20px 0 0;
   }
 `

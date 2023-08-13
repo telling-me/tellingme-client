@@ -24,19 +24,19 @@ const CommonLayout = () => {
 
   const AppAni = {
     init: {
-      x: window.innerWidth < 1024 ? (prevPage < currPage ? '150%' : '-150%') : 0,
-      y: window.innerWidth < 1024 ? 0 : prevPage < currPage ? '150%' : '-150%',
+      x: window.innerWidth < 1024 ? (prevPage < currPage ? '140%' : '-140%') : 0,
+      y: window.innerWidth < 1024 ? 0 : prevPage < currPage ? '140%' : '-140%',
       transition: { type: 'spring', duration: 0 }
     },
     ani: {
       x: 0,
       y: 0,
-      transition: { type: 'spring', duration: 0.6 }
+      transition: { type: 'spring', duration: 0.4 }
     },
     exit: {
-      x: windowSize.width < 1024 ? (prevPage < currPage ? '-150%' : '150%') : 0,
-      y: windowSize.width < 1024 ? 0 : prevPage < currPage ? '-150%' : '150%',
-      transition: { type: 'spring', duration: 0.6 }
+      x: windowSize.width < 1024 ? (prevPage < currPage ? '-140%' : '140%') : 0,
+      y: windowSize.width < 1024 ? 0 : prevPage < currPage ? '-140%' : '140%',
+      transition: { type: 'spring', duration: 0.4 }
     }
   }
 

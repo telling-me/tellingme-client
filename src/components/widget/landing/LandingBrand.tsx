@@ -445,7 +445,7 @@ const BorderCircle = styled(motion.div)<{ zIndex: number; order: number }>`
 const ScrollDownWrapper = styled(Grid)`
   position: absolute;
   bottom: 110px;
-  z-index: 9000;
+  z-index: 8800;
 
   animation: ${floatAni} 1.5s ease-in-out infinite;
 `
