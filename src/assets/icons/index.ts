@@ -62,6 +62,7 @@ import { ReactComponent as Briefcase } from './Briefcase.svg'
 import { ReactComponent as Cookpot } from './Cookpot.svg'
 import { ReactComponent as ScrollDown } from './ScrollDown.svg'
 import { ReactComponent as Smiley } from './Smiley.svg'
+import { ReactComponent as Siren } from './Siren.svg'
 import { ReactComponent as Logo } from './Logo.svg'
 import { ReactComponent as Close } from './Close.svg'
 import { ReactComponent as Rows } from './Rows.svg'
@@ -85,6 +86,11 @@ import { ReactComponent as SadDuei } from './SadDuei.svg'
 import { ReactComponent as EmptyDuei } from './EmptyDuei.svg'
 import { ReactComponent as ResearchDuei } from './ResearchDuei.svg'
 import { ReactComponent as OverhaulDuei } from './OverhaulDuei.svg'
+import { ReactComponent as ChatTearDrop } from './ChatTearDrop.svg'
+import { ReactComponent as CaretLeft } from './CaretLeft.svg'
+import { ReactComponent as SliderLeft } from './SliderLeft.svg'
+import { ReactComponent as SliderRight } from './SliderRight.svg'
+import { ReactComponent as Entrance } from './Entrance.svg'
 
 interface IIconIndex extends IStringKey {
   NotFound: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -115,6 +121,7 @@ interface IIconIndex extends IStringKey {
   Cookpot: string | FunctionComponent<any> | ComponentClass<any, any>
   ScrollDown: string | FunctionComponent<any> | ComponentClass<any, any>
   Smiley: string | FunctionComponent<any> | ComponentClass<any, any>
+  Siren: string | FunctionComponent<any> | ComponentClass<any, any>
   Lock: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingEmotionBg: string | FunctionComponent<any> | ComponentClass<any, any>
   LandingEmotionLine: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -172,6 +179,11 @@ interface IIconIndex extends IStringKey {
   EmptyDuei: string | FunctionComponent<any> | ComponentClass<any, any>
   ResearchDuei: string | FunctionComponent<any> | ComponentClass<any, any>
   OverhaulDuei: string | FunctionComponent<any> | ComponentClass<any, any>
+  ChatTearDrop: string | FunctionComponent<any> | ComponentClass<any, any>
+  CaretLeft: string | FunctionComponent<any> | ComponentClass<any, any>
+  SliderLeft: string | FunctionComponent<any> | ComponentClass<any, any>
+  SliderRight: string | FunctionComponent<any> | ComponentClass<any, any>
+  Entrance: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
@@ -237,6 +249,7 @@ const Icon: IIconIndex = {
   Cookpot,
   ScrollDown,
   Smiley,
+  Siren,
   Logo,
   Close,
   Rows,
@@ -259,7 +272,12 @@ const Icon: IIconIndex = {
   SadDuei,
   EmptyDuei,
   ResearchDuei,
-  OverhaulDuei
+  OverhaulDuei,
+  ChatTearDrop,
+  CaretLeft,
+  SliderLeft,
+  SliderRight,
+  Entrance
 }
 
 export default Icon

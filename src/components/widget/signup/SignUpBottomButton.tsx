@@ -1,5 +1,4 @@
 import React from 'react'
-import { requestPermission } from '../../../firebase-messaging-sw'
 
 // type
 import type { ISignUpTitleAndBottomButton } from './type'
@@ -18,7 +17,8 @@ const SignUpBottomButton = ({
   windowSize,
   canMove,
   handleCheckNickname,
-  setPushToken
+  handleCheckBirthYear,
+  handleSignUp
 }: ISignUpTitleAndBottomButton) => {
   const theme = useTheme()
 
@@ -37,9 +37,10 @@ const SignUpBottomButton = ({
         _onClick={() => {
           if (step === 1) {
             handleCheckNickname()
-          } else if (step === 6) {
-            requestPermission(setPushToken)
-            handleNextStep()
+          } else if (step === 2) {
+            handleCheckBirthYear()
+          } else if (step === 4) {
+            handleSignUp()
           } else {
             handleNextStep()
           }
@@ -64,11 +65,7 @@ const MoveButtonWrapper = styled.div`
     margin-top: 110px;
   }
 
-  @media all and (min-width: 768px) and (max-width: 1023px) {
-    margin: auto 0px 70px 0px;
-  }
-
-  @media all and (max-width: 767px) {
+  @media all and (max-width: 1023px) {
     margin: auto 0px 70px 0px;
   }
 `

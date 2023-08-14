@@ -61,7 +61,7 @@ const LandingEmotion = () => {
             }
             textColor="logo"
           >
-            오늘 하루,
+            글 속에 담긴
           </TextH2>
           <Grid
             flex="center"
@@ -79,7 +79,7 @@ const LandingEmotion = () => {
               }
               textColor="logo"
             >
-              느꼈던 마음을
+              나의 감정을
             </TextH2>
             <TextH2
               typo={
@@ -91,7 +91,7 @@ const LandingEmotion = () => {
               }
               textColor="logo"
             >
-              듀이티콘으로 표현해요
+              듀이티콘으로 나타내요
             </TextH2>
           </Grid>
         </Grid>
@@ -117,7 +117,7 @@ const LandingEmotion = () => {
             }
             textColor="gray8"
           >
-            총 6가지 듀이티콘으로
+            총 6가지 뱁새 감정티콘으로
           </TextH3>
           <TextH3
             typo={
@@ -129,7 +129,7 @@ const LandingEmotion = () => {
             }
             textColor="gray8"
           >
-            하루 감정을 정리해보세요
+            글의 감정을 정리해보세요
           </TextH3>
         </Grid>
       </EmotionInfoWrapper>

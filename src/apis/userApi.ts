@@ -24,17 +24,14 @@ export interface IKakaoTokenData {
   code: string
 }
 export interface IJoinResponseDto {
-  allowNotification: boolean
   birthDate: string | null
   gender: string | null
   job: number
   jobInfo: string
-  mbti: string | null
   nickname: string
   purpose: string
   socialId: string
   socialLoginType: SocialLoginType
-  pushToken: string | undefined
 }
 export interface IUserInfoDto {
   birthDate: string | null
@@ -81,12 +78,12 @@ export const userApi = {
       }
     )
   },
-  checkUserInfo: async (loginType: string, socialId: string | null, idToken?: string) => {
+  checkUserInfo: async (loginType: string, oauthToken: string | null) => {
     return await NO_AUTH_API.post(
-      `/api/oauth/${loginType}`,
-      { socialId },
+      `/api/oauth/${loginType}/manual`,
+      {},
       {
-        headers: { 'Content-Type': 'application/json', idToken: idToken ?? '' }
+        headers: { 'Content-Type': 'application/json', oauthToken }
       }
     )
   },
@@ -117,10 +114,13 @@ export const userApi = {
   patchUserInfo: async (userInfoDto: IUserInfoDto) => {
     return await API.patch('/api/user/update', userInfoDto)
   },
-  deleteUser: async () => {
+  deleteUser: async (code: string, socialType: string) => {
+    // kakao일때는 ''로 보내야함
     return await API.post(
-      '/api/oauth/withdraw',
-      {},
+      `/api/oauth/withdraw/${socialType}`,
+      {
+        authorizationCode: code
+      },
       {
         headers: { 'Content-Type': 'application/json' }
       }

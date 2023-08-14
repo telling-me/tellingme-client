@@ -13,6 +13,20 @@ export interface ITableCell {
   date: string[]
 }
 
-export interface ITable {
+export interface IMyAnswer {
   data: any[]
+}
+
+export interface IData {
+  emotion: number
+  title: string
+  phrase: string
+  date: number[]
+  content: string
+}
+
+export interface ICardViewCard {
+  data: IData
+  isMargin?: boolean
+  _onClick: () => void
 }

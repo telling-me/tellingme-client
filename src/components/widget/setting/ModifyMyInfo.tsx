@@ -29,9 +29,7 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   const [jobInfo, setJobInfo] = useState('')
   const [gender, setGender] = useState<string | null>(null)
   const [canChangeGender, setCanChangeGender] = useState(false)
-  const [year, setYear] = useState<string | null>(null)
-  const [month, setMonth] = useState<string | null>(null)
-  const [day, setDay] = useState<string | null>(null)
+  const [year, setYear] = useState<string>('')
   const [canChangeBirthDate, setCanChangeBirthDate] = useState(false)
   const [mbti, setMbti] = useState<string | null>(null)
 
@@ -39,6 +37,28 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   const [isError, setIsError] = useState(false)
   const [errorText, setErrorText] = useState('')
   const [open, setOpen] = useState(false)
+  const [isYearError, setIsYearError] = useState<boolean>(false)
+  const [yearErrorText, setYearErrorText] = useState<string>('')
+
+  const handleCheckBirthYear = () => {
+    const nowYear = new Date().getFullYear()
+
+    if (parseInt(year) < nowYear - 100) {
+      setIsYearError(true)
+      setYearErrorText(`${nowYear - 100}년 이상부터 입력이 가능합니다.`)
+    } else if (parseInt(year) > nowYear) {
+      setIsYearError(true)
+      setYearErrorText(`${nowYear}년 이하부터 입력이 가능합니다.`)
+    } else {
+      setIsYearError(false)
+
+      if (nickname !== originalNn) {
+        checkNickname()
+      } else {
+        setOpen(true)
+      }
+    }
+  }
 
   const res = useGetUserInfoQuery().data
   const { mutate: patchUserInfo } = usePatchUserInfoMutation(setOpen)
@@ -48,10 +68,7 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
 
   const _onClick = () => {
     patchUserInfo({
-      birthDate:
-        year != null && month != null && day != null
-          ? `${year}-${month.length === 1 ? `0${month}` : month}-${day.length === 1 ? `0${day}` : day}`
-          : null,
+      birthDate: year === '' ? null : year,
       gender,
       job: parseInt(job),
       jobInfo: job === '5' ? jobInfo : '',
@@ -70,14 +87,6 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
   }, [nickname, purpose, job, jobInfo])
 
   useEffect(() => {
-    if ((year === null && month === null && day === null) || (year !== null && month !== null && day !== null)) {
-      setDisabled(false)
-    } else {
-      setDisabled(true)
-    }
-  }, [year, month, day])
-
-  useEffect(() => {
     if (res != null) {
       setNickname(res.data.nickname)
       setOriginalNn(res.data.nickname)
@@ -92,9 +101,7 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
       }
 
       if (res.data.birthDate != null) {
-        setYear(res.data.birthDate[0].toString())
-        setMonth(res.data.birthDate[1].toString())
-        setDay(res.data.birthDate[2].toString())
+        setYear(res.data.birthDate.toString())
       } else {
         setCanChangeBirthDate(true)
       }
@@ -108,7 +115,9 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
         setIsMenu={setIsMenu}
         _disabled={_disabled}
         _onClick={() => {
-          if (nickname !== originalNn) {
+          if (canChangeBirthDate && year !== '') {
+            handleCheckBirthYear()
+          } else if (nickname !== originalNn) {
             checkNickname()
           } else {
             setOpen(true)
@@ -139,15 +148,14 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
         <ModifyGender gender={gender} setGender={setGender} canChangeGender={canChangeGender} />
         <Hr _margin="24px 0px" />
 
-        {/* 생년월일 */}
+        {/* 출생연도 */}
         <ModifyBirth
           year={year}
           setYear={setYear}
-          month={month}
-          setMonth={setMonth}
-          day={day}
-          setDay={setDay}
           canChangeBirthDate={canChangeBirthDate}
+          yearErrorText={yearErrorText}
+          isYearError={isYearError}
+          setIsYearError={setIsYearError}
         />
         <Hr _margin="24px 0px" />
 
@@ -163,7 +171,7 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
                 회원 정보를 수정하시겠어요?
               </style.TextP>
               <style.TextP typo="b2" textColor="gray7">
-                성별과 생년월일은 한번 설정 후 변경할 수 없어요
+                성별과 출생연도은 한번 설정 후 변경할 수 없어요
               </style.TextP>
             </ModalTexts>
 

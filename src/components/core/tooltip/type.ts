@@ -1,4 +1,4 @@
-export type ToolTipType = 'right' | 'left' | 'topLeft' | 'bottomLeft' | 'topRight' | 'bottomRight' | 'bottom'
+export type ToolTipType = 'right' | 'left' | 'topLeft' | 'bottomLeft' | 'topRight' | 'bottomRight' | 'bottom' | 'top'
 
 export interface IToolTip {
   tooltipType?: ToolTipType

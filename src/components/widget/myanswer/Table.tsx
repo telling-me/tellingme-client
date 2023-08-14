@@ -1,9 +1,9 @@
 import React from 'react'
-import type { ITable } from './type'
+import type { IMyAnswer } from './type'
 import styled from 'styled-components'
 import { TableCell } from 'components'
 
-const Table = ({ data }: ITable) => {
+const Table = ({ data }: IMyAnswer) => {
   return (
     <TableWrapper>
       {data?.map((v, i) => {

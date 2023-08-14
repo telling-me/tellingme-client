@@ -6,7 +6,7 @@ import style from 'styles/styled-components/styled'
 import Icon from 'assets/icons'
 
 // hooks
-import { useGetAnswerQuery, useGetQuestionQuery } from 'hooks'
+import { useGetMyAnswerQuery, useGetQuestionQuery } from 'hooks'
 
 // utils
 import { formatStringDate } from 'utils/date'
@@ -17,7 +17,7 @@ const Question = () => {
   const today = new Date(new Date().getTime() - 6 * 60 * 60 * 1000)
 
   // query
-  const { data: { data: answer = null } = {} } = useGetAnswerQuery(formatStringDate(today))
+  const { data: { data: answer = null } = {} } = useGetMyAnswerQuery(formatStringDate(today))
   const { data: { data: question = null } = {} } = useGetQuestionQuery(formatStringDate(today))
 
   return (
@@ -55,7 +55,7 @@ const Question = () => {
       </Link>
       {answer !== null && answer?.code !== 'NOT_FOUND_ANSWER' && (
         <TextP typo="c_b" textColor="logo" _margin="18px 0 0 0">
-          답변 완료!
+          기록 완료!
         </TextP>
       )}
     </Grid>

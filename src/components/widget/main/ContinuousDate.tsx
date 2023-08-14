@@ -17,11 +17,11 @@ const ContinuousDate = () => {
     <DateWrapper flex="center" _width="max-content" _padding="10px 12px" _margin="8px 0 0 0">
       {answer?.count > 0 ? (
         <style.TextP typo="c_b" textColor="gray5">
-          연속 <span>{answer?.count}</span>일째 답변 중!
+          연속 <span>{answer?.count}</span>일째 기록 중!
         </style.TextP>
       ) : (
         <style.TextP typo="c_b" textColor="gray5">
-          오늘도 <span>하루</span>를 돌아봐요
+          오늘도 <span>진정한 나</span>를 만나봐요!
         </style.TextP>
       )}
     </DateWrapper>

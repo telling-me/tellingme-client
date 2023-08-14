@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
 
-// components
-import { ToolTip } from 'components'
-
 // styles
 import style from 'styles/styled-components/styled'
 import { InputComponent, InputInnerFrame, InputOuterFrame2 } from './style'
@@ -18,6 +15,7 @@ import Icons from 'assets/icons'
 
 const Input = ({
   _placeholder,
+  _type,
   _value,
   setValue,
   label,
@@ -52,8 +50,9 @@ const Input = ({
         </style.TextSpan>
       )}
 
-      <InputOuterFrame2 isVisible={isVisible} _value={_value}>
+      <InputOuterFrame2 isVisible={isVisible} _value={_value} _disabled={_disabled}>
         <InputInnerFrame
+          type={_type}
           placeholder={_placeholder}
           value={_value}
           onChange={handleChange}
@@ -68,14 +67,12 @@ const Input = ({
         />
 
         {isError ? (
-          <ToolTip
-            tooltipType={'topRight'}
-            tooltipText={errorText as string}
-            childrenWidth={24}
-            _margin="0 30px 0 auto"
-          >
-            <Icons.Warning width="24" height="24" stroke={useChangeColor('error400')} />
-          </ToolTip>
+          <Icons.Warning
+            width="24"
+            height="24"
+            stroke={useChangeColor('error400')}
+            style={{ margin: '0 30px 0 auto' }}
+          />
         ) : (
           <Icons.XCircle
             width="24"

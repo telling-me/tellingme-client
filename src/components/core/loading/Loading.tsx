@@ -1,5 +1,7 @@
 import React from 'react'
 import { DotWave } from '@uiball/loaders'
+
+// hooks
 import useChangeColor from 'hooks/useChangeColor'
 
 interface ILoadingComponent {
@@ -7,7 +9,7 @@ interface ILoadingComponent {
   color?: string
 }
 
-const LoadingComponent = ({ size = 84, color = 'logo' }: ILoadingComponent) => {
+const LoadingComponent = ({ size = 48, color = 'logo' }: ILoadingComponent) => {
   return <DotWave size={size} speed={1} color={useChangeColor(color)} />
 }
 

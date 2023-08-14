@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 // components
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Dropdown } from 'components'
+import { Dropdown, SlideListButton } from 'components'
 import NormalListButton from './NormalListButton'
 // import SlideListButton from './SlideListButton'
 
@@ -53,9 +53,8 @@ const TableHeader = ({ isSelected, _onClick }: IMyAnswerMode) => {
       </style.Grid>
 
       <style.Grid flex="end" _gap="6px" _width="fit-content">
+        <SlideListButton isSelected={!isSelected} _onClick={_onClick} />
         <NormalListButton isSelected={isSelected} _onClick={_onClick} />
-        {/* TODO: 2차 배포 후 SlideListButton 활성화 */}
-        {/* <SlideListButton isSelected={false} _onClick={() => {}} /> */}
       </style.Grid>
     </HeaderWrapper>
   )
@@ -71,6 +70,8 @@ const HeaderWrapper = styled.div`
 
   width: 100%;
   height: fit-content;
+
+  z-index: 1000;
 
   background-color: ${(props) => props.theme.colors.side.side100};
   transition: 0.2s;

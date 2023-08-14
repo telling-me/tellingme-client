@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 
 // components
 import styled from 'styled-components'
-import { Header, QuestionWriteModal, TabBar } from 'components'
+import { Header, QuestionWriteModal, TabBar, AnswerModal } from 'components'
 
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
@@ -20,21 +20,23 @@ const CommonLayout = () => {
   const windowSize = useWindowSize()
   const { prevPage, currPage } = useCommonStore()
 
+  const PAGE_URL = window.location.href
+
   const AppAni = {
     init: {
-      x: window.innerWidth < 1024 ? (prevPage < currPage ? '150%' : '-150%') : 0,
-      y: window.innerWidth < 1024 ? 0 : prevPage < currPage ? '150%' : '-150%',
+      x: window.innerWidth < 1024 ? (prevPage < currPage ? '140%' : '-140%') : 0,
+      y: window.innerWidth < 1024 ? 0 : prevPage < currPage ? '140%' : '-140%',
       transition: { type: 'spring', duration: 0 }
     },
     ani: {
       x: 0,
       y: 0,
-      transition: { type: 'spring', duration: 0.6 }
+      transition: { type: 'spring', duration: 0.4 }
     },
     exit: {
-      x: windowSize.width < 1024 ? (prevPage < currPage ? '-150%' : '150%') : 0,
-      y: windowSize.width < 1024 ? 0 : prevPage < currPage ? '-150%' : '150%',
-      transition: { type: 'spring', duration: 0.6 }
+      x: windowSize.width < 1024 ? (prevPage < currPage ? '-140%' : '140%') : 0,
+      y: windowSize.width < 1024 ? 0 : prevPage < currPage ? '-140%' : '140%',
+      transition: { type: 'spring', duration: 0.4 }
     }
   }
 
@@ -42,21 +44,22 @@ const CommonLayout = () => {
     <>
       <ParentWrapper>
         <InnerWrapper>
-          <Header />
+          {!PAGE_URL.includes('allanswer') && <Header />}
           <Inner initial="init" animate="ani" exit="exit" variants={AppAni}>
             <Outlet />
           </Inner>
-          <TabBar />
+          {!PAGE_URL.includes('allanswerlist') && <TabBar />}
         </InnerWrapper>
       </ParentWrapper>
       {params.get('date') != null && <QuestionWriteModal />}
+      {params.get('answerId') != null && <AnswerModal />}
     </>
   )
 }
 
 const ParentWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
 `

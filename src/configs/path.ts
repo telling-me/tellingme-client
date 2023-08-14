@@ -3,17 +3,20 @@ export enum PAGE_URL {
   Home = '/',
   Kakao = '/oauth/kakao',
   Apple = '/oauth/apple',
-  CheckPushToken = '/oauth/checktoken',
+  Admin = 'admin',
+  AdminReport = 'admin/report',
 
   // App
   App = 'app',
   Main = 'main',
-  MyAnswer = 'myAnswer',
-  AllAnswer = 'Allanswer',
+  MyAnswer = 'myanswer',
+  AllAnswer = 'allanswer',
+  AllAnswerList = 'allanswer/allanswerlist',
   Setting = 'setting',
   Error500 = '500',
   Error403 = '403',
   Dev = 'dev',
+  WithdrawApple = 'withdraw/apple',
 
   // NewsLetter
   NewsLetter = 'newsletter',

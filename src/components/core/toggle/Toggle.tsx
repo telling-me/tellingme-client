@@ -18,8 +18,11 @@ const Toggle = ({
   return (
     <ToggleComponent
       onClick={() => {
-        setValue(!value)
-        _onClick()
+        if (!_disabled) {
+          setValue(!value)
+        } else {
+          _onClick()
+        }
       }}
       _margin={_margin}
     >

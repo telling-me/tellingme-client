@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Button } from 'components/core'
+import { Button, ToolTip } from 'components/core'
 
 // store
 import useQuestionStore from 'stores/useQuestionStore'
@@ -11,7 +10,7 @@ import useQuestionStore from 'stores/useQuestionStore'
 import { modalAni } from 'styles/ani'
 
 // hooks
-import { useGetAnswerQuery } from 'hooks'
+import { useGetMyAnswerQuery } from 'hooks'
 
 // utils
 import { formatStringDate } from 'utils/date'
@@ -19,29 +18,32 @@ import { emotionList } from 'data/emotion'
 import useAnswerStore from 'stores/useAnswerStore'
 import Icon from 'assets/icons'
 
-const EmotionModal = () => {
+interface IEmotionModal {
+  handleSubmit?: () => void
+}
+
+const EmotionModal = ({ handleSubmit }: IEmotionModal) => {
   const date = new URLSearchParams(window.location.search).get('date')
-  const backUrl = location.hash.split('?date')[1]
 
   // query
-  const { data: { data: answer = null } = {} } = useGetAnswerQuery(formatStringDate(new Date(date as string)))
-
-  const navigate = useNavigate()
+  const { data: { data: answer = null } = {} } = useGetMyAnswerQuery(formatStringDate(new Date(date as string)))
 
   const { setIsEmotionModal } = useQuestionStore()
   const { emotion, setEmotion } = useAnswerStore()
 
   useEffect(() => {
-    setEmotion(answer?.code === 'NOT_FOUND_ANSWER' ? null : answer?.emotion)
+    if (answer?.code !== 'NOT_FOUND_ANSWER') {
+      setEmotion(answer?.emotion)
+    }
   }, [])
 
   return (
     <ModalWrapper flex="center" variants={modalAni} initial="init" animate="ani" exit="exit">
       <ModalInnerWrapper flex="between" direction="column">
         <Grid flex="center" direction="column" _gap="8px">
-          <TextP typo="b1">오늘의 감정을 떠올려 보아요</TextP>
+          <TextP typo="b1">이 글 속 나의 감정을 떠올려 봐요</TextP>
           <TextP typo="b2" textColor="gray5">
-            {emotion === null ? '나는 어떤 마음이었을까?' : emotionList[emotion - 1].description}
+            {emotion === null ? '이 글에 담긴 나의 감정은?' : emotionList[emotion - 1].description}
           </TextP>
         </Grid>
         <EmotionGridWrapper selected={emotion}>
@@ -57,7 +59,13 @@ const EmotionModal = () => {
               >
                 <emotionIcon.icon width={56} />
                 <LockEmotion display={!emotionIcon.membership ? 'none' : 'block'}>
-                  <Icon.Lock width={24} />
+                  <ToolTip
+                    tooltipType={idx % 3 === 0 ? 'bottomLeft' : idx % 3 === 1 ? 'bottom' : 'bottomRight'}
+                    tooltipText="추후 프리미엄 모드에서 만나볼 수 있어요!"
+                    isError={false}
+                  >
+                    <Icon.Lock width={24} />
+                  </ToolTip>
                 </LockEmotion>
               </Emotion>
             </>
@@ -72,7 +80,6 @@ const EmotionModal = () => {
             text="취소"
             textColor="logo"
             _onClick={() => {
-              if (answer.code === 'NOT_FOUND_ANSWER') navigate(backUrl)
               setIsEmotionModal(false)
             }}
           />
@@ -85,6 +92,10 @@ const EmotionModal = () => {
             textColor={emotion === null ? 'gray4' : 'logo'}
             _onClick={() => {
               setIsEmotionModal(false)
+
+              if (handleSubmit != null) {
+                handleSubmit()
+              }
             }}
             _disabled={emotion === null}
           />
@@ -120,8 +131,8 @@ const ModalInnerWrapper = styled(style.Grid)`
 
   @media all and (max-width: 767px) {
     width: 100%;
-    height: 494px;
-    padding: 42px 20px 8px 20px;
+    height: 518px;
+    padding: 42px 20px 32px 20px;
     border-radius: 20px 20px 0 0;
   }
 `

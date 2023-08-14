@@ -71,7 +71,6 @@ export const DropdownList = styled.div<{
   z-index: 100;
 
   position: absolute;
-  // bottom: ${({ listLength }) => `-${parseInt(listLength) + 8}px`};/
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;

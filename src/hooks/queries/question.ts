@@ -21,8 +21,8 @@ export const useGetQuestionQuery = <T>(date: string, options?: T) => {
   })
 }
 
-export const useGetAnswerQuery = <T>(date: string, options?: T) => {
-  return useQuery(['answer', date], async () => await apis.getAnswer(date), {
+export const useGetMyAnswerQuery = <T>(date: string, options?: T) => {
+  return useQuery(['answer', date], async () => await apis.getMyAnswer(date), {
     retry: 0,
     onError: (err: IError) => {
       console.log(err)
@@ -35,6 +35,18 @@ export const useGetAnswerQuery = <T>(date: string, options?: T) => {
 
 export const useGetAnswerRecordCountQuery = <T>(date: string, options?: T) => {
   return useQuery(['answer', 'answerCount'], async () => await apis.getAnswerRecordCount(date), {
+    retry: 0,
+    onError: (err: IError) => {
+      console.log(err)
+    },
+    staleTime: 36000000,
+    cacheTime: Infinity,
+    ...options
+  })
+}
+
+export const useGetCommunicationQuestionsQuery = <T>(date: string, options?: T) => {
+  return useQuery(['communicationQuestions', date], async () => await apis.getCommunicationQuestions(date), {
     retry: 0,
     onError: (err: IError) => {
       console.log(err)
