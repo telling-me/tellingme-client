@@ -25,8 +25,8 @@ const SignUpPage = () => {
 
   // socialId, socialLoginType 가져오기
   const location = useLocation()
-  const [socialId, setSocialId] = useState(location.state.socialId)
-  const [socialLoginType, setSocialLoginType] = useState(location.state.socialLoginType)
+  const [socialId, setSocialId] = useState(location.state?.socialId)
+  const [socialLoginType, setSocialLoginType] = useState(location.state?.socialLoginType)
 
   // RN에서 state로 전달받은 socialId, socialLoginType 저장
   const setLocationState = (message: any) => {
