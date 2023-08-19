@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query'
 import { apis } from 'apis/apis'
 import { type IError } from 'type/db'
+import { getCookie } from '../../utils/cookies'
 
 export const useGetQuestionQuery = <T>(date: string, options?: T) => {
   return useQuery(['question', date], async () => await apis.getQuestion(date), {
@@ -15,6 +16,8 @@ export const useGetQuestionQuery = <T>(date: string, options?: T) => {
       }
       return data
     },
+    enabled:
+      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options
@@ -27,6 +30,8 @@ export const useGetMyAnswerQuery = <T>(date: string, options?: T) => {
     onError: (err: IError) => {
       console.log(err)
     },
+    enabled:
+      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options
@@ -39,6 +44,8 @@ export const useGetAnswerRecordCountQuery = <T>(date: string, options?: T) => {
     onError: (err: IError) => {
       console.log(err)
     },
+    enabled:
+      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options
@@ -51,6 +58,8 @@ export const useGetCommunicationQuestionsQuery = <T>(date: string, options?: T) 
     onError: (err: IError) => {
       console.log(err)
     },
+    enabled:
+      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options

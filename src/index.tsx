@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
 import App from './App'
+import { setCookie } from 'utils/cookies'
 
 // react-query
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -29,6 +30,13 @@ window.addEventListener('resize', () => {
   // We execute the same script as before
   const vh = window.innerHeight * 0.01
   document.documentElement.style.setProperty('--vh', `${vh}px`)
+})
+
+// webview일때 확인하여 쿠키에 저장
+window.addEventListener('message', (message) => {
+  if (Object.hasOwn(JSON.parse(message.data), 'device')) {
+    setCookie('device', JSON.parse(message.data).device)
+  }
 })
 
 root.render(
