@@ -71,8 +71,6 @@ const ListAnswers = () => {
     }
   }, [allAnswerList])
 
-  console.log('asdfas', answers)
-
   return answers == null ? (
     <SingleWrapper>
       <Loading />

@@ -1,8 +1,9 @@
+import { useNavigate } from 'react-router-dom'
 import { useMutation, useQueryClient } from 'react-query'
 
 // apis
 import { apis } from 'apis/apis'
-import type { IUserInfoDto } from 'apis/userApi'
+import type { IJoinResponseDto, IUserInfoDto } from 'apis/userApi'
 // hooks
 import { useDeleteToken, useFilterling } from 'hooks'
 
@@ -50,6 +51,32 @@ export const useLogoutMutation = <T>(options?: T) => {
     },
     ...options
   })
+}
+
+export const useSignUpMutation = <T>(options?: T) => {
+  const navigate = useNavigate()
+  return useMutation(
+    async ({ birthDate, gender, job, jobInfo, nickname, purpose, socialId, socialLoginType }: IJoinResponseDto) =>
+      await apis.signup({
+        birthDate,
+        gender,
+        job,
+        jobInfo,
+        nickname,
+        purpose,
+        socialId,
+        socialLoginType
+      }),
+    {
+      onSuccess: (res) => {
+        navigate('/signup/complete')
+      },
+      onError: (err: IError) => {
+        console.log(err)
+      },
+      ...options
+    }
+  )
 }
 
 export const useCheckNicknameMutation = <T>(

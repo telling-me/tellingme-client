@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 // hooks
-import { useCheckNicknameMutation, useSignUpQuery, useWindowSize } from 'hooks'
+import { useCheckNicknameMutation, useWindowSize } from 'hooks'
 
 // component
 import styled from 'styled-components'
@@ -17,13 +17,11 @@ import {
   SignUpHeader,
   SignUpTitle
 } from 'components'
+import { useSignUpMutation } from 'hooks/mutations/user'
 
 const SignUpPage = () => {
   // 화면 너비
   const windowSize = useWindowSize().width
-
-  // 페이지
-  const navigate = useNavigate()
 
   // socialId, socialLoginType 가져오기
   const location = useLocation()
@@ -98,22 +96,7 @@ const SignUpPage = () => {
     }
   }
 
-  // 회원가입
-  const signupQuery = useSignUpQuery({
-    birthDate: year === '' ? null : year,
-    gender,
-    job,
-    jobInfo: job === 5 ? jobInfo : '',
-    nickname,
-    purpose: `[${purpose.join(',')}]`,
-    socialId,
-    socialLoginType
-  })
-
-  const handleSignUp = () => {
-    signupQuery.refetch().catch(() => {})
-    navigate('/signup/complete')
-  }
+  const { mutate: signUpMutate } = useSignUpMutation()
 
   // 건너뛰기
   const handleSkip = () => {
@@ -123,6 +106,19 @@ const SignUpPage = () => {
     }
 
     handleNextStep()
+  }
+
+  const handleSignUp = () => {
+    signUpMutate({
+      birthDate: year === '' ? null : year,
+      gender,
+      job,
+      jobInfo: job === 5 ? jobInfo : '',
+      nickname,
+      purpose: `[${purpose.join(',')}]`,
+      socialId,
+      socialLoginType
+    })
   }
 
   return (
