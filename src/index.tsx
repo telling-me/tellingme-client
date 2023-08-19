@@ -34,9 +34,11 @@ window.addEventListener('resize', () => {
 
 // webview일때 확인하여 쿠키에 저장
 window.addEventListener('message', (message) => {
-  if (Object.hasOwn(JSON.parse(message.data), 'device')) {
-    setCookie('device', JSON.parse(message.data).device)
-  }
+  try {
+    if (Object.hasOwn(JSON.parse(message.data), 'device')) {
+      setCookie('device', JSON.parse(message.data).device)
+    }
+  } catch {}
 })
 
 root.render(

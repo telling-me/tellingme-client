@@ -182,3 +182,7 @@ textarea:disabled::placeholder {
   -webkit-text-fill-color: currentColor; /* 1. sets text fill to current `color` for safari */
   opacity: 1; /* 2. correct opacity on iOS */
 }
+
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
