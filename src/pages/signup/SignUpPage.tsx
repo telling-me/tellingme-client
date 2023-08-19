@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 // hooks
@@ -27,8 +27,22 @@ const SignUpPage = () => {
 
   // socialId, socialLoginType 가져오기
   const location = useLocation()
-  const socialId = location.state.socialId
-  const socialLoginType = location.state.socialLoginType
+  const [socialId, setSocialId] = useState(location.state.socialId)
+  const [socialLoginType, setSocialLoginType] = useState(location.state.socialLoginType)
+
+  // RN에서 state로 전달받은 socialId, socialLoginType 저장
+  const setLocationState = (message: any) => {
+    setSocialId(JSON.parse(message.data).socialId)
+    setSocialLoginType(JSON.parse(message.data).socialLoginType)
+  }
+
+  // RN에서 state를 받는 event listener
+  useEffect(() => {
+    document.addEventListener('message', setLocationState)
+    return () => {
+      document.removeEventListener('message', setLocationState)
+    }
+  }, [])
 
   // 회원가입 단계 정보
   const [step, setStep] = useState(0)
