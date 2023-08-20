@@ -30,16 +30,16 @@ const SignUpPage = () => {
 
   // RN에서 state로 전달받은 socialId, socialLoginType 저장
   const setLocationState = (message: any) => {
-    setSocialId(JSON.parse(message.data).socialId)
-    setSocialLoginType(JSON.parse(message.data).socialLoginType)
+    const data = JSON.parse(message.data)
+    if (data?.socialId !== undefined && data?.socialId !== null) {
+      setSocialId(JSON.parse(message.data).socialId)
+      setSocialLoginType(JSON.parse(message.data).socialLoginType)
+    }
   }
 
   // RN에서 state를 받는 event listener
   useEffect(() => {
     document.addEventListener('message', setLocationState)
-    return () => {
-      document.removeEventListener('message', setLocationState)
-    }
   }, [])
 
   // 회원가입 단계 정보

@@ -45,7 +45,7 @@ export const useLogoutMutation = <T>(options?: T) => {
   return useMutation(async () => await apis.logout(), {
     onSuccess: (res) => {
       useDeleteToken()
-      window.ReactNativeWebView.postMessage(JSON.stringify('logout'))
+      window?.ReactNativeWebView?.postMessage(JSON.stringify('logout'))
       window.location.href = '/'
     },
     onError: (err: IError) => {

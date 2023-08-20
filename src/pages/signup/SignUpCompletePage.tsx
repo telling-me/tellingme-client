@@ -18,7 +18,7 @@ const SignUpCompletePage = () => {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    window.ReactNativeWebView.postMessage(JSON.stringify('signUpComplete'))
+    window?.ReactNativeWebView?.postMessage(JSON.stringify('signUpComplete'))
   }, [])
 
   return (
