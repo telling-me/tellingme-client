@@ -29,7 +29,7 @@ export const useDeleteUser = <T>(options?: T) => {
     {
       onSuccess: (res) => {
         useDeleteToken()
-        window.ReactNativeWebView.postMessage(JSON.stringify('withdraw'))
+        window?.ReactNativeWebView?.postMessage(JSON.stringify('withdraw'))
         window.location.href = '/'
       },
       onError: (err: IError) => {
