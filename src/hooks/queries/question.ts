@@ -4,7 +4,7 @@ import { type IError } from 'type/db'
 import { getCookie } from '../../utils/cookies'
 
 export const useGetQuestionQuery = <T>(date: string, options?: T) => {
-  return useQuery(['question', date], async () => await apis.getQuestion(date), {
+  return useQuery(['question', 'android', date], async () => await apis.getQuestion(date), {
     retry: 0,
     onError: (err: IError) => {
       console.log(err)
@@ -16,8 +16,7 @@ export const useGetQuestionQuery = <T>(date: string, options?: T) => {
       }
       return data
     },
-    enabled:
-      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
+    enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options
@@ -25,13 +24,12 @@ export const useGetQuestionQuery = <T>(date: string, options?: T) => {
 }
 
 export const useGetMyAnswerQuery = <T>(date: string, options?: T) => {
-  return useQuery(['answer', date], async () => await apis.getMyAnswer(date), {
+  return useQuery(['answer', 'android', date], async () => await apis.getMyAnswer(date), {
     retry: 0,
     onError: (err: IError) => {
       console.log(err)
     },
-    enabled:
-      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
+    enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options
@@ -39,13 +37,12 @@ export const useGetMyAnswerQuery = <T>(date: string, options?: T) => {
 }
 
 export const useGetAnswerRecordCountQuery = <T>(date: string, options?: T) => {
-  return useQuery(['answer', 'answerCount'], async () => await apis.getAnswerRecordCount(date), {
+  return useQuery(['answer', 'android', 'answerCount'], async () => await apis.getAnswerRecordCount(date), {
     retry: 0,
     onError: (err: IError) => {
       console.log(err)
     },
-    enabled:
-      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
+    enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options
@@ -58,8 +55,7 @@ export const useGetCommunicationQuestionsQuery = <T>(date: string, options?: T) 
     onError: (err: IError) => {
       console.log(err)
     },
-    enabled:
-      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
+    enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options

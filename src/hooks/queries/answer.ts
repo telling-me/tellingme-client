@@ -9,8 +9,7 @@ export const useGetMyAnswerListQuery = <T>(month: string, year: string, options?
     onError: (err: IError) => {
       console.log(err)
     },
-    enabled:
-      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
+    enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options
@@ -23,8 +22,7 @@ export const useGetAnswerQuery = <T>(answerId: string, options?: T) => {
     onError: (err: IError) => {
       console.log(err)
     },
-    enabled:
-      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
+    enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options
@@ -46,9 +44,7 @@ export const useGetAllAnswerListQuery = <T>(
       onError: (err: IError) => {
         console.log(err)
       },
-      enabled:
-        getCookie('device') !== 'mobile' ||
-        (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
+      enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
       staleTime: 36000000,
       cacheTime: 0,
       ...options

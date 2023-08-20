@@ -9,8 +9,7 @@ export const useGetUserInfoQuery = <T>(options?: T) => {
     onError: (err: IError) => {
       console.log(err)
     },
-    enabled:
-      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
+    enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options
@@ -23,8 +22,7 @@ export const useGetUserNotiQuery = <T>(options?: T) => {
     onError: (err: IError) => {
       console.log(err)
     },
-    enabled:
-      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
+    enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options
@@ -37,8 +35,7 @@ export const useGetUserPushToken = <T>(options?: T) => {
     onError: (err: IError) => {
       console.log(err)
     },
-    enabled:
-      getCookie('device') !== 'mobile' || (getCookie('accessToken') !== null && getCookie('accessToken') !== undefined),
+    enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options

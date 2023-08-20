@@ -42,7 +42,7 @@ const Header = () => {
             _width="fit-content"
             _height="fit-content"
             _onClick={() => {
-              navigate('setting')
+              navigate('main/setting')
             }}
           >
             <Icons.Setting width="24" height="24" stroke={useChangeColor('gray6')} />

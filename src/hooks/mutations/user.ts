@@ -13,7 +13,7 @@ import { type IError } from 'type/db'
 export const usePatchUserInfoMutation = <T>(setOpen: React.Dispatch<React.SetStateAction<boolean>>, options?: T) => {
   return useMutation(async (userInfoDto: IUserInfoDto) => await apis.patchUserInfo(userInfoDto), {
     onSuccess: async () => {
-      window.location.replace('/app/setting')
+      window.location.replace('/app/main/setting')
       setOpen(false)
     },
     onError: (err: IError) => {
@@ -29,6 +29,7 @@ export const useDeleteUser = <T>(options?: T) => {
     {
       onSuccess: (res) => {
         useDeleteToken()
+        window.ReactNativeWebView.postMessage(JSON.stringify('withdraw'))
         window.location.href = '/'
       },
       onError: (err: IError) => {
@@ -44,6 +45,7 @@ export const useLogoutMutation = <T>(options?: T) => {
   return useMutation(async () => await apis.logout(), {
     onSuccess: (res) => {
       useDeleteToken()
+      window.ReactNativeWebView.postMessage(JSON.stringify('logout'))
       window.location.href = '/'
     },
     onError: (err: IError) => {
