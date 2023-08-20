@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { useState } from 'react'
-import { useQueries, useQuery } from 'react-query'
+import { useQueries } from 'react-query'
 
 // apis
 import { apis } from 'apis/apis'
-import type { IJoinResponseDto, IKakaoTokenData } from 'apis/userApi'
+import type { IKakaoTokenData } from 'apis/userApi'
 
 export const useCheckIdQuery = (loginType: string, oauthToken: string | null) => {
   return {
@@ -44,34 +44,4 @@ export const useKakaoQueries = ({ client_id, redirect_uri, code }: IKakaoTokenDa
 
 export const useAppleQueries = ({ idToken }: { idToken: string }) => {
   return useQueries([useCheckIdQuery('apple', idToken)])
-}
-
-export const useSignUpQuery = ({
-  birthDate,
-  gender,
-  job,
-  jobInfo,
-  nickname,
-  purpose,
-  socialId,
-  socialLoginType
-}: IJoinResponseDto) => {
-  return useQuery(
-    ['signup'],
-    async () =>
-      await apis.signup({
-        birthDate,
-        gender,
-        job,
-        jobInfo,
-        nickname,
-        purpose,
-        socialId,
-        socialLoginType
-      }),
-    {
-      enabled: false,
-      retry: 0
-    }
-  )
 }

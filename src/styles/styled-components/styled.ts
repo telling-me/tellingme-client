@@ -33,7 +33,7 @@ export interface IText {
 }
 
 const Grid = styled(motion.div)<IGrid>`
-  transition: 0.2s;
+  // transition: 0.2s;
   ${({ _width }) => (_width != null ? `width: ${_width}` : 'width: 100%')};
   ${({ _height }) => _height != null && `height: ${_height}`};
   ${({ _margin }) => _margin != null && `margin: ${_margin}`};

@@ -13,7 +13,7 @@ export { useGetMyAnswerListQuery, useGetAllAnswerListQuery, useGetAnswerQuery } 
 export { useNewsLetterQuery } from './newsletter'
 
 // oauth
-export { useKakaoQueries, useAppleQueries, useCheckIdQuery, useSignUpQuery } from './oauth'
+export { useKakaoQueries, useAppleQueries, useCheckIdQuery } from './oauth'
 
 // user
 export { useGetUserInfoQuery, useGetUserNotiQuery, useGetUserPushToken } from './user'

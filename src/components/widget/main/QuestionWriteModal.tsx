@@ -144,9 +144,9 @@ const QuestionWriteModal = () => {
                 flex="center"
                 _height="100%"
                 _alignItems="end"
-                style={{ cursor: alreadyAnswered ? 'default' : 'pointer' }}
+                // style={{ cursor: alreadyAnswered ? 'default' : 'pointer' }}
                 onClick={() => {
-                  if (!alreadyAnswered) setIsEmotionModal(true)
+                  // if (!alreadyAnswered) setIsEmotionModal(true)
                 }}
               >
                 <Grid flex="center" _gap="4px">

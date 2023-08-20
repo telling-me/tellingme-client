@@ -22,7 +22,7 @@ const PageRouter = () => {
   return (
     <>
       <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
+        <Routes location={location} key={location.pathname.toString()?.split('/')?.slice(0, 3)?.join('/')}>
           {
             // 랜딩페이지
           }
