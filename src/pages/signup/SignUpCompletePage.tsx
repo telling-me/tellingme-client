@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // components
@@ -11,11 +11,19 @@ import Icons from 'assets/icons'
 
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
+import { getCookie } from 'utils/cookies'
 
 const SignUpCompletePage = () => {
   const navigate = useNavigate()
 
   const [open, setOpen] = useState(false)
+  const [device] = useState<string>(getCookie('device'))
+
+  useEffect(() => {
+    if (device === 'android') {
+      window.ReactNativeWebView.postMessage(JSON.stringify('signUpComplete'))
+    }
+  }, [device])
 
   return (
     <SignUpCompleteWrapper>
