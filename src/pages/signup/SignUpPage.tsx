@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 // hooks
@@ -38,7 +38,7 @@ const SignUpPage = () => {
   }
 
   // RN에서 state를 받는 event listener
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.addEventListener('message', setLocationState)
   }, [])
 
