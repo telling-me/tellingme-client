@@ -91,6 +91,10 @@ import { ReactComponent as CaretLeft } from './CaretLeft.svg'
 import { ReactComponent as SliderLeft } from './SliderLeft.svg'
 import { ReactComponent as SliderRight } from './SliderRight.svg'
 import { ReactComponent as Entrance } from './Entrance.svg'
+import { ReactComponent as MyInfo } from './MyInfo.svg'
+import { ReactComponent as Premium } from './Premium.svg'
+import { ReactComponent as QnA } from './QnA.svg'
+import { ReactComponent as TellingmeBook } from './TellingmeBook.svg'
 
 interface IIconIndex extends IStringKey {
   NotFound: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -184,6 +188,10 @@ interface IIconIndex extends IStringKey {
   SliderLeft: string | FunctionComponent<any> | ComponentClass<any, any>
   SliderRight: string | FunctionComponent<any> | ComponentClass<any, any>
   Entrance: string | FunctionComponent<any> | ComponentClass<any, any>
+  MyInfo: string | FunctionComponent<any> | ComponentClass<any, any>
+  Premium: string | FunctionComponent<any> | ComponentClass<any, any>
+  QnA: string | FunctionComponent<any> | ComponentClass<any, any>
+  TellingmeBook: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
@@ -277,7 +285,11 @@ const Icon: IIconIndex = {
   CaretLeft,
   SliderLeft,
   SliderRight,
-  Entrance
+  Entrance,
+  MyInfo,
+  Premium,
+  QnA,
+  TellingmeBook
 }
 
 export default Icon

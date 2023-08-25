@@ -6,6 +6,7 @@ import type { Dispatch, SetStateAction } from 'react'
 
 // component
 import styled from 'styled-components'
+import { SettingQuickMenus } from 'components'
 // import style from 'styles/styled-components/styled'
 // import { Toggle, ToolTip } from 'components'
 
@@ -14,7 +15,7 @@ import ServiceInfo from './ServiceInfo'
 
 // hooks
 // import { useLogoutMutation, usePostUserNotiQuery, useGetUserNotiQuery } from 'hooks'
-import { useLogoutMutation } from 'hooks'
+import { useLogoutMutation, useWindowSize } from 'hooks'
 
 interface ISettingMenu {
   setPageNumber: Dispatch<SetStateAction<number>>
@@ -24,6 +25,8 @@ interface ISettingMenu {
 const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   const MENU_LIST_ITEMS_TEXTS = ['내 정보 수정하기', '이용 약관', '개인정보 처리방침', 'FAQ', '회원 탈퇴', '로그아웃']
   const MENU_LIST_ITEMS_ICON = [true, true, true, true, true, false]
+
+  const windowWidth = useWindowSize().width
 
   // const [userNoti, setUserNoti] = useState(false)
   // const resNoti = useGetUserNotiQuery().data
@@ -61,6 +64,8 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
         />
       </PushAlarmWrapper> */}
 
+      {windowWidth <= 768 && <SettingQuickMenus />}
+
       {MENU_LIST_ITEMS_TEXTS.map((text, i) => {
         return (
           <SettingMenuList
@@ -87,6 +92,8 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
           />
         )
       })}
+
+      {windowWidth > 768 && <SettingQuickMenus />}
 
       <ServiceInfo />
     </SettingMenuWrapper>
