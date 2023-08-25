@@ -2,29 +2,22 @@
 import React from 'react'
 
 // type
-import type { Dispatch, SetStateAction } from 'react'
+import type { ISettingMenu } from './type'
 
 // component
 import styled from 'styled-components'
-import { SettingQuickMenus } from 'components'
+import { SettingQuickMenus, SettingMenuList, ServiceInfo } from 'components'
 // import style from 'styles/styled-components/styled'
 // import { Toggle, ToolTip } from 'components'
-
-import SettingMenuList from './SettingMenuList'
-import ServiceInfo from './ServiceInfo'
 
 // hooks
 // import { useLogoutMutation, usePostUserNotiQuery, useGetUserNotiQuery } from 'hooks'
 import { useLogoutMutation, useWindowSize } from 'hooks'
 
-interface ISettingMenu {
-  setPageNumber: Dispatch<SetStateAction<number>>
-  setIsMenu?: Dispatch<SetStateAction<boolean>>
-}
-
 const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
-  const MENU_LIST_ITEMS_TEXTS = ['내 정보 수정하기', '이용 약관', '개인정보 처리방침', 'FAQ', '회원 탈퇴', '로그아웃']
-  const MENU_LIST_ITEMS_ICON = [true, true, true, true, true, false]
+  // 0, 3
+  const MENU_LIST_ITEMS_TEXTS = ['이용 약관', '개인정보 처리방침', '회원 탈퇴', '로그아웃']
+  const MENU_LIST_ITEMS_ICON = [true, true, true, false]
 
   const windowWidth = useWindowSize().width
 
@@ -64,7 +57,7 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
         />
       </PushAlarmWrapper> */}
 
-      {windowWidth <= 768 && <SettingQuickMenus />}
+      {windowWidth <= 768 && <SettingQuickMenus setPageNumber={setPageNumber} setIsMenu={setIsMenu} />}
 
       {MENU_LIST_ITEMS_TEXTS.map((text, i) => {
         return (
@@ -73,19 +66,17 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
             text={text}
             icon={MENU_LIST_ITEMS_ICON[i]}
             _onClick={() => {
-              if ([0, 4].includes(i)) {
-                setPageNumber(i)
+              if (i === 0) {
+                window.open('https://doana.notion.site/f42ec05972a545ce95231f8144705eae?pvs=4')
+              } else if (i === 1) {
+                window.open('https://doana.notion.site/7cdab221ee6d436781f930442040d556?pvs=4')
+              } else if (i === 2) {
+                setPageNumber(4)
 
                 if (setIsMenu != null) {
                   setIsMenu(false)
                 }
-              } else if (i === 1) {
-                window.open('https://doana.notion.site/f42ec05972a545ce95231f8144705eae?pvs=4')
-              } else if (i === 2) {
-                window.open('https://doana.notion.site/7cdab221ee6d436781f930442040d556?pvs=4')
               } else if (i === 3) {
-                window.open('https://doana.notion.site/f7a045872c3b4b02bce5e9f6d6cfc2d8?pvs=4')
-              } else if (i === 5) {
                 logout()
               }
             }}
@@ -93,7 +84,7 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
         )
       })}
 
-      {windowWidth > 768 && <SettingQuickMenus />}
+      {windowWidth > 768 && <SettingQuickMenus setPageNumber={setPageNumber} setIsMenu={setIsMenu} />}
 
       <ServiceInfo />
     </SettingMenuWrapper>

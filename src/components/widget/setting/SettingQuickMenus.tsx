@@ -7,12 +7,31 @@ import Icon from 'assets/icons'
 // styles
 import style from 'styles/styled-components/styled'
 
-const SettingQuickMenus = () => {
+// type
+import type { ISettingMenu } from './type'
+
+const SettingQuickMenus = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   const MENUS = [
-    { icon: Icon.Premium, title: '프리미엄' },
-    { icon: Icon.TellingmeBook, title: '텔링미북' },
-    { icon: Icon.QnA, title: 'FAQ' },
-    { icon: Icon.MyInfo, title: '내 정보' }
+    { icon: Icon.Premium, title: '프리미엄', _onClick: () => {} },
+    { icon: Icon.TellingmeBook, title: '텔링미북', _onClick: () => {} },
+    {
+      icon: Icon.QnA,
+      title: 'FAQ',
+      _onClick: () => {
+        window.open('https://doana.notion.site/f7a045872c3b4b02bce5e9f6d6cfc2d8?pvs=4')
+      }
+    },
+    {
+      icon: Icon.MyInfo,
+      title: '내 정보',
+      _onClick: () => {
+        setPageNumber(0)
+
+        if (setIsMenu != null) {
+          setIsMenu(false)
+        }
+      }
+    }
   ]
 
   return (
@@ -20,7 +39,7 @@ const SettingQuickMenus = () => {
       <QuickMenusWrapper>
         {MENUS.map((v, i) => {
           return (
-            <QuickMenuWrapper key={i}>
+            <QuickMenuWrapper key={i} onClick={v._onClick}>
               <v.icon />
               <style.TextP typo="c" textColor="gray7">
                 {v.title}
