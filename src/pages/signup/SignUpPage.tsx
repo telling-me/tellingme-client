@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import React, { useLayoutEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 // hooks
-import { useCheckNicknameMutation, useSignUpQuery, useWindowSize } from 'hooks'
+import { useCheckNicknameMutation, useWindowSize } from 'hooks'
 
 // component
 import styled from 'styled-components'
@@ -17,18 +17,30 @@ import {
   SignUpHeader,
   SignUpTitle
 } from 'components'
+import { useSignUpMutation } from 'hooks/mutations/user'
 
 const SignUpPage = () => {
   // 화면 너비
   const windowSize = useWindowSize().width
 
-  // 페이지
-  const navigate = useNavigate()
-
   // socialId, socialLoginType 가져오기
   const location = useLocation()
-  const socialId = location.state.socialId
-  const socialLoginType = location.state.socialLoginType
+  const [socialId, setSocialId] = useState(location.state?.socialId)
+  const [socialLoginType, setSocialLoginType] = useState(location.state?.socialLoginType)
+
+  // RN에서 state로 전달받은 socialId, socialLoginType 저장
+  const setLocationState = (message: any) => {
+    const data = JSON.parse(message.data)
+    if (data?.socialId !== undefined && data?.socialId !== null) {
+      setSocialId(JSON.parse(message.data).socialId)
+      setSocialLoginType(JSON.parse(message.data).socialLoginType)
+    }
+  }
+
+  // RN에서 state를 받는 event listener
+  useLayoutEffect(() => {
+    document.addEventListener('message', setLocationState)
+  }, [])
 
   // 회원가입 단계 정보
   const [step, setStep] = useState(0)
@@ -84,22 +96,7 @@ const SignUpPage = () => {
     }
   }
 
-  // 회원가입
-  const signupQuery = useSignUpQuery({
-    birthDate: year === '' ? null : year,
-    gender,
-    job,
-    jobInfo: job === 5 ? jobInfo : '',
-    nickname,
-    purpose: `[${purpose.join(',')}]`,
-    socialId,
-    socialLoginType
-  })
-
-  const handleSignUp = () => {
-    signupQuery.refetch().catch(() => {})
-    navigate('/signup/complete')
-  }
+  const { mutate: signUpMutate } = useSignUpMutation()
 
   // 건너뛰기
   const handleSkip = () => {
@@ -109,6 +106,19 @@ const SignUpPage = () => {
     }
 
     handleNextStep()
+  }
+
+  const handleSignUp = () => {
+    signUpMutate({
+      birthDate: year === '' ? null : year,
+      gender,
+      job,
+      jobInfo: job === 5 ? jobInfo : '',
+      nickname,
+      purpose: `[${purpose.join(',')}]`,
+      socialId,
+      socialLoginType
+    })
   }
 
   return (

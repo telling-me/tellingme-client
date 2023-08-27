@@ -9,10 +9,10 @@ export enum PAGE_URL {
   // App
   App = 'app',
   Main = 'main',
+  Setting = 'main/setting',
   MyAnswer = 'myanswer',
   AllAnswer = 'allanswer',
   AllAnswerList = 'allanswer/allanswerlist',
-  Setting = 'setting',
   Error500 = '500',
   Error403 = '403',
   Dev = 'dev',

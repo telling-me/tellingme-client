@@ -1,8 +1,9 @@
+import { useNavigate } from 'react-router-dom'
 import { useMutation, useQueryClient } from 'react-query'
 
 // apis
 import { apis } from 'apis/apis'
-import type { IUserInfoDto } from 'apis/userApi'
+import type { IJoinResponseDto, IUserInfoDto } from 'apis/userApi'
 // hooks
 import { useDeleteToken, useFilterling } from 'hooks'
 
@@ -12,7 +13,7 @@ import { type IError } from 'type/db'
 export const usePatchUserInfoMutation = <T>(setOpen: React.Dispatch<React.SetStateAction<boolean>>, options?: T) => {
   return useMutation(async (userInfoDto: IUserInfoDto) => await apis.patchUserInfo(userInfoDto), {
     onSuccess: async () => {
-      window.location.replace('/app/setting')
+      window.location.replace('/app/main/setting')
       setOpen(false)
     },
     onError: (err: IError) => {
@@ -28,6 +29,7 @@ export const useDeleteUser = <T>(options?: T) => {
     {
       onSuccess: (res) => {
         useDeleteToken()
+        window?.ReactNativeWebView?.postMessage(JSON.stringify('withdraw'))
         window.location.href = '/'
       },
       onError: (err: IError) => {
@@ -43,6 +45,7 @@ export const useLogoutMutation = <T>(options?: T) => {
   return useMutation(async () => await apis.logout(), {
     onSuccess: (res) => {
       useDeleteToken()
+      window?.ReactNativeWebView?.postMessage(JSON.stringify('logout'))
       window.location.href = '/'
     },
     onError: (err: IError) => {
@@ -50,6 +53,32 @@ export const useLogoutMutation = <T>(options?: T) => {
     },
     ...options
   })
+}
+
+export const useSignUpMutation = <T>(options?: T) => {
+  const navigate = useNavigate()
+  return useMutation(
+    async ({ birthDate, gender, job, jobInfo, nickname, purpose, socialId, socialLoginType }: IJoinResponseDto) =>
+      await apis.signup({
+        birthDate,
+        gender,
+        job,
+        jobInfo,
+        nickname,
+        purpose,
+        socialId,
+        socialLoginType
+      }),
+    {
+      onSuccess: (res) => {
+        navigate('/signup/complete')
+      },
+      onError: (err: IError) => {
+        console.log(err)
+      },
+      ...options
+    }
+  )
 }
 
 export const useCheckNicknameMutation = <T>(

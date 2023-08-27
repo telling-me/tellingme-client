@@ -38,7 +38,9 @@ const SignUpCompletePage = () => {
             textColor="logo"
             _padding="18px 32px"
             _onClick={() => {
-              navigate('/')
+              if (window?.ReactNativeWebView !== undefined)
+                window?.ReactNativeWebView?.postMessage(JSON.stringify('login'))
+              else navigate('/')
             }}
           />
 
@@ -49,7 +51,9 @@ const SignUpCompletePage = () => {
             textColor="logo"
             _padding="18px 32px"
             _onClick={() => {
-              setOpen(true)
+              if (window?.ReactNativeWebView !== undefined) {
+                window?.ReactNativeWebView?.postMessage(JSON.stringify('signUpComplete'))
+              } else setOpen(true)
             }}
           />
         </SignUpCompleteButtonWrapper>
