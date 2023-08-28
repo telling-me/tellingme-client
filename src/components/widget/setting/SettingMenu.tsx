@@ -12,14 +12,13 @@ import { SettingQuickMenus, SettingMenuList, ServiceInfo } from 'components'
 
 // hooks
 // import { useLogoutMutation, usePostUserNotiQuery, useGetUserNotiQuery } from 'hooks'
-import { useLogoutMutation, useWindowSize } from 'hooks'
+import { useLogoutMutation } from 'hooks'
+import SettingProfile from './SettingProfile'
 
 const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   // 0, 3
   const MENU_LIST_ITEMS_TEXTS = ['이용 약관', '개인정보 처리방침', '회원 탈퇴', '로그아웃']
   const MENU_LIST_ITEMS_ICON = [true, true, true, false]
-
-  const windowWidth = useWindowSize().width
 
   // const [userNoti, setUserNoti] = useState(false)
   // const resNoti = useGetUserNotiQuery().data
@@ -57,7 +56,9 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
         />
       </PushAlarmWrapper> */}
 
-      {windowWidth <= 768 && <SettingQuickMenus setPageNumber={setPageNumber} setIsMenu={setIsMenu} />}
+      <SettingProfile />
+
+      <SettingQuickMenus setPageNumber={setPageNumber} setIsMenu={setIsMenu} />
 
       {MENU_LIST_ITEMS_TEXTS.map((text, i) => {
         return (
@@ -83,8 +84,6 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
           />
         )
       })}
-
-      {windowWidth > 768 && <SettingQuickMenus setPageNumber={setPageNumber} setIsMenu={setIsMenu} />}
 
       <ServiceInfo />
     </SettingMenuWrapper>

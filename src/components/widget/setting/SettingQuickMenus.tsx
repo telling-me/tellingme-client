@@ -40,7 +40,7 @@ const SettingQuickMenus = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
         {MENUS.map((v, i) => {
           return (
             <QuickMenuWrapper key={i} onClick={v._onClick}>
-              <v.icon />
+              <v.icon width="32" height="32" />
               <style.TextP typo="c" textColor="gray7">
                 {v.title}
               </style.TextP>
@@ -56,12 +56,12 @@ const QuickMenusSpace = styled.div`
   width: 100%;
 
   @media all and (min-width: 768px) {
-    margin-top: 36px;
+    margin: 12px 0 36px;
     padding: 0 60px;
   }
 
   @media all and (max-width: 768px) {
-    margin: 20px 0 24px 0;
+    margin: 20px 0 24px;
     padding: 0 25px;
   }
 `

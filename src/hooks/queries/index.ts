@@ -16,7 +16,7 @@ export { useNewsLetterQuery } from './newsletter'
 export { useKakaoQueries, useAppleQueries, useCheckIdQuery } from './oauth'
 
 // user
-export { useGetUserInfoQuery, useGetUserNotiQuery, useGetUserPushToken } from './user'
+export { useGetUserInfoQuery, useGetUserNotiQuery, useGetUserPushToken, useGetMyPage } from './user'
 
 // admin
 export { useGetReportList } from './admin'
