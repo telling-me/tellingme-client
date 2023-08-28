@@ -1,4 +1,5 @@
-import React from 'react'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 // assets
@@ -9,11 +10,34 @@ import style from 'styles/styled-components/styled'
 
 // type
 import type { ISettingMenu } from './type'
+import OnlyMobileModal from '../OnlyMobileModal'
 
 const SettingQuickMenus = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
+  const [open, setOpen] = useState<boolean>(false)
+
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   const MENUS = [
-    { icon: Icon.Premium, title: '프리미엄', _onClick: () => {} },
-    { icon: Icon.TellingmeBook, title: '텔링미북', _onClick: () => {} },
+    {
+      icon: Icon.Premium,
+      title: '프리미엄',
+      _onClick: () => {
+        handleOpen()
+      }
+    },
+    {
+      icon: Icon.TellingmeBook,
+      title: '텔링미북',
+      _onClick: () => {
+        handleOpen()
+      }
+    },
     {
       icon: Icon.QnA,
       title: 'FAQ',
@@ -48,6 +72,8 @@ const SettingQuickMenus = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
           )
         })}
       </QuickMenusWrapper>
+
+      {open && <OnlyMobileModal handleClose={handleClose} />}
     </QuickMenusSpace>
   )
 }
