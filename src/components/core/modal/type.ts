@@ -10,3 +10,8 @@ export interface IModal {
   _onClick?: MouseEventHandler<HTMLDivElement>
   children: React.ReactNode
 }
+
+export interface IOneButtonModal {
+  text: string
+  _onClick: () => void
+}

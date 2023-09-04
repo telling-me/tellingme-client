@@ -7,7 +7,7 @@ import useQuestionStore from 'stores/useQuestionStore'
 import useAnswerStore from 'stores/useAnswerStore'
 
 // components
-import { Button, EmotionIcon, EmotionModal, Modal, Toggle, IconButton, Toast } from 'components'
+import { Button, EmotionIcon, EmotionModal, Modal, Toggle, IconButton, Toast, OneButtonModal } from 'components'
 import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
 // components - style
@@ -433,21 +433,27 @@ const QuestionWriteModal = () => {
         </Modal>
       )}
       {toggleModal && (
-        <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
-          <style.TextP typo="b1">3일 이상 지난 답변은 바꿀 수 없어요.</style.TextP>
-          <Button
-            buttonType="secondary"
-            text="확인"
-            textSize="h6"
-            textColor="logo"
-            _width="100%"
-            _height="55px"
-            _margin="auto 0 0 0"
-            _onClick={() => {
-              setToggleModal(false)
-            }}
-          />
-        </Modal>
+        <OneButtonModal
+          text="3일 이상 지난 답변은 바꿀 수 없어요."
+          _onClick={() => {
+            setToggleModal(false)
+          }}
+        />
+        // <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
+        //   <style.TextP typo="b1">3일 이상 지난 답변은 바꿀 수 없어요.</style.TextP>
+        //   <Button
+        //     buttonType="secondary"
+        //     text="확인"
+        //     textSize="h6"
+        //     textColor="logo"
+        //     _width="100%"
+        //     _height="55px"
+        //     _margin="auto 0 0 0"
+        //     _onClick={() => {
+        //       setToggleModal(false)
+        //     }}
+        //   />
+        // </Modal>
       )}
       {toastOpen && (
         <Toast

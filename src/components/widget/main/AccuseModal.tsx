@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Button, Modal } from 'components/core'
+import { Button, OneButtonModal } from 'components/core'
 
 // ani
 import { modalAni } from 'styles/ani'
@@ -108,23 +108,14 @@ const AccuseModal = ({ handleCancel }: IAccuseModal) => {
       </ModalInnerWrapper>
       {/* modal */}
       {modal && (
-        <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
-          <style.TextP typo="b1">{text}</style.TextP>
-          <Button
-            buttonType="secondary"
-            text="확인"
-            textSize="h6"
-            textColor="logo"
-            _width="100%"
-            _height="55px"
-            _margin="auto 0 0 0"
-            _onClick={() => {
-              setModal(false)
-              handleCancel?.()
-              if (status === 4003 || status === 5003) navigate(-1)
-            }}
-          />
-        </Modal>
+        <OneButtonModal
+          text={text}
+          _onClick={() => {
+            setModal(false)
+            handleCancel?.()
+            if (status === 4003 || status === 5003) navigate(-1)
+          }}
+        />
       )}
     </ModalWrapper>
   )

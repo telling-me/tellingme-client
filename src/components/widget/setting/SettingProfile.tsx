@@ -36,7 +36,7 @@ const SettingProfile = () => {
 
   return (
     <ProfileSpace>
-      <ImageWrapper />
+      <ImageWrapper src={mypage.profileUrl} />
 
       <TextWrapper>
         <style.TextP typo="h5" textColor="black">
@@ -93,13 +93,11 @@ const ProfileSpace = styled.div`
   }
 `
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled.img`
   width: 56px;
   height: 56px;
 
   border-radius: 100%;
-
-  background-color: pink;
 `
 
 const TextWrapper = styled.div`
