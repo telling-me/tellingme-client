@@ -7,7 +7,17 @@ import useQuestionStore from 'stores/useQuestionStore'
 import useAnswerStore from 'stores/useAnswerStore'
 
 // components
-import { Button, EmotionIcon, EmotionModal, Modal, Toggle, IconButton, Toast, OneButtonModal } from 'components'
+import {
+  Button,
+  EmotionIcon,
+  EmotionModal,
+  Modal,
+  Toggle,
+  IconButton,
+  Toast,
+  OneButtonModal,
+  TwoButtonModal
+} from 'components'
 import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
 // components - style
@@ -303,134 +313,64 @@ const QuestionWriteModal = () => {
 
       {/* modal */}
       {cancel && (
-        <Modal _width="100%" _maxWidth="425px" _height="174px" _borderRadius="20px" _padding="30px 20px 20px 20px">
-          <Grid flex="between" direction="column" _height="100%">
-            <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
-              <TextP typo="b1" textColor="black">
-                작성을 취소하고 나가시겠어요?
-              </TextP>
-              <TextP typo="b2" textColor="gray7">
-                작성한 답변은 초기화돼요
-              </TextP>
-            </Grid>
-            <Grid flex="center" _gap="15px">
-              <Button
-                _width="135px"
-                _height="55px"
-                buttonType="tertiary"
-                textColor="logo"
-                textSize="h6"
-                text="아니오"
-                _onClick={() => {
-                  setCancel(false)
-                }}
-              ></Button>
-              <Button
-                _width="135px"
-                _height="55px"
-                buttonType="secondary"
-                textColor="logo"
-                textSize="h6"
-                text="나갈래요"
-                _onClick={() => {
-                  navigate(backUrl)
-                }}
-              ></Button>
-            </Grid>
-          </Grid>
-        </Modal>
+        <TwoButtonModal
+          mainText="작성을 취소하고 나가시겠어요?"
+          subText="작성한 답변은 초기화돼요"
+          leftBtnText="아니오"
+          rightBtnText="나갈래요"
+          leftBtnOnClick={() => {
+            setCancel(false)
+          }}
+          rightBtnOnClick={() => {
+            navigate(backUrl)
+          }}
+        />
       )}
       {deleteModal && (
-        <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
-          <Grid flex="between" direction="column" _height="100%">
-            <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
-              <TextP typo="b1" textColor="black">
-                답변을 삭제할까요?
-              </TextP>
-            </Grid>
-            <Grid flex="center" _gap="15px">
-              <Button
-                _width="135px"
-                _height="55px"
-                buttonType="tertiary"
-                textColor="logo"
-                textSize="h6"
-                text="취소"
-                _onClick={() => {
-                  setDeleteModal(false)
-                }}
-              ></Button>
-              <Button
-                _width="135px"
-                _height="55px"
-                buttonType="secondary"
-                textColor="logo"
-                textSize="h6"
-                text="삭제하기"
-                _onClick={() => {
-                  deleteAnswerMutate(
-                    { date: date as string },
-                    {
-                      onSuccess: async () => {
-                        await queryClient.invalidateQueries('answer')
-                        navigate(backUrl)
-                      },
-                      onError: (error) => {
-                        console.log(error)
-                      }
-                    }
-                  )
-                }}
-              ></Button>
-            </Grid>
-          </Grid>
-        </Modal>
+        <TwoButtonModal
+          mainText="답변을 삭제할까요?"
+          rightBtnText="삭제하기"
+          leftBtnOnClick={() => {
+            setDeleteModal(false)
+          }}
+          rightBtnOnClick={() => {
+            deleteAnswerMutate(
+              { date: date as string },
+              {
+                onSuccess: async () => {
+                  await queryClient.invalidateQueries('answer')
+                  navigate(backUrl)
+                },
+                onError: (error) => {
+                  console.log(error)
+                }
+              }
+            )
+          }}
+        />
       )}
       {editModal && (
-        <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
-          <Grid flex="between" direction="column" _height="100%">
-            <Grid flex="center" direction="column" _gap="8px" _alignItems="center">
-              <TextP typo="b1" textColor="black">
-                답변을 수정할까요?
-              </TextP>
-            </Grid>
-            <Grid flex="center" _gap="15px">
-              <Button
-                _width="135px"
-                _height="55px"
-                buttonType="tertiary"
-                textColor="logo"
-                textSize="h6"
-                text="취소"
-                _onClick={() => {
-                  setEditModal(false)
-                }}
-              ></Button>
-              <Button
-                _width="135px"
-                _height="55px"
-                buttonType="secondary"
-                textColor="logo"
-                textSize="h6"
-                text="수정하기"
-                _onClick={() => {
-                  editAnswerMutate(
-                    { date: date as string, content: text, isPublic: shareToggle },
-                    {
-                      onSuccess: async () => {
-                        await queryClient.invalidateQueries('answer')
-                        navigate(backUrl)
-                      },
-                      onError: (error) => {
-                        console.log(error)
-                      }
-                    }
-                  )
-                }}
-              ></Button>
-            </Grid>
-          </Grid>
-        </Modal>
+        <TwoButtonModal
+          mainText="답변을 수정할까요?"
+          rightBtnText="수정하기"
+          leftBtnOnClick={() => {
+            setEditModal(false)
+          }}
+          rightBtnOnClick={() => {
+            editAnswerMutate(
+              { date: date as string, content: text, isPublic: shareToggle },
+              {
+                onSuccess: async () => {
+                  await queryClient.invalidateQueries('answer')
+                  navigate(backUrl)
+                },
+                onError: (error) => {
+                  console.log(error)
+                }
+              }
+            )
+          }}
+        />
       )}
       {toggleModal && (
         <OneButtonModal
@@ -439,21 +379,6 @@ const QuestionWriteModal = () => {
             setToggleModal(false)
           }}
         />
-        // <Modal _width="100%" _maxWidth="425px" _height="150px" _borderRadius="20px" _padding="30px 20px 20px 20px">
-        //   <style.TextP typo="b1">3일 이상 지난 답변은 바꿀 수 없어요.</style.TextP>
-        //   <Button
-        //     buttonType="secondary"
-        //     text="확인"
-        //     textSize="h6"
-        //     textColor="logo"
-        //     _width="100%"
-        //     _height="55px"
-        //     _margin="auto 0 0 0"
-        //     _onClick={() => {
-        //       setToggleModal(false)
-        //     }}
-        //   />
-        // </Modal>
       )}
       {toastOpen && (
         <Toast

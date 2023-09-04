@@ -3,8 +3,7 @@ import type { Dispatch, SetStateAction } from 'react'
 
 // component
 import styled from 'styled-components'
-import style from 'styles/styled-components/styled'
-import { Button, Hr, Modal } from 'components'
+import { Hr, TwoButtonModal } from 'components'
 
 import ModifyNickname from './modify/ModifyNickname'
 import ModifyPurpose from './modify/ModifyPurpose'
@@ -164,41 +163,15 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
       </ModifyMyInfoContent>
 
       {open && (
-        <Modal _width="100%" _maxWidth="425px" _padding="30px 20px 20px" _borderRadius="20px">
-          <ModalChildren>
-            <ModalTexts>
-              <style.TextP typo="b1" textColor="black">
-                회원 정보를 수정하시겠어요?
-              </style.TextP>
-              <style.TextP typo="b2" textColor="gray7">
-                성별과 출생연도은 한번 설정 후 변경할 수 없어요
-              </style.TextP>
-            </ModalTexts>
-
-            <ModalButtons>
-              <Button
-                buttonType="tertiary"
-                text="취소"
-                textSize="h6"
-                textColor="logo"
-                _width="135px"
-                _padding="18px 0"
-                _onClick={() => {
-                  setOpen(false)
-                }}
-              />
-              <Button
-                buttonType="secondary"
-                text="수정하기"
-                textSize="h6"
-                textColor="logo"
-                _width="135px"
-                _padding="18px 0"
-                _onClick={_onClick}
-              />
-            </ModalButtons>
-          </ModalChildren>
-        </Modal>
+        <TwoButtonModal
+          mainText="회원 정보를 수정하시겠어요?"
+          subText="성별과 출생연도는 한번 설정 후 변경할 수 없어요"
+          rightBtnText="수정하기"
+          leftBtnOnClick={() => {
+            setOpen(false)
+          }}
+          rightBtnOnClick={_onClick}
+        />
       )}
     </ModifyMyInfoWrapper>
   )
@@ -232,23 +205,6 @@ const ModifyMyInfoContent = styled.div`
     height: calc(100vh - 108px);
     height: calc(var(--vh, 1vh) * 100 - 108px);
   }
-`
-
-const ModalTexts = styled.div`
-  ${({ theme }) => theme.common.flexCenter}
-  flex-direction: column;
-  gap: 8px;
-`
-
-const ModalButtons = styled.div`
-  display: flex;
-  gap: 15px;
-`
-
-const ModalChildren = styled.div`
-  ${({ theme }) => theme.common.flexCenter}
-  flex-direction: column;
-  gap: 28px;
 `
 
 export default ModifyMyInfo

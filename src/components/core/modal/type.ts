@@ -1,4 +1,5 @@
 import type { MouseEventHandler } from 'react'
+import type { ColorType } from 'type/common'
 
 export interface IModal {
   _width?: string
@@ -14,4 +15,15 @@ export interface IModal {
 export interface IOneButtonModal {
   text: string
   _onClick: () => void
+}
+
+export interface ITwoButtonModal {
+  mainText: string
+  subText?: string
+  subTextColor?: ColorType
+  leftBtnText?: string
+  rightBtnText: string
+  leftBtnOnClick: () => void
+  rightBtnOnClick: () => void
+  children?: React.ReactNode
 }

@@ -7,7 +7,7 @@ import { useGetReportList, useExpireReport } from 'hooks'
 import { getCookie } from 'utils/cookies'
 
 // components
-import { Button, Hr, Loading, Modal } from 'components'
+import { Button, Hr, Loading, TwoButtonModal } from 'components'
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
 
@@ -139,29 +139,12 @@ const AdminReportPage = () => {
       </ReportListRight>
 
       {open && (
-        <Modal _width="100%" _maxWidth="425px" _borderRadius="20px" _padding="30px 0 20px 0">
-          <style.TextP typo="b1">답변을 삭제할까요 ?</style.TextP>
-          <ButtonWrapper>
-            <Button
-              buttonType="tertiary"
-              text="취소"
-              textSize="h6"
-              textColor="logo"
-              _width="135px"
-              _height="55px"
-              _onClick={handleClose}
-            />
-            <Button
-              buttonType="secondary"
-              text="삭제하기"
-              textSize="h6"
-              textColor="logo"
-              _width="135px"
-              _height="55px"
-              _onClick={_onClick}
-            />
-          </ButtonWrapper>
-        </Modal>
+        <TwoButtonModal
+          mainText="답변을 삭제할까요?"
+          rightBtnText="삭제하기"
+          leftBtnOnClick={handleClose}
+          rightBtnOnClick={_onClick}
+        />
       )}
     </ReportListWrapper>
   ) : (
@@ -229,14 +212,6 @@ const ReportListContentWrapper = styled.div`
 const AnswerWrapper = styled.div`
   height: 100%;
   overflow: auto;
-`
-
-const ButtonWrapper = styled.div`
-  ${({ theme }) => theme.common.flexCenter}
-  gap: 15px;
-
-  width: 100%;
-  padding: 8px 0 0 0;
 `
 
 export default AdminReportPage
