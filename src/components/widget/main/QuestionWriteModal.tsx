@@ -7,7 +7,7 @@ import useQuestionStore from 'stores/useQuestionStore'
 import useAnswerStore from 'stores/useAnswerStore'
 
 // components
-import { Button, EmotionIcon, EmotionModal, Modal, Toggle, IconButton } from 'components'
+import { Button, EmotionIcon, EmotionModal, Modal, Toggle, IconButton, Toast } from 'components'
 import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
 // components - style
@@ -78,6 +78,8 @@ const QuestionWriteModal = () => {
 
   const [diffDays, setDiffDays] = useState<number>()
 
+  const [toastOpen, setToastOpen] = useState<boolean>(false)
+
   const handleSubmit = () => {
     postAnswerMutate(
       { date: date as string, content: text, emotion: emotion as number, isPublic: shareToggle },
@@ -120,6 +122,14 @@ const QuestionWriteModal = () => {
     setEmotion(answer?.emotion ?? null)
     setShareToggle(answer?.isPublic ?? true)
   }, [answer])
+
+  useEffect(() => {
+    if (toastOpen) {
+      setTimeout(() => {
+        setToastOpen(false)
+      }, 3000)
+    }
+  }, [toastOpen])
 
   return (
     <>
@@ -270,15 +280,16 @@ const QuestionWriteModal = () => {
                       setToggleModal(true)
                     }}
                   />
+
                   <Button
                     buttonType="noFilled"
                     text="완료"
                     _height="100%"
                     textColor={text?.length < MIN_LENGTH ? 'gray6' : 'logo'}
                     textSize={windowWidth < 768 ? 'b1_b' : 'h6_b'}
-                    _disabled={text?.length < MIN_LENGTH}
                     _onClick={() => {
-                      if (!alreadyAnswered) setIsEmotionModal(true)
+                      if (text?.length < MIN_LENGTH) setToastOpen(true)
+                      else if (!alreadyAnswered) setIsEmotionModal(true)
                       else setEditModal(true)
                     }}
                   />
@@ -437,6 +448,12 @@ const QuestionWriteModal = () => {
             }}
           />
         </Modal>
+      )}
+      {toastOpen && (
+        <Toast
+          icon={<Icon.Warning width="20" height="20" stroke={theme.colors.error.error400} />}
+          text={'4글자 이상 작성해주세요.'}
+        />
       )}
     </>
   )
