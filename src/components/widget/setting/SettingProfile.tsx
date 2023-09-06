@@ -56,16 +56,18 @@ const SettingProfile = () => {
             </style.TextP>
           </RecordWrapper>
         ) : (
-          <MembershipWrapper>
-            <Icon.Premium width="16" height="16" />
-            <style.TextP typo="c" textColor="logo">
-              Premium
-            </style.TextP>
-          </MembershipWrapper>
+          mypage.isPremium && (
+            <MembershipWrapper>
+              <Icon.Premium width="16" height="16" />
+              <style.TextP typo="c" textColor="logo">
+                Premium
+              </style.TextP>
+            </MembershipWrapper>
+          )
         )}
       </TextWrapper>
 
-      {windowWidth < 768 && (
+      {windowWidth < 768 && mypage.isPremium && (
         <MembershipWrapper>
           <Icon.Premium width="16" height="16" />
           <style.TextP typo="c" textColor="logo">
