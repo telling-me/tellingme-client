@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
@@ -105,7 +104,6 @@ const ListAnswers = () => {
           <Loading />
         </LoadingWrapper>
       )}
-      <div ref={ref} />
     </ListAnswersWrapper>
   )
 }

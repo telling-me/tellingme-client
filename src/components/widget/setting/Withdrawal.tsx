@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 // component
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Button, CheckSquare, Modal } from 'components'
+import { Button, CheckSquare, TwoButtonModal } from 'components'
 
 // data
 import { SETTING_WITHDRAWAL_DOCS } from 'data/docs'
@@ -75,39 +75,13 @@ const Withdrawal = () => {
       />
 
       {open && (
-        <Modal _width="100%" _maxWidth="425px" _padding="30px 20px 20px" _borderRadius="20px">
-          <ModalChildren>
-            <ModalTexts>
-              <style.TextP typo="b1" textColor="black">
-                정말로 텔링미를 떠나실건가요?
-              </style.TextP>
-              <style.TextP typo="b2" textColor="gray7">
-                그동안 작성하신 답변들이 모두 사라져요..
-              </style.TextP>
-            </ModalTexts>
-
-            <ModalButtons>
-              <Button
-                buttonType="tertiary"
-                text="취소"
-                textSize="h6"
-                textColor="logo"
-                _width="135px"
-                _padding="18px 0"
-                _onClick={handleClose}
-              />
-              <Button
-                buttonType="secondary"
-                text="떠나기"
-                textSize="h6"
-                textColor="logo"
-                _width="135px"
-                _padding="18px 0"
-                _onClick={_onClick}
-              />
-            </ModalButtons>
-          </ModalChildren>
-        </Modal>
+        <TwoButtonModal
+          mainText="정말로 텔링미를 떠나실건가요?"
+          subText="그동안 작성하신 답변들이 모두 사라져요.."
+          rightBtnText="떠나기"
+          leftBtnOnClick={handleClose}
+          rightBtnOnClick={_onClick}
+        />
       )}
     </WithdrawalWrapper>
   )
@@ -150,23 +124,6 @@ const CheckWrapper = styled.div`
 
   width: 100%;
   margin: 12px 0px 36px 0px;
-`
-
-const ModalTexts = styled.div`
-  ${({ theme }) => theme.common.flexCenter}
-  flex-direction: column;
-  gap: 8px;
-`
-
-const ModalButtons = styled.div`
-  display: flex;
-  gap: 15px;
-`
-
-const ModalChildren = styled.div`
-  ${({ theme }) => theme.common.flexCenter}
-  flex-direction: column;
-  gap: 28px;
 `
 
 export default Withdrawal

@@ -11,7 +11,7 @@ import {
 } from './style'
 
 // components
-import { Button, CheckBox, Input, Modal, RadioButton, Hr, IconButton, Loading } from 'components'
+import { CheckBox, Input, Modal, RadioButton, Hr, IconButton, Loading, OneButtonModal } from 'components'
 
 // styles
 import style from 'styles/styled-components/styled'
@@ -250,32 +250,12 @@ const NewsLetterPage = () => {
         </Modal>
       )}
       {alertOpen !== 0 && (
-        <Modal
-          _width="100%"
-          _maxWidth="425px"
-          _height="150px"
-          _borderRadius="20px"
-          _padding="30px 20px 20px 20px"
+        <OneButtonModal
+          text={alertTexts[alertOpen - 1]}
           _onClick={() => {
             setAlertOpen(0)
           }}
-        >
-          <style.TextP typo="b1" textColor="black">
-            {alertTexts[alertOpen - 1]}
-          </style.TextP>
-
-          <Button
-            buttonType="secondary"
-            text="확인"
-            textSize="h6"
-            textColor="logo"
-            _margin="28px 0px 0px 0px"
-            _padding="18px 127px"
-            _onClick={() => {
-              setAlertOpen(0)
-            }}
-          />
-        </Modal>
+        />
       )}
     </NewsLetterComponent>
   )
