@@ -96,6 +96,7 @@ import { ReactComponent as Premium } from './Premium.svg'
 import { ReactComponent as QnA } from './QnA.svg'
 import { ReactComponent as TellingmeBook } from './TellingmeBook.svg'
 import { ReactComponent as MyLibrary } from './MyLibrary.svg'
+import { ReactComponent as Etc } from './Etc.svg'
 
 interface IIconIndex extends IStringKey {
   NotFound: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -194,6 +195,7 @@ interface IIconIndex extends IStringKey {
   QnA: string | FunctionComponent<any> | ComponentClass<any, any>
   TellingmeBook: string | FunctionComponent<any> | ComponentClass<any, any>
   MyLibrary: string | FunctionComponent<any> | ComponentClass<any, any>
+  Etc: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
@@ -292,7 +294,8 @@ const Icon: IIconIndex = {
   Premium,
   QnA,
   TellingmeBook,
-  MyLibrary
+  MyLibrary,
+  Etc
 }
 
 export default Icon
