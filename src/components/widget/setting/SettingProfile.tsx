@@ -36,7 +36,7 @@ const SettingProfile = () => {
 
   return (
     <ProfileSpace>
-      <ImageWrapper src={mypage.profileUrl} />
+      <ImageWrapper src={mypage.profileUrl} decoding="async" />
 
       <TextWrapper>
         <style.TextP typo="h5" textColor="black">

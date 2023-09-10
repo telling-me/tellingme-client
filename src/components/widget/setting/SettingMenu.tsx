@@ -91,12 +91,16 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
 }
 
 const SettingMenuWrapper = styled.div`
-  ${({ theme }) => theme.common.flexCenter}
+  ${({ theme }) => theme.common.flexStart}
   flex-direction: column;
 
   width: 100%;
-  height: calc(100vh - 64px);
   height: calc(var(--vh, 1vh) * 100 - 64px);
+
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 
   @media all and (min-width: 768px) {
     max-width: 425px;

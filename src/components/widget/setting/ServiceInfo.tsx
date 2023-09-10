@@ -48,6 +48,10 @@ const FirstLine = styled.div`
   flex-wrap: wrap;
   gap: 10px;
 
+  @media all and (min-width: 767px) {
+    margin-top: 60px;
+  }
+
   p:nth-child(1) {
     border: 1px solid #807f7d;
     border-radius: 200px;
