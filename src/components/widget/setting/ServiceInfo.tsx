@@ -51,7 +51,7 @@ const FirstLine = styled.div`
   gap: 10px;
 
   @media all and (min-width: 767px) {
-    margin-top: 60px;
+    margin-top: 20px;
   }
 
   p:nth-child(1) {
