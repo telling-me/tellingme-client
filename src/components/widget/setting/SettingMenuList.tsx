@@ -19,13 +19,15 @@ interface ISettingMenuList {
 const SettingMenuList = ({ text, icon = true, _onClick }: ISettingMenuList) => {
   return (
     <SettingMenuListWrapper onClick={_onClick}>
-      <style.TextP typo="b1" textColor="gray8">
+      <TextP typo="b1" textColor="gray8">
         {text}
-      </style.TextP>
+      </TextP>
       {icon && <Icons.CaretRight width="24" height="24" stroke={useChangeColor('gray6')} />}
     </SettingMenuListWrapper>
   )
 }
+
+const { TextP } = style
 
 const SettingMenuListWrapper = styled.button`
   display: flex;

@@ -28,9 +28,9 @@ const SignUpCompletePage = () => {
       </SignUpCompleteHeader>
 
       <SignUpCompleteContent>
-        <style.TextP typo="h4" textColor="black">
+        <TextP typo="h4" textColor="black">
           회원 가입이 완료되었어요!
-        </style.TextP>
+        </TextP>
 
         <Icons.SignUpSuccessDuei />
 
@@ -63,6 +63,8 @@ const SignUpCompletePage = () => {
     </SignUpCompleteWrapper>
   )
 }
+
+const { TextP } = style
 
 const SignUpCompleteWrapper = styled.div`
   ${({ theme }) => theme.common.flexCenter}

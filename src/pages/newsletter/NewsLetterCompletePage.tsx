@@ -16,20 +16,22 @@ const NewsLetterCompletePage = () => {
       <Icons.Logo width="136" height="57" fill={Theme.colors.logo} />
 
       <TextWrapper>
-        <style.TextP typo="h6_b" textColor="gray7">
+        <TextP typo="h6_b" textColor="gray7">
           알려주신 이메일 주소로
-        </style.TextP>
-        <style.TextP typo="h6_b" textColor="gray7">
+        </TextP>
+        <TextP typo="h6_b" textColor="gray7">
           텔링미 메일이 발송되었어요
-        </style.TextP>
+        </TextP>
       </TextWrapper>
 
-      <style.TextP typo="b1" textColor="gray8">
+      <TextP typo="b1" textColor="gray8">
         서비스가 출시되면 가장 먼저 알려드릴게요!
-      </style.TextP>
+      </TextP>
     </MainWrapper>
   )
 }
+
+const { TextP } = style
 
 const MainWrapper = styled.div`
   display: flex;

@@ -45,9 +45,9 @@ const Input = ({
   return (
     <InputComponent _margin={_margin} _width={_width} _maxWidth={_maxWidth}>
       {label != null && (
-        <style.TextSpan typo="h6" textColor="black" _margin="0 0 0 10px">
+        <TextSpan typo="h6" textColor="black" _margin="0 0 0 10px">
           {label}
-        </style.TextSpan>
+        </TextSpan>
       )}
 
       <InputOuterFrame2 isVisible={isVisible} _value={_value} _disabled={_disabled}>
@@ -87,17 +87,19 @@ const Input = ({
       </InputOuterFrame2>
 
       {!isError && infoText != null && (
-        <style.TextSpan typo="c" textColor={_disabled ? 'gray5' : 'gray7'} _margin="0 0 0 10px">
+        <TextSpan typo="c" textColor={_disabled ? 'gray5' : 'gray7'} _margin="0 0 0 10px">
           {infoText}
-        </style.TextSpan>
+        </TextSpan>
       )}
       {isError && errorText != null && (
-        <style.TextSpan typo="c" textColor="error500" _margin="0 0 0 10px">
+        <TextSpan typo="c" textColor="error500" _margin="0 0 0 10px">
           {errorText}
-        </style.TextSpan>
+        </TextSpan>
       )}
     </InputComponent>
   )
 }
+
+const { TextSpan } = style
 
 export default Input

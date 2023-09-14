@@ -15,9 +15,9 @@ interface IModifyMbti {
 const ModifyMbti = ({ mbti, setMbti }: IModifyMbti) => {
   return (
     <>
-      <style.TextP typo="h6" textColor="black" _margin="0px 0px 8px 10px">
+      <TextP typo="h6" textColor="black" _margin="0px 0px 8px 10px">
         mbti
-      </style.TextP>
+      </TextP>
 
       <Dropdown
         defaultText="mbti 선택"
@@ -30,5 +30,7 @@ const ModifyMbti = ({ mbti, setMbti }: IModifyMbti) => {
     </>
   )
 }
+
+const { TextP } = style
 
 export default ModifyMbti

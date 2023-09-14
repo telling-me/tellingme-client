@@ -38,9 +38,9 @@ const Withdrawal = () => {
 
   return (
     <WithdrawalWrapper>
-      <style.TextP typo="b1_b" textColor="gray7" _margin="0 0 20px 0">
+      <TextP typo="b1_b" textColor="gray7" _margin="0 0 20px 0">
         회원 탈퇴 전 반드시 확인해주세요!
-      </style.TextP>
+      </TextP>
 
       <Icons.SadDuei />
 
@@ -48,9 +48,9 @@ const Withdrawal = () => {
         <WithdrawalContent>
           {SETTING_WITHDRAWAL_DOCS.map((v, i) => {
             return (
-              <style.TextP key={i} typo={v._typo} textColor="black" _margin={v._margin}>
+              <TextP key={i} typo={v._typo} textColor="black" _margin={v._margin}>
                 {v.content}
-              </style.TextP>
+              </TextP>
             )
           })}
         </WithdrawalContent>
@@ -58,9 +58,9 @@ const Withdrawal = () => {
 
       <CheckWrapper>
         <CheckSquare checkSize="small" _checked={agree} setChecked={setAgree} />
-        <style.TextP typo="b1" textColor="gray7">
+        <TextP typo="b1" textColor="gray7">
           (필수) 위 내용을 모두 확인하였습니다.
-        </style.TextP>
+        </TextP>
       </CheckWrapper>
 
       <Button
@@ -86,6 +86,8 @@ const Withdrawal = () => {
     </WithdrawalWrapper>
   )
 }
+
+const { TextP } = style
 
 const WithdrawalWrapper = styled.div`
   ${({ theme }) => theme.common.flexCenter}

@@ -26,22 +26,22 @@ const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
 
   return (
     <Modal _width="100%" _maxWidth="425px" _padding="30px 20px 20px" _borderRadius="20px">
-      <style.TextP typo="b1_b" textColor="black">
+      <TextP typo="b1_b" textColor="black">
         모바일 앱에서만 이용 가능한 서비스예요!
-      </style.TextP>
+      </TextP>
 
       <ContentWrapper>
-        <style.TextP typo="b2" textColor="black">
+        <TextP typo="b2" textColor="black">
           텔링미 앱을 다운받으면
-        </style.TextP>
+        </TextP>
 
         <TextWrapper>
-          <style.TextP typo="b2" textColor="black">
+          <TextP typo="b2" textColor="black">
             이용할 수 있는
-          </style.TextP>
-          <style.TextP typo="b2" textColor="logo">
+          </TextP>
+          <TextP typo="b2" textColor="logo">
             특별한 기능들
-          </style.TextP>
+          </TextP>
         </TextWrapper>
 
         <ServicesWrapper>
@@ -52,9 +52,9 @@ const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
                   <v.icon width="22" height="22" />
                 </IconWrapper>
 
-                <style.TextP typo="b2" textColor="black">
+                <TextP typo="b2" textColor="black">
                   {v.text}
-                </style.TextP>
+                </TextP>
               </ServiceWrapper>
             )
           })}
@@ -86,6 +86,8 @@ const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
     </Modal>
   )
 }
+
+const { TextP } = style
 
 const ContentWrapper = styled.div`
   width: 100%;

@@ -27,12 +27,14 @@ const SettingHeader = () => {
         <Icons.ArrowLeft width="24" height="24" stroke={useChangeColor('gray6')} />
       </IconButton>
 
-      <style.TextP typo="h6_b" textColor="gray6" _margin="0 auto">
+      <TextP typo="h6_b" textColor="gray6" _margin="0 auto">
         설정
-      </style.TextP>
+      </TextP>
     </SettingHeaderWrapper>
   )
 }
+
+const { TextP } = style
 
 const SettingHeaderWrapper = styled.div`
   display: flex;

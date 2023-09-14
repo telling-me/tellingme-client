@@ -10,9 +10,9 @@ import style from 'styles/styled-components/styled'
 const OneButtonModal = ({ text, _onClick }: IOneButtonModal) => {
   return (
     <Modal _width="100%" _maxWidth="425px" _padding="30px 20px 20px" _borderRadius="20px">
-      <style.TextP typo="b1" textColor="black">
+      <TextP typo="b1" textColor="black">
         {text}
-      </style.TextP>
+      </TextP>
 
       <Button
         buttonType="secondary"
@@ -27,5 +27,7 @@ const OneButtonModal = ({ text, _onClick }: IOneButtonModal) => {
     </Modal>
   )
 }
+
+const { TextP } = style
 
 export default OneButtonModal

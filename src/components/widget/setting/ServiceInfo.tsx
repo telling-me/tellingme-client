@@ -7,26 +7,28 @@ const ServiceInfo = () => {
   return (
     <ServiceInfoWrapper>
       <FirstLine>
-        <style.TextP typo="c_b" textColor="side500">
+        <TextP typo="c_b" textColor="side500">
           고객센터 e-mail
-        </style.TextP>
+        </TextP>
 
-        <style.TextP typo="b2_b" textColor="side500">
+        <TextP typo="b2_b" textColor="side500">
           tellingmetime@gmail.com
-        </style.TextP>
+        </TextP>
       </FirstLine>
 
       <SecondLine>
-        <style.TextP typo="c_b" textColor="side500">
+        <TextP typo="c_b" textColor="side500">
           문의, 버그 신고, 제안 등 다양한 의견을
-        </style.TextP>
-        <style.TextP typo="c_b" textColor="side500">
+        </TextP>
+        <TextP typo="c_b" textColor="side500">
           이 이메일 주소로 보내주세요!
-        </style.TextP>
+        </TextP>
       </SecondLine>
     </ServiceInfoWrapper>
   )
 }
+
+const { TextP } = style
 
 const ServiceInfoWrapper = styled.div`
   ${({ theme }) => theme.common.flexCenter};

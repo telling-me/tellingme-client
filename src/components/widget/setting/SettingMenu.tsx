@@ -34,9 +34,9 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   return (
     <SettingMenuWrapper>
       {/* <PushAlarmWrapper>
-        <style.TextP typo="b1" textColor="gray8">
+        <TextP typo="b1" textColor="gray8">
           푸시 알림 받기
-        </style.TextP>
+        </TextP>
 
         <ToolTip
           tooltipText="알림이 오지 않는다면 크롬 사이트|설정에서 알림을 허용해주세요"
@@ -89,6 +89,8 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
     </SettingMenuWrapper>
   )
 }
+
+// const { TextP } = style
 
 const SettingMenuWrapper = styled.div`
   ${({ theme }) => theme.common.flexStart}

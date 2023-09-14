@@ -20,12 +20,14 @@ const RowButton = ({ text, _active, _onClick, children }: INotOnlyButton) => {
     <RowButtonComponent _active={_active} onClick={_onClick}>
       {children}
 
-      <style.TextP typo="h6" textColor="gray7">
+      <TextP typo="h6" textColor="gray7">
         {text}
-      </style.TextP>
+      </TextP>
     </RowButtonComponent>
   )
 }
+
+const { TextP } = style
 
 const RowButtonComponent = styled.button<{ _active: boolean }>`
   ${({ theme }) => theme.common.flexStart}
