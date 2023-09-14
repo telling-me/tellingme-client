@@ -7,4 +7,5 @@ export interface ISignUpTitleAndBottomButton {
   handleCheckNickname: () => void
   handleCheckBirthYear: () => void
   handleSignUp: () => void
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
