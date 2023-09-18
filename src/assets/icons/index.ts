@@ -2,6 +2,8 @@ import { type FunctionComponent, type ComponentClass } from 'react'
 import { type IStringKey } from 'type/common'
 import { ReactComponent as NotFound } from './NotFound.svg'
 import { ReactComponent as Menu } from './menu.svg'
+import { ReactComponent as Notice } from './Notice.svg'
+import { ReactComponent as NoticeBadge } from './NoticeBadge.svg'
 import { ReactComponent as LandingEmotionBg } from './LandingEmotionBg.svg'
 import { ReactComponent as LandingEmotionLine } from './LandingEmotionLine.svg'
 import { ReactComponent as LandingEmotionModal } from './LandingEmotionModal.svg'
@@ -95,6 +97,8 @@ import { ReactComponent as Entrance } from './Entrance.svg'
 interface IIconIndex extends IStringKey {
   NotFound: string | FunctionComponent<any> | ComponentClass<any, any>
   Menu: string | FunctionComponent<any> | ComponentClass<any, any>
+  Notice: string | FunctionComponent<any> | ComponentClass<any, any>
+  NoticeBadge: string | FunctionComponent<any> | ComponentClass<any, any>
   Warning: string | FunctionComponent<any> | ComponentClass<any, any>
   XCircle: string | FunctionComponent<any> | ComponentClass<any, any>
   Bubble: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -189,6 +193,8 @@ interface IIconIndex extends IStringKey {
 const Icon: IIconIndex = {
   NotFound,
   Menu,
+  Notice,
+  NoticeBadge,
   LandingEmotionBg,
   LandingEmotionLine,
   LandingEmotionModal,

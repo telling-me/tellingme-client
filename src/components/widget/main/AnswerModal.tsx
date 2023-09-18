@@ -12,7 +12,7 @@ import AccuseModal from './AccuseModal'
 import style from 'styles/styled-components/styled'
 
 // hooks
-import { usePostLikesMutation } from 'hooks'
+import { useGetAnswerQuery, usePostLikesMutation } from 'hooks'
 
 // assets
 import Icon from 'assets/icons'
@@ -29,16 +29,21 @@ const AnswerModal = () => {
   const answerId = new URLSearchParams(window.location.search).get('answerId')
 
   const location = useLocation()
-  const index = location.state.index
+  const index = location.state.index ?? null
 
   // store
   const { questionIdx, questions, answers, setAnswers } = useCommunicationStore()
+
+  // query
+  const { data: { data: answer = null } = {} } = useGetAnswerQuery(answerId as string)
+
+  console.log(answer)
 
   const [accuse, setAccuse] = useState<boolean>(false)
   const [text, setText] = useState<string>(answers?.[index].content ?? '')
 
   useEffect(() => {
-    setText(answers?.[index].content ?? '')
+    setText(answers?.[index]?.content ?? '')
   }, [answers])
 
   const { mutate: postLikesMutate } = usePostLikesMutation()

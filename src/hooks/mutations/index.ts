@@ -17,3 +17,6 @@ export {
 
 // admin
 export { useExpireReport } from './admin'
+
+// notice
+export { usePostNoticeReadMutation, usePostNoticeReadAllMutation, useDeleteNoticeMutation } from './notice'
