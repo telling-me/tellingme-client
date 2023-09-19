@@ -27,19 +27,19 @@ const Toggle = ({
       _margin={_margin}
     >
       {label && Array.isArray(label) && !value && (
-        <style.TextSpan typo="c" textColor="gray8">
+        <TextSpan typo="c" textColor="gray8">
           {label[0]}
-        </style.TextSpan>
+        </TextSpan>
       )}
       {label && Array.isArray(label) && value && (
-        <style.TextSpan typo="c" textColor="gray8">
+        <TextSpan typo="c" textColor="gray8">
           {label[1]}
-        </style.TextSpan>
+        </TextSpan>
       )}
       {label && !Array.isArray(label) && (
-        <style.TextSpan typo="c" textColor="gray8">
+        <TextSpan typo="c" textColor="gray8">
           {label}
-        </style.TextSpan>
+        </TextSpan>
       )}
       <ToggleWrapper checked={value}>
         <ToggleCircle />
@@ -47,5 +47,7 @@ const Toggle = ({
     </ToggleComponent>
   )
 }
+
+const { TextSpan } = style
 
 export default Toggle

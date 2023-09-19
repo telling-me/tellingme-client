@@ -35,16 +35,16 @@ const TermsOfServiceModal = ({ title, content, setOpen, _checked, setChecked }: 
         <Icons.Close width="24" height="24" stroke={theme.colors.gray.gray8} />
       </IconButton>
 
-      <style.TextP typo="b1_b" textColor="gray7" _margin="4px 0 20px 0">
+      <TextP typo="b1_b" textColor="gray7" _margin="4px 0 20px 0">
         {title}
-      </style.TextP>
+      </TextP>
 
       <TermsOfServiceContent>
         {content.map((v, i) => {
           return (
-            <style.TextP key={i} typo={v._typo} textColor="black" _width="100%" _margin={v._margin}>
+            <TextP key={i} typo={v._typo} textColor="black" _width="100%" _margin={v._margin}>
               {v.content}
-            </style.TextP>
+            </TextP>
           )
         })}
       </TermsOfServiceContent>
@@ -67,6 +67,8 @@ const TermsOfServiceModal = ({ title, content, setOpen, _checked, setChecked }: 
     </Modal>
   )
 }
+
+const { TextP } = style
 
 const TermsOfServiceContent = styled.div`
   background-color: ${({ theme }) => theme.colors.side.side200};

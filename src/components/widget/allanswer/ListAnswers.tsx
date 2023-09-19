@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
@@ -79,9 +78,9 @@ const ListAnswers = () => {
     <SingleWrapper>
       <Icons.EmptyDuei width="100" height="100" />
 
-      <style.TextP typo="b1_b" textColor="gray5">
+      <TextP typo="b1_b" textColor="gray5">
         아직 올라온 글이 없어요!
-      </style.TextP>
+      </TextP>
     </SingleWrapper>
   ) : (
     <ListAnswersWrapper>
@@ -105,10 +104,11 @@ const ListAnswers = () => {
           <Loading />
         </LoadingWrapper>
       )}
-      <div ref={ref} />
     </ListAnswersWrapper>
   )
 }
+
+const { TextP } = style
 
 const ListAnswersWrapper = styled.div`
   ${({ theme }) => theme.common.flexStart}

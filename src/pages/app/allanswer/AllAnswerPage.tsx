@@ -50,16 +50,16 @@ const AllAnswerPage = () => {
   return (
     <AllAnswerWrapper>
       <AllAnswerHeader>
-        <style.TextP typo="h4" textColor="gray7">
+        <TextP typo="h4" textColor="gray7">
           모두의
-        </style.TextP>
-        <style.TextP typo="h4" textColor="gray7" _margin="8px 0 12px">
+        </TextP>
+        <TextP typo="h4" textColor="gray7" _margin="8px 0 12px">
           공간
-        </style.TextP>
+        </TextP>
         <TextPWrapper>
-          <style.TextP typo="c" textColor="logo">
+          <TextP typo="c" textColor="logo">
             모두의 공간은 한 질문 당 3일동안 열려요
-          </style.TextP>
+          </TextP>
         </TextPWrapper>
       </AllAnswerHeader>
 
@@ -72,16 +72,16 @@ const AllAnswerPage = () => {
                 _onClick(i)
               }}
             >
-              <style.TextP typo="b2" style={{ whiteSpace: 'pre-wrap', lineHeight: '20px' }}>{`${v.title}`}</style.TextP>
-              <style.TextP typo="c" textColor="side500" _margin="8px 0 12px">
+              <TextP typo="b2" style={{ whiteSpace: 'pre-wrap', lineHeight: '20px' }}>{`${v.title}`}</TextP>
+              <TextP typo="c" textColor="side500" _margin="8px 0 12px">
                 {useFormatDateArrToStr(v.date)}
-              </style.TextP>
+              </TextP>
 
               <QuestionFooter>
                 <Icons.ChatTearDrop width="20" height="20" />
-                <style.TextP typo="c_b" textColor="gray7" _margin="0 0 0 4px">
+                <TextP typo="c_b" textColor="gray7" _margin="0 0 0 4px">
                   {v.answerCount > 999 ? `999+` : v.answerCount}
-                </style.TextP>
+                </TextP>
                 <IconButton buttonType="noFilled" _width="36" _height="36" _margin="0 0 0 auto" _onClick={() => {}}>
                   <Icons.Entrance />
                 </IconButton>
@@ -93,6 +93,8 @@ const AllAnswerPage = () => {
     </AllAnswerWrapper>
   )
 }
+
+const { TextP } = style
 
 const AllAnswerWrapper = styled.div`
   ${({ theme }) => theme.common.flexStart}

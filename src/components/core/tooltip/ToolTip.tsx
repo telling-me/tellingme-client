@@ -33,9 +33,9 @@ const ToolTip = ({
         <ToolTipTextWrapper isError={isError}>
           {textArr.map((text, i) => {
             return (
-              <style.TextP key={i} textColor={isError ? 'gray0' : 'side100'} typo="c">
+              <TextP key={i} textColor={isError ? 'gray0' : 'side100'} typo="c">
                 {text}
-              </style.TextP>
+              </TextP>
             )
           })}
         </ToolTipTextWrapper>
@@ -50,5 +50,7 @@ const ToolTip = ({
     </ToolTipComponent>
   )
 }
+
+const { TextP } = style
 
 export default ToolTip

@@ -2,7 +2,6 @@ import { type FunctionComponent, type ComponentClass } from 'react'
 import { type IStringKey } from 'type/common'
 import { ReactComponent as NotFound } from './NotFound.svg'
 import { ReactComponent as Menu } from './menu.svg'
-import { ReactComponent as MyLibrary } from './MyLibrary.svg'
 import { ReactComponent as Notice } from './Notice.svg'
 import { ReactComponent as NoticeBadge } from './NoticeBadge.svg'
 import { ReactComponent as LandingEmotionBg } from './LandingEmotionBg.svg'
@@ -94,11 +93,16 @@ import { ReactComponent as CaretLeft } from './CaretLeft.svg'
 import { ReactComponent as SliderLeft } from './SliderLeft.svg'
 import { ReactComponent as SliderRight } from './SliderRight.svg'
 import { ReactComponent as Entrance } from './Entrance.svg'
+import { ReactComponent as MyInfo } from './MyInfo.svg'
+import { ReactComponent as Premium } from './Premium.svg'
+import { ReactComponent as QnA } from './QnA.svg'
+import { ReactComponent as TellingmeBook } from './TellingmeBook.svg'
+import { ReactComponent as MyLibrary } from './MyLibrary.svg'
+import { ReactComponent as Etc } from './Etc.svg'
 
 interface IIconIndex extends IStringKey {
   NotFound: string | FunctionComponent<any> | ComponentClass<any, any>
   Menu: string | FunctionComponent<any> | ComponentClass<any, any>
-  MyLibrary: string | FunctionComponent<any> | ComponentClass<any, any>
   Notice: string | FunctionComponent<any> | ComponentClass<any, any>
   NoticeBadge: string | FunctionComponent<any> | ComponentClass<any, any>
   Warning: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -190,12 +194,17 @@ interface IIconIndex extends IStringKey {
   SliderLeft: string | FunctionComponent<any> | ComponentClass<any, any>
   SliderRight: string | FunctionComponent<any> | ComponentClass<any, any>
   Entrance: string | FunctionComponent<any> | ComponentClass<any, any>
+  MyInfo: string | FunctionComponent<any> | ComponentClass<any, any>
+  Premium: string | FunctionComponent<any> | ComponentClass<any, any>
+  QnA: string | FunctionComponent<any> | ComponentClass<any, any>
+  TellingmeBook: string | FunctionComponent<any> | ComponentClass<any, any>
+  MyLibrary: string | FunctionComponent<any> | ComponentClass<any, any>
+  Etc: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
   NotFound,
   Menu,
-  MyLibrary,
   Notice,
   NoticeBadge,
   LandingEmotionBg,
@@ -286,7 +295,13 @@ const Icon: IIconIndex = {
   CaretLeft,
   SliderLeft,
   SliderRight,
-  Entrance
+  Entrance,
+  MyInfo,
+  Premium,
+  QnA,
+  TellingmeBook,
+  MyLibrary,
+  Etc
 }
 
 export default Icon

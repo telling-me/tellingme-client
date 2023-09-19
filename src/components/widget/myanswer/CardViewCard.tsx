@@ -75,9 +75,13 @@ const CardViewCardWrapper = styled.button<{ isMargin: boolean }>`
 
   p:nth-child(4) {
     height: 100%;
+
+    text-align: start;
     line-height: 22px;
-    overflow: hidden;
+
     display: -webkit-box;
+    overflow: hidden;
+    word-break: break-all;
     -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
   }

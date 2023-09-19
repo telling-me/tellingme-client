@@ -35,13 +35,13 @@ const CheckBox = ({
         _disabled={_disabled}
       />
 
-      <style.TextP
+      <TextP
         typo={checkSize === 'small' ? 'c' : 'b1'}
         textColor={_disabled ? 'gray3' : 'black'}
         _margin="0px 0px 0px 10px"
       >
         {label}
-      </style.TextP>
+      </TextP>
 
       <CheckBoxButton onClick={buttonOnClick} disabled={_disabled}>
         {buttonText}
@@ -49,5 +49,7 @@ const CheckBox = ({
     </CheckBoxComponent>
   )
 }
+
+const { TextP } = style
 
 export default CheckBox

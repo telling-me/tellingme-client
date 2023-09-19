@@ -76,9 +76,9 @@ const Header = () => {
       ) : (
         PAGE_URL.includes('myanswer') && (
           <HeaderWrapper style={{ justifyContent: 'center', padding: '26.5px 0 20.5px 0' }}>
-            <style.TextP typo="h6_b" textColor="gray6">
+            <TextP typo="h6_b" textColor="gray6">
               나의 공간
-            </style.TextP>
+            </TextP>
           </HeaderWrapper>
         )
       )}
@@ -86,7 +86,7 @@ const Header = () => {
   )
 }
 
-const { Grid } = style
+const { TextP, Grid } = style
 
 const HeaderWrapper = styled.header`
   ${({ theme }) => theme.common.flexBetween}

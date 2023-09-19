@@ -35,17 +35,17 @@ const CreatePurpose = ({ purpose, setPurpose }: ICreatePurpose) => {
             }}
           >
             {i === 0 ? (
-              <Icons.Pencil width="32" height="32" stroke="url(#gradient)" />
+              <Icons.Pencil width="32" height="32" />
             ) : i === 1 ? (
-              <Icons.Handshake width="32" height="32" stroke="url(#gradient)" />
+              <Icons.Handshake width="32" height="32" />
             ) : i === 2 ? (
-              <Icons.Values width="32" height="32" stroke="url(#gradient)" />
+              <Icons.Values width="32" height="32" />
             ) : i === 3 ? (
-              <Icons.Magnet width="32" height="32" stroke="url(#gradient)" />
+              <Icons.Magnet width="32" height="32" />
             ) : i === 4 ? (
-              <Icons.Health width="32" height="32" stroke="url(#gradient)" />
+              <Icons.Health width="32" height="32" />
             ) : (
-              i === 5 && <Icons.Heart width="32" height="32" stroke="url(#gradient)" />
+              i === 5 && <Icons.Etc width="32" height="32" />
             )}
           </ColButton>
         )

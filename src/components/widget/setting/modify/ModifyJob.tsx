@@ -26,9 +26,9 @@ const ModifyJob = ({ job, setJob, jobInfo, setJobInfo }: IModifyJob) => {
 
   return (
     <>
-      <style.TextP typo="h6" textColor="black" _margin="0px 0px 16px 10px">
+      <TextP typo="h6" textColor="black" _margin="0px 0px 16px 10px">
         직업
-      </style.TextP>
+      </TextP>
 
       <SelectOuterWrapper>
         <SelectInnerWrapper>
@@ -72,5 +72,7 @@ const ModifyJob = ({ job, setJob, jobInfo, setJobInfo }: IModifyJob) => {
     </>
   )
 }
+
+const { TextP } = style
 
 export default ModifyJob

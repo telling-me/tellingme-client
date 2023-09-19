@@ -16,19 +16,21 @@ const ContinuousDate = () => {
   return (
     <DateWrapper flex="center" _width="max-content" _padding="10px 12px" _margin="8px 0 0 0">
       {answer?.count > 0 ? (
-        <style.TextP typo="c_b" textColor="gray5">
+        <TextP typo="c_b" textColor="gray5">
           연속 <span>{answer?.count}</span>일째 기록 중!
-        </style.TextP>
+        </TextP>
       ) : (
-        <style.TextP typo="c_b" textColor="gray5">
+        <TextP typo="c_b" textColor="gray5">
           오늘도 <span>진정한 나</span>를 만나봐요!
-        </style.TextP>
+        </TextP>
       )}
     </DateWrapper>
   )
 }
 
-const DateWrapper = styled(style.Grid)`
+const { TextP, Grid } = style
+
+const DateWrapper = styled(Grid)`
   box-shadow: ${({ theme }) => theme.shadow.shadow1};
   background-color: ${({ theme }) => theme.colors.side.side100};
   border-radius: 8px;
