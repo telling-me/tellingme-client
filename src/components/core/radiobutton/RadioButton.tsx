@@ -30,12 +30,14 @@ const RadioButton = ({
               }}
             />
 
-            <style.TextSpan typo={labelSize}>{option.label}</style.TextSpan>
+            <TextSpan typo={labelSize}>{option.label}</TextSpan>
           </RadioButtonWrapper>
         )
       })}
     </RadioButtonComponent>
   )
 }
+
+const { TextSpan } = style
 
 export default RadioButton

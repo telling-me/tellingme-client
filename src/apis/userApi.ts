@@ -146,5 +146,8 @@ export const userApi = {
         headers: { 'Content-Type': 'application/json' }
       }
     )
+  },
+  getMyPage: async (date: string) => {
+    return await API.get(`/api/mypage`, { params: { date } })
   }
 }

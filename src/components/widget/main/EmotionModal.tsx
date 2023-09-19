@@ -57,7 +57,9 @@ const EmotionModal = ({ handleSubmit }: IEmotionModal) => {
                   if (!emotionIcon.membership) setEmotion(emotionIcon.idx)
                 }}
               >
-                <emotionIcon.icon width={56} />
+                <BlurEmotion isBlur={emotionIcon.membership}>
+                  <emotionIcon.icon width={56} />
+                </BlurEmotion>
                 <LockEmotion display={!emotionIcon.membership ? 'none' : 'block'}>
                   <ToolTip
                     tooltipType={idx % 3 === 0 ? 'bottomLeft' : idx % 3 === 1 ? 'bottom' : 'bottomRight'}
@@ -155,14 +157,14 @@ const EmotionGridWrapper = styled(style.Grid)<{ selected: number | null }>`
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
 
-  > div > svg:nth-child(1) {
+  > div > div > svg:nth-child(1) {
     opacity: 0.5;
   }
 
   ${({ selected }) =>
     selected !== null &&
     css`
-      > div:nth-child(${selected}) > svg:nth-child(1) {
+      > div:nth-child(${selected}) > div > svg:nth-child(1) {
         opacity: 1;
       }
     `}
@@ -171,6 +173,10 @@ const EmotionGridWrapper = styled(style.Grid)<{ selected: number | null }>`
 const LockEmotion = styled.div<{ display: string }>`
   display: ${({ display }) => display};
   position: absolute;
+`
+
+const BlurEmotion = styled.div<{ isBlur: boolean }>`
+  ${({ isBlur }) => isBlur && 'filter: blur(1px);'}
 `
 
 export default EmotionModal

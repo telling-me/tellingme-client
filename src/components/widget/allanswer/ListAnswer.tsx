@@ -55,7 +55,7 @@ const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked, index }: I
         <EmotionText text={emotionList[emotion - 1].description} _backgroundColor="side100" />
       </EmotionWrapper>
 
-      <style.TextP
+      <TextP
         typo="b2"
         style={{
           lineHeight: '20px',
@@ -68,7 +68,7 @@ const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked, index }: I
         }}
       >
         {`${content}`}
-      </style.TextP>
+      </TextP>
 
       <HeartWrapper>
         <IconButton
@@ -89,14 +89,16 @@ const ListAnswer = ({ answerId, emotion, content, likeCount, isLiked, index }: I
         </IconButton>
 
         {likeCount !== 0 && (
-          <style.TextP typo="c_b" textColor="gray7">
+          <TextP typo="c_b" textColor="gray7">
             {likeCount}
-          </style.TextP>
+          </TextP>
         )}
       </HeartWrapper>
     </ListAnswerWrapper>
   )
 }
+
+const { TextP } = style
 
 const ListAnswerWrapper = styled.div`
   ${({ theme }) => theme.common.flexStart}

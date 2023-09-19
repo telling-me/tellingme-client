@@ -11,7 +11,7 @@ import {
 } from './style'
 
 // components
-import { Button, CheckBox, Input, Modal, RadioButton, Hr, IconButton, Loading } from 'components'
+import { CheckBox, Input, Modal, RadioButton, Hr, IconButton, Loading, OneButtonModal } from 'components'
 
 // styles
 import style from 'styles/styled-components/styled'
@@ -88,12 +88,12 @@ const NewsLetterPage = () => {
       <NewsLetterHeader>
         <Icons.Logo width="103" height="43" fill={Theme.colors.logo} />
 
-        <style.TextSpan typo="h3_b" textColor="gray7" _margin="28px 0px 24px 0px">
+        <TextSpan typo="h3_b" textColor="gray7" _margin="28px 0px 24px 0px">
           텔링미 소식 구독 신청하기
-        </style.TextSpan>
-        <style.TextSpan typo="b1" textColor="gray8">
+        </TextSpan>
+        <TextSpan typo="b1" textColor="gray8">
           텔링미의 새로운 이야기를 하나씩 풀어드릴게요!
-        </style.TextSpan>
+        </TextSpan>
       </NewsLetterHeader>
 
       <Hr _margin="36px 0px" />
@@ -103,9 +103,9 @@ const NewsLetterPage = () => {
         <Input label="성함" _placeholder="성함을 입력해주세요." _value={name} setValue={setName} _margin="28px 0px" />
 
         <NewsLetterFunnel>
-          <style.TextSpan typo="h6" textColor="black" _margin="0px 10px">
+          <TextSpan typo="h6" textColor="black" _margin="0px 10px">
             유입 경로
-          </style.TextSpan>
+          </TextSpan>
 
           <RadioButton
             options={[
@@ -182,9 +182,9 @@ const NewsLetterPage = () => {
           {loading ? (
             <Loading size={48} color="primary700" />
           ) : (
-            <style.TextP typo="h6" textColor="primary700">
+            <TextP typo="h6" textColor="primary700">
               신청하기
-            </style.TextP>
+            </TextP>
           )}
         </ApplyButton>
       </NewsLetterFooter>
@@ -212,9 +212,9 @@ const NewsLetterPage = () => {
             <Icons.Close width="24" height="24" stroke={useChangeColor('gray6')} />
           </IconButton>
 
-          <style.TextSpan typo="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
+          <TextSpan typo="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
             개인정보 수집 및 이용 동의서
-          </style.TextSpan>
+          </TextSpan>
 
           <PersonalAgreeContent>{PersonalAgreeData}</PersonalAgreeContent>
         </Modal>
@@ -242,43 +242,25 @@ const NewsLetterPage = () => {
             <Icons.Close width="24" height="24" stroke={useChangeColor('gray6')} />
           </IconButton>
 
-          <style.TextSpan typo="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
+          <TextSpan typo="b1_b" textColor="gray7" _margin="4px 0px 20px 0px">
             광고성 정보 수신 동의서
-          </style.TextSpan>
+          </TextSpan>
 
           <PersonalAgreeContent>{AdAgreeData}</PersonalAgreeContent>
         </Modal>
       )}
       {alertOpen !== 0 && (
-        <Modal
-          _width="100%"
-          _maxWidth="425px"
-          _height="150px"
-          _borderRadius="20px"
-          _padding="30px 20px 20px 20px"
+        <OneButtonModal
+          text={alertTexts[alertOpen - 1]}
           _onClick={() => {
             setAlertOpen(0)
           }}
-        >
-          <style.TextP typo="b1" textColor="black">
-            {alertTexts[alertOpen - 1]}
-          </style.TextP>
-
-          <Button
-            buttonType="secondary"
-            text="확인"
-            textSize="h6"
-            textColor="logo"
-            _margin="28px 0px 0px 0px"
-            _padding="18px 127px"
-            _onClick={() => {
-              setAlertOpen(0)
-            }}
-          />
-        </Modal>
+        />
       )}
     </NewsLetterComponent>
   )
 }
+
+const { TextP, TextSpan } = style
 
 export default NewsLetterPage

@@ -29,23 +29,25 @@ const ListFooter = () => {
       {questionIdx !== 0 && (
         <MoveButton onClick={handlePrev}>
           <Icons.CaretLeft width="20" height="20" stroke={Theme.colors.gray.gray8} />
-          <style.TextP typo="c_b" textColor="gray8">
+          <TextP typo="c_b" textColor="gray8">
             이전 질문
-          </style.TextP>
+          </TextP>
         </MoveButton>
       )}
 
       {questionIdx !== 2 && (
         <MoveButton _margin="0 0 0 auto" onClick={handleNext}>
-          <style.TextP typo="c_b" textColor="gray8">
+          <TextP typo="c_b" textColor="gray8">
             다음 질문
-          </style.TextP>
+          </TextP>
           <Icons.CaretRight width="20" height="20" stroke={Theme.colors.gray.gray8} />
         </MoveButton>
       )}
     </ListFooterWrapper>
   )
 }
+
+const { TextP } = style
 
 const ListFooterWrapper = styled.div`
   ${({ theme }) => theme.common.flexStart}

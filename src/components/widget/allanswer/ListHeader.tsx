@@ -34,20 +34,22 @@ const ListHeader = () => {
         <Icons.ArrowLeft width="24" height="24" stroke={Theme.colors.gray.gray6} />
       </IconButton>
 
-      <style.TextP typo="b1_b" textColor="gray7">
+      <TextP typo="b1_b" textColor="gray7">
         {questions[questionIdx].title}
-      </style.TextP>
-      <style.TextP typo="b2" textColor="gray7" _margin="10px 0 18px">
+      </TextP>
+      <TextP typo="b2" textColor="gray7" _margin="10px 0 18px">
         {questions[questionIdx].phrase}
-      </style.TextP>
-      <style.TextP typo="c" textColor="side500">
+      </TextP>
+      <TextP typo="c" textColor="side500">
         {useFormatDateArrToStr(questions[questionIdx].date, 'ymd')}
-      </style.TextP>
+      </TextP>
 
       <Hr _maxWidth="1200px" _margin="20px 0" />
     </ListHeaderWrapper>
   )
 }
+
+const { TextP } = style
 
 const ListHeaderWrapper = styled.div`
   ${({ theme }) => theme.common.flexStart}

@@ -55,8 +55,9 @@ export const useLogoutMutation = <T>(options?: T) => {
   })
 }
 
-export const useSignUpMutation = <T>(options?: T) => {
+export const useSignUpMutation = <T>(setLoading: React.Dispatch<React.SetStateAction<boolean>>, options?: T) => {
   const navigate = useNavigate()
+
   return useMutation(
     async ({ birthDate, gender, job, jobInfo, nickname, purpose, socialId, socialLoginType }: IJoinResponseDto) =>
       await apis.signup({
@@ -71,6 +72,7 @@ export const useSignUpMutation = <T>(options?: T) => {
       }),
     {
       onSuccess: (res) => {
+        setLoading(false)
         navigate('/signup/complete')
       },
       onError: (err: IError) => {

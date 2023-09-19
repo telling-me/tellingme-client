@@ -55,3 +55,8 @@ export { default as ListSorts } from './allanswer/ListSorts'
 export { default as ListAnswers } from './allanswer/ListAnswers'
 export { default as ListAnswer } from './allanswer/ListAnswer'
 export { default as ListFooter } from './allanswer/ListFooter'
+
+// setting
+export { default as SettingQuickMenus } from './setting/SettingQuickMenus'
+export { default as SettingMenuList } from './setting/SettingMenuList'
+export { default as ServiceInfo } from './setting/ServiceInfo'

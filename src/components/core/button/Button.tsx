@@ -36,11 +36,13 @@ const Button = ({
         _onClick(e)
       }}
     >
-      <style.TextSpan typo={textSize} textColor={textColor}>
+      <TextSpan typo={textSize} textColor={textColor}>
         {text}
-      </style.TextSpan>
+      </TextSpan>
     </ButtonComponent>
   )
 }
+
+const { TextSpan } = style
 
 export default Button

@@ -22,7 +22,8 @@ const SignUpTitle = ({
   canMove,
   handleCheckNickname,
   handleCheckBirthYear,
-  handleSignUp
+  handleSignUp,
+  setLoading
 }: ISignUpTitleAndBottomButton) => {
   const theme = useTheme()
 
@@ -30,7 +31,7 @@ const SignUpTitle = ({
     <>
       {step !== 7 &&
         (windowSize < 1024 ? (
-          <style.TextSpan
+          <TextSpan
             typo="h4"
             textColor="black"
             _margin={
@@ -44,7 +45,7 @@ const SignUpTitle = ({
             }
           >
             {stepTextData[step]}
-          </style.TextSpan>
+          </TextSpan>
         ) : (
           windowSize >= 1024 && (
             <WebMoveButtonWrapper
@@ -67,9 +68,9 @@ const SignUpTitle = ({
                 />
               </IconButton>
 
-              <style.TextSpan typo="h4" textColor="black">
+              <TextSpan typo="h4" textColor="black">
                 {stepTextData[step]}
-              </style.TextSpan>
+              </TextSpan>
 
               <IconButton
                 buttonType="secondary"
@@ -83,6 +84,7 @@ const SignUpTitle = ({
                   } else if (step === 2) {
                     handleCheckBirthYear()
                   } else if (step === 4) {
+                    setLoading(true)
                     handleSignUp()
                   } else {
                     handleNextStep()
@@ -100,13 +102,15 @@ const SignUpTitle = ({
         ))}
 
       {step === 4 && (
-        <style.TextSpan typo="b2" textColor="gray6" _margin={windowSize < 1024 ? '0 0 40px 0' : '0 0 60px 0'}>
+        <TextSpan typo="b2" textColor="gray6" _margin={windowSize < 1024 ? '0 0 40px 0' : '0 0 60px 0'}>
           최대 2가지 선택 가능
-        </style.TextSpan>
+        </TextSpan>
       )}
     </>
   )
 }
+
+const { TextSpan } = style
 
 export const WebMoveButtonWrapper = styled.div<{ _margin: string }>`
   display: flex;

@@ -63,6 +63,7 @@ const SignUpPage = () => {
   const [year, setYear] = useState<string>('')
   const [isYearError, setIsYearError] = useState<boolean>(false)
   const [yearErrorText, setYearErrorText] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
 
   // step 이동 버튼 disabled 여부
   const canMove = () => {
@@ -71,7 +72,8 @@ const SignUpPage = () => {
       (step === 1 && nickname === '') ||
       (step === 2 && (gender == null || year === '')) ||
       (step === 3 && (job === -1 || (job === 5 && jobInfo === ''))) ||
-      (step === 4 && purpose.length === 0)
+      (step === 4 && purpose.length === 0) ||
+      loading
     )
   }
 
@@ -96,7 +98,7 @@ const SignUpPage = () => {
     }
   }
 
-  const { mutate: signUpMutate } = useSignUpMutation()
+  const { mutate: signUpMutate } = useSignUpMutation(setLoading)
 
   // 건너뛰기
   const handleSkip = () => {
@@ -125,7 +127,7 @@ const SignUpPage = () => {
     <SignUpWrapper>
       <SignUpHeader step={step} windowSize={windowSize} handleSkip={handleSkip} />
 
-      {step !== 7 && <ProgressBar percent={`${14 * (step + 1) + 2}`} />}
+      <ProgressBar percent={`${20 * (step + 1)}`} />
       <SignUpTitle
         step={step}
         handlePrevStep={handlePrevStep}
@@ -135,6 +137,7 @@ const SignUpPage = () => {
         handleCheckNickname={handleCheckNickname}
         handleCheckBirthYear={handleCheckBirthYear}
         handleSignUp={handleSignUp}
+        setLoading={setLoading}
       />
       {
         // 서비스 이용 약관
@@ -178,6 +181,7 @@ const SignUpPage = () => {
         handleCheckNickname={handleCheckNickname}
         handleCheckBirthYear={handleCheckBirthYear}
         handleSignUp={handleSignUp}
+        setLoading={setLoading}
       />
     </SignUpWrapper>
   )
