@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styled, { useTheme } from 'styled-components'
 
 // components
@@ -12,7 +11,7 @@ import AccuseModal from './AccuseModal'
 import style from 'styles/styled-components/styled'
 
 // hooks
-import { useGetAnswerQuery, usePostLikesMutation } from 'hooks'
+import { useGetAnswerQuery, useGetQuestionQuery, usePostLikesMutation } from 'hooks'
 
 // assets
 import Icon from 'assets/icons'
@@ -20,54 +19,32 @@ import Icon from 'assets/icons'
 // data
 import { emotionList } from 'data/emotion'
 
-// stores
-import useCommunicationStore from 'stores/useCommunicationStore'
-
-const AnswerModal = () => {
+const NoticeAnswerModal = () => {
   const navigate = useNavigate()
   const theme = useTheme()
-  const answerId = new URLSearchParams(window.location.search).get('answerId')
-
-  const location = useLocation()
-  const index = location.state.index ?? null
-
-  // store
-  const { questionIdx, questions, answers, setAnswers } = useCommunicationStore()
+  const answerId = new URLSearchParams(window.location.search).get('noticeAnswerId')
+  const answerDate = new URLSearchParams(window.location.search).get('answerDate')
 
   // query
+  const { data: { data: question = null } = {} } = useGetQuestionQuery(answerDate as string)
   const { data: { data: answer = null } = {} } = useGetAnswerQuery(answerId as string)
 
-  console.log(answer)
-
   const [accuse, setAccuse] = useState<boolean>(false)
-  const [text, setText] = useState<string>(answers?.[index].content ?? '')
+  const [text, setText] = useState<string>(answer?.content ?? '')
+  const [like, setLike] = useState<boolean>(answer?.isLiked ?? false)
+  const [likeCount, setLikeCount] = useState<number>(answer?.likeCount ?? 0)
 
   useEffect(() => {
-    setText(answers?.[index]?.content ?? '')
-  }, [answers])
+    setText(answer?.content ?? '')
+    setLike(answer?.isLiked ?? false)
+    setLikeCount(answer?.likeCount ?? 0)
+  }, [answer])
 
   const { mutate: postLikesMutate } = usePostLikesMutation()
 
-  const changeLikeCount = () => {
-    if (answers != null) {
-      const updatedAnswers = [...answers]
-
-      updatedAnswers[index] = {
-        ...updatedAnswers[index],
-        likeCount:
-          updatedAnswers[index].isLiked === true
-            ? +updatedAnswers[index].likeCount - 1
-            : +updatedAnswers[index].likeCount + 1,
-        isLiked: updatedAnswers[index].isLiked !== true
-      }
-
-      setAnswers(updatedAnswers)
-    }
-  }
-
   return (
     <>
-      {answers != null && (
+      {answer != null && (
         <Modal>
           <ModalWrapper flex="center" _alignItems="start">
             <ModalInnerWrapper flex="start" direction="column" _height="100%">
@@ -86,10 +63,8 @@ const AnswerModal = () => {
                 </IconButton>
                 <Grid flex="center" _height="100%" _alignItems="end">
                   <Grid flex="center" _gap="4px">
-                    <EmotionIcon emotion={answers[index].emotion} width={44} />
-                    {answers[index].emotion != null && (
-                      <EmotionText text={emotionList[answers[index].emotion - 1].description} />
-                    )}
+                    <EmotionIcon emotion={answer?.emotion} width={44} />
+                    {answer?.emotion != null && <EmotionText text={emotionList[answer?.emotion - 1].description} />}
                   </Grid>
                 </Grid>
 
@@ -121,14 +96,14 @@ const AnswerModal = () => {
               >
                 <Grid flex="start" direction="column" _gap="10px">
                   <Grid flex="center" direction="column" _gap="4px">
-                    {questions[questionIdx].title?.split('\n')?.map((line: string) => (
+                    {question?.title?.split('\n')?.map((line: string) => (
                       <TextP key={line} typo="b1_b" textColor="logo" textAlign="center" wordBreak="keep-all">
                         {line}
                       </TextP>
                     ))}
                   </Grid>
                   <Grid flex="center" direction="column" _gap="4px">
-                    {questions[questionIdx].phrase?.split('\n')?.map((line: string) => (
+                    {question?.phrase?.split('\n')?.map((line: string) => (
                       <TextP key={line} typo="b2" textColor="gray5" textAlign="center" wordBreak="keep-all">
                         {line}
                       </TextP>
@@ -136,9 +111,9 @@ const AnswerModal = () => {
                   </Grid>
                 </Grid>
                 <TextP typo="c" textColor="side500" textAlign="center">
-                  {`${questions[questionIdx].date?.[0].toString()}년 ${questions[
-                    questionIdx
-                  ].date?.[1].toString()}월 ${questions[questionIdx].date?.[2].toString()}일`}
+                  {`${question?.date?.[0]?.toString() as string}년 ${question?.date?.[1]?.toString() as string}월 ${
+                    question?.date?.[2]?.toString() as string
+                  }일`}
                 </TextP>
               </QuestionWrapper>
 
@@ -154,14 +129,19 @@ const AnswerModal = () => {
                     width={24}
                     height={24}
                     style={{ cursor: 'pointer' }}
-                    stroke={(answers[index].isLiked as boolean) ? null : theme.colors.gray.gray6}
-                    fill={(answers[index].isLiked as boolean) ? theme.colors.error.error300 : 'transparent'}
+                    stroke={like ? null : theme.colors.gray.gray6}
+                    fill={like ? theme.colors.error.error300 : 'transparent'}
                     onClick={async () => {
                       postLikesMutate(
                         { answerId: Number(answerId) },
                         {
                           onSuccess: async () => {
-                            changeLikeCount()
+                            if (like) {
+                              setLikeCount(likeCount - 1)
+                            } else {
+                              setLikeCount(likeCount + 1)
+                            }
+                            setLike(!like)
                           },
                           onError: (error) => {
                             console.log(error)
@@ -171,7 +151,7 @@ const AnswerModal = () => {
                     }}
                   />
                   <TextP typo="c_b" textColor="gray6">
-                    {answers[index].likeCount}
+                    {likeCount}
                   </TextP>
                 </Grid>
               </FooterWrapper>
@@ -190,7 +170,7 @@ const AnswerModal = () => {
   )
 }
 
-const { Grid, TextP, TextSpan } = style
+const { Grid, TextP } = style
 
 const ModalWrapper = styled(Grid)`
   width: 100vw;
@@ -254,4 +234,4 @@ const FooterWrapper = styled(Grid)`
   }
 `
 
-export default AnswerModal
+export default NoticeAnswerModal

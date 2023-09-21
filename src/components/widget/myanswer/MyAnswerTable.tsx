@@ -1,13 +1,13 @@
 import React from 'react'
 import type { IMyAnswer } from './type'
 import styled from 'styled-components'
-import { TableCell } from 'components'
+import { MyAnswerTableCell } from 'components'
 
-const Table = ({ data }: IMyAnswer) => {
+const MyAnswerTable = ({ data }: IMyAnswer) => {
   return (
     <TableWrapper>
       {data?.map((v, i) => {
-        return <TableCell key={i} emotion={v?.emotion} question={v?.title} date={v?.date} />
+        return <MyAnswerTableCell key={i} emotion={v?.emotion} question={v?.title} date={v?.date} />
       })}
     </TableWrapper>
   )
@@ -24,4 +24,4 @@ const TableWrapper = styled.div`
   }
 `
 
-export default Table
+export default MyAnswerTable

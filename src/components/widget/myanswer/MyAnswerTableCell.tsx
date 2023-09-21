@@ -10,7 +10,7 @@ import type { ITableCell } from './type'
 import { formatStringDate } from 'utils/date'
 import EmotionIcon from '../main/EmotionIcon'
 
-const TableCell = ({ emotion, question, date }: ITableCell) => {
+const MyAnswerTableCell = ({ emotion, question, date }: ITableCell) => {
   const questionDate = new Date(Number(date[0]), Number(date[1]) - 1, Number(date[2]))
 
   return (
@@ -82,4 +82,4 @@ const QuestionDateWrapper = styled.div`
   gap: 8px;
 `
 
-export default TableCell
+export default MyAnswerTableCell

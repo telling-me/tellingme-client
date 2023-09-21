@@ -11,6 +11,7 @@ export enum PAGE_URL {
   Main = 'main',
   Setting = 'main/setting',
   MyAnswer = 'myanswer',
+  MyLibrary = 'mylibrary',
   AllAnswer = 'allanswer',
   AllAnswerList = 'allanswer/allanswerlist',
   Error500 = '500',

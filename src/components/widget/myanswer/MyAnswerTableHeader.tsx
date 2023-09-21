@@ -13,7 +13,7 @@ import type { IMyAnswerMode } from './type'
 // store
 import useAnswerStore from 'stores/useAnswerStore'
 
-const TableHeader = ({ isSelected, _onClick }: IMyAnswerMode) => {
+const MyAnswerTableHeader = ({ isSelected, _onClick }: IMyAnswerMode) => {
   const nowYear = new Date().getFullYear()
   const nowMonth = new Date().getMonth() + 1
   const yearData = new Array(nowYear - 2022).fill(0).map((_, i) => (2023 + i).toString())
@@ -91,4 +91,4 @@ const HeaderWrapper = styled.div`
   }
 `
 
-export default TableHeader
+export default MyAnswerTableHeader
