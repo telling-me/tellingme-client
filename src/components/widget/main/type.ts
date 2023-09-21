@@ -7,5 +7,5 @@ export interface INotice {
   link: string | null
   isInternal: boolean
   answerId: number | null
-  date: string
+  date: string[]
 }

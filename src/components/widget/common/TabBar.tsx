@@ -15,8 +15,7 @@ import Icons from 'assets/icons'
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
 
-// eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/no-unused-vars
-const tab_data = [
+const TAB_DATA = [
   {
     name: 'main',
     link: '/app/main',
@@ -51,10 +50,10 @@ const TabBar = () => {
   const location = useLocation()
 
   // store
-  const { setPrevPage, setCurrPage } = useCommonStore()
+  const { setPrevPage, setCurrPage, setMobileOnlyModal } = useCommonStore()
 
   useEffect(() => {
-    const prevPage = tab_data?.find((tab) => location.pathname.includes(`${tab.name}`))
+    const prevPage = TAB_DATA?.find((tab) => location.pathname.includes(`${tab.name}`))
     setPrevPage(prevPage?.page_idx ?? 0)
   }, [location])
 
@@ -69,17 +68,16 @@ const TabBar = () => {
     <TabBarWrapper size={window.innerWidth}>
       {/* Desktop 버전에만 필요 */}
       <TabButtonWrapper>
-        {tab_data.map((tab, idx) => {
+        {TAB_DATA.map((tab, idx) => {
           if (tab.mobile_only)
             return (
-              <Link to={`${tab.link}`} key={idx}>
-                <TabButton
-                  color={location.pathname.includes(`${tab.name}`) ? 'logo' : 'noFilled'}
-                  onClick={() => {
-                    setCurrPage(tab.page_idx)
-                  }}
-                />
-              </Link>
+              <TabButton
+                key={idx}
+                color={location.pathname.includes(`${tab.name}`) ? 'logo' : 'noFilled'}
+                onClick={() => {
+                  setMobileOnlyModal(true)
+                }}
+              />
             )
           else
             return (
@@ -96,27 +94,25 @@ const TabBar = () => {
       </TabButtonWrapper>
       <TabBarWrapperDiv>
         <TabWrapperLi>
-          {tab_data.map((tab, idx) => {
+          {TAB_DATA.map((tab, idx) => {
             if (tab.mobile_only)
               return (
                 <ul key={idx}>
                   <TabWrapper>
-                    <Link to={`${tab.link}`}>
-                      <IconButton
-                        buttonType={location.pathname.includes(`${tab.name}`) ? 'logo' : 'noFilled'}
-                        _width="41px"
-                        _height="41px"
-                        _onClick={() => {
-                          setCurrPage(tab.page_idx)
-                        }}
-                      >
-                        <tab.icon
-                          width="24"
-                          height="24"
-                          stroke={useChangeColor(location.pathname.includes(`${tab.name}`) ? 'side100' : 'gray3')}
-                        />
-                      </IconButton>
-                    </Link>
+                    <IconButton
+                      buttonType={location.pathname.includes(`${tab.name}`) ? 'logo' : 'noFilled'}
+                      _width="41px"
+                      _height="41px"
+                      _onClick={() => {
+                        setMobileOnlyModal(true)
+                      }}
+                    >
+                      <tab.icon
+                        width="24"
+                        height="24"
+                        stroke={useChangeColor(location.pathname.includes(`${tab.name}`) ? 'side100' : 'gray3')}
+                      />
+                    </IconButton>
                   </TabWrapper>
                 </ul>
               )

@@ -16,7 +16,11 @@ export const useGetQuestionQuery = <T>(date: string, options?: T) => {
       }
       return data
     },
-    enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
+    enabled:
+      getCookie('accessToken') !== null &&
+      getCookie('accessToken') !== undefined &&
+      date !== undefined &&
+      date !== null,
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options

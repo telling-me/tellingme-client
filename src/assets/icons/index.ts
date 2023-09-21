@@ -98,6 +98,7 @@ import { ReactComponent as Premium } from './Premium.svg'
 import { ReactComponent as QnA } from './QnA.svg'
 import { ReactComponent as TellingmeBook } from './TellingmeBook.svg'
 import { ReactComponent as MyLibrary } from './MyLibrary.svg'
+import { ReactComponent as MyLibraryColor } from './MyLibraryColor.svg'
 import { ReactComponent as Etc } from './Etc.svg'
 
 interface IIconIndex extends IStringKey {
@@ -199,6 +200,7 @@ interface IIconIndex extends IStringKey {
   QnA: string | FunctionComponent<any> | ComponentClass<any, any>
   TellingmeBook: string | FunctionComponent<any> | ComponentClass<any, any>
   MyLibrary: string | FunctionComponent<any> | ComponentClass<any, any>
+  MyLibraryColor: string | FunctionComponent<any> | ComponentClass<any, any>
   Etc: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
@@ -301,6 +303,7 @@ const Icon: IIconIndex = {
   QnA,
   TellingmeBook,
   MyLibrary,
+  MyLibraryColor,
   Etc
 }
 

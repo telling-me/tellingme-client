@@ -24,6 +24,14 @@ const useCommonStore = create<ICommonStore>()(
         set((state) => {
           state.currPage = value
         })
+      },
+
+      // modal
+      mobileOnlyModal: false,
+      setMobileOnlyModal: (value) => {
+        set((state) => {
+          state.mobileOnlyModal = value
+        })
       }
     }))
   )

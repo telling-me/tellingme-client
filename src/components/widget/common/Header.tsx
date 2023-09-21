@@ -73,11 +73,17 @@ const Header = () => {
             </IconButton>
           </Grid>
         </HeaderWrapper>
+      ) : PAGE_URL.includes('myanswer') ? (
+        <HeaderWrapper style={{ justifyContent: 'center', padding: '26.5px 0 20.5px 0' }}>
+          <TextP typo="h6_b" textColor="gray6">
+            나의 공간
+          </TextP>
+        </HeaderWrapper>
       ) : (
-        PAGE_URL.includes('myanswer') && (
+        PAGE_URL.includes('mylibrary') && (
           <HeaderWrapper style={{ justifyContent: 'center', padding: '26.5px 0 20.5px 0' }}>
             <TextP typo="h6_b" textColor="gray6">
-              나의 공간
+              나의 서재
             </TextP>
           </HeaderWrapper>
         )

@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // components
-import { EmotionIcon, IconButton, Modal, ToggleChip } from 'components'
+import { IconButton, Modal, ToggleChip } from 'components'
+import LoadingComponent from 'components/core/loading/Loading'
 import Icon from 'assets/icons'
 
 // styles
@@ -19,7 +19,7 @@ import { type INotice } from './type'
 
 // utils
 import { formatStringDate } from '../../../utils/date'
-import LoadingComponent from 'components/core/loading/Loading'
+import useCommonStore from 'stores/useCommonStore'
 
 const NoticeModal = () => {
   const navigate = useNavigate()
@@ -32,7 +32,11 @@ const NoticeModal = () => {
   // mutation
   const { mutate: mutateReadAll } = usePostNoticeReadAllMutation()
   const { mutate: mutateRead } = usePostNoticeReadMutation()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { mutate: deleteNotice } = useDeleteNoticeMutation()
+
+  // store
+  const { setMobileOnlyModal } = useCommonStore()
 
   return (
     <Modal>
@@ -86,9 +90,13 @@ const NoticeModal = () => {
                           answerId: notice?.answerId
                         })
                       )
-                      navigate({ search: `?answerId=${notice?.answerId}` })
+                      const noticeAnswerDate = formatStringDate(new Date(notice?.date?.join('-')))
+                      navigate({
+                        search: `?notice=true&noticeAnswer=true&answerDate=${noticeAnswerDate}&noticeAnswerId=${notice?.answerId}`
+                      })
                     } else {
                       // 내부 - 나의 서재
+                      setMobileOnlyModal(true)
                     }
                   } else {
                     // 외부 서비스
@@ -160,5 +168,4 @@ const NoticeItemInnerWrapper = styled(Grid)`
 const ModalHeader = styled(Grid)`
   max-width: 1200px;
 `
-
 export default NoticeModal

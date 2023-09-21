@@ -6,7 +6,9 @@ import { motion } from 'framer-motion'
 
 // components
 import styled from 'styled-components'
-import { Header, QuestionWriteModal, TabBar, AnswerModal } from 'components'
+import { Header, QuestionWriteModal, TabBar, AnswerModal, NoticeAnswerModal } from 'components'
+import NoticeModal from 'components/widget/main/NoticeModal'
+import OnlyMobileModal from 'components/widget/OnlyMobileModal'
 
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
@@ -17,13 +19,12 @@ import useCommonStore from 'stores/useCommonStore'
 
 // utils
 import { setCookie } from 'utils/cookies'
-import NoticeModal from 'components/widget/main/NoticeModal'
 
 const CommonLayout = () => {
   const params = new URLSearchParams(window.location.search)
 
   const windowSize = useWindowSize()
-  const { prevPage, currPage } = useCommonStore()
+  const { prevPage, currPage, mobileOnlyModal, setMobileOnlyModal } = useCommonStore()
 
   const PAGE_URL = window.location.href
 
@@ -92,6 +93,14 @@ const CommonLayout = () => {
       {params.get('date') != null && <QuestionWriteModal />}
       {params.get('answerId') != null && <AnswerModal />}
       {params.get('notice') != null && <NoticeModal />}
+      {params.get('noticeAnswer') != null && <NoticeAnswerModal />}
+      {Boolean(mobileOnlyModal) && (
+        <OnlyMobileModal
+          handleClose={() => {
+            setMobileOnlyModal(false)
+          }}
+        />
+      )}
     </>
   )
 }
