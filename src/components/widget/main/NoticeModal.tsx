@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // components
-import { IconButton, Modal, ToggleChip } from 'components'
+import { IconButton, Modal, NoticeItem, ToggleChip } from 'components'
 import LoadingComponent from 'components/core/loading/Loading'
 import Icon from 'assets/icons'
 
@@ -12,31 +12,30 @@ import styled, { useTheme } from 'styled-components'
 
 // hooks
 import { useGetNoticeQuery, useGetNoticeSummaryQuery } from 'hooks/queries'
-import { usePostNoticeReadAllMutation, usePostNoticeReadMutation, useDeleteNoticeMutation } from 'hooks/mutations'
+import { usePostNoticeReadAllMutation } from 'hooks/mutations'
 
 // type
 import { type INotice } from './type'
-
-// utils
-import { formatStringDate } from '../../../utils/date'
-import useCommonStore from 'stores/useCommonStore'
 
 const NoticeModal = () => {
   const navigate = useNavigate()
   const theme = useTheme()
 
   // query
-  const { data: { data: noticeList = null } = {}, isLoading: isNoticeLoading } = useGetNoticeQuery()
-  const { data: { data: noticeSummary = null } = {} } = useGetNoticeSummaryQuery()
+  const {
+    data: { data: noticeList = null } = {},
+    isLoading: isNoticeLoading,
+    refetch: noticeRefetch
+  } = useGetNoticeQuery()
+  const { data: { data: noticeSummary = null } = {}, refetch: noticeSummaryRefetch } = useGetNoticeSummaryQuery()
 
   // mutation
   const { mutate: mutateReadAll } = usePostNoticeReadAllMutation()
-  const { mutate: mutateRead } = usePostNoticeReadMutation()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { mutate: deleteNotice } = useDeleteNoticeMutation()
 
-  // store
-  const { setMobileOnlyModal } = useCommonStore()
+  const noticeRefetchAll = async () => {
+    await noticeRefetch()
+    await noticeSummaryRefetch()
+  }
 
   return (
     <Modal>
@@ -63,7 +62,15 @@ const NoticeModal = () => {
             // status가 false면 활성화 (toggle됨)
             action={noticeSummary?.status === false}
             _onClick={() => {
-              mutateReadAll()
+              mutateReadAll(
+                // TODO : 임시로 onSuccess Refetch 추가
+                { data: 'all' },
+                {
+                  onSuccess: async () => {
+                    await noticeRefetchAll()
+                  }
+                }
+              )
             }}
           />
         </ChipWrapper>
@@ -75,56 +82,11 @@ const NoticeModal = () => {
           <NoticeScrollWrapper>
             {noticeList?.map((notice: INotice, idx: number) => (
               <NoticeItem
-                key={idx}
-                flex="start"
-                direction="column"
-                onClick={() => {
-                  mutateRead({ noticeId: notice?.noticeId })
-                  if (notice?.isInternal) {
-                    // 내부 서비스
-                    if (notice?.answerId !== null) {
-                      // 내부 - 질문 모달창
-                      // RN에 answerId전달
-                      window?.ReactNativeWebView?.postMessage(
-                        JSON.stringify({
-                          answerId: notice?.answerId
-                        })
-                      )
-                      const noticeAnswerDate = formatStringDate(new Date(notice?.date?.join('-')))
-                      navigate({
-                        search: `?notice=true&noticeAnswer=true&answerDate=${noticeAnswerDate}&noticeAnswerId=${notice?.answerId}`
-                      })
-                    } else {
-                      // 내부 - 나의 서재
-                      setMobileOnlyModal(true)
-                    }
-                  } else {
-                    // 외부 서비스
-                    window.open(notice?.link as string, '_blank')
-                  }
-                }}
-              >
-                <NoticeItemInnerWrapper
-                  flex="start"
-                  direction="column"
-                  _padding="18px 25px"
-                  _alignItems="start"
-                  _gap="8px"
-                >
-                  <TextP typo="b2_b" textColor={notice.isRead ? 'gray3' : 'gray6'}>
-                    {notice.title}
-                  </TextP>
-                  {notice?.content !== null && (
-                    <TextP typo="b2" textColor={notice.isRead ? 'gray3' : 'gray6'}>
-                      {notice.content}
-                    </TextP>
-                  )}
-
-                  <TextP typo="c" textColor={'gray3'}>
-                    {formatStringDate(new Date(notice?.createdAt?.slice(0, 3)?.join('.')), '.')}
-                  </TextP>
-                </NoticeItemInnerWrapper>
-              </NoticeItem>
+                key={`${notice.title} ${String(idx)} ${notice.createdAt.join('-')}`}
+                notice={notice}
+                // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                refetch={noticeRefetchAll}
+              />
             ))}
           </NoticeScrollWrapper>
         )}
@@ -152,17 +114,6 @@ const NoticeScrollWrapper = styled(Grid)`
   ::-webkit-scrollbar {
     width: 0;
   }
-`
-
-const NoticeItem = styled(Grid)`
-  &:hover,
-  &:active {
-    background-color: ${(props) => props.theme.colors.side.side200};
-  }
-`
-
-const NoticeItemInnerWrapper = styled(Grid)`
-  max-width: 1200px;
 `
 
 const ModalHeader = styled(Grid)`

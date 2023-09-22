@@ -187,7 +187,6 @@ const TabWrapperLi = styled.li`
   @media screen and (max-width: 1023px) {
     flex-direction: row;
     height: 77px;
-    gap: 70px;
     padding: 0 32px;
   }
 
