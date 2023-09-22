@@ -1,9 +1,7 @@
 import React from 'react'
-import type { Dispatch, SetStateAction } from 'react'
+import styled from 'styled-components'
 
 // component
-import styled from 'styled-components'
-import style from 'styles/styled-components/styled'
 import { IconButton } from 'components'
 
 // hook
@@ -13,14 +11,18 @@ import useChangeColor from 'hooks/useChangeColor'
 // assets
 import Icons from 'assets/icons'
 
+// styles
+import style from 'styles/styled-components/styled'
+
 interface ISettingContentHeader {
   pageNumber: number
-  setIsMenu?: Dispatch<SetStateAction<boolean>>
+  setPageNumber: React.Dispatch<React.SetStateAction<number>>
+  setIsMenu?: React.Dispatch<React.SetStateAction<boolean>>
   _disabled?: boolean
   _onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const SettingContentHeader = ({ pageNumber, setIsMenu, _disabled, _onClick }: ISettingContentHeader) => {
+const SettingContentHeader = ({ pageNumber, setPageNumber, setIsMenu, _disabled, _onClick }: ISettingContentHeader) => {
   const CONTENT_HEADERS = ['내 정보 수정하기', '이용 약관', '개인정보 처리방침', '', '회원 탈퇴']
   const windowWidth = useWindowSize().width
 
@@ -33,7 +35,9 @@ const SettingContentHeader = ({ pageNumber, setIsMenu, _disabled, _onClick }: IS
           _height="fit-content"
           _margin="0 0 0 -4px"
           _onClick={() => {
-            if (setIsMenu != null) {
+            if (pageNumber === 4) {
+              setPageNumber(0)
+            } else if (setIsMenu != null) {
               setIsMenu(true)
             }
           }}
