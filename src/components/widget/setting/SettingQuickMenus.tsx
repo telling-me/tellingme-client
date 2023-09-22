@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 // assets
@@ -9,17 +9,15 @@ import style from 'styles/styled-components/styled'
 
 // type
 import type { ISettingMenu } from './type'
-import OnlyMobileModal from '../OnlyMobileModal'
+
+// store
+import useCommonStore from 'stores/useCommonStore'
 
 const SettingQuickMenus = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
-  const [open, setOpen] = useState<boolean>(false)
+  const { setMobileOnlyModal } = useCommonStore()
 
   const handleOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
+    setMobileOnlyModal(true)
   }
 
   const MENUS = [
@@ -71,8 +69,6 @@ const SettingQuickMenus = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
           )
         })}
       </QuickMenusWrapper>
-
-      {open && <OnlyMobileModal handleClose={handleClose} />}
     </QuickMenusSpace>
   )
 }

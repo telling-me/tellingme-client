@@ -22,3 +22,7 @@ export { useGetUserInfoQuery, useGetUserNotiQuery, useGetUserPushToken, useGetMy
 export { useGetReportList } from './admin'
 
 export { useTestQuery } from './test'
+
+// notice
+
+export { useGetNoticeQuery, useGetNoticeSummaryQuery } from './notice'

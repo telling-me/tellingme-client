@@ -22,7 +22,11 @@ export const useGetAnswerQuery = <T>(answerId: string, options?: T) => {
     onError: (err: IError) => {
       console.log(err)
     },
-    enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
+    enabled:
+      getCookie('accessToken') !== null &&
+      getCookie('accessToken') !== undefined &&
+      answerId !== undefined &&
+      answerId !== null,
     staleTime: 36000000,
     cacheTime: Infinity,
     ...options

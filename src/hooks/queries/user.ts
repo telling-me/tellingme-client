@@ -2,7 +2,7 @@ import { useQuery } from 'react-query'
 import { apis } from 'apis/apis'
 import { type IError } from 'type/db'
 import { getCookie } from 'utils/cookies'
-import { useFormatDateArrToStr } from '..'
+import useFormatDateArrToStr from 'hooks/useFormatDateArrToStr'
 
 export const useGetUserInfoQuery = <T>(options?: T) => {
   return useQuery(['getUserInfo'], async () => await apis.getUserInfo(), {

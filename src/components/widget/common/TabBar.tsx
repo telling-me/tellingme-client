@@ -15,14 +15,46 @@ import Icons from 'assets/icons'
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
 
+const TAB_DATA = [
+  {
+    name: 'main',
+    link: '/app/main',
+    icon: Icons.Home,
+    page_idx: 0,
+    mobile_only: false
+  },
+  {
+    name: 'myanswer',
+    link: '/app/myanswer',
+    icon: Icons.MyAnswer,
+    page_idx: 1,
+    mobile_only: false
+  },
+  {
+    name: 'mylibrary',
+    link: '/app/mylibrary',
+    icon: Icons.MyLibrary,
+    page_idx: 2,
+    mobile_only: true
+  },
+  {
+    name: 'allanswer',
+    link: '/app/allanswer',
+    icon: Icons.AllAnswer,
+    page_idx: 3,
+    mobile_only: false
+  }
+]
+
 const TabBar = () => {
   const location = useLocation()
 
   // store
-  const { setPrevPage, setCurrPage } = useCommonStore()
+  const { setPrevPage, setCurrPage, setMobileOnlyModal } = useCommonStore()
 
   useEffect(() => {
-    setPrevPage(location.pathname.includes('allanswer') ? 1 : location.pathname.includes('main') ? 0 : -1)
+    const prevPage = TAB_DATA?.find((tab) => location.pathname.includes(`${tab.name}`))
+    setPrevPage(prevPage?.page_idx ?? 0)
   }, [location])
 
   // 질문 작성 시 TabBar 노출 여부
@@ -36,93 +68,77 @@ const TabBar = () => {
     <TabBarWrapper size={window.innerWidth}>
       {/* Desktop 버전에만 필요 */}
       <TabButtonWrapper>
-        <Link to="/app/myanswer">
-          <TabButton
-            color={location.pathname.includes('myanswer') ? 'logo' : 'noFilled'}
-            onClick={() => {
-              setCurrPage(-1)
-            }}
-          />
-        </Link>
-        <Link to="/app/main">
-          <TabButton
-            color={location.pathname.includes('main') ? 'logo' : 'noFilled'}
-            onClick={() => {
-              setCurrPage(0)
-            }}
-          />
-        </Link>
-        <Link to="/app/allanswer">
-          <TabButton
-            color={location.pathname.includes('allanswer') ? 'logo' : 'noFilled'}
-            onClick={() => {
-              setCurrPage(1)
-            }}
-          />
-        </Link>
+        {TAB_DATA.map((tab, idx) => {
+          if (tab.mobile_only)
+            return (
+              <TabButton
+                key={idx}
+                color={location.pathname.includes(`${tab.name}`) ? 'logo' : 'noFilled'}
+                onClick={() => {
+                  setMobileOnlyModal(true)
+                }}
+              />
+            )
+          else
+            return (
+              <Link to={`${tab.link}`} key={idx}>
+                <TabButton
+                  color={location.pathname.includes(`${tab.name}`) ? 'logo' : 'noFilled'}
+                  onClick={() => {
+                    setCurrPage(tab.page_idx)
+                  }}
+                />
+              </Link>
+            )
+        })}
       </TabButtonWrapper>
       <TabBarWrapperDiv>
         <TabWrapperLi>
-          <ul>
-            <TabWrapper>
-              <Link to="/app/myanswer">
-                <IconButton
-                  buttonType={location.pathname.includes('myanswer') ? 'logo' : 'noFilled'}
-                  _width="41px"
-                  _height="41px"
-                  _onClick={() => {
-                    setCurrPage(-1)
-                  }}
-                >
-                  <Icons.MyAnswer
-                    width="24"
-                    height="24"
-                    stroke={useChangeColor(location.pathname.includes('myanswer') ? 'side100' : 'gray3')}
-                  />
-                </IconButton>
-              </Link>
-            </TabWrapper>
-          </ul>
-          <ul>
-            <TabWrapper>
-              <Link to="/app/main">
-                <IconButton
-                  buttonType={location.pathname.includes('main') ? 'logo' : 'noFilled'}
-                  _width="41px"
-                  _height="41px"
-                  _onClick={() => {
-                    setCurrPage(0)
-                  }}
-                >
-                  <Icons.Home
-                    width="24"
-                    height="24"
-                    stroke={useChangeColor(location.pathname.includes('main') ? 'side100' : 'gray3')}
-                  />
-                </IconButton>
-              </Link>
-            </TabWrapper>
-          </ul>
-          <ul>
-            <TabWrapper>
-              <Link to="/app/allanswer">
-                <IconButton
-                  buttonType={location.pathname.includes('allanswer') ? 'logo' : 'noFilled'}
-                  _width="41px"
-                  _height="41px"
-                  _onClick={() => {
-                    setCurrPage(1)
-                  }}
-                >
-                  <Icons.AllAnswer
-                    width="24"
-                    height="24"
-                    stroke={useChangeColor(location.pathname.includes('allanswer') ? 'side100' : 'gray3')}
-                  />
-                </IconButton>
-              </Link>
-            </TabWrapper>
-          </ul>
+          {TAB_DATA.map((tab, idx) => {
+            if (tab.mobile_only)
+              return (
+                <ul key={idx}>
+                  <TabWrapper>
+                    <IconButton
+                      buttonType={location.pathname.includes(`${tab.name}`) ? 'logo' : 'noFilled'}
+                      _width="41px"
+                      _height="41px"
+                      _onClick={() => {
+                        setMobileOnlyModal(true)
+                      }}
+                    >
+                      <tab.icon
+                        width="24"
+                        height="24"
+                        stroke={useChangeColor(location.pathname.includes(`${tab.name}`) ? 'side100' : 'gray3')}
+                      />
+                    </IconButton>
+                  </TabWrapper>
+                </ul>
+              )
+            return (
+              <ul key={idx}>
+                <TabWrapper>
+                  <Link to={`${tab.link}`}>
+                    <IconButton
+                      buttonType={location.pathname.includes(`${tab.name}`) ? 'logo' : 'noFilled'}
+                      _width="41px"
+                      _height="41px"
+                      _onClick={() => {
+                        setCurrPage(tab.page_idx)
+                      }}
+                    >
+                      <tab.icon
+                        width="24"
+                        height="24"
+                        stroke={useChangeColor(location.pathname.includes(`${tab.name}`) ? 'side100' : 'gray3')}
+                      />
+                    </IconButton>
+                  </Link>
+                </TabWrapper>
+              </ul>
+            )
+          })}
         </TabWrapperLi>
       </TabBarWrapperDiv>
     </TabBarWrapper>
@@ -163,9 +179,9 @@ const TabWrapperLi = styled.li`
 
   background-color: ${({ theme }) => theme.colors.side.side100};
   border-radius: 24px;
-  height: 291px;
+  height: max-content;
   width: max-content;
-  padding: 0 16px;
+  padding: 32px 16px;
   transition: 0.3s;
 
   @media screen and (max-width: 1023px) {

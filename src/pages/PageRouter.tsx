@@ -45,6 +45,7 @@ const PageRouter = () => {
             <Route path={PAGE_URL.AllAnswer} element={<Switch.AllAnswerPage />} />
             <Route path={PAGE_URL.AllAnswerList} element={<Switch.AllAnswerListPage />} />
             <Route path={PAGE_URL.MyAnswer} element={<Switch.MyAnswerPage />} />
+            <Route path={PAGE_URL.MyLibrary} element={<Switch.MyLibraryPage />} />
             <Route path={PAGE_URL.Setting} element={<Switch.SettingPage />} />
             <Route path={PAGE_URL.Error500} element={<Switch.Error500Page />} />
             <Route path={PAGE_URL.Error403} element={<Switch.Error403Page />} />

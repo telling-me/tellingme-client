@@ -7,6 +7,8 @@ import { Button, Modal } from 'components'
 import style from 'styles/styled-components/styled'
 import styled from 'styled-components'
 import Icon from 'assets/icons'
+import { getCookie } from 'utils/cookies'
+import useWindowSize from 'hooks/useWindowSize'
 
 interface IOnlyMobileModal {
   handleClose: () => void
@@ -15,7 +17,7 @@ interface IOnlyMobileModal {
 const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
   const contents = [
     {
-      icon: Icon.MyLibrary,
+      icon: Icon.MyLibraryColor,
       text: '나의 서재'
     },
     {
@@ -23,6 +25,32 @@ const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
       text: '프리미엄 모드'
     }
   ]
+
+  const windowWidth = useWindowSize().width
+
+  //  React Native로 접속한 경우 준비중 모달
+  if (getCookie('device') === 'android')
+    return (
+      <Modal _width="100%" _maxWidth="425px" _padding="30px 20px 20px" _borderRadius="20px">
+        <Grid flex="center" direction="column" _padding="30px 0px">
+          <Icon.OverhaulDuei width={windowWidth < 768 ? '120' : '190'} height={windowWidth < 768 ? '120' : '190'} />
+          <TextP typo="b1_b" textColor="gray5">
+            아직 준비중이에요!
+          </TextP>
+        </Grid>
+        <Button
+          buttonType="secondary"
+          text="닫기"
+          textSize="h6"
+          textColor="logo"
+          _width="100%"
+          _padding="18px 0"
+          _onClick={() => {
+            handleClose()
+          }}
+        />
+      </Modal>
+    )
 
   return (
     <Modal _width="100%" _maxWidth="425px" _padding="30px 20px 20px" _borderRadius="20px">
@@ -87,7 +115,7 @@ const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
   )
 }
 
-const { TextP } = style
+const { TextP, Grid } = style
 
 const ContentWrapper = styled.div`
   width: 100%;
