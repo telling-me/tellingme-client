@@ -14,6 +14,7 @@ export { default as LandingCatchPhrase } from './landing/LandingCatchPhrase'
 export { default as Question } from './main/Question'
 export { default as ContinuousDate } from './main/ContinuousDate'
 export { default as MainBackground } from './main/MainBackground'
+export { default as NoticeItem } from './main/NoticeItem'
 
 // Modal - Question
 export { default as QuestionWriteModal } from './main/QuestionWriteModal'

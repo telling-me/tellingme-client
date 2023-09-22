@@ -12,7 +12,6 @@ export const useGetNoticeQuery = <T>(options?: T) => {
     enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
     staleTime: 0,
     cacheTime: Infinity,
-    keepPreviousData: true,
     ...options
   })
 }
@@ -26,7 +25,6 @@ export const useGetNoticeSummaryQuery = <T>(options?: T) => {
     enabled: getCookie('accessToken') !== null && getCookie('accessToken') !== undefined,
     staleTime: 0,
     cacheTime: Infinity,
-    keepPreviousData: true,
     ...options
   })
 }
