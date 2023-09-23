@@ -65,9 +65,9 @@ const Dropdown = ({
   return (
     <DropdownComponent _margin={_margin} _maxWidth={_maxWidth}>
       {label !== undefined && (
-        <style.TextSpan typo={dropdownSize === 'small' ? 'b1' : 'h6'} textColor="black" _margin="0px 0px 0px 10px">
+        <TextSpan typo={dropdownSize === 'small' ? 'b1' : 'h6'} textColor="black" _margin="0px 0px 0px 10px">
           {label}
-        </style.TextSpan>
+        </TextSpan>
       )}
 
       <DropdownButton
@@ -81,13 +81,10 @@ const Dropdown = ({
       >
         <DropdownInnerWrapper dropdownSize={dropdownSize}>
           <DropdownSelectedField>
-            <style.TextSpan
-              typo={dropdownSize === 'small' ? 'b2' : 'b1'}
-              textColor={_selected == null ? 'gray4' : 'black'}
-            >
+            <TextSpan typo={dropdownSize === 'small' ? 'b2' : 'b1'} textColor={_selected == null ? 'gray4' : 'black'}>
               {_selected == null ? defaultText : _selected}
               {unit ?? unit}
-            </style.TextSpan>
+            </TextSpan>
           </DropdownSelectedField>
 
           {open ? (
@@ -118,10 +115,10 @@ const Dropdown = ({
                   setOpen(false)
                 }}
               >
-                <style.TextSpan typo={dropdownSize === 'small' ? 'b2' : 'b1'} textColor="black">
+                <TextSpan typo={dropdownSize === 'small' ? 'b2' : 'b1'} textColor="black">
                   {v}
                   {unit ?? unit}
-                </style.TextSpan>
+                </TextSpan>
               </DropdownItem>
             )
           })}
@@ -130,5 +127,7 @@ const Dropdown = ({
     </DropdownComponent>
   )
 }
+
+const { TextSpan } = style
 
 export default Dropdown

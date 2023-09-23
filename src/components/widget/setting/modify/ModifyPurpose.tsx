@@ -30,12 +30,12 @@ const ModifyPurpose = ({ purpose, setPurpose }: IModifyPurpose) => {
 
   return (
     <>
-      <style.TextP typo="h6" textColor="black" _margin="0px 0px 0px 10px">
+      <TextP typo="h6" textColor="black" _margin="0px 0px 0px 10px">
         고민
-      </style.TextP>
-      <style.TextP typo="c" textColor="gray7" _margin="4px 0px 16px 10px">
+      </TextP>
+      <TextP typo="c" textColor="gray7" _margin="4px 0px 16px 10px">
         최대 2가지 중복 선택 가능
-      </style.TextP>
+      </TextP>
 
       <SelectOuterWrapper>
         <SelectInnerWrapper>
@@ -70,5 +70,7 @@ const ModifyPurpose = ({ purpose, setPurpose }: IModifyPurpose) => {
     </>
   )
 }
+
+const { TextP } = style
 
 export default ModifyPurpose

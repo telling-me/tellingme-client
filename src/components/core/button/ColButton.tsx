@@ -20,12 +20,14 @@ const ColButton = ({ text, _active, _onClick, children }: INotOnlyButton) => {
     <ColButtonComponent _active={_active} onClick={_onClick}>
       {children}
 
-      <style.TextP typo="h6" textColor="gray7">
+      <TextP typo="h6" textColor="gray7">
         {text}
-      </style.TextP>
+      </TextP>
     </ColButtonComponent>
   )
 }
+
+const { TextP } = style
 
 const ColButtonComponent = styled.button<{ _active: boolean }>`
   ${({ theme }) => theme.common.flexCenter}

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 // assets
@@ -10,17 +9,15 @@ import style from 'styles/styled-components/styled'
 
 // type
 import type { ISettingMenu } from './type'
-import OnlyMobileModal from '../OnlyMobileModal'
+
+// store
+import useCommonStore from 'stores/useCommonStore'
 
 const SettingQuickMenus = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
-  const [open, setOpen] = useState<boolean>(false)
+  const { setMobileOnlyModal } = useCommonStore()
 
   const handleOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
+    setMobileOnlyModal(true)
   }
 
   const MENUS = [
@@ -65,18 +62,18 @@ const SettingQuickMenus = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
           return (
             <QuickMenuWrapper key={i} onClick={v._onClick}>
               <v.icon width="32" height="32" />
-              <style.TextP typo="c" textColor="gray7">
+              <TextP typo="c" textColor="gray7">
                 {v.title}
-              </style.TextP>
+              </TextP>
             </QuickMenuWrapper>
           )
         })}
       </QuickMenusWrapper>
-
-      {open && <OnlyMobileModal handleClose={handleClose} />}
     </QuickMenusSpace>
   )
 }
+
+const { TextP } = style
 
 const QuickMenusSpace = styled.div`
   width: 100%;

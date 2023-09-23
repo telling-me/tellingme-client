@@ -13,11 +13,15 @@ import useChangeColor from 'hooks/useChangeColor'
 
 // styles
 import style from 'styles/styled-components/styled'
+import { getCookie } from 'utils/cookies'
+import { useGetNoticeSummaryQuery } from 'hooks/queries'
 
 const Header = () => {
   const theme = useTheme()
   const location = useLocation()
   const navigate = useNavigate()
+
+  const { data: { data: noticeSummary = null } = {} } = useGetNoticeSummaryQuery()
 
   const PAGE_URL = window.location.href
 
@@ -37,29 +41,58 @@ const Header = () => {
             }}
           />
 
-          <IconButton
-            buttonType="noFilled"
-            _width="fit-content"
-            _height="fit-content"
-            _onClick={() => {
-              navigate('main/setting')
-            }}
-          >
-            <Icons.Setting width="24" height="24" stroke={useChangeColor('gray6')} />
-          </IconButton>
+          {/* React Native로 접속한 경우 알람창 */}
+          <Grid flex="end" _gap="8px">
+            {getCookie('device') === 'android' && (
+              <>
+                <IconButton
+                  buttonType="noFilled"
+                  _width="32px"
+                  _height="32px"
+                  _onClick={() => {
+                    navigate({ search: `?notice=true` })
+                  }}
+                >
+                  {noticeSummary?.status === true ? (
+                    <Icons.NoticeBadge width="24" height="24" stroke={useChangeColor('gray6')} />
+                  ) : (
+                    <Icons.Notice width="24" height="24" stroke={useChangeColor('gray6')} />
+                  )}
+                </IconButton>
+              </>
+            )}
+            <IconButton
+              buttonType="noFilled"
+              _width="32px"
+              _height="32px"
+              _onClick={() => {
+                navigate('main/setting')
+              }}
+            >
+              <Icons.Setting width="24" height="24" stroke={useChangeColor('gray6')} />
+            </IconButton>
+          </Grid>
+        </HeaderWrapper>
+      ) : PAGE_URL.includes('myanswer') ? (
+        <HeaderWrapper style={{ justifyContent: 'center', padding: '26.5px 0 20.5px 0' }}>
+          <TextP typo="h6_b" textColor="gray6">
+            나의 공간
+          </TextP>
         </HeaderWrapper>
       ) : (
-        PAGE_URL.includes('myanswer') && (
+        PAGE_URL.includes('mylibrary') && (
           <HeaderWrapper style={{ justifyContent: 'center', padding: '26.5px 0 20.5px 0' }}>
-            <style.TextP typo="h6_b" textColor="gray6">
-              나의 공간
-            </style.TextP>
+            <TextP typo="h6_b" textColor="gray6">
+              나의 서재
+            </TextP>
           </HeaderWrapper>
         )
       )}
     </>
   )
 }
+
+const { TextP, Grid } = style
 
 const HeaderWrapper = styled.header`
   ${({ theme }) => theme.common.flexBetween}

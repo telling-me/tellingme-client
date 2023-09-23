@@ -34,9 +34,9 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   return (
     <SettingMenuWrapper>
       {/* <PushAlarmWrapper>
-        <style.TextP typo="b1" textColor="gray8">
+        <TextP typo="b1" textColor="gray8">
           푸시 알림 받기
-        </style.TextP>
+        </TextP>
 
         <ToolTip
           tooltipText="알림이 오지 않는다면 크롬 사이트|설정에서 알림을 허용해주세요"
@@ -90,13 +90,19 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   )
 }
 
+// const { TextP } = style
+
 const SettingMenuWrapper = styled.div`
-  ${({ theme }) => theme.common.flexCenter}
+  ${({ theme }) => theme.common.flexStart}
   flex-direction: column;
 
   width: 100%;
-  height: calc(100vh - 64px);
   height: calc(var(--vh, 1vh) * 100 - 64px);
+
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 
   @media all and (min-width: 768px) {
     max-width: 425px;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
 // animation
@@ -6,19 +6,25 @@ import { motion } from 'framer-motion'
 
 // components
 import styled from 'styled-components'
-import { Header, QuestionWriteModal, TabBar, AnswerModal } from 'components'
+import { Header, QuestionWriteModal, TabBar, AnswerModal, NoticeAnswerModal } from 'components'
+import NoticeModal from 'components/widget/main/NoticeModal'
+import OnlyMobileModal from 'components/widget/OnlyMobileModal'
 
 // hooks
 import useWindowSize from 'hooks/useWindowSize'
+import useSaveToken from 'hooks/useSaveToken'
 
 // stores
 import useCommonStore from 'stores/useCommonStore'
+
+// utils
+import { setCookie } from 'utils/cookies'
 
 const CommonLayout = () => {
   const params = new URLSearchParams(window.location.search)
 
   const windowSize = useWindowSize()
-  const { prevPage, currPage } = useCommonStore()
+  const { prevPage, currPage, mobileOnlyModal, setMobileOnlyModal } = useCommonStore()
 
   const PAGE_URL = window.location.href
 
@@ -40,6 +46,39 @@ const CommonLayout = () => {
     }
   }
 
+  // ReactNative로 접속하면 cookie에 device(rn) 저장
+  const setReactNative = (message: any) => {
+    const data = JSON.parse(message.data)
+
+    if (data?.device !== undefined && data?.device !== null) {
+      setCookie('device', data.device, { path: '/' })
+    }
+  }
+
+  // RN에서 state로 전달받은 accessToken, refreshToken 저장
+  const setAccessToken = (message: any) => {
+    const data = JSON.parse(message.data)
+
+    if (data?.accessToken !== undefined && data?.accessToken !== null) {
+      // token 저장 후 다시 query 실행
+      useSaveToken({
+        accessToken: JSON.parse(message.data).accessToken,
+        refreshToken: JSON.parse(message.data).refreshToken
+      })
+    }
+  }
+
+  // RN에서 state를 받는 event listener
+  useLayoutEffect(() => {
+    document.addEventListener('message', setReactNative)
+    document.addEventListener('message', setAccessToken)
+
+    return () => {
+      document.removeEventListener('message', setReactNative)
+      document.removeEventListener('message', setAccessToken)
+    }
+  }, [])
+
   return (
     <>
       <ParentWrapper>
@@ -53,6 +92,15 @@ const CommonLayout = () => {
       </ParentWrapper>
       {params.get('date') != null && <QuestionWriteModal />}
       {params.get('answerId') != null && <AnswerModal />}
+      {params.get('notice') != null && <NoticeModal />}
+      {params.get('noticeAnswer') != null && <NoticeAnswerModal />}
+      {Boolean(mobileOnlyModal) && (
+        <OnlyMobileModal
+          handleClose={() => {
+            setMobileOnlyModal(false)
+          }}
+        />
+      )}
     </>
   )
 }

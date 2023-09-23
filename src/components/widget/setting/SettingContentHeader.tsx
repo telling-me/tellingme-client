@@ -42,20 +42,22 @@ const SettingContentHeader = ({ pageNumber, setIsMenu, _disabled, _onClick }: IS
         </IconButton>
       )}
 
-      <style.TextP typo="h6_b" textColor="gray6" _margin="0px 0px 0px auto">
+      <TextP typo="h6_b" textColor="gray6" _margin="0px 0px 0px auto">
         {CONTENT_HEADERS[pageNumber]}
-      </style.TextP>
+      </TextP>
 
       {pageNumber === 0 && _disabled != null && _onClick != null && (
         <CompleteButton disabled={_disabled} onClick={_onClick}>
-          <style.TextSpan typo="b1_b" textColor={_disabled ? 'gray2' : 'logo'}>
+          <TextSpan typo="b1_b" textColor={_disabled ? 'gray2' : 'logo'}>
             완료
-          </style.TextSpan>
+          </TextSpan>
         </CompleteButton>
       )}
     </HeaderWrapper>
   )
 }
+
+const { TextP, TextSpan } = style
 
 const HeaderWrapper = styled.div`
   display: flex;

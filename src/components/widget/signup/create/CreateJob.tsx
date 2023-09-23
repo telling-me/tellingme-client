@@ -37,15 +37,15 @@ const CreateJob = ({ job, setJob, jobInfo, setJobInfo }: ICreateJob) => {
             }}
           >
             {i === 0 ? (
-              <Icons.Bagpack width="24" height="24" fill="url(#gradient)" />
+              <Icons.Bagpack width="24" height="24" />
             ) : i === 1 ? (
-              <Icons.GraduationCap width="24" height="24" stroke="url(#gradient)" />
+              <Icons.GraduationCap width="24" height="24" />
             ) : i === 2 ? (
-              <Icons.Smiley width="24" height="24" fill="url(#gradient)" />
+              <Icons.Smiley width="24" height="24" />
             ) : i === 3 ? (
-              <Icons.Briefcase width="24" height="24" fill="url(#gradient)" />
+              <Icons.Briefcase width="24" height="24" />
             ) : (
-              i === 4 && <Icons.Cookpot width="24" height="24" fill="url(#gradient)" />
+              i === 4 && <Icons.Cookpot width="24" height="24" />
             )}
           </RowButton>
         )
@@ -60,7 +60,7 @@ const CreateJob = ({ job, setJob, jobInfo, setJobInfo }: ICreateJob) => {
         _value={jobInfo}
         setValue={setJobInfo}
       >
-        <Icons.Heart width="24" height="24" stroke="url(#gradient)" />
+        <Icons.Etc width="24" height="24" />
       </InputButton>
     </ContentWrapper>
   )

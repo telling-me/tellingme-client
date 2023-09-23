@@ -36,32 +36,32 @@ const SettingProfile = () => {
 
   return (
     <ProfileSpace>
-      <ImageWrapper src={mypage.profileUrl} />
+      <ImageWrapper src={mypage.profileUrl} decoding="async" />
 
       <TextWrapper>
-        <style.TextP typo="h5" textColor="black">
+        <TextP typo="h5" textColor="black">
           {mypage.nickname} 님
-        </style.TextP>
+        </TextP>
 
         {windowWidth < 768 ? (
           <RecordWrapper>
-            <style.TextP typo="c_b" textColor="gray6">
+            <TextP typo="c_b" textColor="gray6">
               {mypage.answerRecord === 0 ? '오늘도' : '연속'}&nbsp;
-            </style.TextP>
-            <style.TextP typo="c_b" textColor="logo">
+            </TextP>
+            <TextP typo="c_b" textColor="logo">
               {mypage.answerRecord === 0 ? '진정한 나' : '1'}
-            </style.TextP>
-            <style.TextP typo="c_b" textColor="gray6">
+            </TextP>
+            <TextP typo="c_b" textColor="gray6">
               {mypage.answerRecord === 0 ? '를 만나봐요!' : '일째 답변 중!'}
-            </style.TextP>
+            </TextP>
           </RecordWrapper>
         ) : (
           mypage.isPremium && (
             <MembershipWrapper>
               <Icon.Premium width="16" height="16" />
-              <style.TextP typo="c" textColor="logo">
+              <TextP typo="c" textColor="logo">
                 Premium
-              </style.TextP>
+              </TextP>
             </MembershipWrapper>
           )
         )}
@@ -70,14 +70,16 @@ const SettingProfile = () => {
       {windowWidth < 768 && mypage.isPremium && (
         <MembershipWrapper>
           <Icon.Premium width="16" height="16" />
-          <style.TextP typo="c" textColor="logo">
+          <TextP typo="c" textColor="logo">
             Premium
-          </style.TextP>
+          </TextP>
         </MembershipWrapper>
       )}
     </ProfileSpace>
   )
 }
+
+const { TextP } = style
 
 const ProfileSpace = styled.div`
   display: flex;

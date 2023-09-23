@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 // components
-import { TableHeader, Table, NoneData, CardView, Loading } from 'components'
+import { MyAnswerTableHeader, MyAnswerTable, MyAnswerNoneData, CardView, Loading } from 'components'
 
 // hooks
 import { useGetMyAnswerListQuery } from 'hooks'
@@ -25,13 +25,13 @@ const MyAnswerPage = () => {
 
   return (
     <MyAnswerWrapper>
-      <TableHeader isSelected={isVertical} _onClick={handleChangeMode} />
+      <MyAnswerTableHeader isSelected={isVertical} _onClick={handleChangeMode} />
       {isLoading ? (
         <Loading />
       ) : myAnswer === null || myAnswer === undefined || myAnswer?.length === 0 ? (
-        <NoneData />
+        <MyAnswerNoneData />
       ) : isVertical ? (
-        <Table data={myAnswer} />
+        <MyAnswerTable data={myAnswer} />
       ) : (
         <CardView data={myAnswer} />
       )}

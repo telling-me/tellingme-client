@@ -22,14 +22,14 @@ const TwoButtonModal = ({
     <Modal _width="100%" _maxWidth="425px" _padding="30px 20px 20px" _borderRadius="20px">
       <ModalChildren>
         <ModalTexts>
-          <style.TextP typo="b1" textColor="black">
+          <TextP typo="b1" textColor="black">
             {mainText}
-          </style.TextP>
+          </TextP>
 
           {subText != null && (
-            <style.TextP typo="b2" textColor={subTextColor}>
+            <TextP typo="b2" textColor={subTextColor}>
               {subText}
-            </style.TextP>
+            </TextP>
           )}
         </ModalTexts>
 
@@ -59,6 +59,8 @@ const TwoButtonModal = ({
     </Modal>
   )
 }
+
+const { TextP } = style
 
 const ModalChildren = styled.div`
   ${({ theme }) => theme.common.flexCenter}

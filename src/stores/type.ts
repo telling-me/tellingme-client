@@ -10,6 +10,10 @@ export interface ICommonStore {
   setPrevPage: (value: number) => void
   currPage: number
   setCurrPage: (value: number) => void
+
+  // modal
+  mobileOnlyModal: boolean
+  setMobileOnlyModal: (value: boolean) => void
 }
 
 export interface IQuestionStore {
@@ -23,6 +27,12 @@ export interface IAnswerStore {
   setMyAnswerYear: (value: string) => void
   emotion: number | null
   setEmotion: (value: number) => void
+}
+
+export interface ILibraryStore {
+  myLibraryFilter: { month: string; year: string }
+  setMyLibraryMonth: (value: string) => void
+  setMyLibraryYear: (value: string) => void
 }
 
 export interface IQuestion {

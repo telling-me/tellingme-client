@@ -73,7 +73,7 @@ const AdminReportPage = () => {
   ) : Object.keys(nowCheck).length > 0 ? (
     <ReportListWrapper>
       <ReportListLeft>
-        <style.TextP typo="h6_b">신고 목록</style.TextP>
+        <TextP typo="h6_b">신고 목록</TextP>
 
         {reportList.map((v: any, i: number) => {
           return (
@@ -100,30 +100,30 @@ const AdminReportPage = () => {
 
       <ReportListRight>
         <ReportListContentWrapper>
-          <style.TextP typo="h6_b">닉네임</style.TextP>
-          <style.TextP typo="h6">{nowCheck.nickname}</style.TextP>
+          <TextP typo="h6_b">닉네임</TextP>
+          <TextP typo="h6">{nowCheck.nickname}</TextP>
 
           <Hr _maxWidth="100%" />
 
-          <style.TextP typo="h6_b">차단 일자</style.TextP>
-          <style.TextP typo="h6">{`${nowCheck.blindStartedAt[0] as string}년 ${
-            nowCheck.blindStartedAt[1] as string
-          }월 ${nowCheck.blindStartedAt[2] as string}일 ~ ${nowCheck.blindEndedAt[0] as string}년 ${
-            nowCheck.blindEndedAt[1] as string
-          }월 ${nowCheck.blindEndedAt[2] as string}일`}</style.TextP>
+          <TextP typo="h6_b">차단 일자</TextP>
+          <TextP typo="h6">{`${nowCheck.blindStartedAt[0] as string}년 ${nowCheck.blindStartedAt[1] as string}월 ${
+            nowCheck.blindStartedAt[2] as string
+          }일 ~ ${nowCheck.blindEndedAt[0] as string}년 ${nowCheck.blindEndedAt[1] as string}월 ${
+            nowCheck.blindEndedAt[2] as string
+          }일`}</TextP>
 
           <Hr _maxWidth="100%" />
 
-          <style.TextP typo="h6_b">질문</style.TextP>
-          <style.TextP typo="h6">
+          <TextP typo="h6_b">질문</TextP>
+          <TextP typo="h6">
             {nowCheck.question} ({nowCheck.date[0]}/{nowCheck.date[1]}/{nowCheck.date[2]})
-          </style.TextP>
+          </TextP>
 
           <Hr _maxWidth="100%" />
 
-          <style.TextP typo="h6_b">답변</style.TextP>
+          <TextP typo="h6_b">답변</TextP>
           <AnswerWrapper>
-            <style.TextP typo="h6">{nowCheck.content}</style.TextP>
+            <TextP typo="h6">{nowCheck.content}</TextP>
           </AnswerWrapper>
 
           <Button
@@ -151,6 +151,8 @@ const AdminReportPage = () => {
     <ReportListWrapper>신고 내역 없음</ReportListWrapper>
   )
 }
+
+const { TextP } = style
 
 const ReportListWrapper = styled.div`
   ${({ theme }) => theme.common.flexCenter}

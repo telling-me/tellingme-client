@@ -18,7 +18,8 @@ const SignUpBottomButton = ({
   canMove,
   handleCheckNickname,
   handleCheckBirthYear,
-  handleSignUp
+  handleSignUp,
+  setLoading
 }: ISignUpTitleAndBottomButton) => {
   const theme = useTheme()
 
@@ -40,6 +41,7 @@ const SignUpBottomButton = ({
           } else if (step === 2) {
             handleCheckBirthYear()
           } else if (step === 4) {
+            setLoading(true)
             handleSignUp()
           } else {
             handleNextStep()

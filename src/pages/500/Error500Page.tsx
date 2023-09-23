@@ -20,25 +20,25 @@ const Error500Page = () => {
     <ErrorWrapper>
       <Icons.OverhaulDuei width={windowWidth < 768 ? '120' : '190'} height={windowWidth < 768 ? '120' : '190'} />
 
-      <style.TextP typo="h2_b" textColor="logo">
+      <TextP typo="h2_b" textColor="logo">
         500
-      </style.TextP>
+      </TextP>
 
-      <style.TextH2 typo="h6_b" textColor="gray8" _margin="20px 0 0 0">
+      <TextH2 typo="h6_b" textColor="gray8" _margin="20px 0 0 0">
         예상하지 못한 오류가 발생했어요!
-      </style.TextH2>
+      </TextH2>
 
-      <style.TextP typo="b2" textColor="gray8" _margin="12px 0 0 0">
+      <TextP typo="b2" textColor="gray8" _margin="12px 0 0 0">
         현재 이 서비스가 정상적으로
-      </style.TextP>
+      </TextP>
 
       <ErrorInfo>
-        <style.TextP typo="b2" textColor="gray8">
+        <TextP typo="b2" textColor="gray8">
           작동할 수 있도록 열심히 노력중이에요.
-        </style.TextP>
-        <style.TextP typo="b2" textColor="gray8">
+        </TextP>
+        <TextP typo="b2" textColor="gray8">
           잠시 후 다시 방문해주세요.
-        </style.TextP>
+        </TextP>
       </ErrorInfo>
 
       <Button
@@ -55,6 +55,8 @@ const Error500Page = () => {
     </ErrorWrapper>
   )
 }
+
+const { TextP, TextH2 } = style
 
 const ErrorWrapper = styled.div`
   ${({ theme }) => theme.common.flexCenter}

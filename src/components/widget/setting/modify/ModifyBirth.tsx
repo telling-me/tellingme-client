@@ -24,12 +24,12 @@ const ModifyBirth = ({
 }: IModifyBirth) => {
   return (
     <>
-      <style.TextP typo="h6" textColor="black" _margin="0px 0px 0px 10px">
+      <TextP typo="h6" textColor="black" _margin="0px 0px 0px 10px">
         출생 연도
-      </style.TextP>
-      <style.TextP typo="c" textColor="gray7" _margin="4px 0px 16px 10px">
+      </TextP>
+      <TextP typo="c" textColor="gray7" _margin="4px 0px 16px 10px">
         설정 후 변경 불가능
-      </style.TextP>
+      </TextP>
 
       <SelectInnerWrapper>
         <Input
@@ -46,5 +46,7 @@ const ModifyBirth = ({
     </>
   )
 }
+
+const { TextP } = style
 
 export default ModifyBirth

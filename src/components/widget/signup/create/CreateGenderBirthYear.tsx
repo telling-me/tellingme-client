@@ -47,9 +47,9 @@ const CreateGenderBirthYear = ({
         _margin="0 0 70px 0"
       />
 
-      <style.TextP typo="h4" textColor="black" _margin="0 0 52px 0">
+      <TextP typo="h4" textColor="black" _margin="0 0 52px 0">
         성별을 알려주세요
-      </style.TextP>
+      </TextP>
 
       <ContentWrapper type="gender">
         {genderData.map((v: string, i: number) => {
@@ -74,5 +74,7 @@ const CreateGenderBirthYear = ({
     </>
   )
 }
+
+const { TextP } = style
 
 export default CreateGenderBirthYear

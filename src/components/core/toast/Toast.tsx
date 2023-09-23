@@ -13,11 +13,13 @@ const Toast = ({ icon, text, _backgroundColor = 'error100', _color = 'error400' 
     <ToastComponent _backgroundColor={useChangeColor(_backgroundColor)}>
       {icon}
 
-      <style.TextP typo="c_b" textColor={_color}>
+      <TextP typo="c_b" textColor={_color}>
         {text}
-      </style.TextP>
+      </TextP>
     </ToastComponent>
   )
 }
+
+const { TextP } = style
 
 export default Toast

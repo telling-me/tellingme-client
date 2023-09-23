@@ -19,17 +19,17 @@ const WorkingLayout = () => {
     <WorkingLayoutWrapper>
       <Icons.Logo width="137" height="57" fill={useChangeColor('logo')} />
 
-      <style.TextP typo="h6_b" textColor="gray7" _margin="16px 0">
+      <TextP typo="h6_b" textColor="gray7" _margin="16px 0">
         아직 서비스 출시 준비중이에요
-      </style.TextP>
+      </TextP>
 
-      <style.TextP typo="b1" textColor="gray8" _margin="0 0 4px 0">
+      <TextP typo="b1" textColor="gray8" _margin="0 0 4px 0">
         텔링미 소식을 구독하시면
-      </style.TextP>
+      </TextP>
 
-      <style.TextP typo="b1" textColor="gray8">
+      <TextP typo="b1" textColor="gray8">
         가장 먼저 출시 알림을 받아보실 수 있어요!
-      </style.TextP>
+      </TextP>
 
       <ButtonWrapper>
         <Button
@@ -56,6 +56,8 @@ const WorkingLayout = () => {
     </WorkingLayoutWrapper>
   )
 }
+
+const { TextP } = style
 
 const WorkingLayoutWrapper = styled.div`
   ${({ theme }) => theme.common.flexCenter}
