@@ -33,6 +33,8 @@ export interface ILibraryStore {
   myLibraryFilter: { month: string; year: string }
   setMyLibraryMonth: (value: string) => void
   setMyLibraryYear: (value: string) => void
+  helpModalOn: boolean
+  setHelpModalOn: (value: boolean) => void
 }
 
 export interface IQuestion {

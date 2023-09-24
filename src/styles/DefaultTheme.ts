@@ -10,6 +10,8 @@ import side from './colors/side'
 import primary from './colors/primary'
 import secondary from './colors/secondary'
 import gray from './colors/gray'
+import emotion from './colors/emotion'
+import sub from './colors/sub'
 
 const Theme: DefaultTheme = {
   colors: {
@@ -18,7 +20,9 @@ const Theme: DefaultTheme = {
     secondary,
     side,
     logo: '#07BEB8',
-    error
+    sub,
+    error,
+    emotion
   },
   typo,
   font,
