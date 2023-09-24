@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 // store
 import useCommonStore from 'stores/useCommonStore'
@@ -14,6 +14,8 @@ import Icons from 'assets/icons'
 
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
+import useLibraryStore from 'stores/useLibraryStore'
+import { getCookie } from 'utils/cookies'
 
 const TAB_DATA = [
   {
@@ -48,9 +50,11 @@ const TAB_DATA = [
 
 const TabBar = () => {
   const location = useLocation()
+  const navigate = useNavigate()
 
   // store
   const { setPrevPage, setCurrPage, setMobileOnlyModal } = useCommonStore()
+  const { helpModalOn } = useLibraryStore()
 
   useEffect(() => {
     const prevPage = TAB_DATA?.find((tab) => location.pathname.includes(`${tab.name}`))
@@ -58,9 +62,11 @@ const TabBar = () => {
   }, [location])
 
   // 질문 작성 시 TabBar 노출 여부
+  // 나의 서재 - help 클릭 시 노출 여부
   if (
     (location.pathname.includes('app') && new URLSearchParams(window.location.search).get('date') != null) ||
-    location.pathname.includes('setting')
+    location.pathname.includes('setting') ||
+    helpModalOn
   )
     return null
 
@@ -75,7 +81,8 @@ const TabBar = () => {
                 key={idx}
                 color={location.pathname.includes(`${tab.name}`) ? 'logo' : 'noFilled'}
                 onClick={() => {
-                  setMobileOnlyModal(true)
+                  if (getCookie('device') !== 'android') navigate(`${tab.link}`)
+                  else setMobileOnlyModal(true)
                 }}
               />
             )
@@ -104,7 +111,8 @@ const TabBar = () => {
                       _width="41px"
                       _height="41px"
                       _onClick={() => {
-                        setMobileOnlyModal(true)
+                        if (getCookie('device') !== 'android') navigate(`${tab.link}`)
+                        else setMobileOnlyModal(true)
                       }}
                     >
                       <tab.icon
@@ -187,7 +195,6 @@ const TabWrapperLi = styled.li`
   @media screen and (max-width: 1023px) {
     flex-direction: row;
     height: 77px;
-    gap: 70px;
     padding: 0 32px;
   }
 

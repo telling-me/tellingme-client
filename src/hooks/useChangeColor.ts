@@ -12,6 +12,10 @@ const useChangeColor = (beforeColor: string) => {
     ? Theme.colors.error[beforeColor]
     : Object.keys(Theme.colors.side).includes(beforeColor)
     ? Theme.colors.side[beforeColor as keyof typeof Theme.colors.side]
+    : Object.keys(Theme.colors.emotion).includes(beforeColor)
+    ? Theme.colors.emotion[beforeColor]
+    : Object.keys(Theme.colors.sub).includes(beforeColor)
+    ? Theme.colors.sub[beforeColor]
     : beforeColor === 'logo' && Theme.colors.logo
 
   return afterColor

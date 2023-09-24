@@ -10,16 +10,24 @@ import Icons from 'assets/icons'
 
 // hooks
 import useChangeColor from 'hooks/useChangeColor'
+import { useGetNoticeSummaryQuery } from 'hooks/queries'
 
 // styles
 import style from 'styles/styled-components/styled'
+
+// utils
 import { getCookie } from 'utils/cookies'
-import { useGetNoticeSummaryQuery } from 'hooks/queries'
+
+// store
+import useLibraryStore from 'stores/useLibraryStore'
 
 const Header = () => {
   const theme = useTheme()
   const location = useLocation()
   const navigate = useNavigate()
+
+  // store
+  const { setHelpModalOn } = useLibraryStore()
 
   const { data: { data: noticeSummary = null } = {} } = useGetNoticeSummaryQuery()
 
@@ -81,10 +89,21 @@ const Header = () => {
         </HeaderWrapper>
       ) : (
         PAGE_URL.includes('mylibrary') && (
-          <HeaderWrapper style={{ justifyContent: 'center', padding: '26.5px 0 20.5px 0' }}>
+          <HeaderWrapper>
+            <Grid _width="32px" />
             <TextP typo="h6_b" textColor="gray6">
               나의 서재
             </TextP>
+            <IconButton
+              buttonType="noFilled"
+              _width="32px"
+              _height="32px"
+              _onClick={() => {
+                setHelpModalOn(true)
+              }}
+            >
+              <Icons.Question width="24" height="24" stroke={useChangeColor('gray6')} />
+            </IconButton>
           </HeaderWrapper>
         )
       )}
