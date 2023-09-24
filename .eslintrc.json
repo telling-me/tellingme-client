@@ -16,6 +16,6 @@
     "@typescript-eslint/space-before-function-paren": "off",
     "@typescript-eslint/triple-slash-reference": "off",
     "@typescript-eslint/restrict-template-expressions": "error",
-    "@typescript-eslint/strict-boolean-expressions": false
+    "@typescript-eslint/strict-boolean-expressions": "off"
   }
 }
