@@ -9,6 +9,8 @@ import { type IPrimary } from './primary'
 import { type ISecondary } from './secondary'
 import { type IError } from './error'
 import { type ISide } from './colors/side'
+import { type IEmotion } from './emotion'
+import { type ISub } from './sub'
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -18,7 +20,9 @@ declare module 'styled-components' {
       secondary: ISecondary
       side: ISide
       logo: string
+      sub: ISub
       error: IError
+      emotion: IEmotion
     }
     typo: ITypo
     font: IFont
