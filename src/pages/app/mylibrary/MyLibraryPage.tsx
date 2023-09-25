@@ -38,7 +38,10 @@ const MyLibraryPage = () => {
 
   useEffect(() => {
     if (myAnswer !== null || myAnswer !== undefined || myAnswer?.length !== 0) {
-      const answerDay = day
+      const answerDay = new Array(31).fill(null).map(() => ({
+        exist: false,
+        data: { emotion: 0, title: '', phrase: '', date: [0, 0, 0], content: '' }
+      }))
       myAnswer?.forEach((answer: IData, idx: number) => {
         console.log(answer?.date[2] - 1)
         answerDay[answer?.date[2] - 1].exist = true
