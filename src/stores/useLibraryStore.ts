@@ -16,6 +16,12 @@ const useLibraryStore = create<ILibraryStore>()(
         set((state) => {
           state.myLibraryFilter.year = value
         })
+      },
+      helpModalOn: false,
+      setHelpModalOn: (value) => {
+        set((state) => {
+          state.helpModalOn = value
+        })
       }
     }))
   )

@@ -96,10 +96,15 @@ import { ReactComponent as Entrance } from './Entrance.svg'
 import { ReactComponent as MyInfo } from './MyInfo.svg'
 import { ReactComponent as Premium } from './Premium.svg'
 import { ReactComponent as QnA } from './QnA.svg'
+import { ReactComponent as Question } from './Question.svg'
 import { ReactComponent as TellingmeBook } from './TellingmeBook.svg'
 import { ReactComponent as MyLibrary } from './MyLibrary.svg'
 import { ReactComponent as MyLibraryColor } from './MyLibraryColor.svg'
 import { ReactComponent as Etc } from './Etc.svg'
+
+// Library
+import { ReactComponent as LibraryProp1 } from './LibraryProp1.svg'
+import { ReactComponent as LibraryProp2 } from './LibraryProp2.svg'
 
 interface IIconIndex extends IStringKey {
   NotFound: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -198,10 +203,15 @@ interface IIconIndex extends IStringKey {
   MyInfo: string | FunctionComponent<any> | ComponentClass<any, any>
   Premium: string | FunctionComponent<any> | ComponentClass<any, any>
   QnA: string | FunctionComponent<any> | ComponentClass<any, any>
+  Question: string | FunctionComponent<any> | ComponentClass<any, any>
   TellingmeBook: string | FunctionComponent<any> | ComponentClass<any, any>
   MyLibrary: string | FunctionComponent<any> | ComponentClass<any, any>
   MyLibraryColor: string | FunctionComponent<any> | ComponentClass<any, any>
   Etc: string | FunctionComponent<any> | ComponentClass<any, any>
+
+  // Library
+  LibraryProp1: string | FunctionComponent<any> | ComponentClass<any, any>
+  LibraryProp2: string | FunctionComponent<any> | ComponentClass<any, any>
 }
 
 const Icon: IIconIndex = {
@@ -301,10 +311,13 @@ const Icon: IIconIndex = {
   MyInfo,
   Premium,
   QnA,
+  Question,
   TellingmeBook,
   MyLibrary,
   MyLibraryColor,
-  Etc
+  Etc,
+  LibraryProp1,
+  LibraryProp2
 }
 
 export default Icon
