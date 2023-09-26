@@ -1,5 +1,4 @@
 import React from 'react'
-import type { Dispatch, SetStateAction } from 'react'
 
 // component
 import styled from 'styled-components'
@@ -10,15 +9,22 @@ import SettingContentHeader from './SettingContentHeader'
 
 interface ISettingContent {
   pageNumber: number
-  setIsMenu?: Dispatch<SetStateAction<boolean>>
+  setPageNumber: React.Dispatch<React.SetStateAction<number>>
+  setIsMenu?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SettingContent = ({ pageNumber, setIsMenu }: ISettingContent) => {
+const SettingContent = ({ pageNumber, setPageNumber, setIsMenu }: ISettingContent) => {
   return (
     <SettingContentWrapper>
-      {pageNumber !== 0 && <SettingContentHeader pageNumber={pageNumber} setIsMenu={setIsMenu} />}
+      {pageNumber !== 0 && (
+        <SettingContentHeader pageNumber={pageNumber} setPageNumber={setPageNumber} setIsMenu={setIsMenu} />
+      )}
 
-      {pageNumber === 0 ? <ModifyMyInfo setIsMenu={setIsMenu} /> : pageNumber === 4 && <Withdrawal />}
+      {pageNumber === 0 ? (
+        <ModifyMyInfo setPageNumber={setPageNumber} setIsMenu={setIsMenu} />
+      ) : (
+        pageNumber === 4 && <Withdrawal />
+      )}
     </SettingContentWrapper>
   )
 }

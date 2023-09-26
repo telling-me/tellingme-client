@@ -40,7 +40,7 @@ const SettingProfile = () => {
 
       <TextWrapper>
         <TextP typo="h5" textColor="black">
-          {mypage.nickname} 님
+          {mypage.nickname}
         </TextP>
 
         {windowWidth < 768 ? (
@@ -60,7 +60,7 @@ const SettingProfile = () => {
             <MembershipWrapper>
               <Icon.Premium width="16" height="16" />
               <TextP typo="c" textColor="logo">
-                Premium
+                PLUS
               </TextP>
             </MembershipWrapper>
           )
@@ -71,7 +71,7 @@ const SettingProfile = () => {
         <MembershipWrapper>
           <Icon.Premium width="16" height="16" />
           <TextP typo="c" textColor="logo">
-            Premium
+            PLUS
           </TextP>
         </MembershipWrapper>
       )}

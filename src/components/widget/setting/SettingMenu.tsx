@@ -16,8 +16,7 @@ import { useLogoutMutation } from 'hooks'
 import SettingProfile from './SettingProfile'
 
 const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
-  // 0, 3
-  const MENU_LIST_ITEMS_TEXTS = ['이용 약관', '개인정보 처리방침', '회원 탈퇴', '로그아웃']
+  const MENU_LIST_ITEMS_TEXTS = ['이용 약관', '개인정보 처리방침', '듀이의 질문 연구소', '로그아웃']
   const MENU_LIST_ITEMS_ICON = [true, true, true, false]
 
   // const [userNoti, setUserNoti] = useState(false)
@@ -72,12 +71,17 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
               } else if (i === 1) {
                 window.open('https://doana.notion.site/7cdab221ee6d436781f930442040d556?pvs=4')
               } else if (i === 2) {
-                setPageNumber(4)
+                window.open('https://tally.so/r/3Nlvlp')
+              }
 
-                if (setIsMenu != null) {
-                  setIsMenu(false)
-                }
-              } else if (i === 3) {
+              // else if (i === 3) {
+              //   setPageNumber(4)
+
+              //   if (setIsMenu != null) {
+              //     setIsMenu(false)
+              //   }
+              // }
+              else if (i === 3) {
                 logout()
               }
             }}

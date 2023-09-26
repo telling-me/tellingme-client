@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import type { Dispatch, SetStateAction } from 'react'
+import styled from 'styled-components'
 
 // component
-import styled from 'styled-components'
 import { Hr, TwoButtonModal } from 'components'
+
+// styles
+import style from 'styles/styled-components/styled'
 
 import ModifyNickname from './modify/ModifyNickname'
 import ModifyPurpose from './modify/ModifyPurpose'
@@ -17,10 +19,11 @@ import SettingContentHeader from './SettingContentHeader'
 import { useCheckNicknameMutation, usePatchUserInfoMutation, useGetUserInfoQuery } from 'hooks'
 
 interface IModifyMyInfo {
-  setIsMenu?: Dispatch<SetStateAction<boolean>>
+  setPageNumber: React.Dispatch<React.SetStateAction<number>>
+  setIsMenu?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
+const ModifyMyInfo = ({ setPageNumber, setIsMenu }: IModifyMyInfo) => {
   const [nickname, setNickname] = useState('')
   const [originalNn, setOriginalNn] = useState('')
   const [purpose, setPurpose] = useState<string[]>([])
@@ -111,6 +114,7 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
     <ModifyMyInfoWrapper>
       <SettingContentHeader
         pageNumber={0}
+        setPageNumber={setPageNumber}
         setIsMenu={setIsMenu}
         _disabled={_disabled}
         _onClick={() => {
@@ -160,6 +164,17 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
 
         {/* mbti */}
         <ModifyMbti mbti={mbti} setMbti={setMbti} />
+
+        <TextP
+          typo="c"
+          textColor="gray5"
+          onClick={() => {
+            setPageNumber(4)
+          }}
+          style={{ marginTop: '20px', textDecoration: 'underline', cursor: 'pointer' }}
+        >
+          탈퇴하기
+        </TextP>
       </ModifyMyInfoContent>
 
       {open && (
@@ -176,6 +191,8 @@ const ModifyMyInfo = ({ setIsMenu }: IModifyMyInfo) => {
     </ModifyMyInfoWrapper>
   )
 }
+
+const { TextP } = style
 
 const ModifyMyInfoWrapper = styled.div`
   display: flex;
