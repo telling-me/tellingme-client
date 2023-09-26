@@ -22,7 +22,7 @@ const SettingPage = () => {
       {windowWidth > 767 ? (
         <SettingMain>
           <SettingMenu setPageNumber={setPageNumber} />
-          <SettingContent pageNumber={pageNumber} />
+          <SettingContent pageNumber={pageNumber} setPageNumber={setPageNumber} />
         </SettingMain>
       ) : isMenu ? (
         <SettingMain isMenu={isMenu}>
@@ -31,7 +31,7 @@ const SettingPage = () => {
       ) : (
         !isMenu && (
           <SettingMain>
-            <SettingContent pageNumber={pageNumber} setIsMenu={setIsMenu} />
+            <SettingContent pageNumber={pageNumber} setPageNumber={setPageNumber} setIsMenu={setIsMenu} />
           </SettingMain>
         )
       )}
