@@ -14,10 +14,14 @@ import { SettingQuickMenus, SettingMenuList, ServiceInfo } from 'components'
 // import { useLogoutMutation, usePostUserNotiQuery, useGetUserNotiQuery } from 'hooks'
 import { useLogoutMutation } from 'hooks'
 import SettingProfile from './SettingProfile'
+import { getCookie } from 'utils/cookies'
+import { useNavigate } from 'react-router-dom'
 
 const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   const MENU_LIST_ITEMS_TEXTS = ['이용 약관', '개인정보 처리방침', '듀이의 질문 연구소', '로그아웃']
   const MENU_LIST_ITEMS_ICON = [true, true, true, false]
+
+  const navigate = useNavigate()
 
   // const [userNoti, setUserNoti] = useState(false)
   // const resNoti = useGetUserNotiQuery().data
@@ -82,7 +86,8 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
               //   }
               // }
               else if (i === 3) {
-                logout()
+                if (!getCookie('accessToken')) navigate('/')
+                else logout()
               }
             }}
           />
