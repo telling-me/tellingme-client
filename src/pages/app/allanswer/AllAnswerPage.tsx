@@ -101,7 +101,6 @@ const AllAnswerWrapper = styled.div`
   flex-direction: column;
 
   width: 100%;
-  /* height: 100vh; */
   height: calc(var(--vh, 1vh) * 100);
 
   overflow: auto;
@@ -109,16 +108,15 @@ const AllAnswerWrapper = styled.div`
     width: 0;
   }
 
-  @media all and (min-width: 1200px) {
-    max-width: 1220px;
-    padding: 64px 140px 0 20px;
+  @media all and (min-width: 1220px) {
+    width: 1220px;
   }
 
-  @media all and (min-width: 1023px) and (max-width: 1999px) {
+  @media all and (min-width: 1024px) {
     padding: 64px 180px 12px 60px;
   }
 
-  @media all and (min-width: 768px) and (max-width: 1024px) {
+  @media all and (min-width: 768px) and (max-width: 1023px) {
     padding: 64px 60px 12px;
   }
 
@@ -128,11 +126,35 @@ const AllAnswerWrapper = styled.div`
 `
 
 const AllAnswerHeader = styled.div`
+  position: fixed;
+  top: 0;
+
   ${({ theme }) => theme.common.flexStart}
   align-items: flex-start;
   flex-direction: column;
 
   width: 100%;
+  padding: 62px 0 28px 0;
+
+  background-color: ${({ theme }) => theme.colors.side.side100};
+
+  @media all and (min-width: 1220px) {
+    width: 1220px;
+    padding: 62px 180px 28px 120px;
+  }
+
+  @media all and (min-width: 1024px) and (max-width: 1219px) {
+    left: 60px;
+    right: 180px;
+  }
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    left: 60px;
+  }
+
+  @media all and (max-width: 767px) {
+    left: 25px;
+  }
 `
 
 const TextPWrapper = styled.div`
@@ -148,7 +170,7 @@ const AllAnswerQuestions = styled.div`
   gap: 16px;
 
   width: 100%;
-  margin-top: 28px;
+  margin-top: 124px;
 `
 
 const AllAnswerQuestion = styled.div`
