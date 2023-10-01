@@ -14,18 +14,12 @@ import { type INotice } from './type'
 // utils
 import { formatStringDate } from '../../../utils/date'
 
-// store
-import useCommonStore from 'stores/useCommonStore'
-
 // TODO: refetch 를 받아서 쓰지말고 queryClient를 통해 refetch를 하자
 const NoticeItem = ({ notice, refetch }: { notice: INotice; refetch: () => void }) => {
   const navigate = useNavigate()
 
   const { mutate: mutateRead } = usePostNoticeReadMutation()
   const { mutate: deleteNotice } = useDeleteNoticeMutation()
-
-  // store
-  const { setMobileOnlyModal } = useCommonStore()
 
   // ref
   const ref = useRef<HTMLDivElement>(null)
@@ -50,7 +44,7 @@ const NoticeItem = ({ notice, refetch }: { notice: INotice; refetch: () => void 
         )
         if (notice?.isInternal) {
           // 내부 서비스
-          if (notice?.answerId !== null) {
+          if (notice?.answerId !== null && notice?.answerId !== -1) {
             // 내부 - 질문 모달창
             // RN에 answerId전달
             window?.ReactNativeWebView?.postMessage(
@@ -64,7 +58,7 @@ const NoticeItem = ({ notice, refetch }: { notice: INotice; refetch: () => void 
             })
           } else {
             // 내부 - 나의 서재
-            setMobileOnlyModal(true)
+            navigate('/app/mylibrary')
           }
         } else {
           // 외부 서비스

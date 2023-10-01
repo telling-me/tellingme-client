@@ -13,7 +13,7 @@ import Icons from 'assets/icons'
 
 const MyLibraryWeek = ({ data, week }: { data: ILibraryData[]; week: number }) => {
   return (
-    <LibraryWeekWrapper flex="center" _gap="24px">
+    <LibraryWeekWrapper flex="start" _gap="24px">
       <Grid _width="max-content" flex="start" direction="column" _gap="2px">
         <TextP typo="c_b" textColor="side500">
           week

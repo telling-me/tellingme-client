@@ -35,7 +35,7 @@ const ListFooter = () => {
         </MoveButton>
       )}
 
-      {questionIdx !== 2 && (
+      {questionIdx !== 4 && (
         <MoveButton _margin="0 0 0 auto" onClick={handleNext}>
           <TextP typo="c_b" textColor="gray8">
             다음 질문
