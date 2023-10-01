@@ -16,8 +16,52 @@ import { useLogoutMutation } from 'hooks'
 import SettingProfile from './SettingProfile'
 
 const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
-  const MENU_LIST_ITEMS_TEXTS = ['이용 약관', '개인정보 처리방침', '듀이의 질문 연구소', '로그아웃']
-  const MENU_LIST_ITEMS_ICON = [true, true, true, false]
+  const SPACE = '%0D%0A'
+  const INQUIRYT_DATA = {
+    email: 'tellingmetime.gmail.com',
+    subject: '[텔링미 고객센터] 전달사항이 있어요!',
+    body: `안녕하세요, 텔링미입니다.${SPACE}어떤 내용을 텔링미에게 전달하고 싶으신가요? 자유롭게 작성해주시면 확인 후 답변 드리겠습니다. 감사합니다. 😀${SPACE} 📱 쓰고 있는 기종 (예: 갤럭시 S8, 웹): ${SPACE}${SPACE} 🧗🏻‍♀️ 닉네임: ${SPACE}${SPACE} ⚠️ 오류를 발견하셨을 경우 ⚠️${SPACE} 발견한 오류 : ${SPACE}${SPACE} 📷 오류 화면 (캡쳐 혹은 화면녹화): `
+  }
+
+  const EMAIL_DATA = `mailto:${INQUIRYT_DATA.email}?subject=${INQUIRYT_DATA.subject}&body=${INQUIRYT_DATA.body}`
+
+  const MENU_LIST = [
+    {
+      text: '이용 약관',
+      icon: true,
+      _onClick: () => {
+        window.open('https://doana.notion.site/f42ec05972a545ce95231f8144705eae?pvs=4')
+      }
+    },
+    {
+      text: '개인정보 처리방침',
+      icon: true,
+      _onClick: () => {
+        window.open('https://doana.notion.site/7cdab221ee6d436781f930442040d556?pvs=4')
+      }
+    },
+    {
+      text: '고객 센터',
+      icon: true,
+      _onClick: () => {
+        window.open('')
+      }
+    },
+    {
+      text: '듀이의 질문 연구소',
+      icon: true,
+      _onClick: () => {
+        window.open('https://tally.so/r/3Nlvlp')
+      }
+    },
+    {
+      text: '로그아웃',
+      icon: false,
+      _onClick: () => {
+        logout()
+      }
+    }
+  ]
 
   // const [userNoti, setUserNoti] = useState(false)
   // const resNoti = useGetUserNotiQuery().data
@@ -59,35 +103,11 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
 
       <SettingQuickMenus setPageNumber={setPageNumber} setIsMenu={setIsMenu} />
 
-      {MENU_LIST_ITEMS_TEXTS.map((text, i) => {
-        return (
-          <SettingMenuList
-            key={i}
-            text={text}
-            icon={MENU_LIST_ITEMS_ICON[i]}
-            _onClick={() => {
-              if (i === 0) {
-                window.open('https://doana.notion.site/f42ec05972a545ce95231f8144705eae?pvs=4')
-              } else if (i === 1) {
-                window.open('https://doana.notion.site/7cdab221ee6d436781f930442040d556?pvs=4')
-              } else if (i === 2) {
-                window.open('https://tally.so/r/3Nlvlp')
-              }
-
-              // else if (i === 3) {
-              //   setPageNumber(4)
-
-              //   if (setIsMenu != null) {
-              //     setIsMenu(false)
-              //   }
-              // }
-              else if (i === 3) {
-                logout()
-              }
-            }}
-          />
-        )
+      {MENU_LIST.map((menu, i) => {
+        return <SettingMenuList key={i} text={menu.text} icon={menu.icon} _onClick={menu._onClick} />
       })}
+
+      <a href={EMAIL_DATA}>메일 보내기</a>
 
       <ServiceInfo />
     </SettingMenuWrapper>
