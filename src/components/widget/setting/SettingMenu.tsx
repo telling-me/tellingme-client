@@ -46,7 +46,7 @@ const SettingMenu = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
       }
     },
     {
-      text: '듀이의 질문 연구소',
+      text: '듀이의 질문 제작소',
       icon: true,
       _onClick: () => {
         window.open('https://tally.so/r/3Nlvlp')

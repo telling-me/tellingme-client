@@ -15,7 +15,9 @@ const MyLibraryInfo = ({ data }: { data: ILibraryInfoData }) => {
         <TextP typo="h5">월 한 달 동안</TextP>
       </Grid>
       <Grid flex="start">
-        <TextP typo="h5">총</TextP>
+        <TextP typo="h5" style={{ whiteSpace: 'pre-wrap' }}>
+          총&nbsp;
+        </TextP>
         <TextP typo="h5_b" textColor="logo">
           {data.answerLength}
         </TextP>
