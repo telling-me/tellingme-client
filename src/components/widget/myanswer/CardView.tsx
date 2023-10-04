@@ -14,7 +14,15 @@ import useWindowSize from 'hooks/useWindowSize'
 import Icons from 'assets/icons'
 
 const CardView = ({ data }: IMyAnswer) => {
-  const [pd, setPd] = useState<number>()
+  const [pd, setPd] = useState<number>(() => {
+    if (window.innerWidth >= 1200) {
+      return (window.innerWidth - 1200) / 2 + (600 - 170)
+    } else if (window.innerWidth >= 768) {
+      return (window.innerWidth - 422) / 2
+    } else {
+      return (window.innerWidth - 352) / 2 + 20
+    }
+  })
   const [isMove, setIsMove] = useState<boolean>(false)
   const [touchStart, setTouchStart] = useState<number>(0)
   const [dragStart, setDragStart] = useState<number>(0)
@@ -52,7 +60,7 @@ const CardView = ({ data }: IMyAnswer) => {
     } else {
       setPd((windowWidth - 352) / 2 + 20)
     }
-  }, [])
+  }, [windowWidth])
 
   return (
     <CardViewWrapper>
