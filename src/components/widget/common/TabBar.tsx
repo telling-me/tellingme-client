@@ -81,8 +81,10 @@ const TabBar = () => {
                 key={idx}
                 color={location.pathname.includes(`${tab.name}`) ? 'logo' : 'noFilled'}
                 onClick={() => {
-                  if (getCookie('device') === 'android') navigate(`${tab.link}`)
-                  else setMobileOnlyModal(true)
+                  if (getCookie('device') === 'android') {
+                    setCurrPage(tab.page_idx)
+                    navigate(`${tab.link}`)
+                  } else setMobileOnlyModal(true)
                 }}
               />
             )
@@ -111,8 +113,10 @@ const TabBar = () => {
                       _width="41px"
                       _height="41px"
                       _onClick={() => {
-                        if (getCookie('device') === 'android') navigate(`${tab.link}`)
-                        else setMobileOnlyModal(true)
+                        if (getCookie('device') === 'android') {
+                          setCurrPage(tab.page_idx)
+                          navigate(`${tab.link}`)
+                        } else setMobileOnlyModal(true)
                       }}
                     >
                       <tab.icon
