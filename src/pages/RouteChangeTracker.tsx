@@ -12,9 +12,9 @@ const RouteChangeTracker = () => {
   const location = useLocation()
   const [initialized, setInitialized] = useState(false)
 
-  // localhost는 기록하지 않음
+  // localhost & vercel 배포시에는 트래킹 하지 않음
   useEffect(() => {
-    if (!window.location.href.includes('localhost')) {
+    if (!window.location.href.includes('localhost') || !window.location.href.includes('vercel.app')) {
       ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRAKING_ID as string)
       setInitialized(true)
     }
@@ -28,12 +28,12 @@ const RouteChangeTracker = () => {
     }
   }, [initialized, location])
 
-  // 개발용
-  useEffect(() => {
-    ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRAKING_ID as string)
-    ReactGA.set({ page: location.pathname })
-    ReactGA.send('pageview')
-  }, [location])
+  // // 개발용
+  // useEffect(() => {
+  //   ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRAKING_ID as string)
+  //   ReactGA.set({ page: location.pathname })
+  //   ReactGA.send('pageview')
+  // }, [location])
 }
 
 export default RouteChangeTracker
