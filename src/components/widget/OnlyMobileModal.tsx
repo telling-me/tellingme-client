@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import Icon from 'assets/icons'
 import { getCookie } from 'utils/cookies'
 import useWindowSize from 'hooks/useWindowSize'
+import useCheckAgent from 'hooks/useCheckAgent'
 
 interface IOnlyMobileModal {
   handleClose: () => void
@@ -27,6 +28,7 @@ const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
   ]
 
   const windowWidth = useWindowSize().width
+  const userAgent = useCheckAgent()
 
   //  React Native로 접속한 경우 준비중 모달
   if (getCookie('device') === 'android')
@@ -97,7 +99,13 @@ const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
         _width="100%"
         _padding="18px 0"
         _onClick={() => {
-          window.open('https://apps.apple.com/kr/app/텔링미-나를-깨닫는-시간/id6448701604')
+          if (userAgent === 'Android') {
+            window.open('https://play.google.com/store/apps/details?id=com.tellingme_rn&hl=ko-KR')
+          } else if (userAgent === 'iOS') {
+            window.open('https://apps.apple.com/kr/app/텔링미-나를-깨닫는-시간/id6448701604')
+          } else if (userAgent === 'Web') {
+            window.open('https://play.google.com/store/apps/details?id=com.tellingme_rn&hl=ko-KR')
+          }
         }}
       />
       <Button
