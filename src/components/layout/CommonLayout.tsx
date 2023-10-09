@@ -19,12 +19,15 @@ import useCommonStore from 'stores/useCommonStore'
 
 // utils
 import { setCookie } from 'utils/cookies'
+import useInitModal from 'hooks/useInitModal'
 
 const CommonLayout = () => {
   const params = new URLSearchParams(window.location.search)
 
   const windowSize = useWindowSize()
   const { prevPage, currPage, mobileOnlyModal, setMobileOnlyModal } = useCommonStore()
+
+  useInitModal()
 
   const PAGE_URL = window.location.href
 

@@ -43,7 +43,6 @@ const MyLibraryPage = () => {
         data: { emotion: 0, title: '', phrase: '', date: [0, 0, 0], content: '' }
       }))
       myAnswer?.forEach((answer: IData, idx: number) => {
-        console.log(answer?.date[2] - 1)
         answerDay[answer?.date[2] - 1].exist = true
         answerDay[answer?.date[2] - 1].data = answer
       })
@@ -56,7 +55,9 @@ const MyLibraryPage = () => {
       <MyLibraryWrapper>
         <MyLibraryTableHeader />
         {isLoading ? (
-          <Loading />
+          <Grid flex="center">
+            <Loading />
+          </Grid>
         ) : myAnswer === null || myAnswer === undefined || myAnswer?.length === 0 ? (
           <Grid flex="start" direction="column">
             <MyLibraryInfo data={{ month: myLibraryFilter.month, answerLength: myAnswer.length }} />
