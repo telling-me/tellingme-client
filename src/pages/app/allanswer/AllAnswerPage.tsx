@@ -58,7 +58,7 @@ const AllAnswerPage = () => {
         </TextP>
         <TextPWrapper>
           <TextP typo="c" textColor="logo">
-            모두의 공간은 한 질문 당 3일동안 열려요
+            모두의 공간은 한 질문 당 5일동안 열려요
           </TextP>
         </TextPWrapper>
       </AllAnswerHeader>
