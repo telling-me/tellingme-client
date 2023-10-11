@@ -39,7 +39,7 @@ const SignUpCompletePage = () => {
             _padding="18px 32px"
             _onClick={() => {
               if (window?.ReactNativeWebView !== undefined)
-                window?.ReactNativeWebView?.postMessage(JSON.stringify('login'))
+                window?.ReactNativeWebView?.postMessage({ event: JSON.stringify('login') })
               else navigate('/')
             }}
           />
@@ -52,7 +52,7 @@ const SignUpCompletePage = () => {
             _padding="18px 32px"
             _onClick={() => {
               if (window?.ReactNativeWebView !== undefined) {
-                window?.ReactNativeWebView?.postMessage(JSON.stringify('signUpComplete'))
+                window?.ReactNativeWebView?.postMessage({ event: JSON.stringify('signUpComplete') })
               } else setOpen(true)
             }}
           />

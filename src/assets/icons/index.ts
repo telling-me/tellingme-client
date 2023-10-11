@@ -92,6 +92,7 @@ import { ReactComponent as ChatTearDrop } from './ChatTearDrop.svg'
 import { ReactComponent as CaretLeft } from './CaretLeft.svg'
 import { ReactComponent as SliderLeft } from './SliderLeft.svg'
 import { ReactComponent as SliderRight } from './SliderRight.svg'
+import { ReactComponent as Share } from './Share.svg'
 import { ReactComponent as Entrance } from './Entrance.svg'
 import { ReactComponent as MyInfo } from './MyInfo.svg'
 import { ReactComponent as Premium } from './Premium.svg'
@@ -199,6 +200,7 @@ interface IIconIndex extends IStringKey {
   CaretLeft: string | FunctionComponent<any> | ComponentClass<any, any>
   SliderLeft: string | FunctionComponent<any> | ComponentClass<any, any>
   SliderRight: string | FunctionComponent<any> | ComponentClass<any, any>
+  Share: string | FunctionComponent<any> | ComponentClass<any, any>
   Entrance: string | FunctionComponent<any> | ComponentClass<any, any>
   MyInfo: string | FunctionComponent<any> | ComponentClass<any, any>
   Premium: string | FunctionComponent<any> | ComponentClass<any, any>
@@ -307,6 +309,7 @@ const Icon: IIconIndex = {
   CaretLeft,
   SliderLeft,
   SliderRight,
+  Share,
   Entrance,
   MyInfo,
   Premium,

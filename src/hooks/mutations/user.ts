@@ -29,7 +29,7 @@ export const useDeleteUser = <T>(options?: T) => {
     {
       onSuccess: (res) => {
         useDeleteToken()
-        window?.ReactNativeWebView?.postMessage(JSON.stringify('withdraw'))
+        window?.ReactNativeWebView?.postMessage(JSON.stringify({ event: 'withdraw' }))
         window.location.href = '/'
       },
       onError: (err: IError) => {
@@ -45,7 +45,7 @@ export const useLogoutMutation = <T>(options?: T) => {
   return useMutation(async () => await apis.logout(), {
     onSuccess: (res) => {
       useDeleteToken()
-      window?.ReactNativeWebView?.postMessage(JSON.stringify('logout'))
+      window?.ReactNativeWebView?.postMessage(JSON.stringify({ event: 'logout' }))
       window.location.href = '/'
     },
     onError: (err: IError) => {
