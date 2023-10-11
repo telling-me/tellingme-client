@@ -46,12 +46,6 @@ const NoticeItem = ({ notice, refetch }: { notice: INotice; refetch: () => void 
           // 내부 서비스
           if (notice?.answerId !== null && notice?.answerId !== -1) {
             // 내부 - 질문 모달창
-            // RN에 answerId전달
-            window?.ReactNativeWebView?.postMessage(
-              JSON.stringify({
-                answerId: notice?.answerId
-              })
-            )
             const noticeAnswerDate = formatStringDate(new Date(notice?.date?.join('-')))
             navigate({
               search: `?notice=true&noticeAnswer=true&answerDate=${noticeAnswerDate}&noticeAnswerId=${notice?.answerId}`
