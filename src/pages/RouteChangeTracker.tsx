@@ -14,7 +14,7 @@ const RouteChangeTracker = () => {
 
   // http 접속 & vercel 배포시에는 트래킹 하지 않음
   useEffect(() => {
-    if (!window.location.href.includes('http') && !window.location.href.includes('vercel.app')) {
+    if (!(window.location.href.split(':')[0] === 'http') && !window.location.href.includes('vercel.app')) {
       ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRAKING_ID as string)
       setInitialized(true)
     }
