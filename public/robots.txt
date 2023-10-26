@@ -2,4 +2,5 @@
 User-agent: *
 Disallow: /app/
 Disallow: /newsletter/
+Disallow: /admin/
 Sitemap: https://tellingme.co.kr/sitemap.xml
