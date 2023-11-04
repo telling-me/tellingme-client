@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // components
-import { Button, Modal } from 'components'
+import { Button, Modal, RowButton } from 'components'
 
 // styles
 import style from 'styles/styled-components/styled'
@@ -16,6 +16,8 @@ interface IOnlyMobileModal {
 }
 
 const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
+  const [webModalOpen, setWebModalOpen] = useState<boolean>(false)
+
   const contents = [
     {
       icon: Icon.MyLibraryColor,
@@ -29,6 +31,14 @@ const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
 
   const windowWidth = useWindowSize().width
   const userAgent = useCheckAgent()
+
+  const openWebModal = () => {
+    setWebModalOpen(true)
+  }
+
+  const closeWebModal = () => {
+    setWebModalOpen(false)
+  }
 
   //  React Native로 접속한 경우 준비중 모달
   if (getCookie('device') === 'android')
@@ -104,7 +114,7 @@ const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
           } else if (userAgent === 'iOS') {
             window.open('https://apps.apple.com/kr/app/텔링미-나를-깨닫는-시간/id6448701604')
           } else if (userAgent === 'Web') {
-            window.open('https://play.google.com/store/apps/details?id=com.tellingme_rn&hl=ko-KR')
+            openWebModal()
           }
         }}
       />
@@ -119,6 +129,51 @@ const OnlyMobileModal = ({ handleClose }: IOnlyMobileModal) => {
           handleClose()
         }}
       />
+
+      {webModalOpen && (
+        <Modal _width="100%" _maxWidth="425px" _padding="30px 20px 20px" _borderRadius="20px">
+          <RowButton
+            text="바로 가기"
+            _active={false}
+            _justifyContent="center"
+            _gap="8px"
+            _width="100%"
+            _height="58px"
+            _onClick={() => {
+              window.open('https://apps.apple.com/kr/app/텔링미-나를-깨닫는-시간/id6448701604')
+            }}
+          >
+            <Icon.AppStore />
+          </RowButton>
+
+          <RowButton
+            text="바로 가기"
+            _active={false}
+            _justifyContent="center"
+            _gap="8px"
+            _width="100%"
+            _height="58px"
+            _margin="10px 0 20px"
+            _onClick={() => {
+              window.open('https://play.google.com/store/apps/details?id=com.tellingme_rn&hl=ko-KR')
+            }}
+          >
+            <Icon.PlayStore />
+          </RowButton>
+
+          <Button
+            buttonType="secondary"
+            text="닫기"
+            textSize="h6"
+            textColor="logo"
+            _width="100%"
+            _height="55px"
+            _onClick={() => {
+              closeWebModal()
+            }}
+          />
+        </Modal>
+      )}
     </Modal>
   )
 }

@@ -1,10 +1,10 @@
 import React from 'react'
+import styled, { css } from 'styled-components'
 
 // type
 import type { INotOnlyButton } from './type'
 
-// components
-import styled from 'styled-components'
+// styles
 import style from 'styles/styled-components/styled'
 
 /**
@@ -15,9 +15,27 @@ import style from 'styles/styled-components/styled'
  * @param {React.ReactNode} children - (필수) 버튼에 들어갈 아이콘
  */
 
-const RowButton = ({ text, _active, _onClick, children }: INotOnlyButton) => {
+const RowButton = ({
+  text,
+  _active,
+  _justifyContent = 'flex-start',
+  _gap,
+  _width,
+  _height = '55px',
+  _margin = '0px',
+  _onClick,
+  children
+}: INotOnlyButton) => {
   return (
-    <RowButtonComponent _active={_active} onClick={_onClick}>
+    <RowButtonComponent
+      _active={_active}
+      _justifyContent={_justifyContent}
+      _gap={_gap}
+      _width={_width}
+      _height={_height}
+      _margin={_margin}
+      onClick={_onClick}
+    >
       {children}
 
       <TextP typo="h6" textColor="gray7">
@@ -29,32 +47,40 @@ const RowButton = ({ text, _active, _onClick, children }: INotOnlyButton) => {
 
 const { TextP } = style
 
-const RowButtonComponent = styled.button<{ _active: boolean }>`
-  ${({ theme }) => theme.common.flexStart}
-
-  background-color: ${({ _active, theme }) => (_active ? theme.colors.side.side300 : theme.colors.side.side200)};
+const RowButtonComponent = styled.button<{
+  _active: boolean
+  _justifyContent: string
+  _gap?: string
+  _width?: string
+  _margin?: string
+  _height: string
+}>`
+  display: flex;
+  align-items: center;
   border-radius: 20px;
-
-  height: 55px;
   padding: 0 24px;
-
   cursor: pointer;
 
-  &:hover {
-    ${({ _active, theme }) => !_active && `box-shadow: ${theme.shadow.shadow1};`}
-  }
+  ${({ _justifyContent, _gap, _width, _height, _margin, _active, theme }) => css`
+    justify-content: ${_justifyContent};
+    height: ${_height};
+    margin: ${_margin};
+    background-color: ${_active ? theme.colors.side.side300 : theme.colors.side.side200};
 
-  @media all and (min-width: 768px) {
-    gap: 23px;
+    &:hover {
+      box-shadow: ${_active ? 'none' : theme.shadow.shadow1};
+    }
 
-    width: 205px;
-  }
+    @media all and (min-width: 768px) {
+      gap: ${_gap == null ? '23px' : _gap};
+      width: ${_width == null ? '205px' : _width};
+    }
 
-  @media all and (max-width: 767px) {
-    gap: 48px;
-
-    width: 255px;
-  }
+    @media all and (max-width: 767px) {
+      gap: ${_gap == null ? '48px' : _gap};
+      width: ${_width == null ? '255px' : _width};
+    }
+  `}
 `
 
 export default RowButton
