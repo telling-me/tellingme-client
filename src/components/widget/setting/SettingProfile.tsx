@@ -49,7 +49,7 @@ const SettingProfile = () => {
               {mypage.answerRecord === 0 ? '오늘도' : '연속'}&nbsp;
             </TextP>
             <TextP typo="c_b" textColor="logo">
-              {mypage.answerRecord === 0 ? '진정한 나' : '1'}
+              {mypage.answerRecord === 0 ? '진정한 나' : mypage.answerRecord}
             </TextP>
             <TextP typo="c_b" textColor="gray6">
               {mypage.answerRecord === 0 ? '를 만나봐요!' : '일째 답변 중!'}

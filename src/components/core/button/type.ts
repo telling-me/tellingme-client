@@ -21,6 +21,11 @@ export interface IButton {
 export interface INotOnlyButton {
   text: string
   _active: boolean
+  _justifyContent?: string
+  _gap?: string
+  _width?: string
+  _height?: string
+  _margin?: string
   _onClick: MouseEventHandler<HTMLButtonElement>
   children: React.ReactNode
   _value?: string
