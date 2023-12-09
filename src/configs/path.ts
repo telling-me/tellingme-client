@@ -19,6 +19,10 @@ export enum PAGE_URL {
   Dev = 'dev',
   WithdrawApple = 'withdraw/apple',
 
+  // Premium & TeliingmeBook
+  Premium = 'main/setting/premium',
+  TellingEBook = 'main/setting/tellingEbook',
+
   // NewsLetter
   NewsLetter = 'newsletter',
   NewsLetterComplete = 'complete',

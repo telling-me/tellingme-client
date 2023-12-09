@@ -12,9 +12,12 @@ import type { ISettingMenu } from './type'
 
 // store
 import useCommonStore from 'stores/useCommonStore'
+import { useNavigate } from 'react-router-dom'
+import { getCookie } from 'utils/cookies'
 
 const SettingQuickMenus = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
   const { setMobileOnlyModal } = useCommonStore()
+  const navigate = useNavigate()
 
   const handleOpen = () => {
     setMobileOnlyModal(true)
@@ -25,14 +28,14 @@ const SettingQuickMenus = ({ setPageNumber, setIsMenu }: ISettingMenu) => {
       icon: Icon.Premium,
       title: '프리미엄',
       _onClick: () => {
-        handleOpen()
+        getCookie('device') === 'android' ? navigate('/app/main/setting/premium') : handleOpen()
       }
     },
     {
       icon: Icon.TellingmeBook,
       title: '텔링미북',
       _onClick: () => {
-        handleOpen()
+        getCookie('device') === 'android' ? navigate('/app/main/setting/tellingEbook') : handleOpen()
       }
     },
     {

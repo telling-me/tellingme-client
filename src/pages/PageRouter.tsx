@@ -47,6 +47,8 @@ const PageRouter = () => {
             <Route path={PAGE_URL.MyAnswer} element={<Switch.MyAnswerPage />} />
             <Route path={PAGE_URL.MyLibrary} element={<Switch.MyLibraryPage />} />
             <Route path={PAGE_URL.Setting} element={<Switch.SettingPage />} />
+            <Route path={PAGE_URL.TellingEBook} element={<Switch.TellingEBookPage />} />
+            <Route path={PAGE_URL.Premium} element={<Switch.PremiumPage />} />
             <Route path={PAGE_URL.Error500} element={<Switch.Error500Page />} />
             <Route path={PAGE_URL.Error403} element={<Switch.Error403Page />} />
             <Route path={PAGE_URL.Dev} element={<Switch.DevPage />} />

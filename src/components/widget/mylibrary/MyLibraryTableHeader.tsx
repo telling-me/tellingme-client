@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
 
 // components
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Dropdown } from 'components'
+import { Dropdown, IconButton } from 'components'
 
 // store
 import useLibraryStore from 'stores/useLibraryStore'
+import Icon from 'assets/icons'
+import { getCookie } from 'utils/cookies'
+import { formatStringDate } from 'utils/date'
 
 const MyLibraryTableHeader = () => {
+  const theme = useTheme()
   const nowYear = new Date().getFullYear()
   const nowMonth = new Date().getMonth() + 1
   const yearData = new Array(nowYear - 2022).fill(0).map((_, i) => (2023 + i).toString())
@@ -26,29 +30,51 @@ const MyLibraryTableHeader = () => {
 
   return (
     <HeaderWrapper>
-      <style.Grid flex="start" _gap="8px" _width="100%">
-        <Dropdown
-          dropdownSize="small"
-          defaultText=""
-          data={yearData}
-          unit="년"
-          _selected={year}
-          _setSelected={setYear}
-          _maxWidth="111px"
-        />
-        <Dropdown
-          dropdownSize="small"
-          defaultText=""
-          data={monthData}
-          unit="월"
-          _selected={month}
-          _setSelected={setMonth}
-          _maxWidth="94px"
-        />
-      </style.Grid>
+      <Grid flex="between">
+        <Grid flex="start" _gap="8px" _width="100%">
+          <Dropdown
+            dropdownSize="small"
+            defaultText=""
+            data={yearData}
+            unit="년"
+            _selected={year}
+            _setSelected={setYear}
+            _maxWidth="111px"
+          />
+          <Dropdown
+            dropdownSize="small"
+            defaultText=""
+            data={monthData}
+            unit="월"
+            _selected={month}
+            _setSelected={setMonth}
+            _maxWidth="94px"
+          />
+        </Grid>
+        {getCookie('device') === 'android' && (
+          <IconButton
+            buttonType="noFilled"
+            _width="24px"
+            _height="24px"
+            _onClick={(e) => {
+              e.preventDefault()
+              window?.ReactNativeWebView?.postMessage(
+                JSON.stringify({
+                  event: 'share_mylibrary',
+                  date: formatStringDate(new Date(Number(year), Number(month) - 1))
+                })
+              )
+            }}
+          >
+            <Icon.Share width="20" height="20" stroke={theme.colors.gray.gray5} />
+          </IconButton>
+        )}
+      </Grid>
     </HeaderWrapper>
   )
 }
+
+const { Grid } = style
 
 const HeaderWrapper = styled.div`
   display: flex;
