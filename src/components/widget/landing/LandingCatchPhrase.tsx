@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 // components
 import styled from 'styled-components'
 import style from 'styles/styled-components/styled'
-import { Button, LoginModal } from 'components'
+import { Button, Modal, RowButton } from 'components'
 
 // assets
 import Icon from 'assets/icons'
@@ -103,7 +103,7 @@ const LandingCatchPhrase = () => {
               <Button
                 _padding="18px 32px"
                 buttonType="secondary"
-                text="시작하기"
+                text="앱 다운로드"
                 textColor="logo"
                 textSize="h6"
                 _onClick={() => {
@@ -114,7 +114,50 @@ const LandingCatchPhrase = () => {
           </Grid>
         </CatchPhraseText>
       </CatchPhraseWrapper>
-      {open && <LoginModal setOpen={setOpen} />}
+      {open && (
+        <Modal _width="100%" _maxWidth="425px" _padding="30px 20px 20px" _borderRadius="20px">
+          <RowButton
+            text="바로 가기"
+            _active={false}
+            _justifyContent="center"
+            _gap="8px"
+            _width="100%"
+            _height="58px"
+            _onClick={() => {
+              window.open('https://apps.apple.com/kr/app/텔링미-나를-깨닫는-시간/id6448701604')
+            }}
+          >
+            <Icon.AppStore />
+          </RowButton>
+
+          <RowButton
+            text="바로 가기"
+            _active={false}
+            _justifyContent="center"
+            _gap="8px"
+            _width="100%"
+            _height="58px"
+            _margin="10px 0 20px"
+            _onClick={() => {
+              window.open('https://play.google.com/store/apps/details?id=com.tellingme_rn&hl=ko-KR')
+            }}
+          >
+            <Icon.PlayStore />
+          </RowButton>
+
+          <Button
+            buttonType="secondary"
+            text="닫기"
+            textSize="h6"
+            textColor="logo"
+            _width="100%"
+            _height="55px"
+            _onClick={() => {
+              setOpen(false)
+            }}
+          />
+        </Modal>
+      )}
     </>
   )
 }
