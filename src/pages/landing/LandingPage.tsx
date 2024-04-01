@@ -36,8 +36,8 @@ const LandingPage = () => {
 
 const LandingWrapper = styled(motion.main)`
   position: relative;
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  /* scroll-behavior: smooth; */
+  /* scroll-snap-type: y mandatory; */
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   overflow: auto;
