@@ -26,26 +26,26 @@ import { commonOpacityYAni } from 'styles/ani'
 
 const DummyNumber = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
+// slick setting
+const SETTINGS = {
+  centerMode: true,
+  dots: false,
+  infinite: true,
+  speed: 500,
+  variableWidth: true,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  focusOnSelect: false,
+  swipe: false,
+  arrows: false,
+  pauseOnHover: false,
+  pauseOnFocus: false
+}
+
 const LandingQuestionInfo = () => {
   // hooks
   const windowSize = useWindowSize()
   const { ref, inView } = useInView({ triggerOnce: true, initialInView: false })
-
-  // slick setting
-  const settings = {
-    centerMode: true,
-    dots: false,
-    infinite: true,
-    speed: 500,
-    variableWidth: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    focusOnSelect: false,
-    swipe: false,
-    arrows: false,
-    pauseOnHover: false,
-    pauseOnFocus: false
-  }
 
   // ref
   const infoRef = useRef<HTMLDivElement>(null)
@@ -158,6 +158,7 @@ const LandingQuestionInfo = () => {
             </TextH3>
           </Grid>
         </Grid>
+
         <TimeChanger
           ref={ref}
           flex="center"
@@ -201,6 +202,7 @@ const LandingQuestionInfo = () => {
               />
             </TimeText>
           </MinuteWrapper>
+
           <SecondWrapper flex="center">
             <TimeText typo="h1_b" textColor="side500">
               <SlotCounter
@@ -215,15 +217,17 @@ const LandingQuestionInfo = () => {
               />
             </TimeText>
           </SecondWrapper>
+
           <MeridiemWrapper _width="fit-content" flex="center">
             <TextP typo={mediaQuery(windowSize.width) === 'mobile' ? 'c_b' : 'h5_b'} textColor="side500">
               AM
             </TextP>
           </MeridiemWrapper>
         </TimeChanger>
+
         <QuestionChanger
           flex="center"
-          variants={commonOpacityYAni}
+          variants={QuestionChangerVariants}
           viewport={{ once: true }}
           initial="init"
           whileInView="ani"
@@ -238,8 +242,9 @@ const LandingQuestionInfo = () => {
             </QuestionBubble>
             <Icon.LandingQuestionList width={mediaQuery(windowSize.width) === 'mobile' ? '232px' : '375px'} />
           </QuestionList>
+
           <QuestionSlider>
-            <Slider {...settings}>
+            <Slider {...SETTINGS}>
               <Icon.LandingQuestion1 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '325px'} />
               <Icon.LandingQuestion2 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '325px'} />
               <Icon.LandingQuestion3 width={mediaQuery(windowSize.width) === 'mobile' ? '200px' : '325px'} />
@@ -376,3 +381,18 @@ const QuestionSlider = styled(Grid)`
     }
   }
 `
+
+const QuestionChangerVariants = {
+  init: {
+    opacity: 0,
+    y: 10
+  },
+  ani: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.8,
+      duration: 0.3
+    }
+  })
+}
