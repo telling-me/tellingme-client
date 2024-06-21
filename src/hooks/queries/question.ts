@@ -4,6 +4,7 @@ import { type IError } from 'type/db'
 import { getCookie } from '../../utils/cookies'
 
 export const useGetQuestionQuery = <T>(date: string, options?: T) => {
+  console.log('date', date)
   return useQuery(['question', date], async () => await apis.getQuestion(date), {
     retry: 0,
     onError: (err: IError) => {
@@ -11,9 +12,9 @@ export const useGetQuestionQuery = <T>(date: string, options?: T) => {
     },
     onSuccess(data) {
       // TODO: 날짜에 맞는 질문이 없을 때의 임시 로직
-      if (data?.data?.status === 3000) {
-        window.location.href = '/app/main'
-      }
+      // if (data?.data?.status === 3000) {
+      //   window.location.href = '/app/main'
+      // }
       return data
     },
     enabled:
