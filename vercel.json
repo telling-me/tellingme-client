@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://tellingme.shop:8080/api/:path*",
+      "destination": "https://tellingme.site:8080/api/:path*",
       "has": [
         {
           "type": "host",
