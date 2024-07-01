@@ -4,7 +4,6 @@ import { type IError } from 'type/db'
 import { getCookie } from '../../utils/cookies'
 
 export const useGetQuestionQuery = <T>(date: string, options?: T) => {
-  console.log('date', date)
   return useQuery(['question', date], async () => await apis.getQuestion(date), {
     retry: 0,
     onError: (err: IError) => {
