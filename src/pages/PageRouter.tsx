@@ -19,6 +19,7 @@ import { PAGE_URL } from 'configs/path'
 const PageRouter = () => {
   const location = useLocation()
 
+  console.log('test url', process.env.REACT_APP_API_URL)
   return (
     <>
       <AnimatePresence mode="wait">
